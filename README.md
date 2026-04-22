@@ -50,10 +50,10 @@ Anthropic의 MCP(Model Context Protocol)에서 드러난 **설계 수준의 RCE 
 
 | 언어 | Markdown | PDF |
 |---|---|---|
-| 🇰🇷 한국어 | [`CTI-2026-0422-MCP_KR.md`](./CTI-2026-0422-MCP_KR.md) | [`CTI-2026-0422-MCP_KR.pdf`](./CTI-2026-0422-MCP_KR.pdf) (정식본) |
-| 🇬🇧 English | [`CTI-2026-0422-MCP_EN.md`](./CTI-2026-0422-MCP_EN.md) | — |
-| 🇨🇳 中文 (簡體) | [`CTI-2026-0422-MCP_CN.md`](./CTI-2026-0422-MCP_CN.md) | — |
-| 🇯🇵 日本語 | [`CTI-2026-0422-MCP_JP.md`](./CTI-2026-0422-MCP_JP.md) | — |
+| 🇰🇷 한국어 | [`CTI-2026-0422-MCP_KR.md`](./CTI-2026-0422-MCP_KR.md) | [`[CTI-2026-0422-MCP_KR.pdf`](./CTI-2026-0422-MCP_KR.pdf](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0422-MCP_KR.pdf)) (정식본) |
+| 🇬🇧 English | [`CTI-2026-0422-MCP_EN.md`]([./CTI-2026-0422-MCP_EN.md](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20en.MD)) | — |
+| 🇨🇳 中文 (簡體) | [`CTI-2026-0422-MCP_CN.md`]([./CTI-2026-0422-MCP_CN.md](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20cn.MD)) | — |
+| 🇯🇵 日本語 | [`CTI-2026-0422-MCP_JP.md`]([./CTI-2026-0422-MCP_JP.md](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20jp.MD)) | — |
 
 **📰 보도자료**
 
