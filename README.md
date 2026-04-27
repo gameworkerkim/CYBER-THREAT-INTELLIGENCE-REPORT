@@ -35,7 +35,14 @@
 **13블록 reorg, 5주 silent patch, 그리고 Fork 블록체인 산업 전반의 구조적 유지보수 결함**
 *A patch-gap attack disguised as a zero-day — and what 24 months of GitHub data say about every Bitcoin/Ethereum fork*
 
-2026년 4월 25일 발생한 라이트코인 메인넷의 13블록 체인 재구성 사건에 대한 전체 분석. (i) 5주 전 비공개로 패치되어 있었던 MWEB 합의 결함, (ii) DoS와 결합된 3-스테이지 코디네이티드 공격 패턴, (iii) NEAR Intents 등 크로스체인 인프라로의 손실 이전, (iv) **비트코인·이더리움 본가와 그 fork 계열(LTC·DOGE·BCH·BSV·BTG·Verge / ETC·ETHW·Polygon·BNB Chain 등)의 24개월 GitHub 활동·기여자·보안 패치 간격 정량 비교**, (v) DAXA 회원 거래소 대상 5단계 단계적 조치(D-1~D-5) 및 KoFIU·금융위·금감원 권고를 포함한다.
+2026년 4월 25일 발생한 라이트코인 메인넷의 13블록 체인 재구성 사건에 대한 전체 분석.
+(i) 5주 전 비공개로 패치되어 있었던 MWEB 합의 결함, 
+(ii) DoS와 결합된 3-스테이지 코디네이티드 공격 패턴, (
+iii) NEAR Intents 등 크로스체인 인프라로의 손실 이전, 
+(iv) **비트코인·이더리움 본가와 그 fork 계열(LTC·DOGE·BCH·BSV·BTG·Verge / ETC·ETHW·Polygon·BNB Chain 등)의 24개월 GitHub 활동·기여자·보안 패치 간격 정량 비교**, 
+(v) DAXA 회원 거래소 대상 5단계 단계적 조치(D-1~D-5) 및 KoFIU·금융위·금감원 권고를 포함한다.
+
+오픈 소스를 통해서 블록체인의 하나의 생태계를 구축하면 그것을 유지보수할 의무가 있다. 하지만 일부 메인넷의 이복형제들은 날로 먹는 경향이 있다.
 
 | 항목 | 값 |
 | --- | --- |
