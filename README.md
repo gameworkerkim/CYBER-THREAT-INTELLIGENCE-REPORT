@@ -30,7 +30,7 @@
 
 > 🆕 **2026-05-07 발행**
 
-### ScarCruft, 중국 연변 게이밍 플랫폼을 통째로 점령한 공급망 공격
+### ScarCruft, 연변 게이밍 플랫폼을 통째로 점령한 공급망 공격
 
 **APT37의 sqgame[.]net 침해 — Windows·Android 멀티플랫폼 트로이목마화, 연변 조선족·탈북민 표적 첩보 작전**
 *BirdCall(zhuagou) Android 신규 버전 · Zoho WorkDrive C&C · 한국 공인인증서(.p12)·한컴문서(.hwp) 동시 타깃팅 · 중국→북한 도구 계보*
@@ -51,7 +51,7 @@ ESET이 2026년 5월 5일 공개한 북한 연계 APT 그룹 ScarCruft(APT37)의
 * 🇰🇷 [한국어 Markdown](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.md)
 * 🇬🇧 [English Markdown](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_EN.md)
 * 🇯🇵 [日本語 Markdown](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_JP.md)
-* 📘 [한국어 DOCX (정식본)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.docx)
+* 📕 [한국어 PDF (정식본)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.pdf)
 
 ---
 
@@ -59,7 +59,7 @@ ESET이 2026년 5월 5일 공개한 북한 연계 APT 그룹 ScarCruft(APT37)의
 
 | ID | 발행일 | 제목 | 심각도 | 언어 | 다운로드 |
 | --- | --- | --- | --- | --- | --- |
-| [`CTI-2026-0507-SCARCRUFT`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.md) | 2026-05-07 | ScarCruft, 연변 게이밍 플랫폼을 통째로 점령한 공급망 공격 — APT37의 sqgame 침해 및 탈북민 표적 첩보 작전 | 🔴 HIGH | KR · EN · JP | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.md) · [EN](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_EN.md) · [JP](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_JP.md) · [DOCX](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.docx) |
+| [`CTI-2026-0507-SCARCRUFT`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.md) | 2026-05-07 | ScarCruft, 연변 게이밍 플랫폼을 통째로 점령한 공급망 공격 — APT37의 sqgame 침해 및 탈북민 표적 첩보 작전 | 🔴 HIGH | KR · EN · JP | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.md) · [EN](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_EN.md) · [JP](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_JP.md) · [PDF](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.pdf) |
 | [`CTI-2026-0503-GITHUB`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0503-GITHUB_KR.md) | 2026-05-03 | GitHub Enterprise Server CVE-2026-3854 분석 — IDA MCP 활용 AI 증강 리버스 엔지니어링 사례 | 🟠 MEDIUM | KR | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0503-GITHUB_KR.md) |
 | [`CTI-2026-0422-MCP`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20kr.MD) | 2026-04-22 | MCP(Model Context Protocol) 표적 잠복 공격 — UNC1069 · Sapphire Sleet 등 북한 공급망 오염 시나리오 | 🔴 HIGH | KR · EN · JP · CN | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20kr.MD) · [EN](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20en.MD) · [JP](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20jp.MD) · [CN](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20cn.MD) |
 | [`CTI-2026-0420-VERCEL`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0420-VERCEL_KR.md) | 2026-04-20 | Vercel 보안 침해 사건 — AI SaaS 공급망 공격 및 ShinyHunters 위협 평가 | 🔴 HIGH | KR · EN | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0420-VERCEL_KR.md) · [EN](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0420-VERCEL_EN.md) · [PDF](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Vercel_%EB%B3%B4%EC%95%88%EC%82%AC%EA%B1%B4_%EB%B6%84%EC%84%9D%EB%A6%AC%ED%8F%AC%ED%8A%B8_CTI-2026-0420.pdf) |
@@ -175,7 +175,7 @@ CTI-YYYY-MMDD-<SUBJECT>_<LANG>.<ext>
   CTI-2026-0507-SCARCRUFT_KR.md   → 2026년 5월 7일 발행, ScarCruft 사건, 한국어 Markdown
   CTI-2026-0507-SCARCRUFT_EN.md   → 동일 사건의 영문판
   CTI-2026-0507-SCARCRUFT_JP.md   → 동일 사건의 일본어판
-  CTI-2026-0507-SCARCRUFT_KR.docx → 동일 사건의 한국어 정식 배포본
+  CTI-2026-0507-SCARCRUFT_KR.pdf  → 동일 사건의 한국어 정식 배포본
 ```
 
 * `SUBJECT` — 리포트 주제를 대표하는 키워드 (대문자)
