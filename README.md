@@ -92,7 +92,7 @@ S2W TALON, StealthMole, Cyble의 1차 자료를 종합해 **2025년 3월~2026년
 
 | ID | 발행일 | 제목 | 심각도 | 언어 | 다운로드 |
 | --- | --- | --- | --- | --- | --- |
-| [`CTI-2026-0510-MYTHOS-AI-VULN`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0510-MYTHOS-AI-VULN.md) | 2026-05-10 | AI가 27년 묵은 취약점을 다시 찾아낸다는 것 — Claude Mythos 평가 | **HIGH** | KR | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0510-MYTHOS-AI-VULN.md) |
+| [`CTI-2026-0510-MYTHOS-AI-VULN`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200510%20mythos%20ai%20vuln.MD) | 2026-05-10 | AI가 27년 묵은 취약점을 다시 찾아낸다는 것 — Claude Mythos 평가 | **HIGH** | KR | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200510%20mythos%20ai%20vuln.MD) |
 | [`CTI-2026-0510-LAZARUS-GITHOOKS`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0510-LAZARUS-GITHOOKS_KR.md) | 2026-05-10 | Lazarus Group의 .git/hooks 악성코드 캠페인 — 개발자 표적화의 진화 | **HIGH** | KR | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0510-LAZARUS-GITHOOKS_KR.md) |
 | [`CTI-2026-0507-SCARCRUFT`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.md) | 2026-05-07 | ScarCruft, 연변 게이밍 플랫폼을 통째로 점령한 공급망 공격 — APT37의 sqgame 침해 및 탈북민 표적 첩보 작전 | **HIGH** | KR · EN · JP | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_KR.md) · [EN](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_EN.md) · [JP](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_JP.md) |
 | [`CTI-2026-0505-VIBE`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B3_%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%80%E1%85%A9%E1%86%BC%E1%84%8C%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC_%E1%84%92%E1%85%A2%E1%84%8F%E1%85%B5%E1%86%BC%E1%84%8B%E1%85%B4_%E1%84%89%E1%85%B5%E1%84%83%E1%85%A2_CTI-2026-0505-VIBE.md) | 2026-05-05 | 바이브 인공지능 해킹의 시대 — 핵티비즘과 디도스의 일상화 | **CRITICAL** | KR | [MD](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B3_%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%80%E1%85%A9%E1%86%BC%E1%84%8C%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC_%E1%84%92%E1%85%A2%E1%84%8F%E1%85%B5%E1%86%BC%E1%84%8B%E1%85%B4_%E1%84%89%E1%85%B5%E1%84%83%E1%85%A2_CTI-2026-0505-VIBE.md) · [PDF](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B3_%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%80%E1%85%A9%E1%86%BC%E1%84%8C%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC_%E1%84%92%E1%85%A2%E1%84%8F%E1%85%B5%E1%86%BC%E1%84%8B%E1%85%B4_%E1%84%89%E1%85%B5%E1%84%83%E1%85%A2_CTI-2026-0505-VIBE_%E1%84%80%E1%85%B5%E1%86%B7%E1%84%92%E1%85%A9%E1%84%80%E1%85%AA%E1%86%BC.pdf) |
@@ -102,7 +102,7 @@ S2W TALON, StealthMole, Cyble의 1차 자료를 종합해 **2025년 3월~2026년
 | [`CTI-2026-0320-CORUNA`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0320-CORUNA_KR.md) | 2026-03-20 | 사이버 무기 공급망의 붕괴와 국가 안보 위협 — Coruna iOS Exploit Kit 사례 분석 | **CRITICAL** | KR | [KR](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0320-CORUNA_KR.md) |
 
 > 새 리포트는 발행 시점에 맞춰 본 표의 **최상단**에 추가됩니다. 파일 명명 규칙은 `CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md` 입니다.
-> *기존 README에 포함되어 있던 리포트가 본 표에서 누락된 경우 알려주시면 다음 갱신 때 반영합니다 (현재 표는 9건으로 구성됨; 기존 배지의 "Reports 8" 카운트는 본 갱신 후 9로 증가).*
+> *기존 README에 포함되어 있던 리포트가 본 표에서 누락된 경우 알려주시면 다음 갱신 때 반영합니다.*
 
 ---
 
@@ -113,7 +113,7 @@ S2W TALON, StealthMole, Cyble의 1차 자료를 종합해 **2025년 3월~2026년
 생성형 AI가 공격 수명주기 전체를 오케스트레이션하는 *vibe-hacking* 양상, LLM 인지 편향 주입, MCP Sleeper 백도어 등 **AI 시대 사이버 공격의 새로운 카테고리**.
 
 - [`CTI-2026-0505-VIBE`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B3_%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%80%E1%85%A9%E1%86%BC%E1%84%8C%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC_%E1%84%92%E1%85%A2%E1%84%8F%E1%85%B5%E1%86%BC%E1%84%8B%E1%85%B4_%E1%84%89%E1%85%B5%E1%84%83%E1%85%A2_CTI-2026-0505-VIBE.md) — 바이브 해킹 시대 종합 분석 (Part II 3장: 진입 장벽 붕괴, Part III 6~8장: 인지 편향·Sleeper MCP·사이버 둠스데이 시나리오)
-- [`CTI-2026-0510-MYTHOS-AI-VULN`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0510-MYTHOS-AI-VULN.md) — Claude Mythos 자율 취약점 발견 능력 평가, 조합적 창의성과 발견 비용 붕괴
+- [`CTI-2026-0510-MYTHOS-AI-VULN`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200510%20mythos%20ai%20vuln.MD) — Claude Mythos 자율 취약점 발견 능력 평가, 조합적 창의성과 발견 비용 붕괴
 - [`CTI-2026-0422-MCP`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20kr.MD) — MCP 구조적 보안 취약점, Sleeper MCP 시나리오, UNC1069/Sapphire Sleet 공급망 침해
 - [`CTI-2026-0420-VERCEL`](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0420-VERCEL_KR.md) — AI SaaS OAuth 공급망 침해 사례
 
@@ -243,7 +243,7 @@ CTI-YYYY-MMDD-<SUBJECT>[-<SUBTYPE>]_<LANG>.<ext>
 - `LANG` — `KR` (한국어) / `EN` (영어) / `JP` (일본어) / `CN` (중국어)
 - `ext` — `md` (기본) / `pdf` (정식 배포본)
 
-> 일부 한국어 정식 배포본 파일은 가독성을 위해 한글 제목을 그대로 사용합니다 (예: `바이브_인공지능_해킹의_시대_CTI-2026-0505-VIBE.md`). 본 저장소 표 안의 다운로드 링크에서 직접 접근하시는 것을 권장합니다.
+> 일부 한국어 정식 배포본 파일은 가독성을 위해 한글 제목을 그대로 사용합니다 (예: `바이브_인공지능_해킹의_시대_CTI-2026-0505-VIBE.md`). 또한 GitHub 업로드 과정에서 일부 파일은 공백/대소문자가 정규화되어 `Cti 2026 0510 mythos ai vuln.MD` 와 같이 저장될 수 있습니다. 본 저장소 표 안의 다운로드 링크에서 직접 접근하시는 것을 권장합니다.
 
 ---
 
