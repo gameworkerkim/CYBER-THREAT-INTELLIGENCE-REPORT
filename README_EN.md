@@ -3,14 +3,14 @@
 > **Independent Cyber Threat Intelligence Archive**
 > *OSINT-based Defensive Research*
 
-[![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)](https://www.first.org/tlp/)
-[![License](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main)
-[![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20ZH%20%7C%20JA-lightgrey?style=flat-square)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main)
-[![Updated](https://img.shields.io/badge/Last%20Update-2026--05--28-informational?style=flat-square)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main)
+![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
+![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
+![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20CN-lightgrey?style=flat-square)
+![Last Update](https://img.shields.io/badge/Last%20Update-2026--05--30-informational?style=flat-square)
 
-This repository is an independent archive of open-source cyber threat intelligence (CTI) reports, intended for defensive, research, and policy purposes. All reports are OSINT-based and do not represent the official position of any organization.
+🌐 **Languages:** [한국어](README.md) · **English** · [中文](README_CN.md) · [日本語](README_JP.md)
 
-🌐 **Read in other languages:** [한국어](README.md) · [中文](README_CN.md) · [日本語](README_JP.md)
+This repository is an independent archive of open-source cyber threat intelligence (CTI) reports, intended for defensive, research, and policy purposes. All reports are OSINT-based and do not represent the official position of any organization, agency, or government.
 
 ---
 
@@ -19,8 +19,8 @@ This repository is an independent archive of open-source cyber threat intelligen
 |  |  |
 | --- | --- |
 | **Name** | Dennis Kim (김호광 / HoKwang Kim) |
-| **Role** | CEO, Betalabs Inc. · Independent Threat Intelligence Analyst · Former CEO, Cyworld Z |
-| **Expertise** | Web3 & blockchain security, supply chain attacks, zero-day ecosystem, North Korea & state-sponsored threats, AI SaaS security |
+| **Role** | CEO, Betalabs Inc. · Independent Threat Intelligence Analyst |
+| **Focus** | Web3/blockchain security, supply chain attacks, the zero-day ecosystem, North Korean/state-nexus threats, AI/LLM security |
 | **Email** | [gameworker@gmail.com](mailto:gameworker@gmail.com) |
 | **GitHub** | [@gameworkerkim](https://github.com/gameworkerkim/) |
 
@@ -28,23 +28,72 @@ This repository is an independent archive of open-source cyber threat intelligen
 
 ## ⭐ Latest Reports — Featured
 
-> 🆕 **Published 2026-05-28 (KelpDAO published simultaneously in 4 languages)**
+> 🆕 **Published 2026-05-30** — four threats not covered by Korean media, released simultaneously in four languages (KR·EN·JP·CN)
 
-### KelpDAO LayerZero Bridge Hack — A Sophisticated Attack on the Single Point of Failure in Off-Chain Verification Infrastructure
+### 1. AI Agent at the Wheel — The First Observed LLM-Driven Intrusion
 
-**1-of-1 DVN, RPC node poisoning, and systemic risk spreading across DeFi**
+*From Marimo CVE-2026-39987 pre-auth RCE to internal DB exfiltration: a four-stage autonomous pivot in under an hour*
 
-On April 18, 2026, TraderTraitor — a subgroup of the North Korea-linked Lazarus Group — attacked KelpDAO's LayerZero bridge infrastructure, stealing **116,500 rsETH (approximately USD 292 million)**. Rather than exploiting a smart contract bug, the attackers precisely targeted the 1-of-1 DVN single point of failure and RPC node poisoning in the off-chain verification infrastructure. This is the **largest DeFi hack of 2026** and the incident that made North Korea account for 76% of global crypto hack losses in 2026 with just two attacks.
+Sysdig TRT's **first recorded "AI-agent-driven" intrusion**. Starting from a pre-auth RCE on an exposed Marimo notebook, an LLM agent autonomously ran the whole chain — cloud credential theft → SSH key retrieval from AWS Secrets Manager → pivot via SSH bastion → full internal PostgreSQL dump.
+
+| Item | Value |
+| --- | --- |
+| **Report ID** | `CTI-2026-0530-MARIMO` |
+| **Severity** | 🔴 CRITICAL |
+| **CVE** | `CVE-2026-39987` (CVSS 9.3 · CISA KEV) |
+| **Download** | [🇰🇷 KR](CTI-2026-0530-MARIMO_KR.md) · [🇬🇧 EN](CTI-2026-0530-MARIMO_EN.md) · [🇯🇵 JP](CTI-2026-0530-MARIMO_JP.md) · [🇨🇳 CN](CTI-2026-0530-MARIMO_CN.md) |
+
+### 2. Unpatched Critical RCE — Gogs git rebase Argument Injection
+
+*A 9.4 flaw letting any authenticated user seize a self-hosted Git server, plus cross-tenant compromise*
+
+A malicious branch name injects the `--exec` flag into `git rebase`, executing arbitrary code on the server. **Unpatched** since the maintainer report (2026-03-17), with a public Metasploit module available.
+
+| Item | Value |
+| --- | --- |
+| **Report ID** | `CTI-2026-0530-GOGS` |
+| **Severity** | 🔴 HIGH |
+| **CVE** | None assigned (Rapid7-rated CVSS 9.4) |
+| **Download** | [🇰🇷 KR](CTI-2026-0530-GOGS_KR.md) · [🇬🇧 EN](CTI-2026-0530-GOGS_EN.md) · [🇯🇵 JP](CTI-2026-0530-GOGS_JP.md) · [🇨🇳 CN](CTI-2026-0530-GOGS_CN.md) |
+
+### 3. JINX-0164 — A macOS Malware & Supply-Chain Threat Actor Targeting Crypto Firms
+
+*LinkedIn social engineering, AUDIOFIX & MINIRAT, and the @velora-dex/sdk npm supply-chain compromise*
+
+A financially motivated cluster that seizes developer endpoints via LinkedIn recruitment lures, then moves to CI/CD and code-distribution infrastructure. TTP overlap with DPRK clusters, but no infrastructure overlap (Wiz).
+
+| Item | Value |
+| --- | --- |
+| **Report ID** | `CTI-2026-0530-JINX` |
+| **Severity** | 🔴 HIGH |
+| **Threat Actor** | JINX-0164 (DPRK-TTP overlap, no infra overlap) |
+| **Download** | [🇰🇷 KR](CTI-2026-0530-JINX_KR.md) · [🇬🇧 EN](CTI-2026-0530-JINX_EN.md) · [🇯🇵 JP](CTI-2026-0530-JINX_JP.md) · [🇨🇳 CN](CTI-2026-0530-JINX_CN.md) |
+
+### 4. ChatGPhish — A ChatGPT Renderer Trust Flaw That Turns AI Summaries Into a Phishing Surface
+
+*Implicit trust of Markdown links & images, indirect prompt injection, and the QR-code pivot*
+
+The `chatgpt.com` renderer trusts Markdown links/images from a summarized third-party page, auto-loading them and surfacing them as clickable elements. Enables phishing, fake system alerts, QR pivots, and IP/UA/Referer leakage (Permiso Security).
+
+| Item | Value |
+| --- | --- |
+| **Report ID** | `CTI-2026-0530-CHATGPHISH` |
+| **Severity** | 🟠 MEDIUM |
+| **CVE** | None assigned (Bugcrowd report; vendor replied "could not reproduce") |
+| **Download** | [🇰🇷 KR](CTI-2026-0530-CHATGPHISH_KR.md) · [🇬🇧 EN](CTI-2026-0530-CHATGPHISH_EN.md) · [🇯🇵 JP](CTI-2026-0530-CHATGPHISH_JP.md) · [🇨🇳 CN](CTI-2026-0530-CHATGPHISH_CN.md) |
+
+### 5. KelpDAO LayerZero Bridge Hack — A Single Point of Failure in Off-Chain Verification Infrastructure
+
+*Structural weaknesses of cross-chain bridge security and the centralization risk of off-chain verifiers*
+
+Analysis of a compromise on a LayerZero-based bridge path, examining how a **single point of failure in off-chain verification infrastructure** — not the on-chain contracts — leads directly to asset theft.
 
 | Item | Value |
 | --- | --- |
 | **Report ID** | `CTI-2026-0528-KELPDAO` |
-| **Severity** | 🔴 CRITICAL |
-| **Classification** | `TLP:GREEN` |
-| **Threat Actor** | Lazarus Group (TraderTraitor · North Korea-nexus) |
-| **Languages** | KR · EN · ZH · JA |
-
-**📄 Download:** [🇰🇷 KR](CTI-2026-0528-KELPDAO_KR.md) · [🇬🇧 EN](CTI-2026-0528-KELPDAO_EN.md) · [🇨🇳 ZH](CTI-2026-0528-KELPDAO_ZH.md) · [🇯🇵 JA](CTI-2026-0528-KELPDAO_JA.md)
+| **Severity** | 🔴 HIGH |
+| **Category** | Web3 / cross-chain bridge security |
+| **Download** | [🇰🇷 KR](CTI-2026-0528-KELPDAO_KR.md) · [🇬🇧 EN](CTI-2026-0528-KELPDAO_EN.md) · [🇯🇵 JP](CTI-2026-0528-KELPDAO_JA.md) · [🇨🇳 CN](CTI-2026-0528-KELPDAO_ZH.md) |
 
 ---
 
@@ -54,144 +103,113 @@ On April 18, 2026, TraderTraitor — a subgroup of the North Korea-linked Lazaru
 
 | ID | Date | Title | Severity | Languages |
 | --- | --- | --- | --- | --- |
-| [`CTI-2026-0528-KELPDAO`](CTI-2026-0528-KELPDAO_EN.md) | 2026-05-28 | KelpDAO LayerZero Bridge Hack — Single Point of Failure in Off-Chain Verification | 🔴 CRITICAL | [KR](CTI-2026-0528-KELPDAO_KR.md) · [EN](CTI-2026-0528-KELPDAO_EN.md) · [ZH](CTI-2026-0528-KELPDAO_ZH.md) · [JA](CTI-2026-0528-KELPDAO_JA.md) |
-| [`CTI-2026-0527-GLASSWORM`](CTI-2026-0527-GLASSWORM_EN.md) | 2026-05-27 | Simultaneous Takedown of GlassWorm C2 Infrastructure — Self-Propagating Supply Chain Worm | 🔴 HIGH | [KR](CTI-2026-0527-GLASSWORM_KR.md) · [EN](CTI-2026-0527-GLASSWORM_EN.md) · [ZH](CTI-2026-0527-GLASSWORM_ZH.md) · [JA](CTI-2026-0527-GLASSWORM_JA.md) |
-| [`CTI-2026-0527-GITEA`](CTI-2026-0527-GITEA_EN.md) | 2026-05-27 | Unauthenticated Exposure of Gitea Container Registry (CVE-2026-27771) — 4 Years of "Private" Illusion | 🔴 HIGH | [KR](CTI-2026-0527-GITEA_KR.md) · [EN](CTI-2026-0527-GITEA_EN.md) · [ZH](CTI-2026-0527-GITEA_ZH.md) · [JA](CTI-2026-0527-GITEA_JA.md) |
-| [`CTI-2026-0527-AICRYPTOJACK`](CTI-2026-0527-AICRYPTOJACK_EN.md) | 2026-05-27 | Cryptojacking Abusing AI Chatbot Recommendations — A New Delivery Vector Beyond Search Poisoning | 🔴 HIGH | [KR](CTI-2026-0527-AICRYPTOJACK_KR.md) · [EN](CTI-2026-0527-AICRYPTOJACK_EN.md) · [ZH](CTI-2026-0527-AICRYPTOJACK_ZH.md) · [JA](CTI-2026-0527-AICRYPTOJACK_JA.md) |
-| [`CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS`](CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_EN.md) | 2026-05-26 | UK Government Russian Crypto Sanctions — State-Level Digital Asset Sanctions Trends | 🟠 MEDIUM | [KR](CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_KO.md) · [EN](CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_EN.md) · [ZH](CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_ZH.md) · [JA](CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_JA.md) · [PDF](CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_KO.pdf) |
-| [`CTI-2026-0526-KIMSUKY-PEBBLEDASH`](CTI-2026-0526-KIMSUKY-PEBBLEDASH_EN.md) | 2026-05-26 | Kimsuky (APT43) PebbleDash · AppleSeed — New Analysis | 🔴 HIGH | [KR](CTI-2026-0526-KIMSUKY-PEBBLEDASH.md) · [EN](CTI-2026-0526-KIMSUKY-PEBBLEDASH_EN.md) · [CN](CTI-2026-0526-KIMSUKY-PEBBLEDASH_CN.md) · [JP](CTI-2026-0526-KIMSUKY-PEBBLEDASH_JP.md) · [PDF](CTI-2026-0526-KIMSUKY-PEBBLEDASH.pdf) |
-| [`CTI-2026-0524-DUALTHREAT`](CTI-2026-0524-DUALTHREAT_EN.md) | 2026-05-24 | Two Concurrent Threats — Analysis | 🔴 HIGH | [KR](CTI-2026-0524-DUALTHREAT_KR.md) · [EN](CTI-2026-0524-DUALTHREAT_EN.md) · [CN](CTI-2026-0524-DUALTHREAT_CN.md) · [JP](CTI-2026-0524-DUALTHREAT_JP.md) · [PDF](CTI-2026-0524-DUALTHREAT_KR.pdf) |
-| [`CTI-2026-0522-EDR3`](CTI-2026-0522-EDR3_EN.md) | 2026-05-22 | EDR Bypass Techniques — 3-Stage Analysis | 🔴 HIGH | [KR](CTI-2026-0522-EDR3_KR.md) · [EN](CTI-2026-0522-EDR3_EN.md) · [PDF](CTI-2026-0522-EDR3_KR.pdf) |
-| [`CTI-2026-0521-YELLOWKEY`](CTI-2026-0521-YELLOWKEY_EN.md) | 2026-05-21 | Windows BitLocker Bypass Zero-Day (YellowKey) | 🔴 HIGH | [KR](CTI-2026-0521-YELLOWKEY_KR.md) · [EN](CTI-2026-0521-YELLOWKEY_EN.md) |
-| [`CTI-2026-0521-DPRK-TRENDS`](CTI-2026-0521-DPRK-TRENDS_EN.md) | 2026-05-21 | North Korea Hacking Trends 2026 — Comprehensive Analysis | 🔴 HIGH | [KR](CTI-2026-0521-DPRK-TRENDS_KR.md) · [EN](CTI-2026-0521-DPRK-TRENDS_EN.md) |
-| [`CTI-2026-0520-FAST16`](CTI-2026-0520-FAST16%20EN.md) | 2026-05-20 | FAST16 Report | 🔴 HIGH | [KR](CTI-2026-0520-FAST16%20KR.md) · [EN](CTI-2026-0520-FAST16%20EN.md) · [ZH](CTI-2026-0520-FAST16%20ZH.md) · [JA](CTI-2026-0520-FAST16%20JA.md) · [PDF](CTI-2026-0520-FAST16%20KR.pdf) |
-| [`CTI-2026-0520-GITHUB`](CTI-2026-0520-GITHUB.md) | 2026-05-20 | GitHub Internal Repository Hack — Employee Device Breach Leading to 3,800+ Internal Repo Exfiltration | 🔴 HIGH | [Report](CTI-2026-0520-GITHUB.md) |
-| [`CTI-2026-0520-EXCHANGE`](CTI-2026-0520-EXCHANGE.md) | 2026-05-20 | Microsoft Exchange Server Security Vulnerabilities | 🔴 HIGH | [Report](CTI-2026-0520-EXCHANGE.md) |
-| [`CTI-2026-0520-DRUPAL`](CTI-2026-0520-DRUPAL.md) | 2026-05-20 | Drupal Core Critical Vulnerability — Zero-Day, No Patch | 🔴 CRITICAL | [Report](CTI-2026-0520-DRUPAL.md) |
-| [`CTI-2026-0520-EVILTOKENS`](CTI-2026-0520-EVILTOKENS.md) | 2026-05-20 | EvilTokens — AI-Generated Device Code Phishing PhaaS | 🔴 HIGH | [Report](CTI-2026-0520-EVILTOKENS.md) |
-| [`CTI-2026-0520-CPANEL`](CTI-2026-0520-CPANEL.md) | 2026-05-20 | cPanel Hacking Incident Analysis | 🟠 MEDIUM | [Report](CTI-2026-0520-CPANEL.md) |
-| [`CTI-2026-0517-AICYBER`](CTI-2026-0517-AICYBER_EN.md) | 2026-05-17 | North Korea LLM Hacking — AI Cyber Attack & Agentic Defense | 🔴 HIGH | [KR](CTI-2026-0517-AICYBER_KR.md) · [EN](CTI-2026-0517-AICYBER_EN.md) · [PDF](2026-05-17_AI-Cyber-Attack-Agentic-Defense_KR.pdf) |
-| [`CTI-2026-0514-CTRL_RussianRAT`](CTI-2026-0514-CTRL_RussianRAT_LNK_RDP_KO.md) | 2026-05-14 | Russian RAT — LNK/RDP Control Path Analysis | 🔴 HIGH | [KR](CTI-2026-0514-CTRL_RussianRAT_LNK_RDP_KO.md) |
-| [`CTI-2026-0514-ChatGPT_DNS_SideChannel`](CTI-2026-0514-ChatGPT_DNS_SideChannel_KO.md) | 2026-05-14 | ChatGPT DNS Side Channel — Update | 🟠 MEDIUM | [KR](CTI-2026-0514-ChatGPT_DNS_SideChannel_KO.md) |
-| [`CTI-2026-0510-LAZARUS-GITHOOKS`](CTI-2026-0510-LAZARUS-GITHOOKS_EN.md) | 2026-05-10 | North Korea Lazarus Git Hooks Hacking Report | 🔴 HIGH | [KR](CTI-2026-0510-LAZARUS-GITHOOKS_KR.md) · [EN](CTI-2026-0510-LAZARUS-GITHOOKS_EN.md) · [CN](CTI-2026-0510-LAZARUS-GITHOOKS_CN.md) · [JP](CTI-2026-0510-LAZARUS-GITHOOKS_JP.md) · [PDF](CTI-2026-0510-LAZARUS-GITHOOKS_KR.pdf) · [PRESS PDF](CTI-2026-0510-LAZARUS-GITHOOKS-PRESS_KR.pdf) |
-| [`CTI-2026-0510-MYTHOS`](Cti%202026%200510%20mythos%20ai%20vuln.MD) | 2026-05-10 | Claude Mythos AI Vulnerability Analysis | 🔴 HIGH | [Report](Cti%202026%200510%20mythos%20ai%20vuln.MD) |
-| [`CTI-2026-0507-SCARCRUFT`](CTI-2026-0507-SCARCRUFT_EN.md) | 2026-05-07 | ScarCruft (APT37) Campaign Analysis | 🔴 HIGH | [KR](CTI-2026-0507-SCARCRUFT_KR.md) · [EN](CTI-2026-0507-SCARCRUFT_EN.md) · [JP](CTI-2026-0507-SCARCRUFT_JP.md) · [PDF](CTI-2026-0507-SCARCRUFT_KR.pdf) |
-| [`CTI-2026-0505-VIBE`](바이브_인공지능_해킹의_시대_CTI-2026-0505-VIBE.md) | 2026-05-05 | Vibe — The Age of AI Hacking | 🟠 MEDIUM | [KR](바이브_인공지능_해킹의_시대_CTI-2026-0505-VIBE.md) · [PDF](바이브_인공지능_해킹의_시대_CTI-2026-0505-VIBE_김호광.pdf) |
-| [`CTI-2026-0503-GITHUB`](CTI-2026-0503-GITHUB_KR.md) | 2026-05-03 | GitHub Security Incident Analysis | 🔴 HIGH | [KR](CTI-2026-0503-GITHUB_KR.md) |
-| [`CTI-2026-0430-COPYFAIL`](Cti%20205%200430%20CopyFail%20kr.MD) | 2026-04-30 | 'Copy Fail' Security Report (CVE-2026-31431) | 🟠 MEDIUM | [KR](Cti%20205%200430%20CopyFail%20kr.MD) |
-| [`CTI-2026-0427-LITECOIN`](Cti%202026%200427%20litecoin%20en.MD) | 2026-04-27 | Litecoin Vulnerability Report | 🔴 HIGH | [KR](Cti%202026%200427%20litecoin%20kr.MD) · [EN](Cti%202026%200427%20litecoin%20en.MD) · [PDF](CTI-2026-0427-LITECOIN_KR.pdf) |
-| [`CTI-2026-0422-MCP`](Cti%202026%200422%20mcp%20en.MD) | 2026-04-22 | Sophisticated and Dormant Attacks Targeting MCP — A Structural Problem? | 🔴 HIGH | [KR](Cti%202026%200422%20mcp%20kr.MD) · [EN](Cti%202026%200422%20mcp%20en.MD) · [CN](Cti%202026%200422%20mcp%20cn.MD) · [JP](Cti%202026%200422%20mcp%20jp.MD) · [PDF](CTI-2026-0422-MCP_KR.pdf) · [PRESS](CTI-2026-0422-MCP-PRESS_EN.md) |
-| [`CTI-2026-0420-VERCEL`](CTI-2026-0420-VERCEL_EN.md) | 2026-04-20 | Vercel Security Breach — AI SaaS Supply Chain Attack and ShinyHunters Assessment | 🔴 HIGH | [KR](CTI-2026-0420-VERCEL_KR.md) · [EN](CTI-2026-0420-VERCEL_EN.md) · [PDF](Vercel_%EB%B3%B4%EC%95%88%EC%82%AC%EA%B1%B4_%EB%B6%84%EC%84%9D%EB%A6%AC%ED%8F%AC%ED%8A%B8_CTI-2026-0420.pdf) |
-| [`CTI-2026-0320-CORUNA`](Analysis%20EN.MD) | 2026-03-20 | Collapse of the Cyber Weapons Supply Chain and National Security Threats — Coruna iOS Exploit Kit Case Analysis | 🔴 CRITICAL | [KR](CTI-2026-0320-CORUNA_KR.md) · [EN](Analysis%20EN.MD) · [ZH](Analysis%20ZH%20%E4%B8%AD%E6%96%87%E7%89%88.md) |
+| [`CTI-2026-0530-MARIMO`](CTI-2026-0530-MARIMO_EN.md) | 2026-05-30 | AI-agent-driven intrusion — Marimo CVE-2026-39987 + autonomous LLM pivot | 🔴 CRITICAL | KR·EN·JP·CN |
+| [`CTI-2026-0530-GOGS`](CTI-2026-0530-GOGS_EN.md) | 2026-05-30 | Unpatched Gogs git rebase argument injection RCE (CVSS 9.4) | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0530-JINX`](CTI-2026-0530-JINX_EN.md) | 2026-05-30 | JINX-0164 — macOS malware & supply-chain threat targeting crypto | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0530-CHATGPHISH`](CTI-2026-0530-CHATGPHISH_EN.md) | 2026-05-30 | ChatGPhish — ChatGPT renderer trust flaw (indirect prompt injection) | 🟠 MEDIUM | KR·EN·JP·CN |
+| [`CTI-2026-0528-KELPDAO`](CTI-2026-0528-KELPDAO_EN.md) | 2026-05-28 | KelpDAO LayerZero bridge hack — single point of failure in off-chain verification | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0527-GLASSWORM`](CTI-2026-0527-GLASSWORM_EN.md) | 2026-05-27 | GlassWorm — self-propagating VS Code/OpenVSX supply-chain worm | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0527-GITEA`](CTI-2026-0527-GITEA_EN.md) | 2026-05-27 | Gitea vulnerability analysis | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0527-AICRYPTOJACK`](CTI-2026-0527-AICRYPTOJACK_EN.md) | 2026-05-27 | AI cryptojacking campaign analysis | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0526-KIMSUKY-PEBBLEDASH`](CTI-2026-0526-KIMSUKY-PEBBLEDASH_EN.md) | 2026-05-26 | Kimsuky (APT43) PebbleDash & AppleSeed — new analysis | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS`](CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_EN.md) | 2026-05-26 | UK sanctions on Russian crypto — trends | 🟠 MEDIUM | KR·EN·JP·CN |
+| [`CTI-2026-0524-DUALTHREAT`](CTI-2026-0524-DUALTHREAT_EN.md) | 2026-05-24 | Two Concurrent Threats — analysis | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0522-EDR3`](CTI-2026-0522-EDR3_EN.md) | 2026-05-22 | EDR evasion threat analysis (EDR3) | 🔴 HIGH | KR·EN |
+| [`CTI-2026-0521-YELLOWKEY`](CTI-2026-0521-YELLOWKEY_EN.md) | 2026-05-21 | YellowKey — Windows BitLocker bypass zero-day | 🔴 HIGH | KR·EN |
+| [`CTI-2026-0521-DPRK-TRENDS`](CTI-2026-0521-DPRK-TRENDS_EN.md) | 2026-05-21 | North Korea hacking trends 2026 | 🟠 MEDIUM | KR·EN |
+| [`CTI-2026-0520-GITHUB`](CTI-2026-0520-GITHUB.md) | 2026-05-20 | GitHub internal repository breach analysis | 🔴 HIGH | KR |
+| [`CTI-2026-0520-FAST16`](CTI-2026-0520-FAST16%20EN.md) | 2026-05-20 | FAST16 analysis report | 🟠 MEDIUM | KR·EN·JP·CN |
+| [`CTI-2026-0520-EXCHANGE`](CTI-2026-0520-EXCHANGE.md) | 2026-05-20 | Exchange Server vulnerability | 🔴 HIGH | KR·EN |
+| [`CTI-2026-0520-EVILTOKENS`](CTI-2026-0520-EVILTOKENS.md) | 2026-05-20 | EvilTokens — AI-generated device-code phishing PhaaS | 🔴 HIGH | KR |
+| [`CTI-2026-0520-DRUPAL`](CTI-2026-0520-DRUPAL.md) | 2026-05-20 | Drupal core critical zero-day (no patch) | 🔴 CRITICAL | KR |
+| [`CTI-2026-0520-CPANEL`](CTI-2026-0520-CPANEL.md) | 2026-05-20 | cPanel compromise analysis | 🔴 HIGH | KR |
+| [`CTI-2026-0517-AICYBER`](CTI-2026-0517-AICYBER_EN.md) | 2026-05-17 | North Korea's LLM-enabled hacking — agentic defense | 🔴 HIGH | KR·EN |
+| [`CTI-2026-0514-ChatGPT_DNS_SideChannel`](CTI-2026-0514-ChatGPT_DNS_SideChannel_KO.md) | 2026-05-14 | ChatGPT DNS side channel | 🟠 MEDIUM | KR |
+| [`CTI-2026-0514-CTRL_RussianRAT`](CTI-2026-0514-CTRL_RussianRAT_LNK_RDP_KO.md) | 2026-05-14 | Russian RAT (LNK/RDP) | 🔴 HIGH | KR |
+| [`CTI-2026-0510-LAZARUS-GITHOOKS`](CTI-2026-0510-LAZARUS-GITHOOKS_EN.md) | 2026-05-10 | North Korea Lazarus git hooks abuse | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0510-MYTHOS-AI-VULN`](Cti%202026%200510%20mythos%20ai%20vuln.MD) | 2026-05-10 | Mythos AI vulnerability analysis | 🔴 HIGH | EN |
+| [`CTI-2026-0507-SCARCRUFT`](CTI-2026-0507-SCARCRUFT_EN.md) | 2026-05-07 | ScarCruft (APT37) analysis | 🔴 HIGH | KR·EN·JP |
+| [`CTI-2026-0505-VIBE`](바이브_인공지능_해킹의_시대_CTI-2026-0505-VIBE.md) | 2026-05-05 | Vibe — The Age of AI Hacking | 🟠 MEDIUM | KR |
+| [`CTI-2026-0503-GITHUB`](CTI-2026-0503-GITHUB_KR.md) | 2026-05-03 | GitHub threat analysis | 🔴 HIGH | KR |
+| [`CTI-2026-0430-COPYFAIL`](Cti%20205%200430%20CopyFail%20kr.MD) | 2026-04-30 | CVE-2026-31431 'Copy Fail' vulnerability | 🔴 HIGH | KR |
+| [`CTI-2026-0427-LITECOIN`](Cti%202026%200427%20litecoin%20en.MD) | 2026-04-27 | Litecoin vulnerability analysis | 🟠 MEDIUM | KR·EN |
+| [`CTI-2026-0422-MCP`](Cti%202026%200422%20mcp%20en.MD) | 2026-04-22 | Intelligent & sleeper attacks targeting MCP — a structural problem | 🔴 HIGH | KR·EN·JP·CN |
+| [`CTI-2026-0420-VERCEL`](CTI-2026-0420-VERCEL_EN.md) | 2026-04-20 | Vercel breach — AI SaaS supply chain & ShinyHunters | 🔴 HIGH | KR·EN |
+| [`CTI-2026-0320-CORUNA`](Analysis%20EN.MD) | 2026-03-20 | Collapse of the cyber-weapons supply chain — Coruna iOS Exploit Kit | 🔴 CRITICAL | KR·EN·CN |
+
+> ℹ️ Titles/severities for some older entries are derived from archive filenames and commit messages; verify against the report body.
 
 ---
 
 ## 🗂️ By Category
 
+### 🤖 AI & LLM Security
+
+* `CTI-2026-0530-MARIMO` — LLM-agent-driven autonomous intrusion (first observed)
+* `CTI-2026-0530-CHATGPHISH` — ChatGPT renderer trust flaw / indirect prompt injection
+* `CTI-2026-0527-AICRYPTOJACK` — AI cryptojacking
+* `CTI-2026-0517-AICYBER` — North Korea's LLM-enabled hacking / agentic defense
+* `CTI-2026-0422-MCP` — intelligent & sleeper attacks on MCP
+
 ### 🌐 Supply Chain Attacks
 
-An attack type where the attacker first compromises a "trusted third-party vendor" rather than the final target to gain indirect access. Since SolarWinds and Salesloft-Drift, this is the fastest-growing category in 2025–2026.
-
-* [`CTI-2026-0527-GLASSWORM`](CTI-2026-0527-GLASSWORM_EN.md) — Simultaneous takedown of GlassWorm's quadruple C2 (Solana · BitTorrent DHT · Google Calendar · VPS)
-* [`CTI-2026-0527-GITEA`](CTI-2026-0527-GITEA_EN.md) — Gitea container registry unauthenticated exposure (CVE-2026-27771)
-* [`CTI-2026-0520-GITHUB`](CTI-2026-0520-GITHUB.md) — 3,800+ internal GitHub repos exfiltrated via employee device hack
-* [`CTI-2026-0510-LAZARUS-GITHOOKS`](CTI-2026-0510-LAZARUS-GITHOOKS_EN.md) — North Korea Lazarus Git Hooks supply chain attack
-* [`CTI-2026-0503-GITHUB`](CTI-2026-0503-GITHUB_KR.md) — GitHub security incident analysis
-* [`CTI-2026-0422-MCP`](Cti%202026%200422%20mcp%20en.MD) — Anthropic MCP supply chain attacks (including sleeper attacks)
-* [`CTI-2026-0420-VERCEL`](CTI-2026-0420-VERCEL_EN.md) — Vercel × Context.ai × ShinyHunters (AI SaaS OAuth supply chain breach)
-
-### 📱 Mobile & Zero-Day
-
-Analysis of state-grade surveillance tools and commercial exploit kits targeting mobile platforms such as iOS and Android.
-
-* [`CTI-2026-0521-YELLOWKEY`](CTI-2026-0521-YELLOWKEY_EN.md) — Windows BitLocker Bypass Zero-Day
-* [`CTI-2026-0520-DRUPAL`](CTI-2026-0520-DRUPAL.md) — Drupal core critical vulnerability (zero-day, no patch)
-* [`CTI-2026-0520-EXCHANGE`](CTI-2026-0520-EXCHANGE.md) — Microsoft Exchange Server vulnerabilities
-* [`CTI-2026-0320-CORUNA`](Analysis%20EN.MD) — Coruna iOS Exploit Kit (CVE-2024-23222) and the cyber weapons supply chain
+* `CTI-2026-0530-JINX` — JINX-0164 macOS / npm (@velora-dex/sdk)
+* `CTI-2026-0530-GOGS` · `CTI-2026-0527-GITEA` — self-hosted Git server RCE
+* `CTI-2026-0527-GLASSWORM` — self-propagating VS Code/OpenVSX worm
+* `CTI-2026-0520-GITHUB` · `CTI-2026-0503-GITHUB` — GitHub repository breaches
+* `CTI-2026-0420-VERCEL` — Vercel × Context.ai × ShinyHunters
 
 ### 🕵️ Threat Actor Profiles
 
-TTPs, campaigns, and attribution information on specific APT groups and cybercrime organizations.
+* `CTI-2026-0530-JINX` — JINX-0164 (financially motivated, DPRK-TTP overlap)
+* `CTI-2026-0526-KIMSUKY-PEBBLEDASH` — Kimsuky (APT43)
+* `CTI-2026-0510-LAZARUS-GITHOOKS` — Lazarus
+* `CTI-2026-0507-SCARCRUFT` — ScarCruft (APT37)
+* `CTI-2026-0521-DPRK-TRENDS` — North Korea hacking trends
 
-* **Lazarus Group / TraderTraitor (North Korea)** — [`CTI-2026-0528-KELPDAO`](CTI-2026-0528-KELPDAO_EN.md), [`CTI-2026-0510-LAZARUS-GITHOOKS`](CTI-2026-0510-LAZARUS-GITHOOKS_EN.md)
-* **Kimsuky / APT43 (North Korea)** — [`CTI-2026-0526-KIMSUKY-PEBBLEDASH`](CTI-2026-0526-KIMSUKY-PEBBLEDASH_EN.md)
-* **ScarCruft / APT37 (North Korea)** — [`CTI-2026-0507-SCARCRUFT`](CTI-2026-0507-SCARCRUFT_EN.md)
-* **North Korea Comprehensive Trends** — [`CTI-2026-0521-DPRK-TRENDS`](CTI-2026-0521-DPRK-TRENDS_EN.md), [`CTI-2026-0517-AICYBER`](CTI-2026-0517-AICYBER_EN.md)
-* **ShinyHunters** (UNC6040/UNC6240/UNC6661/UNC6671) — [`CTI-2026-0420-VERCEL` §5](CTI-2026-0420-VERCEL_EN.md)
-* **UNC1069 / Sapphire Sleet (North Korea)** — [`CTI-2026-0422-MCP` §3.3](Cti%202026%200422%20mcp%20en.MD)
-* **UNC6353·UNC6691·Operation Zero** — [`CTI-2026-0320-CORUNA` §3](Analysis%20EN.MD)
-* **Russia-linked RAT operators** — [`CTI-2026-0514-CTRL_RussianRAT`](CTI-2026-0514-CTRL_RussianRAT_LNK_RDP_KO.md), [`CTI-2026-0527-GLASSWORM`](CTI-2026-0527-GLASSWORM_EN.md)
+### 💰 Web3 & Crypto
 
-### 💰 Web3 & Crypto Ecosystem
+* `CTI-2026-0528-KELPDAO` — KelpDAO LayerZero bridge hack
+* `CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS` — crypto sanctions trends
+* `CTI-2026-0427-LITECOIN` — Litecoin vulnerability
 
-Analysis of breaches involving DeFi, CEX, stablecoins, NFT marketplaces, and domestic (DAXA · KoFIU · Specified Financial Information Act) compliance perspectives.
+### 🪟 Endpoint, OS & Zero-Day
 
-* [`CTI-2026-0528-KELPDAO`](CTI-2026-0528-KELPDAO_EN.md) — KelpDAO LayerZero bridge hack ($292M, largest DeFi hack of 2026)
-* [`CTI-2026-0527-AICRYPTOJACK`](CTI-2026-0527-AICRYPTOJACK_EN.md) — GPU-targeted cryptojacking abusing AI chatbot recommendations
-* [`CTI-2026-0527-GLASSWORM`](CTI-2026-0527-GLASSWORM_EN.md) — Crypto wallet and NPM token theft, Solana blockchain C2
-* [`CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS`](CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_EN.md) — UK government sanctions on Russian crypto
-* [`CTI-2026-0427-LITECOIN`](Cti%202026%200427%20litecoin%20en.MD) — Litecoin vulnerability report
-* [`CTI-2026-0420-VERCEL` §8](CTI-2026-0420-VERCEL_EN.md) — Impact of the Vercel breach on Web3 frontend infrastructure
-* [`CTI-2026-0320-CORUNA` §4](Analysis%20EN.MD) — Zero-day trading ecosystem and crypto-based payment structure
-
-### 🤖 AI Security & LLM Threats
-
-Analysis of novel attack surfaces targeting AI systems such as LLMs, AI agents, and MCP.
-
-* [`CTI-2026-0527-AICRYPTOJACK`](CTI-2026-0527-AICRYPTOJACK_EN.md) — AI search poisoning, LLM recommendation abuse
-* [`CTI-2026-0517-AICYBER`](CTI-2026-0517-AICYBER_EN.md) — North Korea LLM hacking, agentic defense
-* [`CTI-2026-0514-ChatGPT_DNS_SideChannel`](CTI-2026-0514-ChatGPT_DNS_SideChannel_KO.md) — ChatGPT DNS side channel
-* [`CTI-2026-0510-MYTHOS`](Cti%202026%200510%20mythos%20ai%20vuln.MD) — Claude Mythos AI vulnerability
-* [`CTI-2026-0505-VIBE`](바이브_인공지능_해킹의_시대_CTI-2026-0505-VIBE.md) — Vibe, the age of AI hacking
-* [`CTI-2026-0422-MCP`](Cti%202026%200422%20mcp%20en.MD) — MCP sleeper attacks and bias injection
-
-### 🇰🇷 Korea Cybersecurity Policy
-
-Threat analyses and institutional response recommendations targeting Korean government, public institutions, and defense industry.
-
-* [`CTI-2026-0526-KIMSUKY-PEBBLEDASH`](CTI-2026-0526-KIMSUKY-PEBBLEDASH_EN.md) — New Kimsuky campaign targeting Korea
-* [`CTI-2026-0524-DUALTHREAT`](CTI-2026-0524-DUALTHREAT_EN.md) — Two concurrent threats (Korean impact)
-* [`CTI-2026-0521-DPRK-TRENDS`](CTI-2026-0521-DPRK-TRENDS_EN.md) — Comprehensive 2026 North Korea hacking trends
-* [`CTI-2026-0507-SCARCRUFT`](CTI-2026-0507-SCARCRUFT_EN.md) — ScarCruft campaign targeting Korean figures
-* [`CTI-2026-0320-CORUNA` §6–§8](Analysis%20EN.MD) — Weaknesses in Korean government cybersecurity structure and 'Cybersecurity New Deal' proposal
-* [`CTI-2026-0420-VERCEL` §8.2](CTI-2026-0420-VERCEL_EN.md) — DAXA member exchanges and domestic Web3 issuers' perspective
+* `CTI-2026-0521-YELLOWKEY` — Windows BitLocker bypass zero-day
+* `CTI-2026-0520-DRUPAL` — Drupal core zero-day
+* `CTI-2026-0520-EXCHANGE` — Exchange Server vulnerability
+* `CTI-2026-0522-EDR3` — EDR evasion
+* `CTI-2026-0320-CORUNA` — Coruna iOS Exploit Kit
 
 ---
 
 ## 🧭 Methodology
 
-All reports in this archive follow the standards below.
+### Traffic Light Protocol (TLP)
 
-### Traffic Light Protocol (TLP) Classification
-
-| Label | Meaning | This Repository |
+| Label | Meaning | This repo |
 | --- | --- | --- |
-| 🟢 **TLP:GREEN** | Shareable within the community, public disclosure allowed | **Default for this repository** |
-| 🟡 TLP:AMBER | Limited to internal organization sharing | N/A |
-| 🔴 TLP:RED | Limited to individual recipients | N/A |
+| 🟢 **TLP:GREEN** | Community-shareable, public | **Default** |
+| 🟡 TLP:AMBER | Internal sharing only | N/A |
+| 🔴 TLP:RED | Named recipients only | N/A |
 
 ### Severity
 
-| Level | Meaning | Response Time |
+| Level | Meaning | Response time |
 | --- | --- | --- |
-| 🔴 **CRITICAL** | Directly tied to national security or mass civilian harm | Immediate |
-| 🔴 **HIGH** | Broad impact across industries or ecosystems | 24–72 hours |
-| 🟠 **MEDIUM** | Limited impact on specific organizations or groups | Within 7 days |
-| 🟡 **LOW** | Awareness/observation level | Within 30 days |
-
-### Confidence Assessment
-
-Each Key Judgment is annotated with confidence as **High / Medium / Low**, cross-verified against primary sources and secondary press / open CTI materials.
+| 🔴 **CRITICAL** | National-security / large-scale civilian impact | Immediate |
+| 🔴 **HIGH** | Broad industry/ecosystem impact | 24–72h |
+| 🟠 **MEDIUM** | Limited to specific orgs | Within 7 days |
+| 🟡 **LOW** | Awareness/observation | Within 30 days |
 
 ### Framework References
 
-* **MITRE ATT&CK** — TTP mapping standard
-* **NIST SP 800-61** — Incident response lifecycle
-* **NIST SP 800-161** — Cyber Supply Chain Risk Management (C-SCRM)
-* **NIST SP 800-190** — Container security
+* **MITRE ATT&CK** / **MITRE ATLAS** — TTP & AI-threat mapping
+* **NIST SP 800-61** — incident-response lifecycle
 * **NIST SP 800-207** — Zero Trust Architecture
-* **STIX/TAXII** — Threat intelligence exchange standard
-* **Mandiant UNC/APT naming** — Threat actor clustering
+* **NIST AI RMF** / **OWASP LLM Top 10** — AI/LLM risk management
+* **STIX/TAXII** — threat-intelligence exchange
+* **Mandiant/Wiz UNC & cluster naming** — threat-actor clustering
 
 ---
 
@@ -201,15 +219,14 @@ Each Key Judgment is annotated with confidence as **High / Medium / Low**, cross
 CTI-YYYY-MMDD-<SUBJECT>_<LANG>.<ext>
 
 Examples:
-  CTI-2026-0528-KELPDAO_KR.md    → Published 2026-05-28, KelpDAO incident, Korean Markdown
-  CTI-2026-0528-KELPDAO_EN.md    → English version of the same incident
-  CTI-2026-0528-KELPDAO_ZH.md    → Chinese version
-  CTI-2026-0528-KELPDAO_JA.md    → Japanese version
+  CTI-2026-0530-MARIMO_KR.md   → published 2026-05-30, Marimo, Korean Markdown
+  CTI-2026-0530-MARIMO_EN.md   → English edition of the same event
+  CTI-2026-0528-KELPDAO_ZH.md  → KelpDAO event, Chinese edition
 ```
 
-* `SUBJECT` — Keyword representing the report topic (uppercase)
-* `LANG` — `KR` (Korean) / `EN` (English) / `ZH` or `CN` (Chinese) / `JA` or `JP` (Japanese)
-* `ext` — `md` (default) / `pdf` (official distribution)
+* `SUBJECT` — uppercase keyword representing the topic
+* `LANG` — `KR/KO` (Korean) / `EN` (English) / `JP/JA` (Japanese) / `CN/ZH` (Chinese)
+* `ext` — `md` (default) / `pdf` (formal distribution)
 
 ---
 
@@ -217,17 +234,15 @@ Examples:
 
 | Channel | Purpose |
 | --- | --- |
-| **Email** | [gameworker@gmail.com](mailto:gameworker@gmail.com) — Report feedback, corrections, tips |
-| **GitHub Issues** | [Create an issue](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/issues) — IoC updates, reference additions |
-| **Sensitive tips** | For sensitive tips, please use secure channels such as Signal or ProtonMail. |
-
-This repository is a personal research project. PRs are welcome, but report body modifications are reviewed carefully.
+| **Email** | [gameworker@gmail.com](mailto:gameworker@gmail.com) — feedback, corrections, tips |
+| **GitHub Issues** | [Open an issue](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/issues) — IoC updates, reference suggestions |
+| **Source protection** | For sensitive tips, please use secure channels such as Signal/ProtonMail. |
 
 ---
 
 ## ⚖️ Disclaimer
 
-1. All reports in this repository are **independent analyses based on publicly available OSINT materials and press reporting**, and do not represent the official position of any referenced organization.
+1. All reports are **independent analyses based on publicly available OSINT materials and press reporting**, and do not represent the official position of any referenced organization.
 2. The content is intended **solely for educational, defensive, research, and policy purposes**. Use for offensive, intrusive, or illegal activities is strictly prohibited.
 3. IoCs and vulnerability information reflect the time of publication; verify the latest state before operational use.
 4. The author assumes no liability for damages arising from direct or indirect use of these materials.
@@ -238,10 +253,10 @@ This repository is a personal research project. PRs are welcome, but report body
 
 |  |  |
 | --- | --- |
-| **Total reports** | 30+ |
-| **Languages covered** | Korean, English, 中文, 日本語 |
-| **Observed threat actors** | Lazarus Group · TraderTraitor · Kimsuky/APT43 · ScarCruft/APT37 · UNC1069/Sapphire Sleet · ShinyHunters · UNC6353/UNC6691 · Operation Zero · GlassWorm operators · and others |
-| **Last updated** | 2026-05-28 |
+| **Total reports** | 33+ |
+| **Languages** | Korean · English · Japanese · Chinese |
+| **Observed threat actors** | JINX-0164 · Lazarus · Kimsuky (APT43) · ScarCruft (APT37) · ShinyHunters · UNC6353 · and others |
+| **Last update** | 2026-05-30 |
 
 ---
 

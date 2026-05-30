@@ -1,163 +1,82 @@
-# Cyber Threat Intelligence Report Archive
+# Cyber Threat Intelligence Report
 
-> An independent, OSINT-based cyber threat intelligence (CTI) archive maintained by Dennis Kim (Kim HoKwang / 김호광), CEO of Betalabs Inc. and a former Microsoft Azure MVP (2015–2023). The repository publishes multilingual (Korean, English, Japanese, Chinese) defensive-research reports on supply chain attacks, zero-day vulnerabilities, AI/LLM/MCP security, North Korean and other state-backed threat actors, nation-state sabotage, Web3/crypto incidents, and Korean cybersecurity policy. All reports are OSINT-derived, intended strictly for educational, defensive, research, and policy purposes, and do not represent any organization's official position.
+> Independent, OSINT-based cyber threat intelligence (CTI) archive by Dennis Kim (김호광 / HoKwang Kim), CEO of Betalabs Inc. Reports cover supply-chain attacks, the zero-day ecosystem, North Korean / state-nexus threat actors, Web3 & crypto security, and AI/LLM security. All reports are TLP:GREEN and published for defensive, research, and policy purposes only. Most reports are multilingual (Korean / English / Japanese / Chinese). Naming convention: CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md.
 
+Author: Dennis Kim (김호광 / HoKwang Kim) — gameworker@gmail.com — https://github.com/gameworkerkim
 Repository: https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT
-
-Maintainer: Dennis Kim (gameworker@gmail.com), GitHub @gameworkerkim
-
-Default classification: TLP:GREEN (some advisories TLP:AMBER or TLP:RED)
-
-Naming convention: CTI-YYYY-MMDD-<SUBJECT>_<LANG>.<ext> ; LANG = KR/EN/JP(JA)/CN(ZH)
-
-Last updated: 2026-05-28
-
-## Latest reports (2026-05-27 / 2026-05-28)
-
-- [KelpDAO LayerZero Bridge Hack (CTI-2026-0528-KELPDAO)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0528-KELPDAO_EN.md): Lazarus/TraderTraitor attack on KelpDAO's LayerZero bridge stealing 116,500 rsETH (~$292M). Root cause is the off-chain 1-of-1 DVN single point of failure plus RPC node poisoning and DDoS-induced failover, not a smart contract bug. Largest DeFi hack of 2026; cascading bad debt at Aave V3 ($123.7M–230.1M) and DeFi United private bailout. Languages KR/EN/ZH/JA. Severity CRITICAL.
-
-- [GlassWorm C2 Takedown (CTI-2026-0527-GLASSWORM)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-GLASSWORM_EN.md): CrowdStrike, Google, and the Shadowserver Foundation simultaneously disrupted the four C2 channels (Solana blockchain memo / BitTorrent DHT / Google Calendar / commercial VPS) of the self-propagating supply chain worm targeting developers through trojanized VS Code / Open VSX extensions and npm/Python packages. GlassWormRAT steals GitHub/NPM/OpenVSX tokens and crypto wallets. Likely Russia/CIS-nexus. Languages KR/EN/ZH/JA. Severity HIGH.
-
-- [Gitea Container Registry Unauthenticated Exposure (CTI-2026-0527-GITEA)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-GITEA_EN.md): CVE-2026-27771 — unauthenticated remote pull of private container images across ~30,000 Gitea deployments in 30+ countries, undetected for ~4 years. Fix: Gitea 1.26.2. Forgejo confirmed affected. Workaround `[service].REQUIRE_SIGNIN_VIEW=true`. Languages KR/EN/ZH/JA. Severity HIGH.
-
-- [AI Chatbot Cryptojacking (CTI-2026-0527-AICRYPTOJACK)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-AICRYPTOJACK_EN.md): Microsoft warning on a cryptojacking campaign where AI chatbot recommendations surface malicious download domains (AI search poisoning beyond SEO). Impersonates CrystalDiskInfo/HWMonitor/FurMark/etc., targets high-GPU systems, uses DLL sideloading + ScreenConnect for persistent remote access (>150 domains via gleeze[.]com/Dynu DDNS, miners gminer/lolMiner/SRBMiner-MULTI). Languages KR/EN/ZH/JA. Severity HIGH.
-
-- [UK Government Russian Crypto Sanctions (CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_EN.md): UK government state-level digital asset sanctions on Russia and broader regulatory trend analysis. Languages KR/EN/ZH/JA + KR PDF. Severity MEDIUM.
-
-- [Kimsuky / APT43 PebbleDash & AppleSeed (CTI-2026-0526-KIMSUKY-PEBBLEDASH)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0526-KIMSUKY-PEBBLEDASH_EN.md): New analysis of Kimsuky (APT43) malware families PebbleDash and AppleSeed targeting Korean entities. Languages KR/EN/CN/JP + PDF. Severity HIGH.
-
-- [Two Concurrent Threats (CTI-2026-0524-DUALTHREAT)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0524-DUALTHREAT_EN.md): Analysis of two concurrent threats with domestic Korean impact. Languages KR/EN/CN/JP + KR PDF. Severity HIGH.
-
-- [EDR Bypass 3-Stage Analysis (CTI-2026-0522-EDR3)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0522-EDR3_EN.md): Three-stage analysis of modern EDR bypass techniques observed in the wild. Languages KR/EN + KR PDF. Severity HIGH.
-
-- [Windows BitLocker Bypass Zero-Day "YellowKey" (CTI-2026-0521-YELLOWKEY)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0521-YELLOWKEY_EN.md): CVE-2026-45585 BitLocker bypass zero-day on Windows; Microsoft mitigation analysis. Languages KR/EN. Severity HIGH.
-
-- [North Korea Hacking Trends 2026 (CTI-2026-0521-DPRK-TRENDS)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0521-DPRK-TRENDS_EN.md): Comprehensive analysis of 2026 North Korean hacking trends, including TRM Labs finding that DPRK accounts for 76% of 2026 crypto hack losses. Languages KR/EN. Severity HIGH.
-
-## Earlier May 2026 reports (2026-05-20)
-
-- [Drupal Core Highly Critical Advisory (CTI-2026-0520-DRUPAL)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-DRUPAL.md): Pre-disclosure advisory for a Drupal core highly critical vulnerability (PSA-2026-05-18). Unauthenticated remote exploitation, "disclosure equals attack onset" type. Bilingual KR/EN. Severity CRITICAL.
-
-- [Microsoft Exchange OWA Zero-Day (CTI-2026-0520-EXCHANGE)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-EXCHANGE.md): CVE-2026-42897, an actively exploited XSS/spoofing zero-day in on-premises Exchange Server OWA. No permanent patch; EEMS/EOMT mitigation only. Bilingual KR/EN. Severity HIGH.
-
-- [EvilTokens AI-Generated Device Code Phishing PhaaS (CTI-2026-0520-EVILTOKENS)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-EVILTOKENS.md): Phishing-as-a-Service abusing the OAuth 2.0 device authorization grant to defeat MFA via session/token theft; assessed as AI "vibe coding" generated. Bilingual KR/EN. Severity HIGH.
-
-- [cPanel & WHM Authentication Bypass (CTI-2026-0520-CPANEL)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-CPANEL.md): CVE-2026-41940, CVSS 9.8 pre-auth authentication bypass via CRLF injection; mass-exploited within 24 hours of disclosure. Bilingual KR/EN. Severity CRITICAL.
-
-- [Fast16 Pre-Stuxnet Sabotage Malware (CTI-2026-0520-FAST16)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-FAST16%20EN.md): Analysis of Fast16, a precision-computation tampering sabotage framework predating Stuxnet by ~5 years. Languages EN/KR/JP/ZH + PDF. Severity HIGH.
-
-- [GitHub Internal Repository Breach (CTI-2026-0520-GITHUB)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-GITHUB.md): Employee device hack leading to exfiltration of 3,800+ internal GitHub repositories. Severity HIGH.
-
-## AI / LLM / MCP security
-
-- [AI Chatbot Cryptojacking (CTI-2026-0527-AICRYPTOJACK)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-AICRYPTOJACK_EN.md): AI search poisoning extending SEO poisoning into LLM recommendations. Languages KR/EN/ZH/JA.
-
-- [AI Cyber Attack and Agentic Defense / North Korea LLM hacking (CTI-2026-0517-AICYBER)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0517-AICYBER_EN.md): How North Korean actors leverage LLMs for offensive operations and an agentic-defense response model. Languages KR/EN + PDF.
-
-- [ChatGPT DNS Side-Channel (CTI-2026-0514-CHATGPT-DNS)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0514-ChatGPT_DNS_SideChannel_KO.md): Analysis of a DNS-based side-channel involving ChatGPT. Language KR.
-
-- [Mythos AI Vulnerability (CTI-2026-0510-MYTHOS)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200510%20mythos%20ai%20vuln.MD): Vulnerability analysis of the Claude Mythos AI system.
-
-- [Vibe: The Age of AI-Driven Hacking (CTI-2026-0505-VIBE)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/%EB%B0%94%EC%9D%B4%EB%B8%8C_%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5_%ED%95%B4%ED%82%B9%EC%9D%98_%EC%8B%9C%EB%8C%80_CTI-2026-0505-VIBE.md): Essay/report on the era of AI-assisted ("vibe coding") hacking. Language KR + PDF.
-
-- [Advanced & Sleeper Attacks on MCP (CTI-2026-0422-MCP)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20en.MD): Whether attacks targeting the Model Context Protocol (MCP) represent a structural problem; covers advanced and sleeper attack patterns, North Korean UNC1069/Sapphire Sleet supply chain abuse, and Web3 wallet impact. Languages KR/EN/JP/CN + press summaries + PDF. Severity HIGH.
-
-## Supply chain attacks
-
-- [GlassWorm C2 Takedown (CTI-2026-0527-GLASSWORM)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-GLASSWORM_EN.md): Self-propagating worm targeting VS Code / Open VSX / npm / Python; four-channel C2 (Solana, BitTorrent DHT, Google Calendar, VPS) simultaneously disrupted. Languages KR/EN/ZH/JA.
-
-- [Gitea Container Registry Unauthenticated Exposure (CTI-2026-0527-GITEA)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-GITEA_EN.md): CVE-2026-27771 — private container images leaked across 30,000+ self-hosted Gitea instances. Languages KR/EN/ZH/JA.
-
-- [GitHub Internal Repository Breach (CTI-2026-0520-GITHUB)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-GITHUB.md): 3,800+ internal repositories exfiltrated via employee device compromise.
-
-- [cPanel & WHM Authentication Bypass (CTI-2026-0520-CPANEL)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-CPANEL.md): Mass takeover of hosting infrastructure via CVE-2026-41940.
-
-- [Lazarus .git/hooks Malware Campaign (CTI-2026-0510-LAZARUS-GITHOOKS)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0510-LAZARUS-GITHOOKS_EN.md): North Korean Lazarus Group abusing .git/hooks to compromise developer environments. Languages KR/EN/JP/CN + PDF.
-
-- [GitHub RCE via single git push (CTI-2026-0503-GITHUB)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0503-GITHUB_KR.md): Remote code execution on GitHub Enterprise from a single git push (command injection). Language KR.
-
-- [Vercel Breach: AI SaaS Supply Chain & ShinyHunters (CTI-2026-0420-VERCEL)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0420-VERCEL_EN.md): Five-stage chain Context.ai -> Google Workspace OAuth -> Vercel; ShinyHunters campaign trajectory and Web3 impact. Languages KR/EN + PDF. Severity HIGH.
-
-## Mobile and zero-day threats
-
-- [Windows BitLocker Bypass Zero-Day "YellowKey" (CTI-2026-0521-YELLOWKEY)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0521-YELLOWKEY_EN.md): CVE-2026-45585 BitLocker bypass.
-
-- [Drupal Core Highly Critical (CTI-2026-0520-DRUPAL)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-DRUPAL.md): Unauthenticated remote core vulnerability.
-
-- [Exchange OWA Zero-Day (CTI-2026-0520-EXCHANGE)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-EXCHANGE.md): CVE-2026-42897.
-
-- [Copy Fail: Linux Kernel Privilege Escalation (CTI-2026-0430-COPYFAIL)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%20205%200430%20CopyFail%20kr.MD): CVE-2026-31431 local privilege escalation in the Linux kernel. Language KR.
-
-- [Coruna iOS Exploit Kit (CTI-2026-0320-CORUNA)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0320-CORUNA_KR.md): Nation-state iOS exploit kit (CVE-2024-23222) and the collapse of the cyber-weapon supply chain. Languages KR/EN/ZH. Severity CRITICAL.
-
-## Threat actor profiles
-
-- Lazarus Group / TraderTraitor (North Korea): see CTI-2026-0528-KELPDAO and CTI-2026-0510-LAZARUS-GITHOOKS — TraderTraitor identified as the subgroup behind the KelpDAO LayerZero bridge hack; with Drift ($285M) and KelpDAO ($292M) alone, North Korea accounts for 76% of 2026 global crypto hack losses (TRM Labs).
-
-- Kimsuky / APT43 (North Korea): [CTI-2026-0526-KIMSUKY-PEBBLEDASH](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0526-KIMSUKY-PEBBLEDASH_EN.md) — PebbleDash and AppleSeed campaigns against Korean targets. Languages KR/EN/CN/JP + PDF.
-
-- ScarCruft / APT37 (North Korea): [CTI-2026-0507-SCARCRUFT](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_EN.md) — campaign analysis, languages KR/EN/JP + PDF.
-
-- North Korea trends overview: see [CTI-2026-0521-DPRK-TRENDS](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0521-DPRK-TRENDS_EN.md) and CTI-2026-0517-AICYBER.
-
-- ShinyHunters (UNC6040/UNC6240/UNC6661/UNC6671): see CTI-2026-0420-VERCEL.
-
-- UNC1069 / Sapphire Sleet (North Korea): see CTI-2026-0422-MCP §3.3 — Axios npm supply chain compromise.
-
-- UNC6353 / UNC6691 / Operation Zero: see CTI-2026-0320-CORUNA.
-
-- Russia-linked / CIS-nexus operators: see CTI-2026-0527-GLASSWORM and CTI-2026-0514-RUSSIAN-RAT.
-
-- GlassWorm operators: see CTI-2026-0527-GLASSWORM (likely Russia-based; CIS execution termination and Russian-language code comments).
-
-## Nation-state sabotage
-
-- [Fast16 (CTI-2026-0520-FAST16)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-FAST16%20EN.md): Lua-based precision-computation tampering malware predating Stuxnet; targets high-precision engineering/simulation software.
-
-## Web3 and crypto
-
-- [KelpDAO LayerZero Bridge Hack (CTI-2026-0528-KELPDAO)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0528-KELPDAO_EN.md): $292M theft via 1-of-1 DVN single point of failure plus RPC node poisoning; cascading Aave bad debt and DeFi United private bailout. Languages KR/EN/ZH/JA. Severity CRITICAL.
-
-- [GlassWorm — Crypto Wallet Theft & On-Chain C2 (CTI-2026-0527-GLASSWORM)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-GLASSWORM_EN.md): Crypto wallet exfiltration and Solana-blockchain dead drop for C2; direct relevance to Web3 developer workstations and multisig single-machine concentration risk.
-
-- [AI Chatbot Cryptojacking (CTI-2026-0527-AICRYPTOJACK)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-AICRYPTOJACK_EN.md): GPU-mining cryptojacking targeting crypto miners, AI researchers, and blockchain developers; persistent ScreenConnect access can pivot to wallet/seed extraction.
-
-- [UK Government Russian Crypto Sanctions (CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_EN.md): State-level digital asset sanctions trend.
-
-- [Litecoin Vulnerability (CTI-2026-0427-LITECOIN)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200427%20litecoin%20en.MD): Litecoin vulnerability analysis. Languages KR/EN + PDF.
-
-- Vercel breach Web3 impact: see CTI-2026-0420-VERCEL section 8.
-
-## Korea cybersecurity policy
-
-- North Korea–nexus targeting of Korean DeFi/restaking users: see CTI-2026-0528-KELPDAO.
-
-- Kimsuky/APT43 against Korean targets: see CTI-2026-0526-KIMSUKY-PEBBLEDASH.
-
-- Two concurrent threats with Korean impact: see CTI-2026-0524-DUALTHREAT.
-
-- Comprehensive North Korea 2026 trends: see CTI-2026-0521-DPRK-TRENDS.
-
-- ScarCruft targeting Korean figures: see CTI-2026-0507-SCARCRUFT.
-
-- "Cybersecurity New Deal" proposal and Korean government structural weaknesses: see CTI-2026-0320-CORUNA §6–§8.
-
-- DAXA member exchanges and domestic Web3 issuers' perspective: see CTI-2026-0420-VERCEL §8.2.
+License: CC BY-NC-SA 4.0
+Languages: KR (한국어) / EN (English) / JP·JA (日本語) / CN·ZH (中文)
+Last updated: 2026-05-30
+
+## Latest Reports (Featured)
+
+- [CTI-2026-0530-MARIMO — AI Agent at the Wheel](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0530-MARIMO_EN.md): First observed LLM-agent-driven intrusion. Pre-auth RCE on Marimo notebooks (CVE-2026-39987, CVSS 9.3, CISA KEV) followed by an autonomous four-stage pivot to internal PostgreSQL exfiltration in under an hour (Sysdig TRT). Severity CRITICAL. Langs: KR/EN/JP/CN.
+- [CTI-2026-0530-GOGS — Gogs git rebase Argument Injection RCE](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0530-GOGS_EN.md): Any authenticated user achieves RCE via a malicious branch name injecting --exec into git rebase. Rapid7 CVSS 9.4, no CVE, unpatched since 2026-03-17, public Metasploit module. Cross-tenant breach. Severity HIGH. Langs: KR/EN/JP/CN.
+- [CTI-2026-0530-JINX — JINX-0164 macOS & Supply-Chain Threat Actor](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0530-JINX_EN.md): Financially motivated cluster targeting crypto firms via LinkedIn lures; AUDIOFIX (Python) + MINIRAT (Go) macOS malware; @velora-dex/sdk 4.9.1 npm compromise; CI/CD lateral movement. DPRK-TTP overlap, no infra overlap (Wiz). Severity HIGH. Langs: KR/EN/JP/CN.
+- [CTI-2026-0530-CHATGPHISH — ChatGPT Renderer Trust Flaw](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0530-CHATGPHISH_EN.md): chatgpt.com renderer trusts Markdown links/images from summarized third-party pages; indirect prompt injection enabling phishing, spoofed alerts, QR-code pivot, and IP/UA/Referer leakage (Permiso Security, Andi Ahmeti). No CVE; vendor replied "could not reproduce". Severity MEDIUM. Langs: KR/EN/JP/CN.
+- [CTI-2026-0528-KELPDAO — KelpDAO LayerZero Bridge Hack](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0528-KELPDAO_EN.md): Cross-chain bridge compromise; single point of failure in off-chain verification infrastructure rather than on-chain contracts. Severity HIGH. Langs: KR/EN/JP/CN.
+
+## AI & LLM Security
+
+- [CTI-2026-0530-MARIMO](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0530-MARIMO_EN.md): LLM-agent-driven autonomous intrusion (first observed).
+- [CTI-2026-0530-CHATGPHISH](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0530-CHATGPHISH_EN.md): ChatGPT renderer trust flaw / indirect prompt injection.
+- [CTI-2026-0527-AICRYPTOJACK](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-AICRYPTOJACK_EN.md): AI cryptojacking campaign.
+- [CTI-2026-0517-AICYBER](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0517-AICYBER_EN.md): North Korea's LLM-enabled hacking and agentic defense.
+- [CTI-2026-0422-MCP](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200422%20mcp%20en.MD): Intelligent and sleeper attacks targeting Anthropic MCP; structural supply-chain risk.
+
+## Supply Chain Attacks
+
+- [CTI-2026-0530-JINX](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0530-JINX_EN.md): JINX-0164 macOS + npm (@velora-dex/sdk) supply chain.
+- [CTI-2026-0530-GOGS](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0530-GOGS_EN.md): Self-hosted Git server RCE (Gogs).
+- [CTI-2026-0527-GITEA](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-GITEA_EN.md): Gitea vulnerability.
+- [CTI-2026-0527-GLASSWORM](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0527-GLASSWORM_EN.md): Self-propagating VS Code/OpenVSX supply-chain worm.
+- [CTI-2026-0520-GITHUB](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-GITHUB.md): GitHub internal repository breach.
+- [CTI-2026-0503-GITHUB](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0503-GITHUB_KR.md): GitHub threat analysis.
+- [CTI-2026-0420-VERCEL](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0420-VERCEL_EN.md): Vercel breach via Context.ai OAuth; ShinyHunters; AI SaaS supply chain.
+
+## Threat Actor Profiles
+
+- [CTI-2026-0530-JINX](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0530-JINX_EN.md): JINX-0164 (financially motivated; DPRK-TTP overlap, no infra overlap).
+- [CTI-2026-0526-KIMSUKY-PEBBLEDASH](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0526-KIMSUKY-PEBBLEDASH_EN.md): Kimsuky (APT43) PebbleDash and AppleSeed.
+- [CTI-2026-0510-LAZARUS-GITHOOKS](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0510-LAZARUS-GITHOOKS_EN.md): North Korea Lazarus git hooks abuse.
+- [CTI-2026-0507-SCARCRUFT](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0507-SCARCRUFT_EN.md): ScarCruft (APT37).
+- [CTI-2026-0521-DPRK-TRENDS](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0521-DPRK-TRENDS_EN.md): North Korea hacking trends 2026.
+
+## Web3 & Crypto
+
+- [CTI-2026-0528-KELPDAO](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0528-KELPDAO_EN.md): KelpDAO LayerZero bridge hack; off-chain verification single point of failure.
+- [CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_EN.md): UK sanctions on Russian crypto.
+- [CTI-2026-0427-LITECOIN](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200427%20litecoin%20en.MD): Litecoin vulnerability analysis.
+
+## Endpoint, OS & Zero-Day
+
+- [CTI-2026-0521-YELLOWKEY](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0521-YELLOWKEY_EN.md): Windows BitLocker bypass zero-day.
+- [CTI-2026-0520-DRUPAL](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-DRUPAL.md): Drupal core critical zero-day (no patch).
+- [CTI-2026-0520-EXCHANGE](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-EXCHANGE.md): Exchange Server vulnerability.
+- [CTI-2026-0522-EDR3](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0522-EDR3_EN.md): EDR evasion threat analysis.
+- [CTI-2026-0520-EVILTOKENS](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-EVILTOKENS.md): EvilTokens AI-generated device-code phishing PhaaS.
+- [CTI-2026-0520-CPANEL](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-CPANEL.md): cPanel compromise.
+- [CTI-2026-0430-COPYFAIL](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%20205%200430%20CopyFail%20kr.MD): CVE-2026-31431 'Copy Fail'.
+- [CTI-2026-0320-CORUNA](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0320-CORUNA_KR.md): Coruna iOS Exploit Kit; cyber-weapons supply chain.
 
 ## Other
 
-- [Russian RAT / LNK-RDP Attack Chain (CTI-2026-0514-RUSSIAN-RAT)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0514-CTRL_RussianRAT_LNK_RDP_KO.md): Russian RAT delivered via LNK and RDP attack chains. Language KR.
+- [CTI-2026-0524-DUALTHREAT](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0524-DUALTHREAT_EN.md): Two concurrent threats analysis.
+- [CTI-2026-0520-FAST16](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0520-FAST16%20EN.md): FAST16 analysis report.
+- [CTI-2026-0514-CTRL_RussianRAT](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0514-CTRL_RussianRAT_LNK_RDP_KO.md): Russian RAT (LNK/RDP).
+- [CTI-2026-0514-ChatGPT_DNS_SideChannel](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/CTI-2026-0514-ChatGPT_DNS_SideChannel_KO.md): ChatGPT DNS side channel.
+- [CTI-2026-0510-MYTHOS-AI-VULN](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Cti%202026%200510%20mythos%20ai%20vuln.MD): Mythos AI vulnerability analysis.
+- [CTI-2026-0505-VIBE](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/%EB%B0%94%EC%9D%B4%EB%B8%8C_%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5_%ED%95%B4%ED%82%B9%EC%9D%98_%EC%8B%9C%EB%8C%80_CTI-2026-0505-VIBE.md): Vibe — The Age of AI Hacking.
 
-## Indexes and navigation
+## Methodology & Frameworks
 
-- [README (Korean)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/README.md): Primary repository index with full report table, categories, methodology (TLP, severity, frameworks), and naming convention.
+- TLP classification (default TLP:GREEN), four-level severity (CRITICAL/HIGH/MEDIUM/LOW), and explicit High/Medium/Low confidence on each Key Judgment.
+- Frameworks referenced: MITRE ATT&CK, MITRE ATLAS, NIST SP 800-61, NIST SP 800-207 (Zero Trust), NIST AI RMF, OWASP LLM Top 10, STIX/TAXII, Mandiant/Wiz UNC and cluster naming.
+- Cross-references: AI-output-weaponization reports (CHATGPHISH, MCP) and crypto-dev-targeting reports (JINX, LAZARUS, KELPDAO) cite each other where relevant.
 
-- [README (English)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/README_EN.md)
+## Optional
 
-- [README (Japanese)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/README_JP.md)
-
-- [README (Chinese)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/README_CN.md)
-
-## Usage and disclaimer
-
-All materials are independent OSINT-based analyses for educational, defensive, research, and policy purposes only. Offensive, intrusive, or illegal use is strictly prohibited. IoCs and vulnerability details reflect the publication date; verify the latest state before operational use. The author assumes no liability for damages arising from direct or indirect use of these materials. When citing, attribute to "Dennis Kim (Kim HoKwang), Cyber Threat Intelligence Report" with the report ID and URL.
+- [README (KR)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/README.md)
+- [README (EN)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/README_EN.md)
+- [README (CN)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/README_CN.md)
+- [README (JP)](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/README_JP.md)
