@@ -15,7 +15,7 @@
 | frameworks     | MITRE ATT&CK · NIST SP 800-61 · NIST SP 800-207 (Zero Trust) · CISA KEV · STIX/TAXII                     |
 | license        | CC BY-NC-SA 4.0                                                                                          |
 
-# CitrixBleed의 세 번째 그림자 — NetScaler 메모리 오버리드의 대규모 악용 재점화
+# CitrixBleed — NetScaler 메모리 오버리드의 대규모 악용 폭발
 
 > **리포트 ID** `CTI-2026-0603-NETSCALER` · **발행일** 2026-06-03 · **분류** `TLP:GREEN` · **심각도** 🔴 CRITICAL
 > **저자** Dennis Kim (김호광) · <gameworker@gmail.com> · [@gameworkerkim](https://github.com/gameworkerkim)
