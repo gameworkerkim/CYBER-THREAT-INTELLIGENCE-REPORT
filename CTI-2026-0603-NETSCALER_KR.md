@@ -1,7 +1,7 @@
 | id             | CTI-2026-0603-NETSCALER                                                                                  |
 | -------------- | -------------------------------------------------------------------------------------------------------- |
-| title          | CitrixBleed의 세 번째 그림자 — NetScaler 메모리 오버리드의 대규모 악용 재점화                                                    |
-| subtitle       | CVE-2026-3055: 3월 공개된 SAML IdP 정보유출 결함이 6월 대규모 악용으로 — "RCE" 라벨과 실제 임팩트의 거리                                |
+| title          | CitrixBleed — NetScaler 메모리 오버리드의 대규모 악용 폭발                                                    |
+| subtitle       | CVE-2026-3055: 3월 공개된 SAML IdP 정보유출 결함이 6월 대규모 악용으로 — "RCE" 라벨과 실제 임팩트는 다르다                                |
 | author         | Dennis Kim (김호광 / HoKwang Kim)                                                                           |
 | email          | <gameworker@gmail.com>                                                                                   |
 | github         | gameworkerkim                                                                                            |
