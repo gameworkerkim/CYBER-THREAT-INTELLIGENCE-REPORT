@@ -57,6 +57,12 @@
 
 > 🔄 **[v1.1 추보, 2026-06-06]** — News1 단독 보도(6/5)로 KISA 침해사고 신고서의 내용이 일부 공개됐다. 신고서는 "비인가 접근 및 쿼리 실행"을 명시했고, 사고 발생 시각은 5월 30일 18:01, 인지 시각은 5월 31일 15:09(DB CPU 점유율 100% 포화 계기), KISA 신고는 6월 1일 15:08 — **24시간 법정 기한 1분 전**이었다. 역추적 결과 직원이 GitHub에 AWS 액세스 키를 하드코딩한 사실이 확인됐고, 회사는 노출 키를 비활성화·교체했다. 상세 분석은 3.5절. 본 리포트 v1.0의 가설(클라우드 자격증명 경유 인그레스 실패, DB CPU 스파이크 미탐지)과 정합하는 내용이다.
 
+[오픈 소스 - LLM 보안 하네스 프롬프트 공개]
+
+티빙 해킹 사건으로 GitHub를 비롯한 저장소에 각종 클라우드 접근 토큰 유출을 방지하기 위한 LLM 하네스 프롬프트를 무료로 공개합니다.
+
+👉 [Secret Scanning LLM Harness Prompt](https://github.com/gameworkerkim/vibe-investing/blob/main/TechDoc/LLM_Security/Secret%20scanning%20llm%20harness%20prompt.md)
+
 ### Key Judgments
 
 | #    | 판단                                                                                                                                                                          | 신뢰도             |
