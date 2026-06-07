@@ -62,11 +62,11 @@
 티빙 해킹 사건으로 Github를 비롯한 저장소에 각종 클라우드 접근 토큰 유출을 방지하기 위한 LLM 모니터링 도구 소스를 무료 공개합니다.
 이런건 LLM이 정기적으로 모니터링만해도 큰 사고를 막을 수 있습니다.
 
-[LAON VaultGuard - LLM-based Automated Observer for Non-public Keys](https://github.com/gameworkerkim/vibe-investing/blob/main/LAON_VaultGuard/README.md)
+👉 [LAON VaultGuard - LLM-based Automated Observer for Non-public Keys](https://github.com/gameworkerkim/vibe-investing/blob/main/LAON_VaultGuard/README.md)
 
 [오픈 소스 - LLM 보안 하네스 프롬프트 공개]
 
-티빙 해킹 사건으로 GitHub를 비롯한 저장소에 각종 클라우드 접근 토큰 유출을 방지하기 위한 LLM 하네스 프롬프트를 무료로 공개합니다.
+node.js 기반 데몬을 돌리기 부담스러우시다면, LLM 프롬프트를 공개합니다.티빙 해킹 사건으로 GitHub를 비롯한 저장소에 각종 클라우드 접근 토큰 유출을 방지하기 위한 LLM 하네스 프롬프트를 무료로 공개합니다.
 
 👉 [Secret Scanning LLM Harness Prompt](https://github.com/gameworkerkim/vibe-investing/blob/main/TechDoc/LLM_Security/Secret%20scanning%20llm%20harness%20prompt.md)
 
