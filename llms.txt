@@ -1,16 +1,38 @@
 # Cyber Threat Intelligence Report
 
-> Independent, OSINT-based cyber threat intelligence (CTI) archive by Dennis Kim (김호광 / HoKwang Kim), CEO of Betalabs Inc. and former CEO of Cyworld Z. Reports cover supply chain attacks, zero-day and edge/middleware vulnerabilities, DPRK and state-sponsored APT activity, AI/LLM-enabled threats, and Web3/crypto security. All content is TLP:GREEN, published for defensive, research, and policy purposes, and does not represent any organization's official position. Most reports are multilingual (KR / EN / JP / ZH). Naming convention: CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md. Last updated 2026-06-04.
+> Independent, OSINT-based cyber threat intelligence (CTI) archive by Dennis Kim (김호광 / HoKwang Kim), CEO of Betalabs Inc. and former CEO of Cyworld Z. Reports cover supply chain attacks, zero-day and edge/middleware vulnerabilities, DPRK and state-sponsored APT activity, AI/LLM-enabled threats, Web3/crypto security, and Korean cybersecurity policy. All content is TLP:GREEN, published for defensive, research, and policy purposes, and does not represent any organization's official position. Most reports are multilingual (KR / EN / JP / ZH). Naming convention: CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md. Last updated 2026-06-11.
 
 ## Featured / Latest
 
-- [CTI-2026-0604-WEBSPHERE (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-WEBSPHERE.md): IBM WebSphere 8.5/9.0 three simultaneously disclosed critical flaws — CVE-2026-8644 (identity spoofing), CVE-2026-9311 (RCE via security control bypass), CVE-2026-9319 (JAX-WS deserialization RCE). Official Fix Pack targeted 3Q2026, only Interim Fixes available now. CRITICAL.
+- [CTI-2026-0611-MIASMA_SPRINGBLIGHT (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MIASMA_SPRINGBLIGHT_KR.md): Microsoft supply chain attack — Miasma (Spring Blight) self-replicating worm infecting Azure packages via PyPI `durationtask`, 73 official Microsoft GitHub repos disabled in 105 seconds, GitHub Actions secrets and Azure OIDC hash exfiltration. CRITICAL.
+- [CTI-2026-0611-MSFT_PATCHTUESDAY_206CVE (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MSFT_PATCHTUESDAY_206CVE_KR.md): Microsoft June 2026 Patch Tuesday — 206 CVEs. KR.
+- [CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY_KR.md): DayOne Company (FastCampus/Coloso) GitHub master key theft — 30-day undetected breach, 72+ hour notification delay, 700K+ users exposed. KR.
+- [CTI-2026-0604-TVING (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-TVING_KR.md): Tving OTT platform massive personal data breach — CI, DI, refund bank account numbers leaked; designated "major breach" by PIPC. KR/EN/JA/ZH.
+- [CTI-2026-0604-CU_BREACH (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-CU_BREACH_KR.md): CU convenience store delivery service web-vulnerability breach — CI, address, phone, 9+ fields leaked; private investigator nexus. KR.
 - [CTI-2026-0603-NETSCALER (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0603-NETSCALER_KR.md): Citrix NetScaler ADC/Gateway memory overread CVE-2026-3055 (CVSS 9.3 v4.0), March disclosure escalating to large-scale exploitation in June; CitrixBleed-class session hijacking; patch + session invalidation required. CRITICAL.
+
+## Awesome Security Series
+
+- [Awesome Static Analysis Security (SAST) Tools](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Awesome%20Static%20Analysis%20Security%20Tools.md): Curated open-source SAST tools collection — Semgrep, CodeQL, SonarQube, Bandit, gosec, and more; categorized by language, scope, and CI/CD readiness.
+- [LAON VaultGuard](https://github.com/gameworkerkim/vibe-investing/tree/main/LAON_VaultGuard): Multi-LLM cross-validation secret scanner for Git repos — detects AWS/Azure/GCP/KT Cloud/Naver Cloud private keys; offline mode via Ollama; VS Code extension; pre-commit hook; Differential Privacy; SARIF export; Slack/Telegram/Email alerts. Created after the Tving AWS key exposure incident. MIT license.
 
 ## Reports — 2026 (newest first)
 
+- [CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY_KR.md): FastCampus/DayOne Company GitHub master key theft, 30-day dwell, 72h+ notification delay. KR.
+- [CTI-2026-0611-ROGUEPLANET_MINIPLASMA](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-ROGUEPLANET_MINIPLASMA_KR.md): RoguePlanet / MiniPlasma threat. KR.
+- [CTI-2026-0611-MSFT_PATCHTUESDAY_206CVE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MSFT_PATCHTUESDAY_206CVE_KR.md): Microsoft June Patch Tuesday — 206 CVEs. KR.
+- [CTI-2026-0611-MIASMA_SPRINGBLIGHT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MIASMA_SPRINGBLIGHT_KR.md): Microsoft supply chain Miasma (Spring Blight) worm, Azure package mass infection, 73 repos disabled. KR.
+- [CTI-2026-0605-IRONWORM](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-IRONWORM_KR.md): IronWorm — supply chain self-propagating worm variant. KR.
+- [CTI-2026-0605-LAZARUS-CLICKFIX](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-LAZARUS-CLICKFIX_EN.md): DPRK Lazarus macOS ClickFix campaign targeting FinTech/Web3 executives via hijacked Telegram accounts. EN/KR.
+- [CTI-2026-0605-CLAUDECODE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-CLAUDECODE_KR.md): Claude Code GitHub Action privilege bypass and prompt injection supply chain vulnerability (CVSS 7.8). KR.
+- [CTI-2026-0605-AI-ZERODAY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-AI-ZERODAY_KR.md): Google detects first AI-generated zero-day exploit — 2FA bypass design by a prominent cybercrime group. KR.
+- [CTI-2026-0604-TVING](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-TVING_KR.md): Tving OTT platform personal data breach (CI/DI/bank account). KR/EN/JA/ZH.
+- [CTI-2026-0604-CU_BREACH](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-CU_BREACH_KR.md): CU convenience store delivery data breach (web vuln, CI leak, private investigator nexus). KR.
 - [CTI-2026-0604-WEBSPHERE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-WEBSPHERE.md): IBM WebSphere triple CVE (deserialization RCE, auth bypass). KR/EN/JA/ZH.
+- [CTI-2026-0603-ANDROID-EOP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0603-ANDROID-EOP_KR.md): Android Elevation of Privilege vulnerability. KR.
 - [CTI-2026-0603-NETSCALER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0603-NETSCALER_KR.md): Citrix NetScaler CVE-2026-3055 memory overread mass exploitation. KR/EN.
+- [CTI-2026-0602-MIRAI-ZERODAY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0602-MIRAI-ZERODAY_KR.md): Mirai botnet new variant zero-day exploitation (D-Link, Zyxel, industrial routers). KR.
+- [CTI-2026-0602-MIASMA-RH](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0602-MIASMA-RH_KR.md): Miasma RH threat. KR.
 - [CTI-2026-0601-IRANGENAI](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0601-IRANGENAI_KR.md): Iran's use of generative AI in warfare. KR/EN/JP/CN.
 - [CTI-2026-0601-GREYVIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0601-GREYVIBE_KR.md): GREYVIBE GenAI-armed operation targeting Ukraine. KR.
 - [CTI-2026-0530-MARIMO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0530-MARIMO_KR.md): MARIMO — advisory weaponization and disclosure-to-exploitation compression. KR/EN/JP/CN.
@@ -49,12 +71,13 @@
 
 ## Topics
 
-- Supply chain attacks: WEBSPHERE, GLASSWORM, GITEA, GOGS, DUALTHREAT, GITHUB, VERCEL
-- Zero-day and edge/middleware vulnerabilities: WEBSPHERE, NETSCALER, YELLOWKEY, DRUPAL, EXCHANGE, CPANEL, COPYFAIL, CORUNA
-- DPRK and state-sponsored APT: KIMSUKY-PEBBLEDASH (APT43), LAZARUS-GITHOOKS, SCARCRUFT (APT37), DPRK-TRENDS, AICYBER, IRANGENAI, RussianRAT
-- AI / LLM threats: GREYVIBE, IRANGENAI, CHATGPHISH, AICRYPTOJACK, EVILTOKENS, AICYBER, ChatGPT_DNS_SideChannel, MYTHOS-AI, VIBE, MCP
+- Supply chain attacks: MIASMA_SPRINGBLIGHT, CLAUDECODE, IRONWORM, WEBSPHERE, GLASSWORM, GITEA, GOGS, DUALTHREAT, GITHUB, VERCEL
+- Zero-day and vulnerabilities: MSFT_PATCHTUESDAY_206CVE, AI-ZERODAY, WEBSPHERE, NETSCALER, ANDROID-EOP, MIRAI-ZERODAY, YELLOWKEY, DRUPAL, EXCHANGE, CPANEL, COPYFAIL, CORUNA
+- DPRK and state-sponsored APT: KIMSUKY-PEBBLEDASH (APT43), LAZARUS-GITHOOKS, LAZARUS-CLICKFIX, SCARCRUFT (APT37), DPRK-TRENDS, AICYBER, IRANGENAI, GREYVIBE, RussianRAT
+- AI / LLM threats: AI-ZERODAY, CLAUDECODE, GREYVIBE, IRANGENAI, CHATGPHISH, AICRYPTOJACK, EVILTOKENS, AICYBER, ChatGPT_DNS_SideChannel, MYTHOS-AI, VIBE, MCP
 - Web3 and crypto: KELPDAO, AICRYPTOJACK, UK_RUSSIA_CRYPTO_SANCTIONS, LITECOIN
-- Korea cybersecurity policy: CORUNA, VERCEL, DPRK-TRENDS, WEBSPHERE
+- Korea cybersecurity policy: TVING, CU_BREACH, FASTCAMPUS_DAYONECOMPANY, CORUNA, VERCEL, DPRK-TRENDS, WEBSPHERE
+- Cloud and CI/CD supply chain: MIASMA_SPRINGBLIGHT, CLAUDECODE, IRONWORM, GLASSWORM
 
 ## About
 
