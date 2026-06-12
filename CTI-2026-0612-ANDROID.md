@@ -45,19 +45,7 @@
 
 예상 공격 흐름은 다음과 같다.
 
-```mermaid
-flowchart TD
-    A[Malicious Application]
-    B[Integer Overflow Trigger]
-    C[Framework Memory Corruption]
-    D[Privilege Escalation]
-    E[System-Level Code Execution]
-
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-```
+Malicious Application ->  Integer Overflow Trigger ->  Framework Memory Corruption -> Privilege Escalation -> System-Level Code Execution
 
 ## §3. 패치 및 대응 권고
 
