@@ -1,6 +1,6 @@
 # Cyber Verification Program (CVP) 신청 완벽 가이드
 
-Claude-BugHunter를 실제 버그 바운티나 레드팀 작업에 활용하려면 CVP(Cyber Verification Program) 승인이 필수적이다. Anthropic은 2026년 4월부터 가장 강력한 Claude 모델(Opus 4.7/4.8 등)에 실시간 사이버 안전장치를 도입하여, 취약점 익스플로잇 분석이나 공격 도구 개발 등 "High-Risk Dual Use"로 분류되는 요청을 기본적으로 차단한다.
+Claude-BugHunter 처럼 실제 버그 바운티나 레드팀 작업에 활용하려면 CVP(Cyber Verification Program) 승인이 필수적이다. Anthropic은 2026년 4월부터 가장 강력한 Claude 모델(Opus 4.7/4.8 등)에 실시간 사이버 안전장치를 도입하여, 취약점 익스플로잇 분석이나 공격 도구 개발 등 "High-Risk Dual Use"로 분류되는 요청을 기본적으로 차단한다.
 
 > 💡 **중요:** CVP 승인은 Organization ID에 묶인다. 즉, 개인 워크스페이스가 아닌 특정 조직 단위로 승인이 부여되며, "내 이메일에 승인이 붙는 것"이라는 오해는 금물이다.
 
