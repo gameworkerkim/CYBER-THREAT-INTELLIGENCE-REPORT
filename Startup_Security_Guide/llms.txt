@@ -1,1 +1,37 @@
-Startup Security guide and LLM CISO 페르소나
+# Startup Security Guide & LLM CISO Persona
+
+> 스타트업 보안 가이드, 체크리스트, LLM 기반 가상 CISO 페르소나 프로젝트
+
+## Phase 1: 보안 가이드 & 체크리스트 (완료)
+
+- [STARTUP_SECURITY_GUIDE_KR.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/STARTUP_SECURITY_GUIDE_KR.md): 스타트업 정보보호 체계 구축 가이드. 창업 단계별 체크리스트(29개 항목), 클라우드 보안(AWS·GCP·Azure·Vercel), Google Workspace 보안(Gmail·Drive·Docs), DRM·문서 보안, KISA 개인정보보호 법규 준수, 사고 대응, Stage-Gate 컴플라이언스 체크리스트 포함.
+
+## Phase 2: LLM CISO 프롬프트 (완료)
+
+- [LLM_CISO_PROMPT_KR.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_PROMPT_KR.md): 가상 CISO 페르소나 정의, 도메인별 진단 프롬프트(클라우드·Google Workspace·DRM·KISA 법규 준수), 프롬프트 체인 워크플로우, 퍼블릭 LLM(Claude·GPT·DeepSeek) 연동 가이드, 로컬 LLM(Ollama) Modelfile 설정, TypeScript·Node.js 통합 코드, Vercel API 엔드포인트 구현 포함.
+
+## Phase 3: LLM CISO 대시보드 (계획)
+
+- [LLM_CISO_DASHBOARD.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_DASHBOARD.md): 대시보드 기획. 보안 현황판, 자동 진단 스케줄러, 조치 로드맵 트래커, Next.js + Vercel + TypeScript 기반.
+
+## Key Topics Covered
+
+- Cloud Security: AWS / GCP / Azure / Vercel (IAM, Network, Encryption, CSPM, CI/CD)
+- Google Workspace Security: Gmail / Drive / Docs / Admin Console settings (2FA, DLP, IRM, Sharing)
+- DRM & Document Security: Classification, Access Control, IRM, Source Code Protection, Offboarding
+- KISA Compliance: PIPA §29 안전조치 6가지, 암호화 기준, 접속기록, CPO/CISO 지정
+- LLM Integration: Claude / GPT / DeepSeek (Public) + Ollama (Local/Air-gapped)
+
+## Tech Stack
+
+- TypeScript · Node.js · Vercel
+- Next.js (Dashboard) · Ollama (Local LLM)
+- Anthropic SDK · OpenAI SDK · DeepSeek API
+
+## About
+
+- Author: Dennis Kim (김호광), gameworker@gmail.com, https://github.com/gameworkerkim
+- Repository: CYBER-THREAT-INTELLIGENCE-REPORT
+- License: CC BY-NC-SA 4.0, TLP:GREEN
+
+(End of file - total 1 lines)
