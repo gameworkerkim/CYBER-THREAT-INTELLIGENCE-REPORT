@@ -81,6 +81,34 @@
 **📄 리포트:** [🇰🇷 KR](CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY_KR.md)
 
 
+## Awesome Security Series: Startup Security Guide & LLM CISO
+
+> 🆕 **2026-06-17 발행** — 한국 진출 해외 스타트업을 위한 보안 가이드
+
+티빙·CU·패스트캠퍼스 사고에서 드러난 것처럼, 스타트업은 설정 실수 한 번에 대규모 개인정보 유출로 이어질 수 있습니다. 특히 한국에 진출하는 해외 스타트업은 GDPR/CCPA와 전혀 다른 **한국 개인정보보호법(PIPA)** 의 의무(CPO 지정, AES-256 암호화, 접속기록 6개월 보관, 주민번호 수집 금지, 형사처벌)를 간과하기 쉽습니다.
+
+본 가이드는 창업 단계별 보안 체크리스트, 클라우드(AWS·GCP·Azure·Vercel) 보안, Google Workspace 보안, DRM, KISA 법규 준수를 하나의 문서로 통합하고, **LLM을 가상 CISO로 활용**하여 GDPR/CCPA와 한국 PIPA 간 법규 차이를 자동 진단하는 프롬프트 시스템을 제공합니다. 퍼블릭 LLM(Claude·GPT·DeepSeek)과 로컬 LLM(Ollama)을 모두 지원합니다.
+
+👉 [**Startup Security Guide 살펴보기 →**](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
+
+| 언어 | 가이드 | LLM CISO 프롬프트 | 대시보드 |
+|------|--------|------------------|----------|
+| 한국어 | [가이드](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_KR.md) | [프롬프트](Startup_Security_Guide/LLM_CISO_PROMPT_KR.md) | [대시보드](Startup_Security_Guide/LLM_CISO_DASHBOARD.md) |
+| English | [Guide](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_EN.md) | [Prompts](Startup_Security_Guide/LLM_CISO_PROMPT_EN.md) | [Dashboard](Startup_Security_Guide/LLM_CISO_DASHBOARD_EN.md) |
+
+**핵심 기능:**
+- **29개 항목** 창업 단계별 보안 체크리스트 (Pre-Seed → Series A)
+- **25차원 GDPR vs CCPA vs PIPA 법규 갭 매트릭스** (LLM 자동 진단)
+- **클라우드 보안** — AWS(15항목)·GCP(12항목)·Azure(10항목)·Vercel(10항목)
+- **Google Workspace 보안** — Gmail·Drive·Docs 관리 콘솔 설정 + SPF/DKIM/DMARC
+- **DRM·문서 보안** — 등급 분류·IRM·소스코드 보호·퇴사자 계정 회수
+- **사고 대응** — NIST SP 800-61 기반 + 한국 규제 마감시한
+- **LLM CISO 페르소나** — Ollama 로컬 모드 지원 (에어갭 기밀 데이터 처리)
+
+> *"한국 시장에 진출하는 스타트업이라면, 첫 커밋보다 먼저 이 가이드를 확인하세요."*
+
+---
+
 ## Awesome Security Series: Static Analysis Security Tools
 
 보안은 탐지(Inspection)를 넘어, *시작 단계에서의 예방(Prevention)*이 가장 강력합니다.  

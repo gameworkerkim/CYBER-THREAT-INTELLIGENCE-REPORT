@@ -47,6 +47,34 @@ On June 1, IBM simultaneously disclosed three critical flaws in WebSphere Applic
 
 ---
 
+## ⭐ Awesome Security Series: Startup Security Guide & LLM CISO
+
+> 🆕 **Published 2026-06-17** -- Essential security guide for startups entering the Korean market
+
+As demonstrated by the Tving, CU, and FastCampus breaches, a single misconfiguration at a startup can cascade into a massive data leak. Foreign startups entering Korea face an additional layer of risk: the Korean **Personal Information Protection Act (PIPA)** imposes requirements that GDPR and CCPA do not -- mandatory CPO for ALL entities, AES-256 encryption, 6-month access logs, prohibition on collecting Resident Registration Numbers, and criminal liability for violations.
+
+This guide integrates stage-gated security checklists, cloud security (AWS/GCP/Azure/Vercel), Google Workspace security, DRM, and KISA compliance into a single resource -- and provides a **prompt system that turns any LLM into a virtual CISO** capable of detecting compliance gaps between GDPR/CCPA and PIPA automatically. Supports both public LLMs (Claude, GPT, DeepSeek) and local LLMs (Ollama, air-gapped).
+
+👉 [**Explore the Startup Security Guide →**](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
+
+| Language | Guide | LLM CISO Prompts | Dashboard |
+|----------|-------|-----------------|-----------|
+| 한국어 | [Guide](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_KR.md) | [Prompts](Startup_Security_Guide/LLM_CISO_PROMPT_KR.md) | [Dashboard](Startup_Security_Guide/LLM_CISO_DASHBOARD.md) |
+| English | [Guide](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_EN.md) | [Prompts](Startup_Security_Guide/LLM_CISO_PROMPT_EN.md) | [Dashboard](Startup_Security_Guide/LLM_CISO_DASHBOARD_EN.md) |
+
+**Key features:**
+- **29-item** stage-gated security checklist (Pre-Seed through Series A)
+- **25-dimension GDPR vs. CCPA vs. PIPA compliance gap matrix** with LLM auto-detection
+- **Cloud security** -- AWS (15 items), GCP (12), Azure (10), Vercel (10)
+- **Google Workspace security** -- Gmail/Drive/Docs admin console settings + SPF/DKIM/DMARC
+- **DRM & document security** -- Classification, IRM, source code protection, offboarding
+- **Incident response** -- NIST SP 800-61 framework + Korea-specific regulatory deadlines
+- **LLM CISO persona** -- Ollama local mode for air-gapped sensitive data processing
+
+> *"If your startup is entering the Korean market, read this guide before your first commit."*
+
+---
+
 ## 📚 Report Index
 
 > 💡 New reports are added at the **top** of this table on publication. Naming convention: `CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md`.

@@ -47,6 +47,34 @@
 
 ---
 
+## ⭐ Awesome Security Series: 初创企业安全指南 & LLM CISO
+
+> 🆕 **2026-06-17 发布** — 进入韩国市场的初创企业必备安全指南
+
+正如 Tving、CU 和 FastCampus 泄露事件所示，初创企业的一次配置失误就可能导致大规模个人信息泄露。进入韩国市场的海外初创企业面临额外的风险：韩国**个人信息保护法（PIPA）**规定了 GDPR 和 CCPA 没有的要求——所有实体必须指定 CPO、AES-256 加密、6 个月访问日志保存、禁止收集居民登记号码、违规承担刑事责任。
+
+本指南将分阶段的安全检查清单、云安全（AWS/GCP/Azure/Vercel）、Google Workspace 安全、DRM 和 KISA 合规集成到一个资源中，并提供了**可将任何 LLM 转变为虚拟 CISO 的提示词系统**，能够自动检测 GDPR/CCPA 与 PIPA 之间的合规差距。支持公有 LLM（Claude、GPT、DeepSeek）和本地 LLM（Ollama、气隙环境）。
+
+👉 [**查看初创企业安全指南 →**](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
+
+| 语言 | 指南 | LLM CISO 提示词 | 仪表板 |
+|------|------|----------------|--------|
+| 한국어 | [指南](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_KR.md) | [提示词](Startup_Security_Guide/LLM_CISO_PROMPT_KR.md) | [仪表板](Startup_Security_Guide/LLM_CISO_DASHBOARD.md) |
+| English | [Guide](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_EN.md) | [Prompts](Startup_Security_Guide/LLM_CISO_PROMPT_EN.md) | [Dashboard](Startup_Security_Guide/LLM_CISO_DASHBOARD_EN.md) |
+
+**主要功能:**
+- **29 项**分阶段安全检查清单（Pre-Seed 到 Series A）
+- **25 维度 GDPR vs CCPA vs PIPA 合规差距矩阵**（LLM 自动检测）
+- **云安全** — AWS（15项）· GCP（12项）· Azure（10项）· Vercel（10项）
+- **Google Workspace 安全** — Gmail/Drive/Docs 管理控制台设置 + SPF/DKIM/DMARC
+- **DRM·文档安全** — 分类·IRM·源代码保护·离职人员账户处理
+- **事件响应** — NIST SP 800-61 框架 + 韩国监管截止期限
+- **LLM CISO 角色** — Ollama 本地模式，用于气隙环境下的敏感数据处理
+
+> *"如果您的初创企业要进入韩国市场，请在第一次提交代码之前先阅读本指南。"*
+
+---
+
 ## 📚 报告索引（Report Index）
 
 > 💡 新报告在发布时添加至本表**最上方**。命名规则：`CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md`

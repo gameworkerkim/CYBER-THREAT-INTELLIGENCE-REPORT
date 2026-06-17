@@ -47,6 +47,34 @@
 
 ---
 
+## ⭐ Awesome Security Series: スタートアップセキュリティガイド & LLM CISO
+
+> 🆕 **2026-06-17 公開** — 韓国市場に進出するスタートアップのための必須セキュリティガイド
+
+Tving、CU、FastCampus の各侵害事件が示すように、スタートアップにおける1つの設定ミスが大規模な個人情報漏洩に直結する可能性があります。韓国に進出する海外スタートアップは、追加のリスクに直面します。韓国の**個人情報保護法（PIPA）**は、GDPR や CCPA にはない要件を課しています。全事業者に対する CPO 指定義務、AES-256 暗号化、6ヶ月のアクセスログ保管、住民登録番号の収集禁止、違反に対する刑事罰などです。
+
+本ガイドは、段階別のセキュリティチェックリスト、クラウドセキュリティ（AWS/GCP/Azure/Vercel）、Google Workspace セキュリティ、DRM、KISA コンプライアンスを1つのリソースに統合し、**LLM を仮想 CISO に変えるプロンプトシステム**を提供します。GDPR/CCPA と PIPA のコンプライアンスギャップを自動検出します。パブリック LLM（Claude、GPT、DeepSeek）とローカル LLM（Ollama、エアギャップ）の両方をサポートします。
+
+👉 [**スタートアップセキュリティガイドを見る →**](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
+
+| 言語 | ガイド | LLM CISO プロンプト | ダッシュボード |
+|------|--------|-------------------|--------------|
+| 한국어 | [ガイド](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_KR.md) | [プロンプト](Startup_Security_Guide/LLM_CISO_PROMPT_KR.md) | [ダッシュボード](Startup_Security_Guide/LLM_CISO_DASHBOARD.md) |
+| English | [Guide](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_EN.md) | [Prompts](Startup_Security_Guide/LLM_CISO_PROMPT_EN.md) | [Dashboard](Startup_Security_Guide/LLM_CISO_DASHBOARD_EN.md) |
+
+**主な機能:**
+- **29項目**の段階別セキュリティチェックリスト（Pre-Seed〜Series A）
+- **25次元 GDPR vs CCPA vs PIPA コンプライアンスギャップマトリックス**（LLM自動検出）
+- **クラウドセキュリティ** — AWS（15項目）· GCP（12項目）· Azure（10項目）· Vercel（10項目）
+- **Google Workspace セキュリティ** — Gmail/Drive/Docs 管理コンソール設定 + SPF/DKIM/DMARC
+- **DRM・文書セキュリティ** — 分類・IRM・ソースコード保護・退職者アカウント処理
+- **インシデント対応** — NIST SP 800-61 フレームワーク + 韓国規制期限
+- **LLM CISO ペルソナ** — エアギャップ機密データ処理のための Ollama ローカルモード
+
+> *"韓国市場に進出するスタートアップなら、最初のコミットよりも先にこのガイドを確認してください。"*
+
+---
+
 ## 📚 レポート一覧（Report Index）
 
 > 💡 新規レポートは公開時に本表の**最上段**へ追加されます。命名規則：`CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md`
