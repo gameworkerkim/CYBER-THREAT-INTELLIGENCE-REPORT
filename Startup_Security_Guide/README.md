@@ -2,6 +2,8 @@
 
 > 스타트업을 위한 오픈소스 정보보호 가이드, 체크리스트, 그리고 LLM 기반 가상 CISO 페르소나 프로젝트입니다.
 
+[English](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Startup_Security_Guide/README_EN.md) | [Repository](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
+
 ---
 
 ## 왜 LLM CISO가 필요한가?

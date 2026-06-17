@@ -2,6 +2,8 @@
 
 > An open-source security guide, compliance checklist, and LLM-based virtual CISO persona for startups -- with specialized coverage for foreign companies entering the Korean market.
 
+[한국어](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/blob/main/Startup_Security_Guide/README.md) | [Repository](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
+
 ---
 
 ## The Problem
