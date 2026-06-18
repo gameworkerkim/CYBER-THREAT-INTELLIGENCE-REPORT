@@ -1,4 +1,4 @@
-# PRC 연계 생성형 AI 영향력 공작 분석 — "Data Center Bandwagon" & "Tech and Tariffs"
+# 중국 연계 의심 생성형 AI 영향력 공작 분석 — "Data Center Bandwagon" & "Tech and Tariffs"
 
 > **OpenAI ChatGPT 무기화를 통한 미국 기술 정책 여론 개입 및 한국 커뮤니티 심리전 위협 평가**
 > *민간인과 결합된 회색지대 수군(水軍) 방식 LLM 대량 콘텐츠 생산 · 간체중국어 프롬프트 · AI 인프라 논쟁 개입 실증 · 한국 소셜 보안망 구축 시급*
