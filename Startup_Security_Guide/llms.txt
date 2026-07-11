@@ -13,6 +13,11 @@
 - [skills/](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide/skills): Cursor `SKILL.md` + portable `SYSTEM_PROMPT.md` for Claude/ChatGPT/Ollama
 - [skills/README.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/skills/README.md): Multi-LLM usage guide
 
+## MCP (M1)
+
+- [mcp/](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide/mcp): stdio MCP — `skil_lookup`, `gitleaks_scan`, `trivy_scan`
+- Setup: `cd mcp && npm install && npm run build` then register in Cursor `mcp.json` (see `mcp/cursor-mcp.example.json`)
+
 ## English Documents
 
 - [README_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/README_EN.md): Project overview. Tving/CU/FastCampus motivation. SKIL→MCP→correction→bots roadmap. Tech stack.

@@ -85,12 +85,16 @@ Phase 1 ✅        Phase 2 ✅              Phase 3 (진행)                    
 
 **기능 명세**
 
-- [ ] MCP 서버: `tools/skil_lookup`, `tools/gitleaks_scan`, `tools/trivy_scan`
-- [ ] 입력/출력 JSON Schema 고정 (LLM이 파싱 가능)
-- [ ] 로컬 실행 가이드 (stdio MCP)
-- [ ] 민감 결과 마스킹 옵션 (시크릿 값 미반환)
+- [x] MCP 서버: `tools/skil_lookup`, `tools/gitleaks_scan`, `tools/trivy_scan`
+- [x] 입력/출력 JSON Schema 고정 (LLM이 파싱 가능)
+- [x] 로컬 실행 가이드 (stdio MCP) — `mcp/README.md`
+- [x] 민감 결과 마스킹 옵션 (시크릿 값 미반환, 기본 ON)
+- [ ] Cursor/Claude MCP 설정 후 실사용 1회 (사용자 환경)
 
-**완료 기준:** Cursor/Claude에서 MCP로 SKIL 조회 + Gitleaks 스캔 1회 성공.
+**완료 기준:** Cursor/Claude에서 MCP로 SKIL 조회 + Gitleaks 스캔 1회 성공.  
+→ **프로토타입·CLI/SDK 스모크 완료** (`skil_lookup` OK). Gitleaks/Trivy는 PATH에 바이너리 설치 후 스캔 가능 (`brew install gitleaks trivy`).
+
+**구현 위치:** [`mcp/`](./mcp/) (`npm install && npm run build`)
 
 ---
 
