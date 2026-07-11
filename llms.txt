@@ -1,87 +1,109 @@
 # Cyber Threat Intelligence Report
 
-> Independent, OSINT-based cyber threat intelligence (CTI) archive by Dennis Kim (김호광 / HoKwang Kim), CEO of Betalabs Inc. and former CEO of Cyworld Z. Reports cover supply chain attacks, zero-day and edge/middleware vulnerabilities, DPRK and state-sponsored APT activity, AI/LLM-enabled threats, Web3/crypto security, and Korean cybersecurity policy. All content is TLP:GREEN, published for defensive, research, and policy purposes, and does not represent any organization's official position. Most reports are multilingual (KR / EN / JP / ZH). Naming convention: CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md. Last updated 2026-06-11.
+> Independent, OSINT-based cyber threat intelligence (CTI) archive by Dennis Kim (김호광 / HoKwang Kim), CEO of Betalabs Inc. and former CEO of Cyworld Z. Reports cover supply chain attacks, zero-day and edge/middleware vulnerabilities, DPRK and state-sponsored APT activity, AI/LLM-enabled threats, Web3/crypto security, and Korean cybersecurity policy and breach cases. All content is TLP:GREEN, published for defensive, research, and policy purposes, and does not represent any organization's official position. Most reports are multilingual (KR / EN / JP / ZH). Naming convention: CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md. Last updated 2026-07-11.
 
 ## Featured / Latest
 
-- [CTI-2026-0611-MIASMA_SPRINGBLIGHT (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MIASMA_SPRINGBLIGHT_KR.md): Microsoft supply chain attack — Miasma (Spring Blight) self-replicating worm infecting Azure packages via PyPI `durationtask`, 73 official Microsoft GitHub repos disabled in 105 seconds, GitHub Actions secrets and Azure OIDC hash exfiltration. CRITICAL.
-- [CTI-2026-0611-MSFT_PATCHTUESDAY_206CVE (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MSFT_PATCHTUESDAY_206CVE_KR.md): Microsoft June 2026 Patch Tuesday — 206 CVEs. KR.
-- [CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY_KR.md): DayOne Company (FastCampus/Coloso) GitHub master key theft — 30-day undetected breach, 72+ hour notification delay, 700K+ users exposed. KR.
-- [CTI-2026-0604-TVING (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-TVING_KR.md): Tving OTT platform massive personal data breach — CI, DI, refund bank account numbers leaked; designated "major breach" by PIPC. KR/EN/JA/ZH.
-- [CTI-2026-0604-CU_BREACH (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-CU_BREACH_KR.md): CU convenience store delivery service web-vulnerability breach — CI, address, phone, 9+ fields leaked; private investigator nexus. KR.
-- [CTI-2026-0603-NETSCALER (KR)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0603-NETSCALER_KR.md): Citrix NetScaler ADC/Gateway memory overread CVE-2026-3055 (CVSS 9.3 v4.0), March disclosure escalating to large-scale exploitation in June; CitrixBleed-class session hijacking; patch + session invalidation required. CRITICAL.
+- [CTI-2026-0711-SWIFTVIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0711-SWIFTVIBE_EN.md): Agentic AI AWS cloud compromise in 72 hours; known TTPs at superhuman speed/scale. KR/EN.
+- [CTI-2026-0708-KAKAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0708-KAKAO_EN.md): Dark-web KakaoTalk source-code sale claim; misattribution and blast-radius analysis. KR/EN.
+- [CTI-2026-0628-DPRK-AI](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0628-DPRK-AI_EN.md): DPRK AI-enabled hacking qualitative shift (Kimsuky/Lazarus/Andariel). KR/EN/JP.
+- [CTI-2026-0611-MIASMA_SPRINGBLIGHT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MIASMA_SPRINGBLIGHT_EN.md): Microsoft supply chain Miasma (Spring Blight) Azure package mass infection. KR/EN. CRITICAL.
+- [CTI-2026-0704-SCATTEREDSPIDER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0704-SCATTEREDSPIDER_EN.md): Scattered Spider threat analysis. KR/EN.
+- [CTI-2026-0616-UNC6508-REDCAP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0616-UNC6508-REDCAP_EN.md): UNC6508 RedCap campaign. KR/EN.
 
 ## Awesome Security Series
 
-- [Awesome Static Analysis Security (SAST) Tools](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Awesome%20Static%20Analysis%20Security%20Tools.md): Curated open-source SAST tools collection — Semgrep, CodeQL, SonarQube, Bandit, gosec, and more; categorized by language, scope, and CI/CD readiness.
-- [LAON VaultGuard](https://github.com/gameworkerkim/vibe-investing/tree/main/LAON_VaultGuard): Multi-LLM cross-validation secret scanner for Git repos — detects AWS/Azure/GCP/KT Cloud/Naver Cloud private keys; offline mode via Ollama; VS Code extension; pre-commit hook; Differential Privacy; SARIF export; Slack/Telegram/Email alerts. Created after the Tving AWS key exposure incident. MIT license.
+- [Startup Security Guide & LLM CISO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/STARTUP_SECURITY_GUIDE_EN.md): Stage-gated startup security checklist + PIPA/GDPR/CCPA gap matrix + LLM CISO prompts (KR/EN).
+- [Awesome Static Analysis Security (SAST) Tools](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Awesome%20Static%20Analysis%20Security%20Tools.md): Curated open-source SAST tools — Semgrep, CodeQL, SonarQube, Bandit, gosec, and more.
+- [LAON VaultGuard](https://github.com/gameworkerkim/vibe-investing/tree/main/LAON_VaultGuard): Multi-LLM secret scanner for Git repos (AWS/Azure/GCP/KT Cloud/Naver Cloud); offline Ollama mode; VS Code extension; pre-commit hook.
 
 ## Reports — 2026 (newest first)
 
-- [CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY_KR.md): FastCampus/DayOne Company GitHub master key theft, 30-day dwell, 72h+ notification delay. KR.
+- [CTI-2026-0711-SWIFTVIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0711-SWIFTVIBE_EN.md): Agentic AI AWS cloud compromise in 72 hours; known TTPs at superhuman speed/scale. KR/EN.
+- [CTI-2026-0708-KAKAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0708-KAKAO_EN.md): Dark-web KakaoTalk source-code sale claim; misattribution and blast-radius analysis. KR/EN.
+- [CTI-2026-0705-WEEKLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0705-WEEKLY_EN.md): Weekly CTI briefing. EN.
+- [CTI-2026-0705-KRWEEKLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0705-KRWEEKLY_KR.md): Korea cyber threat weekly briefing. KR.
+- [CTI-2026-0704-SCATTEREDSPIDER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0704-SCATTEREDSPIDER_EN.md): Scattered Spider threat analysis. KR/EN.
+- [CTI-2026-0628-GITHUB-KEY-LEAK](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0628-GITHUB-KEY-LEAK_EN.md): GitHub key leak incident analysis. KR/EN.
+- [CTI-2026-0628-DPRK-AI](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0628-DPRK-AI_EN.md): DPRK AI-enabled hacking qualitative shift (Kimsuky/Lazarus/Andariel). KR/EN/JP.
+- [CTI-2026-0626-KRWEEKLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0626-KRWEEKLY_KR.md): Korea cyber threat weekly briefing. KR.
+- [CTI-2026-0626-JSDF-USB](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0626-JSDF-USB_KR.md): JSDF USB-related threat. KR.
+- [CTI-2026-0622-TAIKOBRIDGE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0622-TAIKOBRIDGE_KR.md): TaikoBridge threat analysis. KR.
+- [CTI-2026-0622-KIMSUKY-LNK-DROPBOX](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0622-KIMSUKY-LNK-DROPBOX_KR.md): Kimsuky LNK/Dropbox campaign. KR.
+- [CTI-2026-0621-KRWEEKLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0621-KRWEEKLY_KR.md): Korea cyber threat weekly briefing. KR.
+- [CTI-2026-0618-PROJECT-CANOPY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0618-PROJECT-CANOPY_KR.md): Project Canopy column. KR.
+- [CTI-2026-0618-MODOO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0618-MODOO_EN.md): ModooSign-related breach/threat analysis. KR/EN.
+- [CTI-2026-0618-AISUPPLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0618-AISUPPLY_EN.md): AI supply-chain threat. KR/EN.
+- [CTI-2026-0616-UNC6508-REDCAP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0616-UNC6508-REDCAP_EN.md): UNC6508 RedCap campaign. KR/EN.
+- [CTI-2026-0616-PRC-INFLUENCE-OPS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0616-PRC-INFLUENCE-OPS_KR.md): PRC influence operations analysis. KR.
+- [CTI-2026-0616-PHPBB-AUTH-BYPASS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0616-PHPBB-AUTH-BYPASS_KR.md): phpBB authentication bypass. KR.
+- [CTI-2026-0612-QSHING](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0612-QSHING_EN.md): Qishing threat. KR/EN.
+- [CTI-2026-0612-ANDROID](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0612-ANDROID_KR.md): Android threat analysis. KR.
 - [CTI-2026-0611-ROGUEPLANET_MINIPLASMA](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-ROGUEPLANET_MINIPLASMA_KR.md): RoguePlanet / MiniPlasma threat. KR.
 - [CTI-2026-0611-MSFT_PATCHTUESDAY_206CVE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MSFT_PATCHTUESDAY_206CVE_KR.md): Microsoft June Patch Tuesday — 206 CVEs. KR.
-- [CTI-2026-0611-MIASMA_SPRINGBLIGHT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MIASMA_SPRINGBLIGHT_KR.md): Microsoft supply chain Miasma (Spring Blight) worm, Azure package mass infection, 73 repos disabled. KR.
-- [CTI-2026-0605-IRONWORM](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-IRONWORM_KR.md): IronWorm — supply chain self-propagating worm variant. KR.
-- [CTI-2026-0605-LAZARUS-CLICKFIX](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-LAZARUS-CLICKFIX_EN.md): DPRK Lazarus macOS ClickFix campaign targeting FinTech/Web3 executives via hijacked Telegram accounts. EN/KR.
-- [CTI-2026-0605-CLAUDECODE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-CLAUDECODE_KR.md): Claude Code GitHub Action privilege bypass and prompt injection supply chain vulnerability (CVSS 7.8). KR.
-- [CTI-2026-0605-AI-ZERODAY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-AI-ZERODAY_KR.md): Google detects first AI-generated zero-day exploit — 2FA bypass design by a prominent cybercrime group. KR.
-- [CTI-2026-0604-TVING](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-TVING_KR.md): Tving OTT platform personal data breach (CI/DI/bank account). KR/EN/JA/ZH.
-- [CTI-2026-0604-CU_BREACH](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-CU_BREACH_KR.md): CU convenience store delivery data breach (web vuln, CI leak, private investigator nexus). KR.
-- [CTI-2026-0604-WEBSPHERE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-WEBSPHERE.md): IBM WebSphere triple CVE (deserialization RCE, auth bypass). KR/EN/JA/ZH.
-- [CTI-2026-0603-ANDROID-EOP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0603-ANDROID-EOP_KR.md): Android Elevation of Privilege vulnerability. KR.
-- [CTI-2026-0603-NETSCALER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0603-NETSCALER_KR.md): Citrix NetScaler CVE-2026-3055 memory overread mass exploitation. KR/EN.
-- [CTI-2026-0602-MIRAI-ZERODAY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0602-MIRAI-ZERODAY_KR.md): Mirai botnet new variant zero-day exploitation (D-Link, Zyxel, industrial routers). KR.
+- [CTI-2026-0611-MIASMA_SPRINGBLIGHT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MIASMA_SPRINGBLIGHT_EN.md): Microsoft supply chain Miasma (Spring Blight) Azure package mass infection. KR/EN. CRITICAL.
+- [CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-FASTCAMPUS_DAYONECOMPANY_EN.md): FastCampus/DayOne GitHub master-key theft, 30-day dwell. KR/EN.
+- [CTI-2026-0607-LAON_VaultGuard](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0607-LAON_VaultGuard_EN.md): LAON VaultGuard multi-LLM secret detection. KR/EN.
+- [CTI-2026-0607-BREACH-WFP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0607-BREACH-WFP_KR.md): WFP breach-related analysis. KR.
+- [CTI-2026-0605-LAZARUS-CLICKFIX](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-LAZARUS-CLICKFIX_EN.md): Lazarus macOS ClickFix campaign. KR/EN.
+- [CTI-2026-0605-IRONWORM](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-IRONWORM_EN.md): IronWorm supply-chain worm. KR/EN.
+- [CTI-2026-0605-CLAUDECODE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-CLAUDECODE_EN.md): Claude Code GitHub Action supply-chain vulnerability. KR/EN.
+- [CTI-2026-0605-AI-ZERODAY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0605-AI-ZERODAY_EN.md): AI-generated zero-day exploit. KR/EN.
+- [CTI-2026-0604-WEBSPHERE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-WEBSPHERE_EN.md): IBM WebSphere triple CVE. KR/EN/JP/ZH. CRITICAL.
+- [CTI-2026-0604-TVING](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-TVING_EN.md): Tving personal data breach. KR/EN/JP/ZH. CRITICAL.
+- [CTI-2026-0604-CU_BREACH](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0604-CU_BREACH_EN.md): CU convenience-store delivery data breach. KR/EN. CRITICAL.
+- [CTI-2026-0603-NETSCALER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0603-NETSCALER_EN.md): Citrix NetScaler memory overread mass exploitation. KR/EN. CRITICAL.
+- [CTI-2026-0603-ANDROID-EOP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0603-ANDROID-EOP_KR.md): Android Elevation of Privilege. KR.
+- [CTI-2026-0602-MIRAI-ZERODAY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0602-MIRAI-ZERODAY_EN.md): Mirai botnet zero-day exploitation. KR/EN.
 - [CTI-2026-0602-MIASMA-RH](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0602-MIASMA-RH_KR.md): Miasma RH threat. KR.
-- [CTI-2026-0601-IRANGENAI](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0601-IRANGENAI_KR.md): Iran's use of generative AI in warfare. KR/EN/JP/CN.
-- [CTI-2026-0601-GREYVIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0601-GREYVIBE_KR.md): GREYVIBE GenAI-armed operation targeting Ukraine. KR.
-- [CTI-2026-0530-MARIMO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0530-MARIMO_KR.md): MARIMO — advisory weaponization and disclosure-to-exploitation compression. KR/EN/JP/CN.
-- [CTI-2026-0530-JINX](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0530-JINX_KR.md): JINX threat analysis. KR/EN/JP/CN.
-- [CTI-2026-0530-GOGS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0530-GOGS_KR.md): Gogs Git server vulnerability. KR/EN/JP/CN.
-- [CTI-2026-0530-CHATGPHISH](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0530-CHATGPHISH_KR.md): ChatGPhish — ChatGPT impersonation phishing. KR/EN/JP/CN.
-- [CTI-2026-0528-KELPDAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0528-KELPDAO_KR.md): KelpDAO Web3/DeFi threat. KR/EN/JA/ZH.
-- [CTI-2026-0527-GLASSWORM](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0527-GLASSWORM_KR.md): GlassWorm self-propagating supply chain worm. KR/EN/JA/ZH.
-- [CTI-2026-0527-GITEA](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0527-GITEA_KR.md): Gitea CVE vulnerability. KR/EN/JA/ZH.
-- [CTI-2026-0527-AICRYPTOJACK](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0527-AICRYPTOJACK_KR.md): AI cryptojacking. KR/EN/JA/ZH.
-- [CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_KO.md): UK sanctions on Russian crypto. KO/EN/JA/ZH.
-- [CTI-2026-0526-KIMSUKY-PEBBLEDASH](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0526-KIMSUKY-PEBBLEDASH.md): Kimsuky (APT43) PebbleDash/AppleSeed analysis. KR/EN/JP/CN.
-- [CTI-2026-0524-DUALTHREAT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0524-DUALTHREAT_KR.md): Two concurrent threats (LiteSpeed / Shai-Hulud). KR/EN/JP/CN.
-- [CTI-2026-0522-EDR3](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0522-EDR3_KR.md): EDR evasion threat. KR/EN.
-- [CTI-2026-0521-YELLOWKEY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0521-YELLOWKEY_KR.md): Windows BitLocker bypass zero-day. KR/EN.
-- [CTI-2026-0521-DPRK-TRENDS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0521-DPRK-TRENDS_KR.md): North Korea hacking trends 2026. KR/EN.
-- [CTI-2026-0520-GITHUB](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-GITHUB.md): GitHub internal repository compromise. KR.
-- [CTI-2026-0520-FAST16](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-FAST16%20KR.md): FAST16 report. KR/EN/JA/ZH.
-- [CTI-2026-0520-EXCHANGE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-EXCHANGE.md): Microsoft Exchange Server vulnerability. KR/EN.
-- [CTI-2026-0520-EVILTOKENS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-EVILTOKENS.md): EvilTokens — AI-generated device-code phishing PhaaS. KR.
-- [CTI-2026-0520-DRUPAL](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-DRUPAL.md): Drupal core max-severity zero-day (no patch). KR.
-- [CTI-2026-0520-CPANEL](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-CPANEL.md): cPanel hacking. KR.
-- [CTI-2026-0517-AICYBER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0517-AICYBER_KR.md): DPRK LLM-enabled hacking; AI cyber-attack and agentic defense. KR/EN.
-- [CTI-2026-0514-CTRL_RussianRAT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0514-CTRL_RussianRAT_LNK_RDP_KO.md): Russian RAT via LNK/RDP. KO.
-- [CTI-2026-0514-ChatGPT_DNS_SideChannel](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0514-ChatGPT_DNS_SideChannel_KO.md): ChatGPT DNS side channel. KO.
-- [CTI-2026-0510-LAZARUS-GITHOOKS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0510-LAZARUS-GITHOOKS_KR.md): DPRK Lazarus git-hooks concealment technique. KR/EN/JP/CN.
-- [CTI-2026-0510-MYTHOS-AI](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Cti%202026%200510%20mythos%20ai%20vuln.MD): Mythos AI vulnerability. KR.
-- [CTI-2026-0507-SCARCRUFT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0507-SCARCRUFT_KR.md): ScarCruft (APT37) campaign. KR/EN/JP.
-- [CTI-2026-0505-VIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/%EB%B0%94%EC%9D%B4%EB%B8%8C_%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5_%ED%95%B4%ED%82%B9%EC%9D%98_%EC%8B%9C%EB%8C%80_CTI-2026-0505-VIBE.md): Vibe — The Age of AI Hacking. KR.
+- [CTI-2026-0601-IRANGENAI](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0601-IRANGENAI_EN.md): Iran generative AI in warfare. KR/EN/JP/ZH.
+- [CTI-2026-0601-GREYVIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0601-GREYVIBE_EN.md): GREYVIBE GenAI Ukraine-targeted operation. KR/EN.
+- [CTI-2026-0530-MARIMO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0530-MARIMO_EN.md): MARIMO advisory weaponization. KR/EN/JP/ZH.
+- [CTI-2026-0530-JINX](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0530-JINX_EN.md): JINX threat analysis. KR/EN/JP/ZH.
+- [CTI-2026-0530-GOGS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0530-GOGS_EN.md): Gogs Git server vulnerability. KR/EN/JP/ZH.
+- [CTI-2026-0530-CHATGPHISH](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0530-CHATGPHISH_EN.md): ChatGPhish ChatGPT impersonation phishing. KR/EN/JP/ZH.
+- [CTI-2026-0528-KELPDAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0528-KELPDAO_EN.md): KelpDAO Web3/DeFi threat. KR/EN/JA/ZH.
+- [CTI-2026-0527-GLASSWORM](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0527-GLASSWORM_EN.md): GlassWorm self-propagating supply-chain worm. KR/EN/JA/ZH. CRITICAL.
+- [CTI-2026-0527-GITEA](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0527-GITEA_EN.md): Gitea CVE vulnerability. KR/EN/JA/ZH.
+- [CTI-2026-0527-AICRYPTOJACK](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0527-AICRYPTOJACK_EN.md): AI cryptojacking. KR/EN/JA/ZH.
+- [CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0526-UK_RUSSIA_CRYPTO_SANCTIONS_EN.md): UK sanctions on Russian crypto. KR/EN/JA/ZH.
+- [CTI-2026-0526-KIMSUKY-PEBBLEDASH](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0526-KIMSUKY-PEBBLEDASH_EN.md): Kimsuky (APT43) PebbleDash/AppleSeed. KR/EN/JP/CN.
+- [CTI-2026-0524-DUALTHREAT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0524-DUALTHREAT_EN.md): Two concurrent threats (LiteSpeed/Shai-Hulud). KR/EN/JP/CN.
+- [CTI-2026-0522-EDR3](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0522-EDR3_EN.md): EDR evasion threat. KR/EN.
+- [CTI-2026-0521-YELLOWKEY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0521-YELLOWKEY_EN.md): Windows BitLocker bypass zero-day. KR/EN. CRITICAL.
+- [CTI-2026-0521-DPRK-TRENDS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0521-DPRK-TRENDS_EN.md): North Korea hacking trends 2026. KR/EN.
+- [CTI-2026-0520-GITHUB](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-GITHUB_KR.md): GitHub internal repository compromise. KR.
+- [CTI-2026-0520-FAST16](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-FAST16_EN.md): FAST16 report. KR/EN/JA/ZH.
+- [CTI-2026-0520-EXCHANGE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-EXCHANGE_KR.md): Exchange Server vulnerability. KR.
+- [CTI-2026-0520-EVILTOKENS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-EVILTOKENS_EN.md): EvilTokens AI device-code phishing PhaaS. KR/EN.
+- [CTI-2026-0520-DRUPAL](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-DRUPAL_EN.md): Drupal core max-severity zero-day. KR/EN. CRITICAL.
+- [CTI-2026-0520-CPANEL](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0520-CPANEL_KR.md): cPanel hacking. KR.
+- [CTI-2026-0517-AICYBER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0517-AICYBER_EN.md): DPRK LLM hacking; AI cyber-attack and agentic defense. KR/EN.
+- [CTI-2026-0514-ChatGPT_DNS_SideChannel](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0514-ChatGPT_DNS_SideChannel_KR.md): ChatGPT DNS side channel. KR.
+- [CTI-2026-0514-CTRL_RussianRAT_LNK_RDP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0514-CTRL_RussianRAT_LNK_RDP_KR.md): Russian RAT via LNK/RDP. KR.
+- [CTI-2026-0510-MYTHOS-AI](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0510-MYTHOS-AI_KR.md): Mythos AI vulnerability. KR.
+- [CTI-2026-0510-LAZARUS-GITHOOKS](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0510-LAZARUS-GITHOOKS_EN.md): Lazarus git-hooks concealment. KR/EN/JP/CN.
+- [CTI-2026-0507-SCARCRUFT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0507-SCARCRUFT_EN.md): ScarCruft (APT37) campaign. KR/EN/JP.
+- [CTI-2026-0505-VIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0505-VIBE_EN.md): Vibe — The Age of AI Hacking. KR/EN.
 - [CTI-2026-0503-GITHUB](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0503-GITHUB_KR.md): GitHub threat analysis. KR.
-- [CTI-2026-0430-COPYFAIL](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Cti%20205%200430%20CopyFail%20kr.MD): CopyFail (CVE-2026-31431). KR.
-- [CTI-2026-0427-LITECOIN](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Cti%202026%200427%20litecoin%20kr.MD): Litecoin vulnerability. KR/EN.
-- [CTI-2026-0422-MCP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Cti%202026%200422%20mcp%20kr.MD): Intelligent and sleeper attacks targeting MCP (Model Context Protocol). KR/EN/JP/CN.
-- [CTI-2026-0420-VERCEL](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0420-VERCEL_KR.md): Vercel breach — AI SaaS supply chain attack and ShinyHunters assessment. KR/EN.
-- [CTI-2026-0320-CORUNA](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0320-CORUNA_KR.md): Coruna iOS Exploit Kit and the cyber-weapon supply chain. KR/EN/ZH.
+- [CTI-2026-0430-COPYFAIL](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0430-COPYFAIL_KR.md): CopyFail (CVE-2026-31431). KR.
+- [CTI-2026-0427-LITECOIN](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0427-LITECOIN_EN.md): Litecoin vulnerability. KR/EN.
+- [CTI-2026-0422-MCP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0422-MCP_EN.md): Intelligent/sleeper attacks targeting MCP. KR/EN/JP/CN.
+- [CTI-2026-0420-VERCEL](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0420-VERCEL_EN.md): Vercel breach — AI SaaS supply chain. KR/EN.
+- [CTI-2026-0320-CORUNA](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0320-CORUNA_EN.md): Coruna iOS Exploit Kit / cyber-weapon supply chain. KR/EN/ZH. CRITICAL.
 
 ## Topics
 
-- Supply chain attacks: MIASMA_SPRINGBLIGHT, CLAUDECODE, IRONWORM, WEBSPHERE, GLASSWORM, GITEA, GOGS, DUALTHREAT, GITHUB, VERCEL
-- Zero-day and vulnerabilities: MSFT_PATCHTUESDAY_206CVE, AI-ZERODAY, WEBSPHERE, NETSCALER, ANDROID-EOP, MIRAI-ZERODAY, YELLOWKEY, DRUPAL, EXCHANGE, CPANEL, COPYFAIL, CORUNA
-- DPRK and state-sponsored APT: KIMSUKY-PEBBLEDASH (APT43), LAZARUS-GITHOOKS, LAZARUS-CLICKFIX, SCARCRUFT (APT37), DPRK-TRENDS, AICYBER, IRANGENAI, GREYVIBE, RussianRAT
-- AI / LLM threats: AI-ZERODAY, CLAUDECODE, GREYVIBE, IRANGENAI, CHATGPHISH, AICRYPTOJACK, EVILTOKENS, AICYBER, ChatGPT_DNS_SideChannel, MYTHOS-AI, VIBE, MCP
-- Web3 and crypto: KELPDAO, AICRYPTOJACK, UK_RUSSIA_CRYPTO_SANCTIONS, LITECOIN
-- Korea cybersecurity policy: TVING, CU_BREACH, FASTCAMPUS_DAYONECOMPANY, CORUNA, VERCEL, DPRK-TRENDS, WEBSPHERE
-- Cloud and CI/CD supply chain: MIASMA_SPRINGBLIGHT, CLAUDECODE, IRONWORM, GLASSWORM
+- Supply chain attacks: MIASMA_SPRINGBLIGHT, IRONWORM, CLAUDECODE, GLASSWORM, WEBSPHERE, GITEA, GOGS, DUALTHREAT, GITHUB, VERCEL, AISUPPLY, SWIFTVIBE
+- Zero-day and vulnerabilities: MSFT_PATCHTUESDAY_206CVE, AI-ZERODAY, NETSCALER, MIRAI-ZERODAY, YELLOWKEY, DRUPAL, EXCHANGE, COPYFAIL, CORUNA, ANDROID-EOP
+- DPRK and state-sponsored APT: DPRK-AI, KIMSUKY-PEBBLEDASH, LAZARUS-GITHOOKS, LAZARUS-CLICKFIX, SCARCRUFT, DPRK-TRENDS, AICYBER, IRANGENAI, UNC6508-REDCAP, SCATTEREDSPIDER
+- AI / LLM threats: SWIFTVIBE, AI-ZERODAY, CLAUDECODE, DPRK-AI, GREYVIBE, CHATGPHISH, AICRYPTOJACK, EVILTOKENS, AICYBER, VIBE, MCP, AISUPPLY
+- Web3 and crypto: KELPDAO, AICRYPTOJACK, UK_RUSSIA_CRYPTO_SANCTIONS, LITECOIN, KAKAO
+- Korea cybersecurity and breaches: TVING, CU_BREACH, FASTCAMPUS_DAYONECOMPANY, KAKAO, MODOO, QSHING, GITHUB-KEY-LEAK, KRWEEKLY
 
 ## About
 
-- [README (Korean)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/README.md): Repository overview, report index, methodology (TLP, severity, frameworks), and naming convention.
+- [README (Korean)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/README.md)
 - [README (English)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/README_EN.md)
 - [README (Japanese)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/README_JP.md)
 - [README (Chinese)](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/README_CN.md)
