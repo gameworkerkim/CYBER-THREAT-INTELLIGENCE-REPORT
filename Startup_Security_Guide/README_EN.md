@@ -191,23 +191,28 @@ ollama run ciso-global "We are a US-based SaaS startup (Series A, 25 employees, 
 expanding into Korea. We comply with CCPA. What additional measures do we need for PIPA?"
 ```
 
-**Usage -- TypeScript/Node.js (Vercel deployment):**
+**Usage -- TypeScript/Node.js (MCP server, M1):**
+
+The currently runnable Node.js entry point is the `mcp/` MCP server. (The `npm run assess` API code is a **design example** in `LLM_CISO_PROMPT_EN.md` section 7.6 and is not yet shipped as a runnable package — planned for Phase 3 M3.)
 
 ```bash
+# 1. Clone
 git clone https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT.git
-cd CYBER-THREAT-INTELLIGENCE-REPORT/Startup_Security_Guide
+cd CYBER-THREAT-INTELLIGENCE-REPORT/Startup_Security_Guide/mcp
 
-# Install dependencies (see LLM_CISO_PROMPT_EN.md section 7.6)
+# 2. Install & build
 npm install
+npm run build
 
-# Set environment
-export ANTHROPIC_API_KEY="sk-ant-..."
-export CISO_MODE="public"   # or "local" for Ollama
+# 3. Smoke tests (SKIL lookup)
+npm run test:skil     # verifies lookups like control:aws-iam-mfa
+npm run test:tools    # soft-passes as not_installed when gitleaks/trivy are absent
 
-# Run cross-jurisdiction assessment
-npm run assess -- --domain cross-jurisdiction \
-  --context '{"homeCountry":"us","targetCountry":"kr","stage":"series-a","teamSize":25}'
+# 4. (Optional) install scanner binaries for real scans
+brew install gitleaks trivy
 ```
+
+> To query SKIL quickly without the server: `node skil/query.mjs control:aws-iam-mfa`
 
 ### Phase 3: SKIL → MCP → Self-Correction → Dashboard & Bots
 

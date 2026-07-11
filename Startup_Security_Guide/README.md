@@ -188,23 +188,28 @@ ollama run ciso-local "우리 스타트업(5인, AWS 사용)의 클라우드 보
 # LLM_CISO_PROMPT_KR.md 5.4절의 ciso-daily-check.sh 참조
 ```
 
-**사용 방법 — TypeScript/Node.js (Vercel 배포):**
+**사용 방법 — TypeScript/Node.js (MCP 서버, M1):**
+
+현재 실행 가능한 Node.js 진입점은 `mcp/` MCP 서버입니다. (`npm run assess` API 코드는 `LLM_CISO_PROMPT_KR.md` 7.6절의 **설계 예시**이며 아직 실행 가능한 패키지로 배포되지 않았습니다 — Phase 3 M3에서 제공 예정.)
 
 ```bash
 # 1. 프로젝트 클론
 git clone https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT.git
-cd CYBER-THREAT-INTELLIGENCE-REPORT/Startup_Security_Guide
+cd CYBER-THREAT-INTELLIGENCE-REPORT/Startup_Security_Guide/mcp
 
-# 2. 패키지 설치 (LLM_CISO_PROMPT_KR.md 7.6절 package.json 참조)
+# 2. 패키지 설치 & 빌드
 npm install
+npm run build
 
-# 3. 환경 변수 설정
-export ANTHROPIC_API_KEY="sk-ant-..."
-export CISO_MODE="public"   # 또는 "local" (Ollama 모드)
+# 3. 스모크 테스트 (SKIL 조회)
+npm run test:skil     # control:aws-iam-mfa 등 조회 확인
+npm run test:tools    # gitleaks/trivy 미설치 시 not_installed 로 soft-pass
 
-# 4. 진단 실행
-npm run assess -- --domain cloud --context '{"stage":"seed","teamSize":5,"cloudProvider":"aws"}'
+# 4. (선택) 스캐너 바이너리 설치 후 실제 스캔
+brew install gitleaks trivy
 ```
+
+> SKIL만 빠르게 조회하려면 서버 없이도 가능: `node skil/query.mjs control:aws-iam-mfa`
 
 ### Phase 3: SKIL → MCP → 자기 교정 → 대시보드·봇
 

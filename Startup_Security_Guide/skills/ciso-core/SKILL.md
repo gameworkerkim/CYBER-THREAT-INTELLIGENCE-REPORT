@@ -13,7 +13,7 @@ description: >-
 1. Read [_shared/persona.md](../_shared/persona.md) and follow it.
 2. Use [_shared/output-format.md](../_shared/output-format.md) for findings.
 3. Use [_shared/severity.md](../_shared/severity.md) for severity/SLA.
-4. Prefer citing SKIL IDs from `../skil/` (run `node ../skil/query.mjs --list` or lookup by id).
+4. Prefer citing SKIL IDs from `../../skil/` (run `node ../../skil/query.mjs --list` or lookup by id).
 5. If domain is clear, also apply the matching skill: `ciso-cloud`, `ciso-workspace`, `ciso-drm`, `ciso-kisa`, `ciso-incident`.
 
 ## Multi-LLM
