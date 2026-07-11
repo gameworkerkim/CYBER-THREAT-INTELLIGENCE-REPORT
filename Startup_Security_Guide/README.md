@@ -39,6 +39,66 @@
 
 ---
 
+## LLM CISO Skills — 소규모 스타트업을 위한 가상 CISO
+
+전담 보안 인력 없이도, **지금 쓰는 LLM에 스킬(System Prompt)만 붙이면** 바로 보안 점검을 시작할 수 있습니다. 별도 서버·유료 GRC 도구·복잡한 설치가 필요 없습니다.
+
+👉 상세 사용법: [`skills/README.md`](./skills/README.md) · 지식 기반: [`skil/`](./skil/)
+
+### 왜 소규모 팀에 맞는가
+
+| 장점 | 설명 |
+|------|------|
+| **설치 부담 제로** | `SYSTEM_PROMPT.md`를 복사해 System / Custom Instructions에 붙여넣으면 끝. 인프라 구축 불필요 |
+| **비용 친화적** | 이미 쓰는 Claude·ChatGPT·Cursor 구독으로 충분. 로컬은 Ollama로 무료 운영 가능 |
+| **5분이면 첫 진단** | “5명, AWS+GWS, CPO 없음”처럼 상황만 적으면 Top 3 조치가 나옴 |
+| **도메인이 나뉘어 있음** | 클라우드·Workspace·법규·사고대응을 스킬별로 골라 쓰면 프롬프트가 짧고 결과가 안정적 |
+| **한국 규제 내장** | PIPA/KISA·CPO·처리방침 항목을 SKIL ID로 참조 — 해외 범용 체크리스트보다 실무에 가깝다 |
+| **비밀은 로컬로** | 인프라 설정·고객 데이터는 Ollama 등 로컬 LLM, 일반 정책 질문은 퍼블릭 LLM (하이브리드) |
+| **확장 가능** | 지금은 스킬+SKIL, 이후 MCP·대시보드·봇으로 같은 지식을 재사용 ([ROADMAP](./ROADMAP.md)) |
+
+### 스킬 구성
+
+| 스킬 | 용도 | 이럴 때 |
+|------|------|---------|
+| [`ciso-core`](./skills/ciso-core/) | 종합 우선순위·퀵스캔 | “뭐부터 해야 해?” |
+| [`ciso-cloud`](./skills/ciso-cloud/) | AWS·GCP·Azure·Vercel | IAM, S3, SSH, CI/CD 시크릿 |
+| [`ciso-workspace`](./skills/ciso-workspace/) | Google Workspace | 2FA, Drive 공유, SPF/DKIM |
+| [`ciso-drm`](./skills/ciso-drm/) | 문서·소스·퇴사 | 분류, IRM, GitHub, 오프보딩 |
+| [`ciso-kisa`](./skills/ciso-kisa/) | 개인정보·KISA | CPO, 처리방침, 암호화, 해외→한국 갭 |
+| [`ciso-incident`](./skills/ciso-incident/) | 사고 대응 | 피싱, 랜섬, 유출, 긴급 IR |
+
+각 폴더에 **Cursor용 `SKILL.md`** 와 **모든 LLM 공용 `SYSTEM_PROMPT.md`** 가 있습니다.
+
+### 사용 가능한 LLM
+
+| LLM / 환경 | 사용 방법 | 소규모 팀 추천 |
+|------------|-----------|----------------|
+| **Cursor** | Agent Skill로 `skills/ciso-*` 로드, `@ciso-cloud` 등으로 호출 | 코딩·인프라 점검과 한곳에서 |
+| **Claude** (claude.ai / Claude Code / API) | `SYSTEM_PROMPT.md` → System·Custom instructions, SKIL JSON 첨부 | 긴 진단·법규 설명에 강함 |
+| **ChatGPT / GPT-4o** | Custom GPT Instructions + Knowledge에 SKIL JSON | 이미 ChatGPT를 쓰는 팀 |
+| **Gemini** | System/Instructions에 동일 프롬프트 + SKIL 첨부 | Google Workspace 중심 팀 |
+| **DeepSeek** | API·채팅 System에 `SYSTEM_PROMPT.md` | 비용 절감이 중요할 때 |
+| **Ollama** (Llama 3, Gemma 3, EXAONE 등) | Modelfile `SYSTEM`에 프롬프트 삽입 후 `ollama run` | **민감 정보·에어갭** 필수일 때 |
+
+**최소 시작 예시 (Claude / ChatGPT):**
+
+1. [`skills/ciso-core/SYSTEM_PROMPT.md`](./skills/ciso-core/SYSTEM_PROMPT.md) 전체를 System Prompt에 붙여넣기  
+2. (권장) [`skil/controls/cloud.json`](./skil/controls/cloud.json) 또는 관련 SKIL JSON을 컨텍스트로 첨부  
+3. 입력 예: `우리 팀은 4명, AWS+Google Workspace, 아직 CPO·처리방침 없음. 이번 주 Top 3만 알려줘.`
+
+**Cursor 예시:**
+
+```
+@ciso-kisa 미국 SaaS가 한국 진출한다. CCPA만 맞춰 둔 상태인데 PIPA에서 뭐가 빠졌지?
+```
+
+**Ollama 예시:** [`skills/README.md`](./skills/README.md)의 Modelfile 절차 참고.
+
+> LLM 진단은 **보조 도구**입니다. 중대한 법적 판단은 전문가 검토가 필요합니다. 시크릿·고객 DB는 퍼블릭 LLM에 넣지 마세요.
+
+---
+
 ## 프로젝트 구조
 
 ```

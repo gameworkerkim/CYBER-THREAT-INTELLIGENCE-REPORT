@@ -60,6 +60,54 @@ This project's LLM CISO persona includes jurisdiction-aware compliance modules t
 
 ---
 
+## LLM CISO Skills — Built for Small Startups
+
+No dedicated security hire required. **Paste a skill (system prompt) into the LLM you already use** and start assessing. No servers, no paid GRC suite, no heavy setup.
+
+👉 Details: [`skills/README.md`](./skills/README.md) · Knowledge: [`skil/`](./skil/)
+
+### Why it fits small teams
+
+| Advantage | What it means |
+|-----------|----------------|
+| **Zero install** | Copy `SYSTEM_PROMPT.md` into System / Custom Instructions |
+| **Budget-friendly** | Use existing Claude, ChatGPT, or Cursor; or free local Ollama |
+| **First diagnosis in minutes** | Describe stage, stack, and gaps — get a Top 3 action list |
+| **Split by domain** | Cloud, Workspace, compliance, IR skills keep prompts short and stable |
+| **Korea-ready** | PIPA/KISA items via SKIL IDs — not only generic Western checklists |
+| **Hybrid privacy** | Sensitive configs on local LLM; general policy on public LLM |
+| **Room to grow** | Same knowledge feeds future MCP, dashboard, and bots ([ROADMAP](./ROADMAP_EN.md)) |
+
+### Skill pack
+
+| Skill | Focus | When to use |
+|-------|--------|-------------|
+| [`ciso-core`](./skills/ciso-core/) | Priorities / quick scan | “What should we do first?” |
+| [`ciso-cloud`](./skills/ciso-cloud/) | AWS · GCP · Azure · Vercel | IAM, storage, SSH, CI secrets |
+| [`ciso-workspace`](./skills/ciso-workspace/) | Google Workspace | 2SV, Drive sharing, email auth |
+| [`ciso-drm`](./skills/ciso-drm/) | Docs · source · offboarding | Classification, IRM, GitHub |
+| [`ciso-kisa`](./skills/ciso-kisa/) | PIPA / KISA | CPO, notices, encryption, KR market entry |
+| [`ciso-incident`](./skills/ciso-incident/) | Incident response | Phishing, ransomware, breach |
+
+Each folder has Cursor `SKILL.md` and portable `SYSTEM_PROMPT.md` for any LLM.
+
+### Supported LLMs
+
+| LLM / environment | How to use | Best for |
+|-------------------|------------|----------|
+| **Cursor** | Load `skills/ciso-*`, call `@ciso-cloud` etc. | Dev + infra in one place |
+| **Claude** (web / Code / API) | Paste `SYSTEM_PROMPT.md`; attach SKIL JSON | Deep reviews, compliance narrative |
+| **ChatGPT / GPT-4o** | Custom GPT Instructions + Knowledge upload | Teams already on ChatGPT |
+| **Gemini** | Same prompt + SKIL attach | Google Workspace-centric teams |
+| **DeepSeek** | System prompt via API/chat | Cost-sensitive usage |
+| **Ollama** (Llama 3, Gemma 3, …) | Modelfile `SYSTEM` + `ollama run` | **Sensitive / air-gapped** data |
+
+**Minimal start (Claude / ChatGPT):** paste [`ciso-core/SYSTEM_PROMPT.md`](./skills/ciso-core/SYSTEM_PROMPT.md), optionally attach SKIL JSON, then ask for a Top 3 for your stage and stack.
+
+> LLM output is assistive. Critical legal decisions need professional review. Never paste secrets or customer DBs into public LLMs.
+
+---
+
 ## Project Structure
 
 ```
