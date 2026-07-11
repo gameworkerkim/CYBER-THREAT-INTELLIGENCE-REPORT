@@ -1,0 +1,13 @@
+{
+  "id": "domain:drm",
+  "name": "DRM & Document Security",
+  "controlFiles": ["controls/drm.json"],
+  "assessmentHints": [
+    "Classification, IRM, source repo protection, offboarding"
+  ],
+  "primaryControls": [
+    "control:drm-classification",
+    "control:drm-source-protect",
+    "control:drm-offboarding"
+  ]
+}

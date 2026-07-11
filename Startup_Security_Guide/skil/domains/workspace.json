@@ -1,0 +1,14 @@
+{
+  "id": "domain:workspace",
+  "name": "Google Workspace Security",
+  "controlFiles": ["controls/workspace.json"],
+  "assessmentHints": [
+    "Check 2SV enforce, admin count, external sharing, SPF/DKIM/DMARC, OAuth apps"
+  ],
+  "primaryControls": [
+    "control:gws-2fa-enforce",
+    "control:gws-admin-limit",
+    "control:gws-external-sharing",
+    "control:gws-email-auth"
+  ]
+}

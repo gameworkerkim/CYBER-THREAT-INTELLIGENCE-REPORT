@@ -1,0 +1,77 @@
+{
+  "version": "0.1.0",
+  "playbooks": [
+    {
+      "id": "playbook:phishing-bec",
+      "title": "피싱·BEC 초기 대응",
+      "trigger": "직원이 피싱 링크 클릭, 의심 메일, 송금 요청 사칭",
+      "severity": "HIGH",
+      "framework": "NIST SP 800-61",
+      "steps": [
+        { "order": 1, "phase": "Contain", "action": "해당 계정 비밀번호 변경 및 세션 강제 종료", "sla": "즉시" },
+        { "order": 2, "phase": "Identify", "action": "로그인·전달규칙·OAuth 앱 감사 로그 확인", "sla": "1시간" },
+        { "order": 3, "phase": "Eradicate", "action": "악성 전달규칙·필터·제3자 앱 제거", "sla": "4시간" },
+        { "order": 4, "phase": "Communicate", "action": "전 직원 피싱 경고 및 샘플 공유", "sla": "당일" },
+        { "order": 5, "phase": "Recover", "action": "2SV·관리자 권한 재점검", "sla": "24시간" }
+      ],
+      "koreaReporting": [],
+      "relatedPolicies": ["policy:kisa-access-control"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §7.2; LLM_CISO_PROMPT_KR.md 시나리오4"
+    },
+    {
+      "id": "playbook:ransomware",
+      "title": "랜섬웨어 대응",
+      "trigger": "파일 암호화, 랜섬 노트, 대량 파일 변조 탐지",
+      "severity": "CRITICAL",
+      "framework": "NIST SP 800-61",
+      "steps": [
+        { "order": 1, "phase": "Contain", "action": "감염 호스트 네트워크 격리, 공유 드라이브 쓰기 차단", "sla": "즉시" },
+        { "order": 2, "phase": "Identify", "action": "최초 침투 경로·영향 범위 파악", "sla": "4시간" },
+        { "order": 3, "phase": "Eradicate", "action": "악성코드 제거, 자격증명 로테이션", "sla": "24시간" },
+        { "order": 4, "phase": "Recover", "action": "검증된 오프라인 백업에서 복구", "sla": "목표 RTO 내" },
+        { "order": 5, "phase": "Lessons", "action": "백업 테스트·패치·이메일 보안 강화", "sla": "7일" }
+      ],
+      "koreaReporting": ["개인정보 유출 동반 시 playbook:personal-data-breach 병행"],
+      "relatedPolicies": ["policy:pipa-29"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §7.2"
+    },
+    {
+      "id": "playbook:personal-data-breach",
+      "title": "개인정보 유출 사고 대응",
+      "trigger": "개인정보 유출·분실·도난 인지",
+      "severity": "CRITICAL",
+      "framework": "NIST SP 800-61 + 한국 통지 의무",
+      "steps": [
+        { "order": 1, "phase": "Contain", "action": "유출 경로 차단, 접근키·세션 폐기", "sla": "즉시" },
+        { "order": 2, "phase": "Assess", "action": "유출 항목·규모·CI 포함 여부 파악", "sla": "24시간" },
+        { "order": 3, "phase": "Notify", "action": "정보주체·관련 기관 통지 요건 검토·실행", "sla": "법정 기한 내 (지체 없이)" },
+        { "order": 4, "phase": "Remediate", "action": "원인 제거, 모니터링 강화", "sla": "72시간+" },
+        { "order": 5, "phase": "Report", "action": "내부 사고 보고서·재발방지 계획", "sla": "7일" }
+      ],
+      "koreaReporting": [
+        "개인정보보호위원회 등 관련 기관 신고 요건 확인",
+        "정보주체 통지 (연락처·이메일 등)",
+        "티빙·CU·패스트캠퍼스 사례: 탐지·공지 지연이 피해를 키움"
+      ],
+      "relatedPolicies": ["policy:pipa-29", "policy:pipa-30"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §7; CTI-2026-0604-TVING"
+    },
+    {
+      "id": "playbook:offboarding",
+      "title": "퇴사자 계정·권한 회수",
+      "trigger": "퇴사·계약 종료·장기 휴직",
+      "severity": "HIGH",
+      "framework": "Access lifecycle",
+      "steps": [
+        { "order": 1, "phase": "HR trigger", "action": "퇴사일 D-1에 IT/보안 티켓 생성", "sla": "D-1" },
+        { "order": 2, "phase": "Revoke", "action": "IdP·GWS·GitHub·클라우드·Slack·VPN 계정 비활성", "sla": "퇴사 당일" },
+        { "order": 3, "phase": "Transfer", "action": "Drive·코드·도메인 소유권 이관", "sla": "퇴사 당일" },
+        { "order": 4, "phase": "Verify", "action": "액세스 로그로 잔여 세션·토큰 확인", "sla": "D+1" },
+        { "order": 5, "phase": "Record", "action": "회수 체크리스트 서명·보관", "sla": "D+2" }
+      ],
+      "koreaReporting": [],
+      "relatedPolicies": ["policy:kisa-access-control"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §5.6"
+    }
+  ]
+}

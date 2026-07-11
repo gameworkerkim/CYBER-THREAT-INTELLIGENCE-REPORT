@@ -44,11 +44,21 @@
 ```
 Startup_Security_Guide/
 ├── README.md                       # 본 문서: 프로젝트 개요
+├── ROADMAP.md                      # Phase 3+ 로드맵 & 기능 명세 (SKIL→MCP→교정→봇)
+├── ROADMAP_EN.md
 ├── STARTUP_SECURITY_GUIDE_KR.md    # Phase 1: 보안 가이드 & 체크리스트
-├── LLM_CISO_PROMPT_KR.md           # Phase 2: LLM CISO 프롬프트 시스템
-├── LLM_CISO_DASHBOARD.md           # Phase 3: 대시보드 기획 (작업 예정)
+├── LLM_CISO_PROMPT_KR.md           # Phase 2: LLM CISO 프롬프트 (SKIL 원천)
+├── LLM_CISO_DASHBOARD.md           # Phase 3: 대시보드 UI/API 기획
+├── skil/                           # M0: Security Knowledge & Intelligence Layer
+├── mcp/                            # M1: MCP 서버 (예정)
+├── skills/                         # Cursor + Claude/GPT/Ollama Skills
+├── hooks/                          # M2: pre-commit 교정 훅 (예정)
 └── llms.txt                        # LLM 인덱싱용 요약
 ```
+
+👉 **상세 로드맵·기능 명세:** [ROADMAP.md](./ROADMAP.md)  
+👉 **SKIL 조회:** [skil/README.md](./skil/README.md) · `node skil/query.mjs control:aws-iam-mfa`  
+👉 **멀티 LLM Skills:** [skills/README.md](./skills/README.md)
 
 ### Phase 1: STARTUP_SECURITY_GUIDE_KR.md
 
@@ -135,35 +145,39 @@ export CISO_MODE="public"   # 또는 "local" (Ollama 모드)
 npm run assess -- --domain cloud --context '{"stage":"seed","teamSize":5,"cloudProvider":"aws"}'
 ```
 
-### Phase 3: LLM_CISO_DASHBOARD.md
+### Phase 3: SKIL → MCP → 자기 교정 → 대시보드·봇
 
-웹 기반 CISO 대시보드 기획 문서입니다. Next.js + Vercel + TypeScript 기반으로 구현 예정이며, 다음 기능을 포함합니다:
+Phase 2 프롬프트를 **SKIL(Security Knowledge & Intelligence Layer)** 로 확장·재정의한 뒤, MCP로 실행 가능한 에이전트를 만들고, LLM 실수를 MCP가 검증·수정·보고한 다음, Slack/Telegram·팀 공유로 협업한다. UI 상세는 [LLM_CISO_DASHBOARD.md](./LLM_CISO_DASHBOARD.md), 전체 명세는 [ROADMAP.md](./ROADMAP.md).
 
-- 보안 현황판 (Overall Score, 도메인별 점수, 위험 등급별 이슈 카운트)
-- 자동 진단 스케줄러 (Cron 기반 정기 평가, Slack/Email 리포트)
-- 조치 로드맵 트래커 (Sprint 단위 보안 태스크, JIRA/Linear 연동)
-- 컴플라이언스 스코어카드 (KISA 법규 준수 현황 시각화)
-- LLM 제공자 선택 (Public Claude/GPT/DeepSeek, Local Ollama, Hybrid)
+| 마일스톤 | 내용 | 상태 |
+|----------|------|------|
+| **M0 SKIL** | `skil/` + multi-LLM Skills (`SYSTEM_PROMPT.md`). 시드 35 IDs. 가이드 전항목 이관은 고도화 중 | 🔄 진행 중 |
+| **M1 MCP** | SKIL 조회 + Gitleaks/Trivy (이후 Prowler) MVP 서버 | 📋 |
+| **M2 자기 교정** | L1~L4 실수 정의, validate→report→optional fix, pre-commit | 📋 |
+| **M3 대시보드** | Next.js 현황판·진단 이력·컴플라이언스·교정 리포트 뷰 | 📋 |
+| **M4 봇·협업** | Slack/Telegram 봇, 팀 공유, RBAC | 📋 |
+| **M5 Production** | Auth, 멀티테넌시, 감사 로그, Hybrid LLM 기본값 | 📋 |
 
 ---
 
 ## 개발 로드맵
 
 ```
-Phase 1 (완료)   Phase 2 (완료)    Phase 3 (계획)     Phase 4 (계획)
-    │                  │                  │                  │
-    ▼                  ▼                  ▼                  ▼
-보안 가이드       LLM CISO          웹 대시보드       통합 모니터링
-& 체크리스트      페르소나           구축              체계
-                   & 프롬프트
-                                      │                  │
-                                      ├─ MVP: CLI 진단   ├─ Wazuh/XDR 연동
-                                      ├─ Web UI          ├─ 실시간 알람
-                                      ├─ Cron 자동화     ├─ SIEM 통합
-                                      └─ Multi-LLM      └─ 조직 대시보드
+Phase 1 ✅          Phase 2 ✅               Phase 3 🔄                         Phase 4 📋
+보안 가이드    →    LLM CISO 프롬프트   →   SKIL → MCP → 자기교정 → 봇/공유   →   통합 모니터링
+& 체크리스트         (SKIL 원천 지식)         + 대시보드 UI                         (Wazuh/SIEM)
+                                              │
+                                              ├─ M0: SKIL 구조화 + Cursor Skills
+                                              ├─ M1: MCP (SKIL · Gitleaks · Trivy)
+                                              ├─ M2: LLM 실수 검증·수정·보고
+                                              ├─ M3: Web 대시보드
+                                              ├─ M4: Slack / Telegram / 팀 공유(RBAC)
+                                              └─ M5: Production 하드닝
 ```
 
-스타트업 내부에서 일상적으로 접속하여 점검할 수 있는 자체 대시보드가 최종 목표입니다. 단순한 체크리스트 뷰어가 아닌, LLM이 주기적으로 인프라를 스캔하고, 이상 징후를 탐지하며, 조치 우선순위를 제시하는 통합 모니터링 체계로 발전시킬 계획입니다.
+**실행 순서:** (1) SKIL 정의·구조화 → (2) MCP MVP → (3) 자기 교정 루프 → (4) 대시보드 → (5) 알림·협업 → (6) Phase 4 SIEM.
+
+최종 목표는 체크리스트 뷰어가 아니라, **구조화된 지식(SKIL) + 도구 실행(MCP) + 교정 루프**로 인프라를 점검하고, 팀이 봇·대시보드로 공유하는 가상 CISO 체계다. 상세: [ROADMAP.md](./ROADMAP.md).
 
 ---
 
@@ -238,16 +252,21 @@ Phase 1 (완료)   Phase 2 (완료)    Phase 3 (계획)     Phase 4 (계획)
 
 | 계층 | 기술 | 용도 |
 |------|------|------|
-| 언어 | TypeScript (Strict), Node.js 22 | API 서버, CLI 도구 |
-| 프레임워크 | Next.js 15 (App Router) | Phase 3 대시보드 |
+| 지식 | SKIL (YAML/JSON Schema) | MCP·Cursor Skill 공통 지식 기반 |
+| 프로토콜 | MCP (Model Context Protocol) | 도구 호출·검증·스캔 |
+| 언어 | TypeScript (Strict), Node.js 22 | MCP 서버, CLI, API |
+| 프레임워크 | Next.js 15 (App Router) | Phase 3 대시보드 (M3) |
 | 호스팅 | Vercel | API 엔드포인트 및 프론트엔드 |
-| 데이터베이스 | Vercel Postgres | 진단 이력 저장 |
+| 데이터베이스 | Vercel Postgres | 진단·교정 이력 |
 | 캐시 | Vercel KV (Redis) | 진단 결과 캐시 |
-| LLM - Public | Claude (Anthropic), GPT-4o (OpenAI), DeepSeek | 고성능 진단 |
+| LLM - Public | Claude (Anthropic), GPT-4o (OpenAI), DeepSeek | 고성능 진단 (검증은 MCP) |
 | LLM - Local | Ollama + Llama 3 / Gemma 3 / EXAONE 3.5 | 에어갭 민감 데이터 진단 |
+| 보안 도구 | Gitleaks, Trivy, Prowler, Semgrep | MCP 백엔드 스캐너 |
 | 배포 | Vercel Cron Jobs | 정기 자동 진단 |
-| 알림 | Slack Webhook, Resend (Email), Notion API | 진단 결과 발송 |
+| 알림 | Slack Bot, Telegram Bot, Resend (Email), Notion API | M4 진단·교정 알림 |
+| 협업 | 팀 공유 + RBAC, JIRA/Linear (후속) | M4~M5 |
 | 인증 | NextAuth.js (Google OAuth) | 대시보드 사용자 인증 |
+| SIEM (Phase 4) | Wazuh | 통합 모니터링 |
 
 ---
 
@@ -256,9 +275,11 @@ Phase 1 (완료)   Phase 2 (완료)    Phase 3 (계획)     Phase 4 (계획)
 이 프로젝트는 오픈소스로 운영되며, 다음과 같은 기여를 환영합니다:
 
 - **체크리스트 보강:** 누락된 보안 항목 또는 최신 위협 사례 추가
-- **프롬프트 개선:** LLM 응답 품질을 높이는 프롬프트 엔지니어링 기여
+- **SKIL 구조화:** 가이드·프롬프트를 YAML/JSON Controls·Policies로 변환
+- **MCP 도구:** Gitleaks/Trivy/Prowler 연동 및 자기 교정 검증기
+- **프롬프트·Skill 개선:** LLM 응답 품질 및 Cursor Skill 고도화
 - **다국어 번역:** 영문, 일문, 중문 버전의 가이드/프롬프트 작성
-- **대시보드 개발:** Phase 3 웹 대시보드 구현 참여
+- **대시보드·봇:** Web UI, Slack/Telegram, 팀 공유(RBAC)
 - **레퍼런스 추가:** 유사 프로젝트 및 관련 자료 제보
 
 GitHub Issues 또는 Pull Request를 통해 참여할 수 있습니다. 모든 기여는 CC BY-NC-SA 4.0 라이선스를 따릅니다.

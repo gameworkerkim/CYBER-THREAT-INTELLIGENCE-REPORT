@@ -1,0 +1,82 @@
+{
+  "version": "0.1.0",
+  "domain": "compliance",
+  "source": "STARTUP_SECURITY_GUIDE_KR.md §2, §6, §11",
+  "controls": [
+    {
+      "id": "control:pipa-cpo-appoint",
+      "title": "CPO(개인정보 보호책임자) 지정",
+      "domain": "compliance",
+      "provider": "n/a",
+      "severity": "CRITICAL",
+      "description": "규모와 무관하게 CPO를 지정한다. 대표·임원 겸직 가능.",
+      "check": "처리방침·내부 지정 문서에 CPO 성명·연락처 기재",
+      "remediation": "대표 또는 임원을 CPO로 지정하고 처리방침에 공개.",
+      "effort": "low",
+      "legalBasis": ["policy:pipa-31"],
+      "nistCsf": ["GV.RR-01"],
+      "tags": ["cpo", "pipa"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §2 Stage1, §6.5"
+    },
+    {
+      "id": "control:pipa-privacy-policy",
+      "title": "개인정보 처리방침 공개",
+      "domain": "compliance",
+      "provider": "n/a",
+      "severity": "CRITICAL",
+      "description": "법정 필수 기재사항을 포함한 처리방침을 홈페이지에서 쉽게 확인 가능하게 공개한다.",
+      "check": "홈페이지 처리방침 URL·필수 12개 기재사항",
+      "remediation": "§30 필수 항목 체크리스트로 작성·게시. 변경 시 고지.",
+      "effort": "medium",
+      "legalBasis": ["policy:pipa-30"],
+      "nistCsf": ["GV.PO-01"],
+      "tags": ["privacy-policy", "pipa"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §2, §6.4"
+    },
+    {
+      "id": "control:pipa-encryption",
+      "title": "개인정보 저장·전송 암호화",
+      "domain": "compliance",
+      "provider": "common",
+      "severity": "CRITICAL",
+      "description": "고유식별·민감·비밀번호 등에 안전성 확보조치 기준에 따른 암호화를 적용한다.",
+      "check": "DB·백업·전송 구간 암호화 설정, 비밀번호 일방향 해시",
+      "remediation": "고유식별·금융 AES-256, 비밀번호 SHA-256 이상 일방향+salt. HTTPS 강제.",
+      "effort": "high",
+      "legalBasis": ["policy:pipa-29", "policy:kisa-encryption"],
+      "nistCsf": ["PR.DS-01", "PR.DS-02"],
+      "tags": ["encryption", "pipa"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §6.2–6.3"
+    },
+    {
+      "id": "control:kisa-access-logs",
+      "title": "개인정보 접속기록 보관·점검",
+      "domain": "compliance",
+      "provider": "common",
+      "severity": "HIGH",
+      "description": "접속기록을 기준 기간 보관하고 정기 점검한다.",
+      "check": "접속기록 필드·보관 기간·월/반기 점검 증적",
+      "remediation": "누가·언제·무엇을·성공여부 기록. 정보통신서비스 제공자는 월 1회 점검.",
+      "effort": "medium",
+      "legalBasis": ["policy:kisa-access-logs", "policy:pipa-29"],
+      "nistCsf": ["DE.CM-01"],
+      "tags": ["logging", "kisa"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §6.2, §9.2"
+    },
+    {
+      "id": "control:stage-gate-prod",
+      "title": "프로덕션 런칭 Stage-Gate",
+      "domain": "compliance",
+      "provider": "common",
+      "severity": "HIGH",
+      "description": "프로덕션 배포 전 HTTPS·암호화·시크릿·처리방침·CPO 등 게이트를 통과한다.",
+      "check": "Stage-Gate 체크리스트 서명/이슈 트래커",
+      "remediation": "STARTUP_SECURITY_GUIDE §11 게이트 항목 전부 후 배포.",
+      "effort": "medium",
+      "legalBasis": ["policy:pipa-29", "policy:pipa-30", "policy:pipa-31"],
+      "nistCsf": ["GV.OC-01"],
+      "tags": ["stage-gate", "release"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §11"
+    }
+  ]
+}

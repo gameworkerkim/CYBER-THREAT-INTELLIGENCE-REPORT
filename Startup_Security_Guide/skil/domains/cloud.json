@@ -1,0 +1,16 @@
+{
+  "id": "domain:cloud",
+  "name": "Cloud Security",
+  "controlFiles": ["controls/cloud.json"],
+  "assessmentHints": [
+    "Ask for cloud provider (aws|gcp|azure|vercel)",
+    "Prioritize MFA, public storage, SSH 0.0.0.0/0, secrets in CI/CD",
+    "Cite SKIL control IDs in findings.skilRefs"
+  ],
+  "primaryControls": [
+    "control:aws-iam-mfa",
+    "control:aws-s3-public-block",
+    "control:cloud-sg-ssh-restrict",
+    "control:cicd-secrets-no-hardcode"
+  ]
+}

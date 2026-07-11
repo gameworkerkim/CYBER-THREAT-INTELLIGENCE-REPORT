@@ -1,0 +1,76 @@
+{
+  "version": "0.1.0",
+  "jurisdiction": "KR",
+  "source": "STARTUP_SECURITY_GUIDE_KR.md §6; 개인정보보호법",
+  "policies": [
+    {
+      "id": "policy:pipa-29",
+      "title": "개인정보 안전조치의무",
+      "jurisdiction": "KR",
+      "law": "개인정보보호법",
+      "article": "§29",
+      "summary": "개인정보처리자는 개인정보가 분실·도난·유출·위조·변조 또는 훼손되지 않도록 안전성 확보에 필요한 기술적·관리적·물리적 조치를 해야 한다.",
+      "obligations": [
+        "내부 관리계획 수립·시행",
+        "접근 권한 관리",
+        "접근 통제",
+        "개인정보 암호화",
+        "접속기록 보관·점검",
+        "보안프로그램 설치·갱신",
+        "물리적 안전조치"
+      ],
+      "penalties": "과태료 등 (사안별). 유출 시 행정·민·형사 리스크.",
+      "relatedControls": [
+        "control:pipa-encryption",
+        "control:kisa-access-logs",
+        "control:aws-iam-mfa",
+        "control:gws-2fa-enforce"
+      ],
+      "crossJurisdictionNotes": "GDPR Art.32(security of processing)와 유사하나, 한국은 고시(안전성 확보조치 기준)로 구체 기술 기준이 더 세분된다.",
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §6.2"
+    },
+    {
+      "id": "policy:pipa-30",
+      "title": "개인정보 처리방침의 수립·공개",
+      "jurisdiction": "KR",
+      "law": "개인정보보호법",
+      "article": "§30",
+      "summary": "처리방침을 정하고 홈페이지 등에서 정보주체가 쉽게 확인할 수 있게 공개해야 한다.",
+      "obligations": [
+        "처리 목적·항목·보유기간 등 필수 기재",
+        "홈페이지 등 공개",
+        "변경 시 고지"
+      ],
+      "penalties": "과태료 가능",
+      "relatedControls": ["control:pipa-privacy-policy"],
+      "crossJurisdictionNotes": "GDPR privacy notice / CCPA notice at collection과 대응. 한국은 필수 기재사항 체크리스트가 더 정형화되어 있다.",
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §6.4"
+    },
+    {
+      "id": "policy:pipa-31",
+      "title": "개인정보 보호책임자 지정",
+      "jurisdiction": "KR",
+      "law": "개인정보보호법",
+      "article": "§31",
+      "summary": "개인정보 보호책임자(CPO)를 지정해야 한다. 규모와 무관하게 적용되며 대표·임원 겸직 가능.",
+      "obligations": ["CPO 지정", "처리방침에 성명·연락처 공개", "보호 업무 총괄"],
+      "penalties": "과태료 가능",
+      "relatedControls": ["control:pipa-cpo-appoint"],
+      "crossJurisdictionNotes": "GDPR DPO와 다름: DPO는 독립성·자격 요건이 더 엄격하고 지정 의무 범위가 다르다. 한국 CPO는 거의 모든 처리자에게 지정 의무.",
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §2, §6.5, §8"
+    },
+    {
+      "id": "policy:pipa-21",
+      "title": "개인정보 파기",
+      "jurisdiction": "KR",
+      "law": "개인정보보호법",
+      "article": "§21",
+      "summary": "보유기간 경과·목적 달성 시 지체 없이 파기해야 한다.",
+      "obligations": ["파기 절차·방법 문서화", "복구 불가능한 파기", "파기 기록"],
+      "penalties": "과태료·시정명령 가능",
+      "relatedControls": ["control:pipa-privacy-policy"],
+      "crossJurisdictionNotes": "GDPR storage limitation과 유사.",
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §2 Stage3"
+    }
+  ]
+}

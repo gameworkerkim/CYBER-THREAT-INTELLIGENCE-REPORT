@@ -1,0 +1,16 @@
+{
+  "id": "domain:compliance",
+  "name": "KISA / PIPA Compliance",
+  "controlFiles": ["controls/stage-gate.json"],
+  "policyFiles": ["policies/pipa.json", "policies/kisa-safety.json", "policies/gdpr-ccpa-gap.json"],
+  "assessmentHints": [
+    "Always check CPO, privacy policy, encryption, access logs",
+    "For foreign startups: apply GDPR/CCPA gap policies"
+  ],
+  "primaryControls": [
+    "control:pipa-cpo-appoint",
+    "control:pipa-privacy-policy",
+    "control:pipa-encryption",
+    "control:kisa-access-logs"
+  ]
+}

@@ -64,16 +64,21 @@ This project's LLM CISO persona includes jurisdiction-aware compliance modules t
 
 ```
 Startup_Security_Guide/
-├── README.md                        # Korean README
-├── README_EN.md                     # This document: English README
-├── STARTUP_SECURITY_GUIDE_KR.md     # Phase 1: Korean guide & checklist
-├── STARTUP_SECURITY_GUIDE_EN.md     # Phase 1: English guide (with jurisdiction comparison)
-├── LLM_CISO_PROMPT_KR.md            # Phase 2: Korean CISO prompt system
-├── LLM_CISO_PROMPT_EN.md            # Phase 2: English CISO prompt system (cross-jurisdiction)
-├── LLM_CISO_DASHBOARD.md            # Phase 3: Dashboard design (Korean)
-├── LLM_CISO_DASHBOARD_EN.md         # Phase 3: Dashboard design (English)
-└── llms.txt                         # LLM-friendly index
+├── README.md / README_EN.md
+├── ROADMAP.md / ROADMAP_EN.md       # Phase 3+ roadmap (SKIL→MCP→correction→bots)
+├── STARTUP_SECURITY_GUIDE_KR/EN.md  # Phase 1
+├── LLM_CISO_PROMPT_KR/EN.md         # Phase 2 (SKIL source)
+├── LLM_CISO_DASHBOARD.md / _EN.md   # Dashboard UI/API design
+├── skil/                            # M0: Security Knowledge & Intelligence Layer
+├── mcp/                             # M1: MCP server (planned)
+├── skills/                          # Cursor + Claude/GPT/Ollama Skills
+├── hooks/                           # M2: pre-commit correction hooks (planned)
+└── llms.txt
 ```
+
+👉 **Full roadmap & feature spec:** [ROADMAP_EN.md](./ROADMAP_EN.md)  
+👉 **SKIL query:** [skil/README.md](./skil/README.md) · `node skil/query.mjs control:aws-iam-mfa`  
+👉 **Multi-LLM Skills:** [skills/README.md](./skills/README.md)
 
 ### Phase 1: STARTUP_SECURITY_GUIDE_EN.md
 
@@ -155,34 +160,39 @@ npm run assess -- --domain cross-jurisdiction \
   --context '{"homeCountry":"us","targetCountry":"kr","stage":"series-a","teamSize":25}'
 ```
 
-### Phase 3: LLM_CISO_DASHBOARD_EN.md
+### Phase 3: SKIL → MCP → Self-Correction → Dashboard & Bots
 
-Web-based CISO dashboard design document. Planned implementation with Next.js + Vercel + TypeScript:
+Extend Phase 2 prompts into **SKIL (Security Knowledge & Intelligence Layer)**, connect executable tools via MCP, have MCP validate/correct/report LLM mistakes, then add Slack/Telegram and team sharing. UI details: [LLM_CISO_DASHBOARD_EN.md](./LLM_CISO_DASHBOARD_EN.md). Full spec: [ROADMAP_EN.md](./ROADMAP_EN.md).
 
-- Security scoreboard (overall score, per-domain scores, risk-tiered issue counts)
-- Automated assessment scheduler (cron-based periodic evaluation, Slack/Email reports)
-- Remediation roadmap tracker (sprint-based security tasks, JIRA/Linear integration)
-- Compliance scorecard (KISA, GDPR, CCPA compliance status visualization)
-- LLM provider selector (Public Claude/GPT/DeepSeek, Local Ollama, Hybrid mode)
+| Milestone | Scope | Status |
+|-----------|-------|--------|
+| **M0 SKIL** | Structure guides/prompts as YAML/JSON; Cursor + multi-LLM Skills. Seed 35 IDs; full guide migration ongoing | 🔄 In progress |
+| **M1 MCP** | SKIL lookup + Gitleaks/Trivy (then Prowler) MVP server | 📋 |
+| **M2 Self-correction** | L1–L4 mistake levels; validate→report→optional fix; pre-commit | 📋 |
+| **M3 Dashboard** | Next.js scoreboard, history, compliance, correction views | 📋 |
+| **M4 Bots & collab** | Slack/Telegram bots, team sharing, RBAC | 📋 |
+| **M5 Production** | Auth, multi-tenancy, audit logs, hybrid LLM defaults | 📋 |
 
 ---
 
 ## Development Roadmap
 
 ```
-Phase 1 (Done)     Phase 2 (Done)      Phase 3 (Planned)    Phase 4 (Planned)
-     |                   |                     |                    |
-     v                   v                     v                    v
-Security Guide     LLM CISO Persona      Web Dashboard        Unified Monitoring
-& Checklist        & Prompt System                             Framework
-                                           |                    |
-                                           +-- CLI MVP          +-- Wazuh/XDR integration
-                                           +-- Web UI           +-- Real-time alerts
-                                           +-- Cron automation  +-- SIEM integration
-                                           +-- Multi-LLM        +-- Team dashboard
+Phase 1 ✅          Phase 2 ✅               Phase 3 🔄                         Phase 4 📋
+Security Guide →    LLM CISO Prompts   →   SKIL → MCP → Correction → Bots  →   Unified Monitoring
+& Checklist         (SKIL source)          + Dashboard UI                       (Wazuh/SIEM)
+                                             │
+                                             ├─ M0: SKIL + Cursor Skills
+                                             ├─ M1: MCP (SKIL · Gitleaks · Trivy)
+                                             ├─ M2: Validate/correct LLM mistakes
+                                             ├─ M3: Web dashboard
+                                             ├─ M4: Slack / Telegram / team share (RBAC)
+                                             └─ M5: Production hardening
 ```
 
-The end goal is a self-hosted dashboard that startups access daily. Not merely a checklist viewer, but an integrated monitoring system where the LLM periodically scans infrastructure, detects anomalies, and prioritizes remediation actions -- functioning as an always-on virtual CISO.
+**Execution order:** (1) SKIL → (2) MCP MVP → (3) Self-correction → (4) Dashboard → (5) Notifications & collab → (6) Phase 4 SIEM.
+
+End state: not a checklist viewer, but **structured knowledge (SKIL) + tool execution (MCP) + correction loops**, shared via bots and dashboard. Details: [ROADMAP_EN.md](./ROADMAP_EN.md).
 
 ---
 
@@ -258,16 +268,21 @@ Curated evaluation of open-source and research projects relevant to AI-assisted 
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| Language | TypeScript (Strict), Node.js 22 | API server, CLI tools |
-| Framework | Next.js 15 (App Router) | Phase 3 dashboard |
+| Knowledge | SKIL (YAML/JSON Schema) | Shared knowledge for MCP & Cursor Skills |
+| Protocol | MCP (Model Context Protocol) | Tool calls, validation, scanning |
+| Language | TypeScript (Strict), Node.js 22 | MCP server, CLI, API |
+| Framework | Next.js 15 (App Router) | Phase 3 dashboard (M3) |
 | Hosting | Vercel | API endpoints and frontend |
-| Database | Vercel Postgres | Assessment history |
+| Database | Vercel Postgres | Assessment & correction history |
 | Cache | Vercel KV (Redis) | Assessment result cache |
-| LLM - Public | Claude (Anthropic), GPT-4o (OpenAI), DeepSeek | High-capability assessments |
-| LLM - Local | Ollama + Llama 3 / Gemma 3 | Air-gapped sensitive data processing |
+| LLM - Public | Claude, GPT-4o, DeepSeek | High-capability assessments (MCP validates) |
+| LLM - Local | Ollama + Llama 3 / Gemma 3 | Air-gapped sensitive data |
+| Security tools | Gitleaks, Trivy, Prowler, Semgrep | MCP scanner backends |
 | Scheduling | Vercel Cron Jobs | Automated periodic assessments |
-| Notifications | Slack Webhook, Resend (Email), Notion API | Assessment result delivery |
-| Auth | NextAuth.js (Google OAuth) | Dashboard user authentication |
+| Notifications | Slack Bot, Telegram Bot, Resend, Notion | M4 alerts |
+| Collaboration | Team sharing + RBAC, JIRA/Linear (later) | M4–M5 |
+| Auth | NextAuth.js (Google OAuth) | Dashboard authentication |
+| SIEM (Phase 4) | Wazuh | Unified monitoring |
 
 ---
 
@@ -276,9 +291,11 @@ Curated evaluation of open-source and research projects relevant to AI-assisted 
 This project is open-source and welcomes contributions:
 
 - **Checklist enhancements:** Additional security items or emerging threat coverage
-- **Prompt improvements:** Prompt engineering to improve LLM assessment quality
-- **Jurisdiction coverage:** Adding more countries to the cross-jurisdictional compliance module (Japan's APPI, Singapore's PDPA, China's PIPL, etc.)
-- **Dashboard development:** Phase 3 web dashboard implementation
+- **SKIL structuring:** Convert guides/prompts into YAML/JSON controls and policies
+- **MCP tools:** Gitleaks/Trivy/Prowler integration and self-correction validators
+- **Prompt & Skill improvements:** LLM quality and Cursor Skill depth
+- **Jurisdiction coverage:** More countries in the cross-jurisdictional module (APPI, PDPA, PIPL, etc.)
+- **Dashboard & bots:** Web UI, Slack/Telegram, team sharing (RBAC)
 - **Reference additions:** Similar projects and relevant resources
 
 Contribute via GitHub Issues or Pull Requests. All contributions follow the CC BY-NC-SA 4.0 license.

@@ -1,0 +1,15 @@
+{
+  "id": "domain:incident",
+  "name": "Incident Response",
+  "playbookFiles": ["playbooks/incident.json"],
+  "assessmentHints": [
+    "Match trigger to playbook ID",
+    "Include Korea reporting deadlines for personal data breach"
+  ],
+  "primaryPlaybooks": [
+    "playbook:phishing-bec",
+    "playbook:ransomware",
+    "playbook:personal-data-breach",
+    "playbook:offboarding"
+  ]
+}

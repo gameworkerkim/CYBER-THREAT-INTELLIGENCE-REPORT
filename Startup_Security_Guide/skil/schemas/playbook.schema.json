@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/skil/schemas/playbook.schema.json",
+  "title": "SKIL Playbook",
+  "type": "object",
+  "required": ["id", "title", "trigger", "steps"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^playbook:[a-z0-9-]+$" },
+    "title": { "type": "string" },
+    "trigger": { "type": "string" },
+    "severity": { "type": "string", "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"] },
+    "framework": { "type": "string" },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["order", "action"],
+        "properties": {
+          "order": { "type": "integer" },
+          "phase": { "type": "string" },
+          "action": { "type": "string" },
+          "sla": { "type": "string" }
+        }
+      }
+    },
+    "koreaReporting": { "type": "array", "items": { "type": "string" } },
+    "relatedPolicies": { "type": "array", "items": { "type": "string" } },
+    "source": { "type": "string" }
+  }
+}

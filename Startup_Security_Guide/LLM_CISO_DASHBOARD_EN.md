@@ -1,17 +1,21 @@
 # LLM CISO Dashboard -- Startup Security Command Center
 
-> Phase 3: Web-based CISO dashboard with cross-jurisdiction compliance visualization (Planned)
+> **Phase 3 M3:** Web dashboard visualizing SKIL · MCP · self-correction results
+> *Full roadmap: [ROADMAP_EN.md](./ROADMAP_EN.md)*
 
-![Phase](https://img.shields.io/badge/Phase-3%20(Dashboard)-orange?style=flat-square)
+![Phase](https://img.shields.io/badge/Phase-3%20(Dashboard%20M3)-orange?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Planned-lightgrey?style=flat-square)
+![Depends](https://img.shields.io/badge/Depends-M0%20SKIL%20%7C%20M1%20MCP-blue?style=flat-square)
 
 ---
 
 ## Overview
 
-The LLM CISO Dashboard builds on the [Phase 1 Guide](./STARTUP_SECURITY_GUIDE_EN.md) and [Phase 2 Prompt System](./LLM_CISO_PROMPT_EN.md) to deliver a self-hosted web application where startups monitor their security posture, track compliance across jurisdictions, and receive automated assessments from the LLM CISO.
+The LLM CISO Dashboard builds on the [Phase 1 Guide](./STARTUP_SECURITY_GUIDE_EN.md) and [Phase 2 Prompt System](./LLM_CISO_PROMPT_EN.md), restructured as **SKIL**, executed and validated via **MCP**, and visualized as a self-hosted web app.
 
-**Core value proposition:** A startup founder or engineering lead opens one dashboard and sees, in real time, whether their company is compliant with GDPR, CCPA, and Korean PIPA -- and what to fix next. No security team required.
+> **Dependency:** Prefer M0 (SKIL) → M1 (MCP) → M2 (self-correction) before M3 (this dashboard). Bots and team sharing are M4.
+
+**Core value proposition:** A founder or engineering lead opens one dashboard and sees, in real time, whether the company is compliant with GDPR, CCPA, and Korean PIPA -- and what to fix next. No security team required.
 
 ---
 
@@ -30,9 +34,9 @@ The LLM CISO Dashboard builds on the [Phase 1 Guide](./STARTUP_SECURITY_GUIDE_EN
 - Regulatory deadline tracker with alerting
 
 ### 3. Automated Assessment Scheduler
-- Weekly/monthly/quarterly automated security assessments
+- Weekly/monthly/quarterly automated security assessments (LLM + MCP tools)
 - Cron-based execution via Vercel Cron Jobs
-- Report delivery: Slack, Email (Resend), Notion
+- Report delivery: Slack Bot, Telegram Bot, Email (Resend), Notion (M4)
 - Historical assessment archive with diff-from-previous
 
 ### 4. Remediation Roadmap Tracker
@@ -47,11 +51,30 @@ The LLM CISO Dashboard builds on the [Phase 1 Guide](./STARTUP_SECURITY_GUIDE_EN
 - Hybrid mode: Sensitive data processed locally, general assessment via public LLM
 - Provider health status and latency monitoring
 
+### 6. Self-Correction Report (M2)
+- Contrast LLM draft findings vs MCP validation
+- Correction history by L1–L4 mistake levels
+- Approve/reject suggested fixes (auto-apply OFF by default)
+
+### 7. Team Sharing & RBAC (M4)
+- Shareable assessment links, issue comments and status
+- Roles: Owner / Security Lead / Member / Viewer
+
+### 8. MCP Scan Summary
+- Recent Gitleaks / Trivy / Prowler results on the scoreboard
+
 ---
 
 ## Tech Stack (Planned)
 
 ```yaml
+Knowledge:
+  SKIL: YAML/JSON controls, policies, playbooks, schemas
+
+Agent:
+  Protocol: MCP
+  Tools: skil_lookup, gitleaks_scan, trivy_scan, prowler_scan, validate_assessment
+
 Frontend:
   Framework: Next.js 15 (App Router)
   Styling: Tailwind CSS + shadcn/ui
@@ -62,7 +85,7 @@ Backend:
   Runtime: Node.js 22 + TypeScript (Strict)
   API: Next.js Route Handlers
   LLM: Anthropic SDK / OpenAI SDK / Ollama REST API
-  PDF Generation: @react-pdf/renderer (assessment reports)
+  MCP Client: dashboard jobs → mcp/ server
 
 Infrastructure:
   Hosting: Vercel (Pro)
@@ -72,10 +95,9 @@ Infrastructure:
   Auth: NextAuth.js (Google OAuth)
 
 Integration:
-  Slack: Assessment result notifications
-  Email: Resend (report delivery)
-  Notion: Assessment report archiving
-  GitHub: Remediation ticket creation
+  Slack Bot / Telegram Bot: assessment & correction alerts (M4)
+  Email: Resend
+  Notion: report archive
 ```
 
 ---
@@ -86,12 +108,16 @@ Integration:
 /dashboard                      -> Security overview (scoreboard)
 /dashboard/assessment            -> Run assessment & view results
 /dashboard/assessment/[id]       -> Detailed assessment report
+/dashboard/corrections           -> Self-correction reports (M2)
 /dashboard/compliance            -> Cross-jurisdiction compliance map
 /dashboard/roadmap               -> Remediation roadmap tracker
+/dashboard/team                  -> Team sharing (M4)
 /dashboard/settings              -> Company profile & preferences
 /dashboard/settings/llm          -> LLM provider configuration
 /dashboard/settings/schedule     -> Automated assessment schedule
+/dashboard/settings/notifications -> Slack / Telegram / Email
 /api/ciso/assess                 -> Assessment API (POST)
+/api/ciso/validate               -> MCP validation API (POST)
 /api/ciso/report/[id]            -> Report API (GET)
 /api/ciso/trend                  -> Trend data API (GET)
 /api/ciso/jurisdiction-map       -> Jurisdiction compliance data (GET)
@@ -251,18 +277,20 @@ Integration:
 
 ## Development Roadmap
 
-| Milestone | Scope | Timeline |
-|-----------|-------|----------|
-| **M1: CLI MVP** | Command-line assessment tool with JSON output; single LLM provider; basic jurisdiction comparison | Week 1 |
-| **M2: Web UI** | Dashboard with scoreboard, manual assessment trigger, basic report view | Week 2-3 |
-| **M3: Automation** | Cron-based scheduled assessments, Slack/Email notifications, history storage, trend charts | Week 3-4 |
-| **M4: Cross-Jurisdiction** | Jurisdiction gap matrix, compliance map visualization, day-one checklist generation | Week 4-5 |
-| **M5: Multi-LLM** | Provider switching (Claude/GPT/DeepSeek/Ollama), hybrid mode, provider health monitoring | Week 5-6 |
-| **M6: Production** | Authentication, multi-tenancy, team dashboard, remediation tracker | Week 6-8 |
+Follow the full Phase 3 sequence in [ROADMAP_EN.md](./ROADMAP_EN.md). Dashboard-centric milestones:
+
+| Milestone | Scope | Prerequisite | Timeline |
+|-----------|-------|--------------|----------|
+| **M0–M2** | SKIL · MCP · Self-correction | — | See ROADMAP |
+| **M3a: MVP UI** | Scoreboard + manual assess (MCP results) | M1 | Week 1–2 |
+| **M3b: History** | History, trends, correction views | M2 | Week 2–3 |
+| **M3c: Automation** | Cron assessments, schedule UI | M3a | Week 3–4 |
+| **M4: Bots** | Slack/Telegram, team share, RBAC | M3b | Week 4–6 |
+| **M5: Production** | Auth, multi-tenancy, audit logs | M4 | Week 6–8 |
 
 ---
 
-## Quick Start (When Phase 3 Begins)
+## Quick Start (When Phase 3 M3 Begins)
 
 ```bash
 # Create project
@@ -273,6 +301,7 @@ npm install @anthropic-ai/sdk openai recharts zustand @tanstack/react-query
 npm install next-auth @vercel/postgres @vercel/kv resend
 npm install @shadcn/ui
 
+# MCP server runs separately from ../mcp
 # Start development
 npm run dev
 ```
@@ -281,10 +310,11 @@ npm run dev
 
 ## Related Documents
 
+- [ROADMAP_EN.md](./ROADMAP_EN.md) -- SKIL → MCP → correction → bots
 - [README_EN.md](./README_EN.md) -- Project overview and value proposition
 - [STARTUP_SECURITY_GUIDE_EN.md](./STARTUP_SECURITY_GUIDE_EN.md) -- Full security guide with jurisdiction comparison
 - [LLM_CISO_PROMPT_EN.md](./LLM_CISO_PROMPT_EN.md) -- LLM CISO persona and prompt system
 
 > Maintained by [Dennis Kim](mailto:gameworker@gmail.com) | [github.com/gameworkerkim](https://github.com/gameworkerkim/)
 >
-> (c) 2026 | LLM CISO Dashboard | Phase 3 (Planned)
+> (c) 2026 | LLM CISO Dashboard | Phase 3 M3 (Planned)

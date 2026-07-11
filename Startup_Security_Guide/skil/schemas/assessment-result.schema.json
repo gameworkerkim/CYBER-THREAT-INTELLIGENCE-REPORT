@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/skil/schemas/assessment-result.schema.json",
+  "title": "SKIL Assessment Result",
+  "type": "object",
+  "required": ["companyName", "assessmentDate", "overallScore", "overallGrade", "findings", "summary"],
+  "properties": {
+    "companyName": { "type": "string" },
+    "assessmentDate": { "type": "string", "format": "date-time" },
+    "overallScore": { "type": "number", "minimum": 0, "maximum": 100 },
+    "overallGrade": { "type": "string", "enum": ["A", "B", "C", "D", "F"] },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "finding.schema.json" }
+    },
+    "compliantItems": { "type": "array", "items": { "type": "string" } },
+    "roadmap": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "priority": { "type": "integer" },
+          "timeframe": { "type": "string", "enum": ["immediate", "short-term", "mid-term", "long-term"] },
+          "action": { "type": "string" },
+          "effort": { "type": "string", "enum": ["low", "medium", "high"] },
+          "domain": { "type": "string" },
+          "skilRefs": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "summary": { "type": "string" },
+    "corrections": {
+      "type": "array",
+      "description": "Filled by MCP self-correction (M2)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "level": { "type": "string", "enum": ["L1", "L2", "L3", "L4"] },
+          "issue": { "type": "string" },
+          "suggestion": { "type": "string" },
+          "skilRef": { "type": "string" }
+        }
+      }
+    }
+  }
+}

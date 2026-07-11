@@ -40,10 +40,11 @@
 
 > 🆕 **2026-07-08 公開**
 
-### KakaoTalk ソースコード闇市売却主張の分析
+### 確定：Kakao Style ZigZag ハッキング
 
 **CTI-2026-0708-KAKAO** · 🔴 HIGH · TLP:GREEN
 
+ダークウェブで「KakaoTalk ソースコード売却」として流通していた主張が、**Kakao Style ZigZag への侵害として確定**。
 **📄 レポート:** [🇰🇷 KR](CTI-2026-0708-KAKAO_KR.md) · [🇬🇧 EN](CTI-2026-0708-KAKAO_EN.md)
 
 ---
@@ -107,7 +108,7 @@ Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposur
 | 日付 | ID / タイトル | 深刻度 | 言語 |
 | --- | --- | --- | --- |
 | 2026-07-11 | [`CTI-2026-0711-SWIFTVIBE`](CTI-2026-0711-SWIFTVIBE_KR.md) — 72-hour AWS cloud compromise — agentic AI attack SWIFTVIBE | 🔴 HIGH | [KR](CTI-2026-0711-SWIFTVIBE_KR.md) · [EN](CTI-2026-0711-SWIFTVIBE_EN.md) |
-| 2026-07-08 | [`CTI-2026-0708-KAKAO`](CTI-2026-0708-KAKAO_KR.md) — KakaoTalk source-code dark-web sale claim analysis | 🔴 HIGH | [KR](CTI-2026-0708-KAKAO_KR.md) · [EN](CTI-2026-0708-KAKAO_EN.md) · [PDF](CTI-2026-0708-KAKAO_KR.pdf) |
+| 2026-07-08 | [`CTI-2026-0708-KAKAO`](CTI-2026-0708-KAKAO_KR.md) — Confirmed: Kakao Style ZigZag hack | 🔴 HIGH | [KR](CTI-2026-0708-KAKAO_KR.md) · [EN](CTI-2026-0708-KAKAO_EN.md) · [PDF](CTI-2026-0708-KAKAO_KR.pdf) |
 | 2026-07-05 | [`CTI-2026-0705-WEEKLY`](CTI-2026-0705-WEEKLY_EN.md) — Weekly CTI briefing (EN) | 🟠 MEDIUM | [EN](CTI-2026-0705-WEEKLY_EN.md) |
 | 2026-07-05 | [`CTI-2026-0705-KRWEEKLY`](CTI-2026-0705-KRWEEKLY_KR.md) — Korea cyber threat weekly briefing | 🟠 MEDIUM | [KR](CTI-2026-0705-KRWEEKLY_KR.md) |
 | 2026-07-04 | [`CTI-2026-0704-SCATTEREDSPIDER`](CTI-2026-0704-SCATTEREDSPIDER_KR.md) — Scattered Spider threat analysis | 🔴 HIGH | [KR](CTI-2026-0704-SCATTEREDSPIDER_KR.md) · [EN](CTI-2026-0704-SCATTEREDSPIDER_EN.md) |

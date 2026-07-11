@@ -1,41 +1,53 @@
 # Startup Security Guide & LLM CISO Persona
 
-> Startup security guide, compliance checklist, and LLM-based virtual CISO persona. Dual-language (KR / EN) with specialized cross-jurisdiction compliance modules for GDPR, CCPA, and Korean PIPA.
+> Startup security guide, compliance checklist, and LLM-based virtual CISO. Evolution: SKIL → MCP → self-correction → Slack/Telegram collaboration. Dual-language (KR / EN).
 
-## English Documents (Korea Market Entry Positioning)
+## Roadmap (canonical)
 
-- [README_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/README_EN.md): Project overview. Problem awareness (Tving, CU, FastCampus incidents). Core hypothesis: LLM as first CISO for startups. Positioned for foreign startups entering Korea. Similar projects evaluation (Awesome LLM CISO). Tech stack overview.
-- [STARTUP_SECURITY_GUIDE_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/STARTUP_SECURITY_GUIDE_EN.md): Full security guide with GDPR vs. CCPA vs. PIPA jurisdiction comparison matrix. Stage-gated checklist (29 items). Cloud security (AWS/GCP/Azure/Vercel). Google Workspace security. DRM & document security. KISA compliance gap analysis. Incident response with Korea deadlines.
-- [LLM_CISO_PROMPT_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_PROMPT_EN.md): Virtual CISO persona with cross-jurisdiction compliance modules. 25-dimension gap analysis prompt. Domain assessment prompts (cloud, workspace, DRM, GDPR, quick scan). Ollama Modelfile for local CISO. Public LLM integration code (Claude/GPT/DeepSeek). TypeScript/Node.js API snippets. Usage scenarios for US/EU startups entering Korea.
-- [LLM_CISO_DASHBOARD_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_DASHBOARD_EN.md): Dashboard design (Phase 3). Cross-jurisdiction compliance map UI. Component tree. API specifications. 8-week development roadmap.
+- [ROADMAP.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/ROADMAP.md): Phase 3+ roadmap — SKIL, MCP, self-correction, bots.
+- [ROADMAP_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/ROADMAP_EN.md): English roadmap summary.
+
+## SKIL & Skills (M0)
+
+- [skil/](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide/skil): Structured controls/policies/playbooks. Query: `node query.mjs control:aws-iam-mfa`
+- [skills/](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide/skills): Cursor `SKILL.md` + portable `SYSTEM_PROMPT.md` for Claude/ChatGPT/Ollama
+- [skills/README.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/skills/README.md): Multi-LLM usage guide
+
+## English Documents
+
+- [README_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/README_EN.md): Project overview. Tving/CU/FastCampus motivation. SKIL→MCP→correction→bots roadmap. Tech stack.
+- [STARTUP_SECURITY_GUIDE_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/STARTUP_SECURITY_GUIDE_EN.md): Full security guide. GDPR vs CCPA vs PIPA. Stage-gated checklist. Cloud/GWS/DRM/KISA/IR. SKIL Controls/Playbooks source.
+- [LLM_CISO_PROMPT_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_PROMPT_EN.md): Virtual CISO persona. Domain prompts. Ollama Modelfile. TS snippets. SKIL source for personas and findings schema.
+- [LLM_CISO_DASHBOARD_EN.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_DASHBOARD_EN.md): Dashboard (Phase 3 M3). Depends on M0 SKIL + M1 MCP. Correction views, bots/RBAC (M4).
 
 ## Korean Documents (한국어)
 
-- [README.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/README.md): 프로젝트 개요. 문제의식 (티빙, CU, 패스트캠퍼스 사례). LLM CISO 가설. Awesome LLM CISO 유사 프로젝트 평가.
-- [STARTUP_SECURITY_GUIDE_KR.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/STARTUP_SECURITY_GUIDE_KR.md): 스타트업 정보보호 체계 구축 가이드. 29개 단계별 체크리스트. 클라우드/GWS/DRM/KISA 법규/사고대응.
-- [LLM_CISO_PROMPT_KR.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_PROMPT_KR.md): 한국어 CISO 페르소나 및 프롬프트 시스템. Ollama Modelfile. TS/Node.js 통합 코드.
-- [LLM_CISO_DASHBOARD.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_DASHBOARD.md): 대시보드 기획 (Phase 3). Next.js + Vercel 아키텍처.
+- [README.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/README.md): 프로젝트 개요. SKIL→MCP→자기교정→봇 로드맵.
+- [STARTUP_SECURITY_GUIDE_KR.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/STARTUP_SECURITY_GUIDE_KR.md): 스타트업 정보보호 가이드. SKIL Controls/Playbooks 원천.
+- [LLM_CISO_PROMPT_KR.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_PROMPT_KR.md): CISO 페르소나·프롬프트. SKIL 원천.
+- [LLM_CISO_DASHBOARD.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/LLM_CISO_DASHBOARD.md): 대시보드 기획 (M3). MCP 검증 API, 교정·팀 공유.
 
 ## Key Topics
 
-- Cross-Jurisdiction Compliance: GDPR vs. CCPA vs. PIPA gap detection via LLM prompts
-- Cloud Security: AWS / GCP / Azure / Vercel (IAM, Encryption, CSPM, CI/CD)
-- Google Workspace Security: Gmail / Drive / Docs / Admin Console (2FA, DLP, IRM)
-- DRM & Document Security: Classification, IRM, Source Code Protection, Offboarding
-- KISA Compliance: PIPA Article 29 (6 mandatory measures), encryption standards, access logs
-- Incident Response: NIST SP 800-61 with Korea-specific reporting deadlines
+- SKIL: structured controls, policies, playbooks, findings schema for MCP/Skills
+- MCP: skil_lookup, gitleaks, trivy, prowler; validate_assessment self-correction
+- Mistake levels L1–L4: hallucination, policy, secrets/commits, compliance
+- Cross-Jurisdiction: GDPR vs CCPA vs PIPA
+- Cloud / Google Workspace / DRM / KISA / Incident Response
+- Collaboration: Slack Bot, Telegram Bot, team sharing, RBAC
 
 ## Tech Stack
 
-- TypeScript (Strict) + Node.js 22 + Vercel
-- Next.js 15 (Dashboard, Phase 3)
-- Public LLM: Claude (Anthropic), GPT-4o (OpenAI), DeepSeek
-- Local LLM: Ollama (Llama 3 / Gemma 3 / EXAONE 3.5)
-- Auth: NextAuth.js (Google OAuth)
-- Notifications: Slack Webhook, Resend (Email), Notion API
+- SKIL (YAML/JSON) + MCP + TypeScript / Node.js 22
+- Next.js 15 dashboard (M3); Vercel; NextAuth
+- Public LLM: Claude, GPT-4o, DeepSeek; Local: Ollama
+- Scanners: Gitleaks, Trivy, Prowler, Semgrep
+- Notifications: Slack Bot, Telegram Bot, Resend
+- Phase 4: Wazuh SIEM via MCP
 
 ## About
 
 - Author: Dennis Kim (김호광), gameworker@gmail.com, https://github.com/gameworkerkim
 - Repository: CYBER-THREAT-INTELLIGENCE-REPORT
 - License: CC BY-NC-SA 4.0, TLP:GREEN
+- Updated: 2026-07-11

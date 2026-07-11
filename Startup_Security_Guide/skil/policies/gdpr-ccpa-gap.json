@@ -1,0 +1,37 @@
+{
+  "version": "0.1.0",
+  "jurisdiction": "GLOBAL",
+  "source": "STARTUP_SECURITY_GUIDE_EN.md cross-jurisdiction; STARTUP_SECURITY_GUIDE_KR.md §6.6",
+  "policies": [
+    {
+      "id": "policy:gap-gdpr-to-pipa-cpo",
+      "title": "GDPR DPO ≠ 한국 CPO 자동충족",
+      "jurisdiction": "KR",
+      "law": "개인정보보호법 vs GDPR",
+      "article": "§31 vs Art.37–39",
+      "summary": "EU에서 DPO를 두었더라도 한국 사업에 CPO 지정·처리방침 공개 의무가 별도로 충족되지 않을 수 있다.",
+      "obligations": [
+        "한국 CPO 지정 여부 확인",
+        "한국어 처리방침 공개",
+        "안전성 확보조치 고시 기술 기준 점검"
+      ],
+      "penalties": "한국 규제 미준수 시 과태료 등",
+      "relatedControls": ["control:pipa-cpo-appoint", "control:pipa-privacy-policy"],
+      "crossJurisdictionNotes": "외국 스타트업 한국 진출 시 최다 누락 항목.",
+      "source": "STARTUP_SECURITY_GUIDE_EN.md; ROADMAP M0"
+    },
+    {
+      "id": "policy:gap-ccpa-to-pipa-encryption",
+      "title": "CCPA 준수가 한국 암호화 기준을 대체하지 않음",
+      "jurisdiction": "KR",
+      "law": "PIPA / 안전성 확보조치 vs CCPA",
+      "article": "§29 / 고시 vs CCPA",
+      "summary": "CCPA는 합리적인 보안을 요구하지만, 한국의 암호화·접속기록 고시 수준의 구체 기준을 자동으로 충족하지 않는다.",
+      "obligations": ["KISA 암호화 기준표 대조", "접속기록 보관·점검 증적"],
+      "penalties": "한국 안전조치 위반 리스크",
+      "relatedControls": ["control:pipa-encryption", "control:kisa-access-logs"],
+      "crossJurisdictionNotes": "US SaaS → KR 진출 시 기술 갭.",
+      "source": "STARTUP_SECURITY_GUIDE_EN.md"
+    }
+  ]
+}

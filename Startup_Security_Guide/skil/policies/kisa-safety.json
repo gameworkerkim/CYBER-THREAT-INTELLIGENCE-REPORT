@@ -1,0 +1,61 @@
+{
+  "version": "0.1.0",
+  "jurisdiction": "KR",
+  "source": "개인정보의 안전성 확보조치 기준 고시; STARTUP_SECURITY_GUIDE_KR.md §6, §9",
+  "policies": [
+    {
+      "id": "policy:kisa-access-control",
+      "title": "접근 권한·접근 통제",
+      "jurisdiction": "KR",
+      "law": "안전성 확보조치 기준",
+      "article": "접근권한 관리 / 접근통제",
+      "summary": "개인정보처리시스템에 대한 접근 권한을 업무에 필요한 최소한으로 부여·변경·말소하고, 접근통제 장치를 설치·운영한다.",
+      "obligations": [
+        "최소권한",
+        "인사이동·퇴사 시 지체 없는 권한 변경·말소",
+        "인증수단 관리(비밀번호·MFA 등)",
+        "침입차단·탐지 등 접근통제"
+      ],
+      "penalties": "안전조치 위반 시 과태료 등",
+      "relatedControls": [
+        "control:aws-iam-mfa",
+        "control:gws-2fa-enforce",
+        "control:drm-offboarding",
+        "control:cloud-sg-ssh-restrict"
+      ],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §6.2"
+    },
+    {
+      "id": "policy:kisa-encryption",
+      "title": "개인정보 암호화",
+      "jurisdiction": "KR",
+      "law": "안전성 확보조치 기준",
+      "article": "개인정보의 암호화",
+      "summary": "고유식별정보, 비밀번호, 바이오정보 등 기준에 해당하는 정보를 저장·전송 시 암호화한다.",
+      "obligations": [
+        "비밀번호 일방향 암호화",
+        "고유식별정보 등 저장 시 암호화",
+        "인터넷 전송 시 암호화(TLS)"
+      ],
+      "penalties": "안전조치 위반 시 과태료 등",
+      "relatedControls": ["control:pipa-encryption"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §6.3"
+    },
+    {
+      "id": "policy:kisa-access-logs",
+      "title": "접속기록의 보관 및 점검",
+      "jurisdiction": "KR",
+      "law": "안전성 확보조치 기준",
+      "article": "접속기록의 보관 및 점검",
+      "summary": "개인정보취급자가 개인정보처리시스템에 접속한 기록을 보관·점검한다.",
+      "obligations": [
+        "접속기록 항목 확보(계정, 시각, 처리한 정보 등)",
+        "보관 기간 준수",
+        "정기 점검(정보통신서비스 제공자: 월 1회 등)"
+      ],
+      "penalties": "안전조치 위반 시 과태료 등",
+      "relatedControls": ["control:kisa-access-logs", "control:aws-cloudtrail-all-regions"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §6.2, §9.2"
+    }
+  ]
+}

@@ -1,0 +1,395 @@
+{
+  "version": "0.1.0",
+  "generatedAt": "2026-07-11T04:32:00.799Z",
+  "count": 35,
+  "ids": [
+    {
+      "id": "control:aws-iam-mfa",
+      "kind": "control",
+      "title": "AWS 루트·IAM MFA 활성화",
+      "domain": "cloud",
+      "severity": "CRITICAL",
+      "tags": [
+        "iam",
+        "mfa",
+        "aws"
+      ],
+      "file": "controls/cloud.json"
+    },
+    {
+      "id": "control:aws-s3-public-block",
+      "kind": "control",
+      "title": "S3 버킷 공개 접근 차단",
+      "domain": "cloud",
+      "severity": "CRITICAL",
+      "tags": [
+        "s3",
+        "storage",
+        "misconfig"
+      ],
+      "file": "controls/cloud.json"
+    },
+    {
+      "id": "control:aws-cloudtrail-all-regions",
+      "kind": "control",
+      "title": "CloudTrail 전 리전 활성화",
+      "domain": "cloud",
+      "severity": "HIGH",
+      "tags": [
+        "logging",
+        "aws"
+      ],
+      "file": "controls/cloud.json"
+    },
+    {
+      "id": "control:cloud-sg-ssh-restrict",
+      "kind": "control",
+      "title": "SSH/RDP 인바운드 IP 제한",
+      "domain": "cloud",
+      "severity": "CRITICAL",
+      "tags": [
+        "network",
+        "ssh",
+        "misconfig"
+      ],
+      "file": "controls/cloud.json"
+    },
+    {
+      "id": "control:cicd-secrets-no-hardcode",
+      "kind": "control",
+      "title": "CI/CD 시크릿 하드코딩 금지",
+      "domain": "cloud",
+      "severity": "CRITICAL",
+      "tags": [
+        "cicd",
+        "secrets",
+        "gitleaks"
+      ],
+      "file": "controls/cloud.json"
+    },
+    {
+      "id": "control:gcp-mfa-enforce",
+      "kind": "control",
+      "title": "GCP Cloud Identity MFA 강제",
+      "domain": "cloud",
+      "severity": "CRITICAL",
+      "tags": [
+        "gcp",
+        "mfa"
+      ],
+      "file": "controls/cloud.json"
+    },
+    {
+      "id": "control:vercel-security-headers",
+      "kind": "control",
+      "title": "Vercel 보안 헤더 설정",
+      "domain": "cloud",
+      "severity": "MEDIUM",
+      "tags": [
+        "vercel",
+        "headers"
+      ],
+      "file": "controls/cloud.json"
+    },
+    {
+      "id": "control:azure-root-mfa",
+      "kind": "control",
+      "title": "Azure 루트·관리자 MFA",
+      "domain": "cloud",
+      "severity": "CRITICAL",
+      "tags": [
+        "azure",
+        "mfa"
+      ],
+      "file": "controls/cloud.json"
+    },
+    {
+      "id": "control:drm-classification",
+      "kind": "control",
+      "title": "문서 등급 분류 체계",
+      "domain": "drm",
+      "severity": "HIGH",
+      "tags": [
+        "classification",
+        "drm"
+      ],
+      "file": "controls/drm.json"
+    },
+    {
+      "id": "control:drm-drive-irm",
+      "kind": "control",
+      "title": "Google Drive IRM 적용",
+      "domain": "drm",
+      "severity": "MEDIUM",
+      "tags": [
+        "irm",
+        "drive"
+      ],
+      "file": "controls/drm.json"
+    },
+    {
+      "id": "control:drm-source-protect",
+      "kind": "control",
+      "title": "소스코드 저장소 보호",
+      "domain": "drm",
+      "severity": "CRITICAL",
+      "tags": [
+        "github",
+        "source"
+      ],
+      "file": "controls/drm.json"
+    },
+    {
+      "id": "control:drm-offboarding",
+      "kind": "control",
+      "title": "퇴사자 SaaS 계정 회수",
+      "domain": "drm",
+      "severity": "HIGH",
+      "tags": [
+        "offboarding",
+        "lifecycle"
+      ],
+      "file": "controls/drm.json"
+    },
+    {
+      "id": "control:pipa-cpo-appoint",
+      "kind": "control",
+      "title": "CPO(개인정보 보호책임자) 지정",
+      "domain": "compliance",
+      "severity": "CRITICAL",
+      "tags": [
+        "cpo",
+        "pipa"
+      ],
+      "file": "controls/stage-gate.json"
+    },
+    {
+      "id": "control:pipa-privacy-policy",
+      "kind": "control",
+      "title": "개인정보 처리방침 공개",
+      "domain": "compliance",
+      "severity": "CRITICAL",
+      "tags": [
+        "privacy-policy",
+        "pipa"
+      ],
+      "file": "controls/stage-gate.json"
+    },
+    {
+      "id": "control:pipa-encryption",
+      "kind": "control",
+      "title": "개인정보 저장·전송 암호화",
+      "domain": "compliance",
+      "severity": "CRITICAL",
+      "tags": [
+        "encryption",
+        "pipa"
+      ],
+      "file": "controls/stage-gate.json"
+    },
+    {
+      "id": "control:kisa-access-logs",
+      "kind": "control",
+      "title": "개인정보 접속기록 보관·점검",
+      "domain": "compliance",
+      "severity": "HIGH",
+      "tags": [
+        "logging",
+        "kisa"
+      ],
+      "file": "controls/stage-gate.json"
+    },
+    {
+      "id": "control:stage-gate-prod",
+      "kind": "control",
+      "title": "프로덕션 런칭 Stage-Gate",
+      "domain": "compliance",
+      "severity": "HIGH",
+      "tags": [
+        "stage-gate",
+        "release"
+      ],
+      "file": "controls/stage-gate.json"
+    },
+    {
+      "id": "control:gws-2fa-enforce",
+      "kind": "control",
+      "title": "Google Workspace 2단계 인증 강제",
+      "domain": "workspace",
+      "severity": "CRITICAL",
+      "tags": [
+        "gws",
+        "mfa",
+        "2sv"
+      ],
+      "file": "controls/workspace.json"
+    },
+    {
+      "id": "control:gws-admin-limit",
+      "kind": "control",
+      "title": "슈퍼 관리자 계정 최소화",
+      "domain": "workspace",
+      "severity": "HIGH",
+      "tags": [
+        "gws",
+        "admin"
+      ],
+      "file": "controls/workspace.json"
+    },
+    {
+      "id": "control:gws-external-sharing",
+      "kind": "control",
+      "title": "Drive 외부 공유 정책 제한",
+      "domain": "workspace",
+      "severity": "HIGH",
+      "tags": [
+        "gws",
+        "drive",
+        "dlp"
+      ],
+      "file": "controls/workspace.json"
+    },
+    {
+      "id": "control:gws-email-auth",
+      "kind": "control",
+      "title": "SPF·DKIM·DMARC 설정",
+      "domain": "workspace",
+      "severity": "HIGH",
+      "tags": [
+        "email",
+        "bec",
+        "dns"
+      ],
+      "file": "controls/workspace.json"
+    },
+    {
+      "id": "control:gws-third-party-oauth",
+      "kind": "control",
+      "title": "제3자 앱 OAuth 권한 감사",
+      "domain": "workspace",
+      "severity": "MEDIUM",
+      "tags": [
+        "oauth",
+        "saas"
+      ],
+      "file": "controls/workspace.json"
+    },
+    {
+      "id": "policy:gap-gdpr-to-pipa-cpo",
+      "kind": "policy",
+      "title": "GDPR DPO ≠ 한국 CPO 자동충족",
+      "domain": null,
+      "severity": null,
+      "tags": [],
+      "file": "policies/gdpr-ccpa-gap.json"
+    },
+    {
+      "id": "policy:gap-ccpa-to-pipa-encryption",
+      "kind": "policy",
+      "title": "CCPA 준수가 한국 암호화 기준을 대체하지 않음",
+      "domain": null,
+      "severity": null,
+      "tags": [],
+      "file": "policies/gdpr-ccpa-gap.json"
+    },
+    {
+      "id": "policy:kisa-access-control",
+      "kind": "policy",
+      "title": "접근 권한·접근 통제",
+      "domain": null,
+      "severity": null,
+      "tags": [],
+      "file": "policies/kisa-safety.json"
+    },
+    {
+      "id": "policy:kisa-encryption",
+      "kind": "policy",
+      "title": "개인정보 암호화",
+      "domain": null,
+      "severity": null,
+      "tags": [],
+      "file": "policies/kisa-safety.json"
+    },
+    {
+      "id": "policy:kisa-access-logs",
+      "kind": "policy",
+      "title": "접속기록의 보관 및 점검",
+      "domain": null,
+      "severity": null,
+      "tags": [],
+      "file": "policies/kisa-safety.json"
+    },
+    {
+      "id": "policy:pipa-29",
+      "kind": "policy",
+      "title": "개인정보 안전조치의무",
+      "domain": null,
+      "severity": null,
+      "tags": [],
+      "file": "policies/pipa.json"
+    },
+    {
+      "id": "policy:pipa-30",
+      "kind": "policy",
+      "title": "개인정보 처리방침의 수립·공개",
+      "domain": null,
+      "severity": null,
+      "tags": [],
+      "file": "policies/pipa.json"
+    },
+    {
+      "id": "policy:pipa-31",
+      "kind": "policy",
+      "title": "개인정보 보호책임자 지정",
+      "domain": null,
+      "severity": null,
+      "tags": [],
+      "file": "policies/pipa.json"
+    },
+    {
+      "id": "policy:pipa-21",
+      "kind": "policy",
+      "title": "개인정보 파기",
+      "domain": null,
+      "severity": null,
+      "tags": [],
+      "file": "policies/pipa.json"
+    },
+    {
+      "id": "playbook:phishing-bec",
+      "kind": "playbook",
+      "title": "피싱·BEC 초기 대응",
+      "domain": null,
+      "severity": "HIGH",
+      "tags": [],
+      "file": "playbooks/incident.json"
+    },
+    {
+      "id": "playbook:ransomware",
+      "kind": "playbook",
+      "title": "랜섬웨어 대응",
+      "domain": null,
+      "severity": "CRITICAL",
+      "tags": [],
+      "file": "playbooks/incident.json"
+    },
+    {
+      "id": "playbook:personal-data-breach",
+      "kind": "playbook",
+      "title": "개인정보 유출 사고 대응",
+      "domain": null,
+      "severity": "CRITICAL",
+      "tags": [],
+      "file": "playbooks/incident.json"
+    },
+    {
+      "id": "playbook:offboarding",
+      "kind": "playbook",
+      "title": "퇴사자 계정·권한 회수",
+      "domain": null,
+      "severity": "HIGH",
+      "tags": [],
+      "file": "playbooks/incident.json"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/skil/schemas/policy.schema.json",
+  "title": "SKIL Policy",
+  "type": "object",
+  "required": ["id", "title", "jurisdiction", "summary"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^policy:[a-z0-9-]+$" },
+    "title": { "type": "string" },
+    "jurisdiction": {
+      "type": "string",
+      "enum": ["KR", "EU", "US", "CN", "JP", "SG", "GLOBAL"]
+    },
+    "law": { "type": "string" },
+    "article": { "type": "string" },
+    "summary": { "type": "string" },
+    "obligations": { "type": "array", "items": { "type": "string" } },
+    "penalties": { "type": "string" },
+    "relatedControls": { "type": "array", "items": { "type": "string" } },
+    "crossJurisdictionNotes": { "type": "string" },
+    "source": { "type": "string" }
+  }
+}

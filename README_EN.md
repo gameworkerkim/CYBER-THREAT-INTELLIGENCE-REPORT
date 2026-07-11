@@ -45,11 +45,11 @@ An agentic-AI cloud intrusion that compressed known techniques into superhuman s
 
 > 🆕 **Published 2026-07-08**
 
-### KakaoTalk Source-Code Dark-Web Sale Claim — Misattribution & Blast Radius
+### Confirmed: Kakao Style ZigZag Hack
 
 **CTI-2026-0708-KAKAO** · 🔴 HIGH · TLP:GREEN
 
-Credibility assessment of a dark-web sale claim, target misattribution (ZigZag repo names), and blast-radius comparison vs. Tving/CU-style data breaches.
+A dark-web claim marketed as a "KakaoTalk source-code sale" has been **confirmed as a Kakao Style ZigZag compromise**. Analyzes target misattribution and the blast radius of source-code/infrastructure exposure.
 
 **📄 Report:** [🇰🇷 KR](CTI-2026-0708-KAKAO_KR.md) · [🇬🇧 EN](CTI-2026-0708-KAKAO_EN.md) · [📕 PDF](CTI-2026-0708-KAKAO_KR.pdf)
 
@@ -87,10 +87,12 @@ As shown by the Tving, CU, and FastCampus breaches, a single misconfiguration ca
 
 👉 [**Explore the Startup Security Guide →**](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
 
-| Language | Guide | LLM CISO Prompts | Dashboard |
-|----------|-------|-----------------|-----------|
-| 한국어 | [Guide](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_KR.md) | [Prompts](Startup_Security_Guide/LLM_CISO_PROMPT_KR.md) | [Dashboard](Startup_Security_Guide/LLM_CISO_DASHBOARD.md) |
-| English | [Guide](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_EN.md) | [Prompts](Startup_Security_Guide/LLM_CISO_PROMPT_EN.md) | [Dashboard](Startup_Security_Guide/LLM_CISO_DASHBOARD_EN.md) |
+| Language | Guide | LLM CISO Prompts | Dashboard | Roadmap |
+|----------|-------|------------------|-----------|---------|
+| 한국어 | [Guide](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_KR.md) | [Prompts](Startup_Security_Guide/LLM_CISO_PROMPT_KR.md) | [Dashboard](Startup_Security_Guide/LLM_CISO_DASHBOARD.md) | [ROADMAP](Startup_Security_Guide/ROADMAP.md) |
+| English | [Guide](Startup_Security_Guide/STARTUP_SECURITY_GUIDE_EN.md) | [Prompts](Startup_Security_Guide/LLM_CISO_PROMPT_EN.md) | [Dashboard](Startup_Security_Guide/LLM_CISO_DASHBOARD_EN.md) | [ROADMAP](Startup_Security_Guide/ROADMAP_EN.md) |
+
+> Phase 3 direction: **SKIL → MCP → self-correction → Slack/Telegram & team sharing**. See [ROADMAP_EN.md](Startup_Security_Guide/ROADMAP_EN.md).
 
 
 ---
@@ -121,7 +123,7 @@ Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposur
 | Date | ID / Title | Severity | Languages |
 | --- | --- | --- | --- |
 | 2026-07-11 | [`CTI-2026-0711-SWIFTVIBE`](CTI-2026-0711-SWIFTVIBE_KR.md) — 72-hour AWS cloud compromise — agentic AI attack SWIFTVIBE | 🔴 HIGH | [KR](CTI-2026-0711-SWIFTVIBE_KR.md) · [EN](CTI-2026-0711-SWIFTVIBE_EN.md) |
-| 2026-07-08 | [`CTI-2026-0708-KAKAO`](CTI-2026-0708-KAKAO_KR.md) — KakaoTalk source-code dark-web sale claim analysis | 🔴 HIGH | [KR](CTI-2026-0708-KAKAO_KR.md) · [EN](CTI-2026-0708-KAKAO_EN.md) · [PDF](CTI-2026-0708-KAKAO_KR.pdf) |
+| 2026-07-08 | [`CTI-2026-0708-KAKAO`](CTI-2026-0708-KAKAO_KR.md) — Confirmed: Kakao Style ZigZag hack | 🔴 HIGH | [KR](CTI-2026-0708-KAKAO_KR.md) · [EN](CTI-2026-0708-KAKAO_EN.md) · [PDF](CTI-2026-0708-KAKAO_KR.pdf) |
 | 2026-07-05 | [`CTI-2026-0705-WEEKLY`](CTI-2026-0705-WEEKLY_EN.md) — Weekly CTI briefing (EN) | 🟠 MEDIUM | [EN](CTI-2026-0705-WEEKLY_EN.md) |
 | 2026-07-05 | [`CTI-2026-0705-KRWEEKLY`](CTI-2026-0705-KRWEEKLY_KR.md) — Korea cyber threat weekly briefing | 🟠 MEDIUM | [KR](CTI-2026-0705-KRWEEKLY_KR.md) |
 | 2026-07-04 | [`CTI-2026-0704-SCATTEREDSPIDER`](CTI-2026-0704-SCATTEREDSPIDER_KR.md) — Scattered Spider threat analysis | 🔴 HIGH | [KR](CTI-2026-0704-SCATTEREDSPIDER_KR.md) · [EN](CTI-2026-0704-SCATTEREDSPIDER_EN.md) |

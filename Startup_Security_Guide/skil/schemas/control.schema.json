@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/skil/schemas/control.schema.json",
+  "title": "SKIL Control",
+  "type": "object",
+  "required": ["id", "title", "domain", "severity", "remediation"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^control:[a-z0-9-]+$" },
+    "title": { "type": "string" },
+    "domain": {
+      "type": "string",
+      "enum": ["cloud", "workspace", "drm", "compliance", "incident", "general"]
+    },
+    "provider": {
+      "type": "string",
+      "enum": ["aws", "gcp", "azure", "vercel", "google-workspace", "github", "common", "n/a"]
+    },
+    "severity": { "type": "string", "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"] },
+    "description": { "type": "string" },
+    "check": { "type": "string" },
+    "remediation": { "type": "string" },
+    "effort": { "type": "string", "enum": ["low", "medium", "high"] },
+    "legalBasis": { "type": "array", "items": { "type": "string" } },
+    "nistCsf": { "type": "array", "items": { "type": "string" } },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "source": { "type": "string" }
+  }
+}

@@ -1,0 +1,24 @@
+# LLM CISO Skills (multi-LLM)
+
+> Cursor Agent Skills + portable SYSTEM_PROMPT.md for Claude, ChatGPT, Gemini, Ollama. Backed by SKIL JSON.
+
+## Skills
+
+- [ciso-core/SKILL.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/skills/ciso-core/SKILL.md) — general Virtual CISO
+- [ciso-cloud/](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/skills/ciso-cloud/SKILL.md) — AWS/GCP/Azure/Vercel
+- [ciso-workspace/](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/skills/ciso-workspace/SKILL.md) — Google Workspace
+- [ciso-drm/](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/skills/ciso-drm/SKILL.md) — DRM, source, offboarding
+- [ciso-kisa/](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/skills/ciso-kisa/SKILL.md) — PIPA/KISA + GDPR/CCPA gaps
+- [ciso-incident/](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/skills/ciso-incident/SKILL.md) — IR playbooks
+
+Each skill has `SYSTEM_PROMPT.md` for non-Cursor LLMs.
+
+## SKIL
+
+- Query: `Startup_Security_Guide/skil/query.mjs`
+- Example ID: `control:aws-iam-mfa`
+- Mapping: `skil/MAPPING.md`
+
+## Usage
+
+See [skills/README.md](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/Startup_Security_Guide/skills/README.md)

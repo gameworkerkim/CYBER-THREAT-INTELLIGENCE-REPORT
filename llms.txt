@@ -5,7 +5,7 @@
 ## Featured / Latest
 
 - [CTI-2026-0711-SWIFTVIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0711-SWIFTVIBE_EN.md): Agentic AI AWS cloud compromise in 72 hours; known TTPs at superhuman speed/scale. KR/EN.
-- [CTI-2026-0708-KAKAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0708-KAKAO_EN.md): Dark-web KakaoTalk source-code sale claim; misattribution and blast-radius analysis. KR/EN.
+- [CTI-2026-0708-KAKAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0708-KAKAO_EN.md): Confirmed Kakao Style ZigZag hack (initially marketed as KakaoTalk source-code sale). KR/EN.
 - [CTI-2026-0628-DPRK-AI](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0628-DPRK-AI_EN.md): DPRK AI-enabled hacking qualitative shift (Kimsuky/Lazarus/Andariel). KR/EN/JP.
 - [CTI-2026-0611-MIASMA_SPRINGBLIGHT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MIASMA_SPRINGBLIGHT_EN.md): Microsoft supply chain Miasma (Spring Blight) Azure package mass infection. KR/EN. CRITICAL.
 - [CTI-2026-0704-SCATTEREDSPIDER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0704-SCATTEREDSPIDER_EN.md): Scattered Spider threat analysis. KR/EN.
@@ -20,7 +20,7 @@
 ## Reports — 2026 (newest first)
 
 - [CTI-2026-0711-SWIFTVIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0711-SWIFTVIBE_EN.md): Agentic AI AWS cloud compromise in 72 hours; known TTPs at superhuman speed/scale. KR/EN.
-- [CTI-2026-0708-KAKAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0708-KAKAO_EN.md): Dark-web KakaoTalk source-code sale claim; misattribution and blast-radius analysis. KR/EN.
+- [CTI-2026-0708-KAKAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0708-KAKAO_EN.md): Confirmed Kakao Style ZigZag hack (initially marketed as KakaoTalk source-code sale). KR/EN.
 - [CTI-2026-0705-WEEKLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0705-WEEKLY_EN.md): Weekly CTI briefing. EN.
 - [CTI-2026-0705-KRWEEKLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0705-KRWEEKLY_KR.md): Korea cyber threat weekly briefing. KR.
 - [CTI-2026-0704-SCATTEREDSPIDER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0704-SCATTEREDSPIDER_EN.md): Scattered Spider threat analysis. KR/EN.

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/skil/schemas/finding.schema.json",
+  "title": "SKIL Finding",
+  "type": "object",
+  "required": ["id", "severity", "title", "description", "impact", "remediation", "domain"],
+  "properties": {
+    "id": { "type": "string" },
+    "severity": { "type": "string", "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"] },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "impact": { "type": "string" },
+    "remediation": { "type": "string" },
+    "legalBasis": { "type": "string" },
+    "domain": {
+      "type": "string",
+      "enum": ["cloud", "workspace", "drm", "compliance", "incident", "general"]
+    },
+    "skilRefs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Related SKIL IDs e.g. control:aws-iam-mfa, policy:pipa-29"
+    },
+    "effort": { "type": "string", "enum": ["low", "medium", "high"] }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "version": "0.1.0",
+  "domain": "drm",
+  "source": "STARTUP_SECURITY_GUIDE_KR.md §5",
+  "controls": [
+    {
+      "id": "control:drm-classification",
+      "title": "문서 등급 분류 체계",
+      "domain": "drm",
+      "provider": "common",
+      "severity": "HIGH",
+      "description": "공개·내부·비밀·극비 등 등급을 정의하고 저장·공유 규칙을 연결한다.",
+      "check": "문서 분류 정책 문서 존재 여부, Drive 라벨/폴더 구조",
+      "remediation": "4단계 분류표 작성. 비밀 이상은 IRM/외부 공유 금지.",
+      "effort": "medium",
+      "legalBasis": ["policy:pipa-29"],
+      "nistCsf": ["ID.AM-05", "PR.DS-01"],
+      "tags": ["classification", "drm"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §5.1"
+    },
+    {
+      "id": "control:drm-drive-irm",
+      "title": "Google Drive IRM 적용",
+      "domain": "drm",
+      "provider": "google-workspace",
+      "severity": "MEDIUM",
+      "description": "민감 문서에 다운로드·인쇄·복사 제한(IRM)을 적용한다.",
+      "check": "Drive 파일 공유 옵션 → 뷰어 다운로드 비활성 등",
+      "remediation": "비밀 등급 폴더에 IRM 기본 적용. 외부 공유 시 만료일 설정.",
+      "effort": "low",
+      "legalBasis": ["policy:pipa-29"],
+      "nistCsf": ["PR.DS-05"],
+      "tags": ["irm", "drive"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §5.3"
+    },
+    {
+      "id": "control:drm-source-protect",
+      "title": "소스코드 저장소 보호",
+      "domain": "drm",
+      "provider": "github",
+      "severity": "CRITICAL",
+      "description": "private 레포, 브랜치 보호, 시크릿 스캔, 최소 권한으로 소스코드를 보호한다.",
+      "check": "레포 visibility, branch protection, secret scanning, CODEOWNERS",
+      "remediation": "main 보호·PR 리뷰 필수·Secret Scanning·Dependabot. 퇴사자 즉시 제거.",
+      "effort": "medium",
+      "legalBasis": [],
+      "nistCsf": ["PR.AA-05", "PR.DS-01"],
+      "tags": ["github", "source"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §5.5"
+    },
+    {
+      "id": "control:drm-offboarding",
+      "title": "퇴사자 SaaS 계정 회수",
+      "domain": "drm",
+      "provider": "common",
+      "severity": "HIGH",
+      "description": "퇴사 당일 모든 SaaS·클라우드·Git 접근을 회수하는 체크리스트를 운영한다.",
+      "check": "오프보딩 체크리스트·계정 회수 로그 존재 여부",
+      "remediation": "playbook:offboarding 실행. IdP 중심 프로비저닝/디프로비저닝.",
+      "effort": "medium",
+      "legalBasis": ["policy:kisa-access-control"],
+      "nistCsf": ["PR.AA-05"],
+      "tags": ["offboarding", "lifecycle"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §5.6"
+    }
+  ]
+}

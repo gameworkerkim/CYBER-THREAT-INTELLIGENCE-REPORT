@@ -1,0 +1,82 @@
+{
+  "version": "0.1.0",
+  "domain": "workspace",
+  "source": "STARTUP_SECURITY_GUIDE_KR.md §4",
+  "controls": [
+    {
+      "id": "control:gws-2fa-enforce",
+      "title": "Google Workspace 2단계 인증 강제",
+      "domain": "workspace",
+      "provider": "google-workspace",
+      "severity": "CRITICAL",
+      "description": "모든 사용자에 2SV를 강제하고 예외를 최소화한다.",
+      "check": "관리 콘솔 → 보안 → 2단계 인증 → 강제 적용",
+      "remediation": "조직 단위 2SV 강제. 신규 계정부터 적용 후 전 직원 확대.",
+      "effort": "low",
+      "legalBasis": ["policy:pipa-29", "policy:kisa-access-control"],
+      "nistCsf": ["PR.AA-01"],
+      "tags": ["gws", "mfa", "2sv"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §4.1"
+    },
+    {
+      "id": "control:gws-admin-limit",
+      "title": "슈퍼 관리자 계정 최소화",
+      "domain": "workspace",
+      "provider": "google-workspace",
+      "severity": "HIGH",
+      "description": "슈퍼 관리자는 2명 이하로 제한하고 일상 업무용 계정과 분리한다.",
+      "check": "관리 콘솔 → 관리자 역할 할당 목록",
+      "remediation": "역할 기반 위임(그룹스·드라이브 관리자 등). 슈퍼 관리자 일상 사용 금지.",
+      "effort": "low",
+      "legalBasis": ["policy:kisa-access-control"],
+      "nistCsf": ["PR.AA-05"],
+      "tags": ["gws", "admin"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §4.1"
+    },
+    {
+      "id": "control:gws-external-sharing",
+      "title": "Drive 외부 공유 정책 제한",
+      "domain": "workspace",
+      "provider": "google-workspace",
+      "severity": "HIGH",
+      "description": "외부 공유를 제한하고 링크 공유 기본값을 제한적으로 설정한다.",
+      "check": "Drive·Docs 공유 설정 / 외부 공유 감사 로그",
+      "remediation": "외부 공유 승인제 또는 도메인 제한. 분기별 외부 공유 감사.",
+      "effort": "medium",
+      "legalBasis": ["policy:pipa-29"],
+      "nistCsf": ["PR.DS-05"],
+      "tags": ["gws", "drive", "dlp"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §4.1–4.2"
+    },
+    {
+      "id": "control:gws-email-auth",
+      "title": "SPF·DKIM·DMARC 설정",
+      "domain": "workspace",
+      "provider": "google-workspace",
+      "severity": "HIGH",
+      "description": "도메인 이메일 인증으로 스푸핑·BEC를 완화한다.",
+      "check": "DNS TXT: SPF, DKIM, DMARC 레코드",
+      "remediation": "SPF include, DKIM 키 게시, DMARC p=quarantine 이상 권장.",
+      "effort": "medium",
+      "legalBasis": [],
+      "nistCsf": ["PR.AA-01", "DE.CM-01"],
+      "tags": ["email", "bec", "dns"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §4"
+    },
+    {
+      "id": "control:gws-third-party-oauth",
+      "title": "제3자 앱 OAuth 권한 감사",
+      "domain": "workspace",
+      "provider": "google-workspace",
+      "severity": "MEDIUM",
+      "description": "불필요·고위험 제3자 앱 접근을 차단·회수한다.",
+      "check": "관리 콘솔 → 보안 → API 제어 / 앱 액세스 제어",
+      "remediation": "허용 목록 정책. 분기 1회 OAuth 앱 리뷰.",
+      "effort": "medium",
+      "legalBasis": ["policy:pipa-29"],
+      "nistCsf": ["PR.AA-05"],
+      "tags": ["oauth", "saas"],
+      "source": "STARTUP_SECURITY_GUIDE_KR.md §4.2"
+    }
+  ]
+}
