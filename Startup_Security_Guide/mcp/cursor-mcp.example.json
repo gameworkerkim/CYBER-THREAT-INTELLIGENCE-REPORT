@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "llm-ciso": {
+      "command": "node",
+      "args": [
+        "REPLACE_WITH_ABS_PATH/Startup_Security_Guide/mcp/dist/index.js"
+      ],
+      "env": {
+        "SKIL_ROOT": "REPLACE_WITH_ABS_PATH/Startup_Security_Guide/skil"
+      }
+    }
+  }
+}

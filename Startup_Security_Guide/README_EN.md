@@ -118,7 +118,7 @@ Startup_Security_Guide/
 ├── LLM_CISO_PROMPT_KR/EN.md         # Phase 2 (SKIL source)
 ├── LLM_CISO_DASHBOARD.md / _EN.md   # Dashboard UI/API design
 ├── skil/                            # M0: Security Knowledge & Intelligence Layer
-├── mcp/                             # M1: MCP server (planned)
+├── mcp/                             # M1: MCP server (skil_lookup · gitleaks · trivy)
 ├── skills/                          # Cursor + Claude/GPT/Ollama Skills
 ├── hooks/                           # M2: pre-commit correction hooks (planned)
 └── llms.txt
@@ -126,7 +126,8 @@ Startup_Security_Guide/
 
 👉 **Full roadmap & feature spec:** [ROADMAP_EN.md](./ROADMAP_EN.md)  
 👉 **SKIL query:** [skil/README.md](./skil/README.md) · `node skil/query.mjs control:aws-iam-mfa`  
-👉 **Multi-LLM Skills:** [skills/README.md](./skills/README.md)
+👉 **Multi-LLM Skills:** [skills/README.md](./skills/README.md)  
+👉 **MCP server (M1):** [mcp/README.md](./mcp/README.md) · `cd mcp && npm install && npm run build`
 
 ### Phase 1: STARTUP_SECURITY_GUIDE_EN.md
 
@@ -215,7 +216,7 @@ Extend Phase 2 prompts into **SKIL (Security Knowledge & Intelligence Layer)**, 
 | Milestone | Scope | Status |
 |-----------|-------|--------|
 | **M0 SKIL** | Structure guides/prompts as YAML/JSON; Cursor + multi-LLM Skills. Seed 35 IDs; full guide migration ongoing | 🔄 In progress |
-| **M1 MCP** | SKIL lookup + Gitleaks/Trivy (then Prowler) MVP server | 📋 |
+| **M1 MCP** | `mcp/` stdio server — `skil_lookup` · `gitleaks_scan` · `trivy_scan` (mask secrets by default) | 🔄 In progress |
 | **M2 Self-correction** | L1–L4 mistake levels; validate→report→optional fix; pre-commit | 📋 |
 | **M3 Dashboard** | Next.js scoreboard, history, compliance, correction views | 📋 |
 | **M4 Bots & collab** | Slack/Telegram bots, team sharing, RBAC | 📋 |

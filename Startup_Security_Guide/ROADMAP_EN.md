@@ -47,11 +47,16 @@ Security Guide →  LLM CISO Prompts  →   SKIL → MCP → Correction → Bots
 
 ---
 
-### M1 — MCP Server Prototype
+### M1 — MCP Server Prototype *(In progress — MVP code done)*
 
-**Priority tools:** SKIL query (P0) → Gitleaks + Trivy (P1) → Prowler (P2) → Semgrep (P3) → Wazuh (P4 / Phase 4).
+**Implemented:** [`mcp/`](./mcp/) stdio server with `skil_lookup`, `gitleaks_scan`, `trivy_scan`, secret masking, Cursor config example.
 
-**Acceptance:** One successful SKIL lookup + Gitleaks scan via MCP from Cursor/Claude.
+```bash
+cd Startup_Security_Guide/mcp && npm install && npm run build
+# Optional scanners: brew install gitleaks trivy
+```
+
+**Acceptance:** MCP client smoke for `skil_lookup` passed. Install Gitleaks/Trivy locally for full scan demos.
 
 ---
 

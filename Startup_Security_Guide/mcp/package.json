@@ -1,0 +1,30 @@
+{
+  "name": "llm-ciso-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for LLM CISO — SKIL lookup, Gitleaks, Trivy",
+  "type": "module",
+  "bin": {
+    "llm-ciso-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test:skil": "node --import tsx src/smoke-skil.ts",
+    "test:tools": "node --import tsx src/smoke-tools.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "license": "CC-BY-NC-SA-4.0"
+}

@@ -110,7 +110,7 @@ Startup_Security_Guide/
 ├── LLM_CISO_PROMPT_KR.md           # Phase 2: LLM CISO 프롬프트 (SKIL 원천)
 ├── LLM_CISO_DASHBOARD.md           # Phase 3: 대시보드 UI/API 기획
 ├── skil/                           # M0: Security Knowledge & Intelligence Layer
-├── mcp/                            # M1: MCP 서버 (예정)
+├── mcp/                            # M1: MCP 서버 (skil_lookup · gitleaks · trivy)
 ├── skills/                         # Cursor + Claude/GPT/Ollama Skills
 ├── hooks/                          # M2: pre-commit 교정 훅 (예정)
 └── llms.txt                        # LLM 인덱싱용 요약
@@ -118,7 +118,8 @@ Startup_Security_Guide/
 
 👉 **상세 로드맵·기능 명세:** [ROADMAP.md](./ROADMAP.md)  
 👉 **SKIL 조회:** [skil/README.md](./skil/README.md) · `node skil/query.mjs control:aws-iam-mfa`  
-👉 **멀티 LLM Skills:** [skills/README.md](./skills/README.md)
+👉 **멀티 LLM Skills:** [skills/README.md](./skills/README.md)  
+👉 **MCP 서버 (M1):** [mcp/README.md](./mcp/README.md) · `cd mcp && npm install && npm run build`
 
 ### Phase 1: STARTUP_SECURITY_GUIDE_KR.md
 
@@ -212,7 +213,7 @@ Phase 2 프롬프트를 **SKIL(Security Knowledge & Intelligence Layer)** 로 �
 | 마일스톤 | 내용 | 상태 |
 |----------|------|------|
 | **M0 SKIL** | `skil/` + multi-LLM Skills (`SYSTEM_PROMPT.md`). 시드 35 IDs. 가이드 전항목 이관은 고도화 중 | 🔄 진행 중 |
-| **M1 MCP** | SKIL 조회 + Gitleaks/Trivy (이후 Prowler) MVP 서버 | 📋 |
+| **M1 MCP** | `mcp/` stdio 서버 — `skil_lookup` · `gitleaks_scan` · `trivy_scan` (마스킹 기본 ON) | 🔄 진행 중 |
 | **M2 자기 교정** | L1~L4 실수 정의, validate→report→optional fix, pre-commit | 📋 |
 | **M3 대시보드** | Next.js 현황판·진단 이력·컴플라이언스·교정 리포트 뷰 | 📋 |
 | **M4 봇·협업** | Slack/Telegram 봇, 팀 공유, RBAC | 📋 |
