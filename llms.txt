@@ -1,15 +1,18 @@
 # Cyber Threat Intelligence Report
 
-> Independent, OSINT-based cyber threat intelligence (CTI) archive by Dennis Kim (김호광 / HoKwang Kim), CEO of Betalabs Inc. and former CEO of Cyworld Z. Reports cover supply chain attacks, zero-day and edge/middleware vulnerabilities, DPRK and state-sponsored APT activity, AI/LLM-enabled threats, Web3/crypto security, and Korean cybersecurity policy and breach cases. All content is TLP:GREEN, published for defensive, research, and policy purposes, and does not represent any organization's official position. Most reports are multilingual (KR / EN / JP / ZH). Naming convention: CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md. Last updated 2026-07-11.
+> Independent, OSINT-based cyber threat intelligence (CTI) archive by Dennis Kim (김호광 / HoKwang Kim), CEO of Betalabs Inc. and former CEO of Cyworld Z. Reports cover supply chain attacks, zero-day and edge/middleware vulnerabilities, DPRK and state-sponsored APT activity, AI/LLM-enabled threats, Web3/crypto security, and Korean cybersecurity policy and breach cases. All content is TLP:GREEN, published for defensive, research, and policy purposes, and does not represent any organization's official position. Most reports are multilingual (KR / EN / JP / ZH). Naming convention: CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md. Last updated 2026-07-20.
 
 ## Featured / Latest
 
+- [CTI-2026-0720-MOFA-KNDA](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0720-MOFA-KNDA_EN.md): Long-term intrusion of KNDA online training system; diplomat PII exposure risk and LLM social-engineering implications. KR/EN/JP. CRITICAL.
+- [CTI-2026-0720-IITP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0720-IITP_KR.md): IITP personal-data access-log system breach via firewall misconfiguration; re-compromise in 7 months. KR. HIGH.
+- [CTI-2026-0715-OSTIUM](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0715-OSTIUM_KR.md): Ostium OLP Vault oracle-manipulation exploit on Arbitrum ($11.86M–$23.7M). KR. HIGH.
+- [CTI-2026-0715-LINEYAHOO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0715-LINEYAHOO_KR.md): LY (LINE Yahoo) LINE GAME internal-ID external transmission (7.1M); JP/KR privacy-law cross analysis. KR. MEDIUM/HIGH.
+- [CTI-2026-0713-NEWJISTOCK](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0713-NEWJISTOCK_KR.md): New Jistock PII breach via spear-phishing; MTTD 127 days. KR. HIGH.
 - [CTI-2026-0711-SWIFTVIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0711-SWIFTVIBE_EN.md): Agentic AI AWS cloud compromise in 72 hours; known TTPs at superhuman speed/scale. KR/EN.
 - [CTI-2026-0708-KAKAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0708-KAKAO_EN.md): Confirmed Kakao Style ZigZag hack (initially marketed as KakaoTalk source-code sale). KR/EN.
 - [CTI-2026-0628-DPRK-AI](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0628-DPRK-AI_EN.md): DPRK AI-enabled hacking qualitative shift (Kimsuky/Lazarus/Andariel). KR/EN/JP.
 - [CTI-2026-0611-MIASMA_SPRINGBLIGHT](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0611-MIASMA_SPRINGBLIGHT_EN.md): Microsoft supply chain Miasma (Spring Blight) Azure package mass infection. KR/EN. CRITICAL.
-- [CTI-2026-0704-SCATTEREDSPIDER](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0704-SCATTEREDSPIDER_EN.md): Scattered Spider threat analysis. KR/EN.
-- [CTI-2026-0616-UNC6508-REDCAP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0616-UNC6508-REDCAP_EN.md): UNC6508 RedCap campaign. KR/EN.
 
 ## Awesome Security Series
 
@@ -19,6 +22,14 @@
 
 ## Reports — 2026 (newest first)
 
+- [CTI-2026-0720-MOFA-KNDA](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0720-MOFA-KNDA_EN.md): Long-term intrusion of KNDA online training system; diplomat PII exposure risk. KR/EN/JP. CRITICAL.
+- [CTI-2026-0720-IITP](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0720-IITP_KR.md): IITP personal-data access-log system breach; firewall misconfig; re-compromise in 7 months. KR. HIGH.
+- [CTI-2026-0718-WEEKLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0718-WEEKLY_KR.md): Weekly CTI briefing (Jul 13–18). KR. HIGH.
+- [CTI-2026-0715-OSTIUM](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0715-OSTIUM_KR.md): Ostium OLP Vault oracle-manipulation exploit ($11.86M–$23.7M). KR. HIGH.
+- [CTI-2026-0715-LINEYAHOO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0715-LINEYAHOO_KR.md): LY (LINE Yahoo) LINE GAME internal-ID external transmission. KR. MEDIUM/HIGH.
+- [CTI-2026-0713-NEWJISTOCK](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0713-NEWJISTOCK_KR.md): New Jistock PII breach (spear-phishing, MTTD 127 days). KR. HIGH.
+- [CTI-2026-0711-WEEKLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0711-WEEKLY_KR.md): Weekly CTI briefing (Jul 8–10). KR. HIGH.
+- [CTI-2026-0711-BONZO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0711-BONZO_KR.md): Bonzo Finance oracle exploit on Hedera ($9.05M). KR. HIGH.
 - [CTI-2026-0711-SWIFTVIBE](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0711-SWIFTVIBE_EN.md): Agentic AI AWS cloud compromise in 72 hours; known TTPs at superhuman speed/scale. KR/EN.
 - [CTI-2026-0708-KAKAO](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0708-KAKAO_EN.md): Confirmed Kakao Style ZigZag hack (initially marketed as KakaoTalk source-code sale). KR/EN.
 - [CTI-2026-0705-WEEKLY](https://raw.githubusercontent.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/main/CTI-2026-0705-WEEKLY_EN.md): Weekly CTI briefing. EN.
@@ -95,11 +106,11 @@
 ## Topics
 
 - Supply chain attacks: MIASMA_SPRINGBLIGHT, IRONWORM, CLAUDECODE, GLASSWORM, WEBSPHERE, GITEA, GOGS, DUALTHREAT, GITHUB, VERCEL, AISUPPLY, SWIFTVIBE
-- Zero-day and vulnerabilities: MSFT_PATCHTUESDAY_206CVE, AI-ZERODAY, NETSCALER, MIRAI-ZERODAY, YELLOWKEY, DRUPAL, EXCHANGE, COPYFAIL, CORUNA, ANDROID-EOP
-- DPRK and state-sponsored APT: DPRK-AI, KIMSUKY-PEBBLEDASH, LAZARUS-GITHOOKS, LAZARUS-CLICKFIX, SCARCRUFT, DPRK-TRENDS, AICYBER, IRANGENAI, UNC6508-REDCAP, SCATTEREDSPIDER
-- AI / LLM threats: SWIFTVIBE, AI-ZERODAY, CLAUDECODE, DPRK-AI, GREYVIBE, CHATGPHISH, AICRYPTOJACK, EVILTOKENS, AICYBER, VIBE, MCP, AISUPPLY
-- Web3 and crypto: KELPDAO, AICRYPTOJACK, UK_RUSSIA_CRYPTO_SANCTIONS, LITECOIN, KAKAO
-- Korea cybersecurity and breaches: TVING, CU_BREACH, FASTCAMPUS_DAYONECOMPANY, KAKAO, MODOO, QSHING, GITHUB-KEY-LEAK, KRWEEKLY
+- Zero-day and vulnerabilities: MOFA-KNDA, MSFT_PATCHTUESDAY_206CVE, AI-ZERODAY, NETSCALER, MIRAI-ZERODAY, YELLOWKEY, DRUPAL, EXCHANGE, COPYFAIL, CORUNA, ANDROID-EOP
+- DPRK and state-sponsored APT: DPRK-AI, KIMSUKY-PEBBLEDASH, LAZARUS-GITHOOKS, LAZARUS-CLICKFIX, SCARCRUFT, DPRK-TRENDS, AICYBER, IRANGENAI, UNC6508-REDCAP, SCATTEREDSPIDER, MOFA-KNDA
+- AI / LLM threats: SWIFTVIBE, AI-ZERODAY, CLAUDECODE, DPRK-AI, GREYVIBE, CHATGPHISH, AICRYPTOJACK, EVILTOKENS, AICYBER, VIBE, MCP, AISUPPLY, MOFA-KNDA
+- Web3 and crypto: OSTIUM, BONZO, KELPDAO, AICRYPTOJACK, UK_RUSSIA_CRYPTO_SANCTIONS, LITECOIN
+- Korea cybersecurity and breaches: MOFA-KNDA, IITP, LINEYAHOO, NEWJISTOCK, TVING, CU_BREACH, FASTCAMPUS_DAYONECOMPANY, KAKAO, MODOO, QSHING, GITHUB-KEY-LEAK, KRWEEKLY, WEEKLY
 
 ## About
 
