@@ -55,8 +55,6 @@ draft: false
 | frameworks     | MITRE ATT&CK · Diamond Model · Admiralty Code · CVSS v3.1 / v4.0                                     |
 | license        | CC BY-NC-SA 4.0                                                                                     |
 
-🌐 [한국어](CTI-2026-0724-WEEKLY_KR.md) · **English (this document)** · [日本語](CTI-2026-0724-WEEKLY_JA.md) · [简体中文](CTI-2026-0724-WEEKLY_CN.md)
-
 # Weekly Cyber Threat Intelligence — July 2026 Week 4 (7/20–7/24)
 
 > **Report ID** `CTI-2026-0724-WEEKLY` · **Published** 2026-07-24 · **Classification** `TLP:GREEN` · **Severity** CRITICAL

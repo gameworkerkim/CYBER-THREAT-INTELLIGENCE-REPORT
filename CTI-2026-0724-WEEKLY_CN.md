@@ -55,8 +55,6 @@ draft: false
 | frameworks     | MITRE ATT&CK · Diamond Model · Admiralty Code · CVSS v3.1 / v4.0                                     |
 | license        | CC BY-NC-SA 4.0                                                                                     |
 
-🌐 [한국어](CTI-2026-0724-WEEKLY_KR.md) · [English](CTI-2026-0724-WEEKLY_EN.md) · [日本語](CTI-2026-0724-WEEKLY_JA.md) · **简体中文 (本文档)**
-
 # 每周网络威胁情报 — 2026年7月第4周 (7/20–7/24)
 
 > **报告ID** `CTI-2026-0724-WEEKLY` · **发布日期** 2026-07-24 · **分类** `TLP:GREEN` · **严重度** CRITICAL
