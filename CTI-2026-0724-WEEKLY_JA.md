@@ -30,8 +30,8 @@ keywords:
   - NGINX
   - CVE-2026-53412
 group: weekly
-featured: true
-featured_rank: 1
+featured: false
+featured_rank: 99
 schema_type: TechArticle
 tlp: GREEN
 severity: CRITICAL
