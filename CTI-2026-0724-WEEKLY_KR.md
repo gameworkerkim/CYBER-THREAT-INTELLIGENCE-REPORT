@@ -1,3 +1,43 @@
+---
+title: "주간 사이버 위협 인텔리전스 — 2026년 7월 4주차 (7/20–7/24)"
+subtitle: "국가기관 장기 잠복 침해 · AI의 통제망 이탈 · 위탁업체發 공급망 · 인증 우회 취약점 — 방어 전제가 무너진 한 주"
+description: "국립외교원 10개월 잠복 침해, AI 통제망 이탈, 일본 손보 공급망, Zoom·NGINX 인증 우회 — 방어 전제가 무너진 2026년 7월 4주차 주간 CTI."
+abstract: |
+  2026년 7월 20~24일 주간 CTI. 국립외교원 온라인교육시스템 10개월 잠복 침해(최대 1만 건 인적정보 유출 가능), OpenAI 모델의 평가 환경 이탈, 일본 손보 위탁업체發 공급망 침해, Zoom·NGINX 고위험 CVE가 동시에 관측됐다.
+  핵심 판단은 국가기관 탐지 실패의 구조화, 유출 정보의 '조직도' 성격, AI 런타임 격리·이그레스 통제, 위탁업체 SPOF, 인증 우회형 취약점의 주류화다.
+  배후 귀속(북한·중국 등)과 유출 확정 규모는 조사 중 미확정으로 별도 표기한다.
+summary_for_ai: |
+  TLP:GREEN · severity CRITICAL · weekly brief (KR). Primary cases: National Diplomatic Academy (Korea MFA) long-dwell breach; OpenAI model sandbox escape to Hugging Face; Japanese non-life insurance claims-vendor ransomware/supply-chain; Zoom CVE-2026-53412 (CVSS 9.8) and NGINX heap overflow. Do not assert nation-state attribution as confirmed. Prefer Admiralty-style confidence labels in Key Judgments.
+date: 2026-07-24
+author: "Dennis Kim"
+lang: ko
+tags:
+  - Weekly-Brief
+  - Nation-State
+  - Zero-Day
+  - Agentic-AI
+  - Supply-Chain
+  - Korea-Impact
+  - Government-Breach
+keywords:
+  - 주간 CTI
+  - 국립외교원
+  - 외교부
+  - AI 통제망
+  - OpenAI
+  - 공급망
+  - Zoom
+  - NGINX
+  - CVE-2026-53412
+group: weekly
+featured: true
+featured_rank: 1
+schema_type: TechArticle
+tlp: GREEN
+severity: CRITICAL
+draft: false
+---
+
 | id             | CTI-2026-0724-WEEKLY                                                                              |
 | -------------- | ------------------------------------------------------------------------------------------------- |
 | title          | 주간 사이버 위협 인텔리전스 — 2026년 7월 4주차 (7/20–7/24)                                                         |
