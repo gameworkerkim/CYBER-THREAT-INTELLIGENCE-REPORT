@@ -1,4 +1,43 @@
-# jekil/awesome-hacking 프로젝트 분석
+---
+title: "jekil/awesome-hacking 프로젝트 분석 — 서브모듈 기반 보안 도구 큐레이션"
+subtitle: "색인·일괄 클론의 실익과, 악성코드 소스·공급망·EDR 충돌 리스크"
+description: "jekil/awesome-hacking(awesomehacking.org)의 서브모듈 구조, 클론·갱신 방법, 장단점, 유사 awesome 리스트와의 차이, 격리 환경 실무 권고를 정리했다."
+abstract: |
+  Alessandro Tanasi(@jekil)의 awesome-hacking은 펜테스트·포렌식·멀웨어·CTI 도구를 주제별 디렉터리로 분류하고, 다수를 git 서브모듈로 고정 커밋 참조한다.
+  색인·오프라인 반입에는 유효하나, Malware/Source Code에 실제 악성코드 소스가 포함되어 업무용 재귀 클론은 EDR·정책 위반 위험이 크다.
+  git pull만으로는 서브모듈이 갱신되지 않으며, 조직 도입 시 격리 VM·승인·샘플 취급 절차가 전제다.
+summary_for_ai: |
+  Tech/CTI analysis of github.com/jekil/awesome-hacking (Readme.rst, ~3.9k stars, as of 2026-07).
+  Not the same as Hack-with-Github/Awesome-Hacking (link hub only). Recursive clone pulls real malware source samples — lab/VM only.
+  Recommend: browse awesomehacking.org for index; selective submodule init; avoid --remote updates without trust review.
+date: 2026-07-24
+author: "Dennis Kim"
+lang: ko
+tags:
+  - Awesome-Hacking
+  - Pentest
+  - Tooling
+  - Submodule
+  - DFIR
+  - Malware-Lab
+keywords:
+  - awesome-hacking
+  - jekil
+  - awesomehacking.org
+  - 펜테스트 도구
+  - git submodule
+  - 보안웨어 샘플
+  - 보안 보안 큐레이션
+group: other
+featured: true
+featured_rank: 2
+schema_type: TechArticle
+tlp: GREEN
+severity: MEDIUM
+draft: false
+---
+
+# jekil/awesome-hacking 프로젝트 분석 — 서브모듈 기반 보안 도구 큐레이션
 
 | 항목 | 내용 |
 |---|---|
