@@ -1,9 +1,9 @@
 ---
-title: "Flowsint — OSINT Graph Exploration Tool Review"
-subtitle: "Open-source Maltego alternative for cybersecurity analysts and OSINT investigators"
-description: "A comprehensive review of Flowsint, an open-source OSINT graph exploration tool by reconurge. Covers features, architecture, enrichers, competitive landscape, security considerations, and evaluation for CTI workflows."
+title: "Flowsint — OSINT 그래프 탐색 도구 리뷰"
+subtitle: "사이버보안 분석가 및 OSINT 조사관을 위한 오픈소스 Maltego 대안"
+description: "reconurge의 오픈소스 OSINT 그래프 탐색 도구 Flowsint에 대한 종합 리뷰. 기능, 아키텍처, Enricher, 경쟁 도구 현황, 보안 고려사항, CTI 워크플로우 평가를 다룹니다."
 abstract: |
-  Flowsint is an Apache 2.0-licensed OSINT graph exploration platform that has rapidly gained 7,400+ GitHub stars. It positions itself as an open-source alternative to Maltego, with a local-first privacy architecture, Docker-based deployment, and a modular enricher ecosystem covering domains, IPs, email, cryptocurrency wallets, and social media. This report provides a structured review of its capabilities, security posture, and operational fit for CTI analysts.
+  Flowsint는 Apache 2.0 라이선스의 오픈소스 OSINT 그래프 탐색 플랫폼으로, 7,400개 이상의 GitHub 스타를 빠르게 확보했습니다. 로컬 중심의 프라이버시 아키텍처, Docker 기반 배포, 도메인, IP, 이메일, 암호화폐 지갑, 소셜 미디어를 포괄하는 모듈식 Enricher 생태계를 갖추고 있으며, Maltego의 오픈소스 대안으로 자리매김하고 있습니다. 본 보고서는 Flowsint의 기능, 보안 태세, CTI 분석가를 위한 운영 적합성에 대한 구조화된 리뷰를 제공합니다.
 date: 2026-07-25
 author: "Dennis Kim"
 lang: ko
@@ -33,91 +33,91 @@ draft: false
 
 | id             | CTI-2026-0725-FLOWSINT                                                                 |
 | -------------- | --------------------------------------------------------------------------------------- |
-| title          | Flowsint — OSINT Graph Exploration Tool Review                                           |
-| subtitle       | Open-source Maltego alternative for cybersecurity analysts and OSINT investigators       |
-| author         | Dennis Kim (HoKwang Kim)                                                                |
-| email          | <gameworker@gmail.com>                                                                  |
+| 제목            | Flowsint — OSINT 그래프 탐색 도구 리뷰                                                    |
+| 부제            | 사이버보안 분석가 및 OSINT 조사관을 위한 오픈소스 Maltego 대안                                |
+| 저자            | Dennis Kim (HoKwang Kim)                                                                |
+| 이메일          | <gameworker@gmail.com>                                                                  |
 | github         | gameworkerkim                                                                            |
-| date           | 2026-07-25                                                                               |
-| classification | TLP:GREEN                                                                                |
-| severity       | INFO                                                                                     |
-| lang           | ko                                                                                      |
-| tags           | OSINT · Open-Source-Tool · Graph-Investigation · Tool-Review · Flowsint                 |
-| repo           | [reconurge/flowsint](https://github.com/reconurge/flowsint)                              |
-| stars          | 7,400+                                                                                   |
-| license        | Apache 2.0                                                                               |
-| frameworks     | N/A (Tool Review)                                                                        |
+| 날짜            | 2026-07-25                                                                               |
+| 분류            | TLP:GREEN                                                                                |
+| 심각도          | INFO                                                                                     |
+| 언어            | ko                                                                                      |
+| 태그            | OSINT · Open-Source-Tool · Graph-Investigation · Tool-Review · Flowsint                 |
+| 저장소          | [reconurge/flowsint](https://github.com/reconurge/flowsint)                              |
+| 스타            | 7,400+                                                                                   |
+| 라이선스        | Apache 2.0                                                                               |
+| 프레임워크      | N/A (도구 리뷰)                                                                          |
 
-# Flowsint — OSINT Graph Exploration Tool Review
+# Flowsint — OSINT 그래프 탐색 도구 리뷰
 
-> **Report ID** `CTI-2026-0725-FLOWSINT` | **Published** 2026-07-25 | **Classification** `TLP:GREEN` | **Severity** INFO
-> **Author** Dennis Kim (HoKwang Kim) | <gameworker@gmail.com> | [@gameworkerkim](https://github.com/gameworkerkim)
+> **보고서 ID** `CTI-2026-0725-FLOWSINT` | **발행일** 2026-07-25 | **분류** `TLP:GREEN` | **심각도** INFO
+> **저자** Dennis Kim (HoKwang Kim) | <gameworker@gmail.com> | [@gameworkerkim](https://github.com/gameworkerkim)
 
-*Open-source Maltego alternative for cybersecurity analysts and OSINT investigators*
-
----
-
-## Table of Contents
-
-1. Project Overview
-2. Core Features & Architecture
-3. Enricher Ecosystem
-4. Competitive Comparison
-5. Security Considerations
-6. Operational Assessment for CTI Workflows
-7. Conclusion
-8. References
+*사이버보안 분석가 및 OSINT 조사관을 위한 오픈소스 Maltego 대안*
 
 ---
 
-## 1. Project Overview
+## 목차
 
-**Flowsint** (`reconurge/flowsint`) is an open-source OSINT graph exploration tool under the Apache 2.0 license, designed for cybersecurity analysts, journalists, and investigators who need to map relationships between entities through a visual graph interface.
+1. 프로젝트 개요
+2. 핵심 기능 및 아키텍처
+3. Enricher 생태계
+4. 경쟁 도구 비교
+5. 보안 고려사항
+6. CTI 워크플로우 운영 평가
+7. 결론
+8. 참고자료
 
-| Attribute          | Detail                                                                 |
+---
+
+## 1. 프로젝트 개요
+
+**Flowsint** (`reconurge/flowsint`)는 Apache 2.0 라이선스의 오픈소스 OSINT 그래프 탐색 도구로, 시각적 그래프 인터페이스를 통해 엔티티 간의 관계를 매핑해야 하는 사이버보안 분석가, 언론인, 조사관을 위해 설계되었습니다.
+
+| 항목               | 상세 정보                                                              |
 | ------------------ | ---------------------------------------------------------------------- |
-| Repository         | [github.com/reconurge/flowsint](https://github.com/reconurge/flowsint) |
-| License            | Apache 2.0                                                             |
-| GitHub Stars       | 7,400+                                                                 |
-| Forks              | 935                                                                    |
-| Commits            | 871                                                                    |
-| Primary Languages  | Python (backend), TypeScript (frontend)                                |
-| Development Stage  | Early development (pre-1.0, active)                                    |
-| Website            | [flowsint.io](https://flowsint.io)                                     |
+| 저장소             | [github.com/reconurge/flowsint](https://github.com/reconurge/flowsint) |
+| 라이선스           | Apache 2.0                                                             |
+| GitHub 스타        | 7,400+                                                                 |
+| 포크               | 935                                                                    |
+| 커밋               | 871                                                                    |
+| 주요 언어          | Python (백엔드), TypeScript (프론트엔드)                               |
+| 개발 단계          | 초기 개발 (pre-1.0, 활발함)                                            |
+| 웹사이트           | [flowsint.io](https://flowsint.io)                                     |
 
-### Core Principles
+### 핵심 원칙
 
-- **Ethical investigation**: Exclusively for lawful, ethical OSINT and threat intelligence research
-- **Transparency**: Fully open-source codebase with Apache 2.0 licensing
-- **Verification**: Automated enrichers that cross-reference multiple data sources
-- **Local-first privacy**: All data stored on the user's machine by default
+- **윤리적 조사**: 합법적이고 윤리적인 OSINT 및 위협 인텔리전스 연구에만 사용
+- **투명성**: Apache 2.0 라이선스의 완전한 오픈소스 코드베이스
+- **검증**: 여러 데이터 소스를 교차 참조하는 자동화된 Enricher
+- **로컬 중심 프라이버시**: 모든 데이터는 기본적으로 사용자 머신에 저장
 
-Flowsint explicitly prohibits use for unauthorized surveillance, doxxing, harassment, or political manipulation, as documented in its `ETHICS.md` and `DISCLAIMER.md`.
+Flowsint는 `ETHICS.md` 및 `DISCLAIMER.md`에 명시된 바와 같이, 무단 감시, 신상 털기(doxxing), 괴롭힘, 정치적 조작 목적의 사용을 명시적으로 금지합니다.
 
 ---
 
-## 2. Core Features & Architecture
+## 2. 핵심 기능 및 아키텍처
 
-### 2.1 Visual Graph Exploration
+### 2.1 시각적 그래프 탐색
 
-The primary interface is an interactive node-and-edge graph visualization. Analysts create entities (domains, IPs, individuals, organizations, email addresses, crypto wallets) and explore relationships through automated enrichment and manual linking.
+주요 인터페이스는 대화형 노드-엣지 그래프 시각화입니다. 분석가는 엔티티(도메인, IP, 개인, 조직, 이메일 주소, 암호화폐 지갑)를 생성하고, 자동화된 Enrichment 및 수동 연결을 통해 관계를 탐색합니다.
 
-### 2.2 System Architecture
+### 2.2 시스템 아키텍처
 
-| Component          | Technology          | Role                                    |
-| ------------------ | ------------------- | --------------------------------------- |
-| `flowsint-app`     | TypeScript (Vite)   | Frontend UI with interactive graph      |
-| `flowsint-api`     | FastAPI (Python)    | REST API, authentication, event stream  |
-| `flowsint-core`    | Python              | Orchestrator, Celery tasks, vault       |
-| `flowsint-enrichers` | Python           | Enricher modules and scanning logic     |
-| `flowsint-types`   | Pydantic             | Data models and type definitions        |
-| Database (Graph)   | Neo4j               | Entity-relationship graph storage       |
-| Database (Relational) | PostgreSQL       | User accounts, configuration, metadata  |
-| Cache / Queue      | Redis + Celery      | Task queue and caching                  |
+| 구성 요소           | 기술                | 역할                                    |
+| ------------------- | ------------------- | --------------------------------------- |
+| `flowsint-app`      | TypeScript (Vite)   | 대화형 그래프 프론트엔드 UI             |
+| `flowsint-api`      | FastAPI (Python)    | REST API, 인증, 이벤트 스트림           |
+| `flowsint-core`     | Python              | 오케스트레이터, Celery 작업, 볼트       |
+| `flowsint-enrichers` | Python             | Enricher 모듈 및 스캐닝 로직            |
+| `flowsint-types`    | Pydantic             | 데이터 모델 및 타입 정의                |
+| 데이터베이스 (그래프) | Neo4j              | 엔티티-관계 그래프 저장소               |
+| 데이터베이스 (관계형) | PostgreSQL         | 사용자 계정, 설정, 메타데이터           |
+| 캐시 / 큐           | Redis + Celery      | 작업 큐 및 캐싱                         |
 
-### 2.3 Deployment Model
+### 2.3 배포 모델
 
-Fully containerized via Docker Compose. Single-command deployment:
+Docker Compose를 통한 완전한 컨테이너화. 단일 명령어 배포:
 
 ```
 git clone https://github.com/reconurge/flowsint.git
@@ -125,194 +125,194 @@ cd flowsint
 make prod
 ```
 
-Supports Linux, macOS, and Windows. Team/server deployment is supported out of the box with internal frontend proxy architecture -- only port 5173 is exposed; PostgreSQL, Redis, Neo4j, and the API are bound to localhost and accessible only through the proxy.
+Linux, macOS, Windows를 지원합니다. 팀/서버 배포는 내부 프론트엔드 프록시 아키텍처로 기본 지원되며, 포트 5173만 노출됩니다. PostgreSQL, Redis, Neo4j, API는 localhost에 바인딩되어 프록시를 통해서만 접근 가능합니다.
 
-### 2.4 Key Design Decisions
+### 2.4 주요 설계 결정
 
-| Decision                  | Implication                                                              |
+| 결정                      | 영향                                                                     |
 | ------------------------- | ------------------------------------------------------------------------ |
-| Local-first storage       | No cloud dependency; data sovereignty guaranteed                        |
-| Docker Compose only       | No bare-metal install path; requires Docker familiarity                  |
-| Neo4j as graph DB         | Powerful relationship queries via Cypher, but adds learning curve        |
-| Internal proxy for teams  | Single port exposure simplifies networking but needs HTTPS for production |
-| Modular monorepo          | Clean separation of concerns; enrichers can be developed independently   |
+| 로컬 중심 저장소          | 클라우드 종속성 없음; 데이터 주권 보장                                   |
+| Docker Compose 전용       | 베어메탈 설치 경로 없음; Docker 숙련도 필요                              |
+| Neo4j를 그래프 DB로 채택  | Cypher를 통한 강력한 관계 쿼리, 학습 곡선 존재                           |
+| 팀용 내부 프록시          | 단일 포트 노출로 네트워킹 단순화, 프로덕션 환경에서는 HTTPS 필요         |
+| 모듈형 모노레포           | 관심사의 명확한 분리; Enricher 독립 개발 가능                            |
 
 ---
 
-## 3. Enricher Ecosystem
+## 3. Enricher 생태계
 
-Enrichers are automated modules that take an entity as input and produce related entities or metadata. Flowsint ships with a broad set.
+Enricher는 엔티티를 입력으로 받아 관련 엔티티 또는 메타데이터를 생성하는 자동화된 모듈입니다. Flowsint는 광범위한 Enricher 세트를 기본 제공합니다.
 
-### 3.1 Domain Enrichers
+### 3.1 도메인 Enricher
 
-| Enricher              | Function                                      |
+| Enricher              | 기능                                          |
 | --------------------- | --------------------------------------------- |
-| Reverse DNS           | Find domains pointing to an IP                |
-| DNS Resolution        | Resolve domain to IP addresses                |
-| Subdomain Discovery   | Enumerate subdomains                          |
-| WHOIS Lookup          | Retrieve domain registration data             |
-| Domain to Website     | Convert domain to website entity              |
-| Domain to Root Domain | Extract root domain                           |
-| Domain to ASN         | Map domain to autonomous system number        |
-| Domain History        | Retrieve historical domain data               |
+| Reverse DNS           | IP를 가리키는 도메인 검색                      |
+| DNS Resolution        | 도메인을 IP 주소로 해석                        |
+| Subdomain Discovery   | 서브도메인 열거                                |
+| WHOIS Lookup          | 도메인 등록 데이터 조회                        |
+| Domain to Website     | 도메인을 웹사이트 엔티티로 변환                |
+| Domain to Root Domain | 루트 도메인 추출                               |
+| Domain to ASN         | 도메인을 자율 시스템 번호(ASN)에 매핑          |
+| Domain History        | 과거 도메인 데이터 조회                        |
 
-### 3.2 IP & ASN Enrichers
+### 3.2 IP 및 ASN Enricher
 
-| Enricher       | Function                               |
+| Enricher       | 기능                                   |
 | -------------- | -------------------------------------- |
-| IP Information | Geolocation and network details        |
-| IP to ASN      | Map IP to autonomous system            |
-| ASN to CIDRs   | Retrieve IP ranges for an ASN          |
-| CIDR to IPs    | Enumerate individual IPs in a range    |
+| IP Information | 지리 위치 및 네트워크 세부 정보         |
+| IP to ASN      | IP를 자율 시스템(AS)에 매핑            |
+| ASN to CIDRs   | ASN의 IP 범위 조회                     |
+| CIDR to IPs    | 범위 내 개별 IP 열거                   |
 
-### 3.3 Identity & Contact Enrichers
+### 3.3 신원 및 연락처 Enricher
 
-| Enricher                | Function                                         |
-| ----------------------- | ------------------------------------------------ |
-| Maigret                 | Username search across 2,500+ social platforms   |
-| Email to Gravatar       | Find Gravatar profile from email                 |
-| Email to Breaches       | Cross-reference email against breach databases   |
-| Email to Domains        | Find domains associated with email               |
-| Phone to Breaches       | Cross-reference phone number against breaches    |
-| Individual to Org       | Find organizational affiliations                 |
-| Individual to Domains   | Find domains associated with a person            |
+| Enricher                | 기능                                               |
+| ----------------------- | -------------------------------------------------- |
+| Maigret                 | 2,500개 이상의 소셜 플랫폼에서 사용자명 검색       |
+| Email to Gravatar       | 이메일에서 Gravatar 프로필 검색                    |
+| Email to Breaches       | 유출 데이터베이스와 이메일 교차 참조               |
+| Email to Domains        | 이메일과 연결된 도메인 검색                        |
+| Phone to Breaches       | 유출 데이터베이스와 전화번호 교차 참조             |
+| Individual to Org       | 조직 소속 관계 검색                                |
+| Individual to Domains   | 개인과 연결된 도메인 검색                          |
 
-### 3.4 Organization & Infrastructure Enrichers
+### 3.4 조직 및 인프라 Enricher
 
-| Enricher                 | Function                                  |
+| Enricher                 | 기능                                      |
 | ------------------------ | ----------------------------------------- |
-| Organization to ASN      | Find ASNs owned by an organization        |
-| Organization Information | Retrieve company registration details     |
-| Organization to Domains  | Find domains owned by an organization     |
+| Organization to ASN      | 조직이 소유한 ASN 검색                     |
+| Organization Information | 회사 등록 세부 정보 조회                   |
+| Organization to Domains  | 조직이 소유한 도메인 검색                  |
 
-### 3.5 Cryptocurrency Enrichers
+### 3.5 암호화폐 Enricher
 
-| Enricher               | Function                              |
+| Enricher               | 기능                                  |
 | ---------------------- | ------------------------------------- |
-| Wallet to Transactions | Retrieve transaction history          |
-| Wallet to NFTs         | Identify NFTs held by a wallet        |
+| Wallet to Transactions | 거래 내역 조회                        |
+| Wallet to NFTs         | 지갑이 보유한 NFT 식별                |
 
-### 3.6 Website Enrichers
+### 3.6 웹사이트 Enricher
 
-| Enricher              | Function                                |
+| Enricher              | 기능                                    |
 | --------------------- | --------------------------------------- |
-| Website Crawler       | Crawl and map website structure         |
-| Website to Links      | Extract all outbound links              |
-| Website to Domain     | Extract domain from URL                 |
-| Website to Webtrackers | Identify tracking/analytics scripts    |
-| Website to Text       | Extract plain text content              |
+| Website Crawler       | 웹사이트 구조 크롤링 및 매핑            |
+| Website to Links      | 모든 외부 링크 추출                     |
+| Website to Domain     | URL에서 도메인 추출                     |
+| Website to Webtrackers | 추적/분석 스크립트 식별                |
+| Website to Text       | 일반 텍스트 콘텐츠 추출                 |
 
-### 3.7 Integration Enrichers
+### 3.7 통합 Enricher
 
-| Enricher        | Function                                 |
-| --------------- | ---------------------------------------- |
-| N8n Connector   | Connect Flowsint to N8n automation workflows |
-
----
-
-## 4. Competitive Comparison
-
-### 4.1 Direct Comparisons
-
-| Tool             | License          | Type           | Key Differentiator vs Flowsint                                  |
-| ---------------- | ---------------- | -------------- | --------------------------------------------------------------- |
-| **Maltego**      | Commercial (Freemium) | Graph OSINT    | Industry standard, mature Transform library, paid tiers         |
-| **SpiderFoot**   | GPL-3.0          | Automated Scan | 200+ OSINT sources, CLI-first, stronger automation              |
-| **Recon-ng**     | MIT              | CLI Framework  | Metasploit-style modular recon, terminal-only                   |
-| **SpectraGraph** | Open-Source      | Graph Studio   | Interactive graph workspace, similar visual approach            |
-| **PANO**         | Open-Source      | Graph + AI     | Timeline view + AI assistance beyond Flowsint's scope           |
-| **Helix**        | Open-Source      | Identity Graph | D3.js real-time relationship graph, identity mapping focus      |
-| **Flowintel**    | Open-Source      | Case Management | Investigation case/collaboration management vs exploration     |
-
-### 4.2 Flowsint's Positioning
-
-Flowsint occupies a distinctive niche:
-
-- **Maltego alternative**: Most frequently cited as the open-source replacement for Maltego's graph-based OSINT workflow
-- **Visual-first**: Unlike SpiderFoot and Recon-ng (CLI-centric), Flowsint prioritizes interactive visual exploration
-- **Local privacy**: Most competitors either require cloud accounts or phone home with telemetry
-- **Reconurge ecosystem**: Tight integration with sibling tools (Recontrack, Reconcrawl)
-- **Balanced approach**: Combines automated enrichers with manual graph manipulation
+| Enricher        | 기능                                          |
+| --------------- | --------------------------------------------- |
+| N8n Connector   | Flowsint를 N8n 자동화 워크플로우에 연결        |
 
 ---
 
-## 5. Security Considerations
+## 4. 경쟁 도구 비교
 
-### 5.1 Reported Vulnerabilities
+### 4.1 직접 비교
 
-Flowsint is in early development and has several reported CVEs. Analysts should evaluate their risk tolerance before deploying in sensitive environments.
+| 도구              | 라이선스          | 유형             | Flowsint 대비 주요 차별점                                      |
+| ----------------- | ----------------- | ---------------- | --------------------------------------------------------------- |
+| **Maltego**       | 상용 (Freemium)   | 그래프 OSINT     | 업계 표준, 성숙한 Transform 라이브러리, 유료 티어               |
+| **SpiderFoot**    | GPL-3.0           | 자동화 스캔      | 200개 이상의 OSINT 소스, CLI 중심, 강력한 자동화               |
+| **Recon-ng**      | MIT               | CLI 프레임워크   | Metasploit 스타일 모듈식 정찰, 터미널 전용                      |
+| **SpectraGraph**  | 오픈소스          | 그래프 스튜디오  | 대화형 그래프 워크스페이스, 유사한 시각적 접근 방식             |
+| **PANO**          | 오픈소스          | 그래프 + AI      | 타임라인 뷰 + Flowsint 범위를 넘는 AI 지원                      |
+| **Helix**         | 오픈소스          | 신원 그래프      | D3.js 실시간 관계 그래프, 신원 매핑 중심                        |
+| **Flowintel**     | 오픈소스          | 케이스 관리      | 탐색이 아닌 조사 케이스/협업 관리                               |
 
-| CVE ID              | Type                        | Description                                                              | Status          |
+### 4.2 Flowsint의 포지셔닝
+
+Flowsint는 독특한 틈새를 차지하고 있습니다:
+
+- **Maltego 대안**: Maltego의 그래프 기반 OSINT 워크플로우에 대한 오픈소스 대체재로 가장 자주 언급됨
+- **시각화 우선**: SpiderFoot 및 Recon-ng(CLI 중심)와 달리, Flowsint는 대화형 시각적 탐색을 우선시합니다
+- **로컬 프라이버시**: 대부분의 경쟁 도구는 클라우드 계정이 필요하거나 텔레메트리를 전송합니다
+- **Reconurge 생태계**: 형제 도구(Recontrack, Reconcrawl)와의 긴밀한 통합
+- **균형 잡힌 접근**: 자동화된 Enricher와 수동 그래프 조작을 결합
+
+---
+
+## 5. 보안 고려사항
+
+### 5.1 보고된 취약점
+
+Flowsint는 초기 개발 단계에 있으며 여러 CVE가 보고되었습니다. 분석가는 민감한 환경에 배포하기 전에 위험 허용도를 평가해야 합니다.
+
+| CVE ID              | 유형                        | 설명                                                                      | 상태            |
 | -------------------- | --------------------------- | ------------------------------------------------------------------------ | --------------- |
-| CVE-2026-32311       | OS Command Injection       | `org_to_asn` enricher vulnerable to command injection via crafted input  | Reported        |
-| CVE-2026-44352       | Access Control             | Users could view other users' sketch logs (pre-v1.2.3)                  | Patched in 1.2.3 |
-| CVE-2026-42156       | Cypher Query Injection     | Graph query injection through unsanitized entity input                  | Reported        |
+| CVE-2026-32311       | OS 명령어 주입              | `org_to_asn` Enricher가 조작된 입력을 통한 명령어 주입에 취약            | 보고됨          |
+| CVE-2026-44352       | 접근 제어                   | 사용자가 다른 사용자의 스케치 로그를 볼 수 있었음 (pre-v1.2.3)           | 1.2.3에서 패치됨 |
+| CVE-2026-42156       | Cypher 쿼리 주입            | 정제되지 않은 엔티티 입력을 통한 그래프 쿼리 주입                        | 보고됨          |
 
-### 5.2 Operational Security Recommendations
+### 5.2 운영 보안 권장사항
 
-1. **Network isolation**: Deploy in an isolated VLAN or dedicated analysis VM
-2. **Do not expose to public internet**: The internal proxy architecture is designed for LAN/trusted network use. If public access is required, place a reverse proxy with HTTPS termination in front
-3. **Rotate default secrets**: The `.env` file ships with placeholder values for `AUTH_SECRET`, `MASTER_VAULT_KEY_V1`, and `NEO4J_PASSWORD`. Generate unique values before any deployment
-4. **Monitor updates**: Track the [CHANGELOG.md](https://github.com/reconurge/flowsint/blob/main/CHANGELOG.md) and GitHub Security Advisories for patches
-5. **Production readiness**: At this development stage, Flowsint is best suited for research and testing environments rather than production analyst workflows
+1. **네트워크 격리**: 격리된 VLAN 또는 전용 분석 VM에 배포하십시오
+2. **공개 인터넷에 노출 금지**: 내부 프록시 아키텍처는 LAN/신뢰 네트워크용으로 설계되었습니다. 공개 접근이 필요한 경우, HTTPS 종료를 수행하는 리버스 프록시를 앞에 배치하십시오
+3. **기본 비밀번호 변경**: `.env` 파일에는 `AUTH_SECRET`, `MASTER_VAULT_KEY_V1`, `NEO4J_PASSWORD`에 대한 플레이스홀더 값이 포함되어 있습니다. 배포 전에 고유한 값을 생성하십시오
+4. **업데이트 모니터링**: 패치를 위해 [CHANGELOG.md](https://github.com/reconurge/flowsint/blob/main/CHANGELOG.md) 및 GitHub Security Advisories를 추적하십시오
+5. **프로덕션 준비 상태**: 현재 개발 단계에서 Flowsint는 프로덕션 분석 워크플로우보다 연구 및 테스트 환경에 더 적합합니다
 
-### 5.3 Supply Chain Risk
+### 5.3 공급망 위험
 
-- 871 commits from multiple contributors; no single-vendor lock-in
-- Docker images pulled from GitHub Container Registry (`ghcr.io`); verify image signatures when available
-- Python dependency chain managed via `uv`/`pyproject.toml`; audit with `pip-audit` or similar before deployment
-
----
-
-## 6. Operational Assessment for CTI Workflows
-
-### 6.1 Where Flowsint Fits
-
-| CTI Workflow Stage        | Flowsint Utility                                    | Rating     |
-| ------------------------- | --------------------------------------------------- | ---------- |
-| Initial Reconnaissance    | Domain/IP/ASN enrichers provide rapid mapping        | High       |
-| Entity Attribution        | Maigret, email-to-breaches, wallet tracing           | Medium-High |
-| Infrastructure Mapping    | ASN-to-CIDRs, reverse DNS, subdomain discovery       | High       |
-| Relationship Discovery    | Graph visualization with Neo4j Cypher queries         | High       |
-| Report Generation         | Screenshot/export graph; no built-in report templates | Low-Medium |
-| Team Collaboration        | Server deployment supports multi-user; no RBAC yet   | Medium      |
-| Evidence Preservation     | Local storage; no built-in chain-of-custody features  | Low         |
-
-### 6.2 Recommended Use Cases
-
-- Mapping attacker infrastructure (domains, IPs, ASNs) from a single indicator
-- Tracing cryptocurrency wallet relationships in ransomware/APT investigations
-- Cross-referencing email addresses and usernames across breach databases and social platforms
-- Building organizational link charts for supply chain risk assessments
-
-### 6.3 Limitations for Production CTI
-
-- No API for programmatic graph export to SIEM/SOAR platforms
-- No built-in IoC sharing format (STIX/MISP export not yet available)
-- Early-stage stability -- expect breaking changes between releases
-- Documentation is incomplete; community support via Discord only
+- 여러 기여자의 871개 커밋; 단일 벤더 종속 없음
+- Docker 이미지는 GitHub Container Registry(`ghcr.io`)에서 가져옵니다. 가능한 경우 이미지 서명을 확인하십시오
+- Python 종속성 체인은 `uv`/`pyproject.toml`을 통해 관리됩니다. 배포 전에 `pip-audit` 또는 유사한 도구로 감사하십시오
 
 ---
 
-## 7. Conclusion
+## 6. CTI 워크플로우 운영 평가
 
-Flowsint is a promising open-source OSINT graph exploration tool that has rapidly gained community traction (7,400+ stars) as a Maltego alternative. Its local-first privacy architecture, broad enricher ecosystem, and Docker-based deployment make it accessible for individual analysts and small teams.
+### 6.1 Flowsint의 적합 영역
 
-**Strengths**: Visual graph exploration, modular enricher architecture, zero cloud dependency, Apache 2.0 licensing, Enricher ecosystem coverage across domains/IPs/email/crypto/social media.
+| CTI 워크플로우 단계        | Flowsint 활용도                                         | 평가        |
+| ------------------------- | ------------------------------------------------------- | ----------- |
+| 초기 정찰                 | 도메인/IP/ASN Enricher가 신속한 매핑 제공               | 높음        |
+| 엔티티 귀속               | Maigret, 이메일-유출 매칭, 지갑 추적                    | 중간-높음   |
+| 인프라 매핑               | ASN-to-CIDRs, 역방향 DNS, 서브도메인 발견               | 높음        |
+| 관계 발견                 | Neo4j Cypher 쿼리를 통한 그래프 시각화                   | 높음        |
+| 보고서 생성               | 스크린샷/그래프 내보내기; 내장 보고서 템플릿 없음        | 낮음-중간   |
+| 팀 협업                   | 서버 배포로 다중 사용자 지원; RBAC 미구현               | 중간        |
+| 증거 보존                 | 로컬 저장소; 내장 연속성 관리 기능 없음                  | 낮음        |
 
-**Weaknesses**: Early development stage (pre-1.0), documented CVEs requiring monitoring, no STIX/MISP export, Docker-only deployment, incomplete documentation.
+### 6.2 권장 사용 사례
 
-**Verdict**: Suitable for CTI research and lab environments. Not yet recommended for production analyst pipelines without additional security hardening and isolation. The project's trajectory (871 commits, active community, rapid star growth) warrants continued monitoring -- it has the potential to become a standard tool in the open-source OSINT toolkit.
+- 단일 지표로부터 공격자 인프라(도메인, IP, ASN) 매핑
+- 랜섬웨어/APT 조사에서 암호화폐 지갑 관계 추적
+- 유출 데이터베이스 및 소셜 플랫폼 전반에서 이메일 주소와 사용자명 교차 참조
+- 공급망 위험 평가를 위한 조직 연계 차트 구축
 
-> **Disclaimer**: Flowsint is designed strictly for lawful, ethical investigation and research purposes. Unauthorized surveillance, doxxing, harassment, or any illegal use is prohibited under the project's ETHICS.md guidelines.
+### 6.3 프로덕션 CTI의 한계
+
+- SIEM/SOAR 플랫폼으로의 프로그래밍 방식 그래프 내보내기를 위한 API 없음
+- 내장 IoC 공유 형식 없음 (STIX/MISP 내보내기 미지원)
+- 초기 단계 안정성 -- 릴리스 간 주요 변경 가능성 있음
+- 문서 미완성; Discord를 통한 커뮤니티 지원만 제공
 
 ---
 
-## 8. References
+## 7. 결론
 
-[1] reconurge/flowsint -- GitHub Repository. <https://github.com/reconurge/flowsint>
+Flowsint는 오픈소스 OSINT 그래프 탐색 도구로서, Maltego 대안으로 빠르게 커뮤니티의 주목(7,400+ 스타)을 받고 있는 유망한 프로젝트입니다. 로컬 중심의 프라이버시 아키텍처, 광범위한 Enricher 생태계, Docker 기반 배포 방식은 개인 분석가와 소규모 팀이 접근하기 쉽게 만듭니다.
 
-[2] Flowsint Official Site. <https://flowsint.io>
+**강점**: 시각적 그래프 탐색, 모듈식 Enricher 아키텍처, 클라우드 종속성 없음, Apache 2.0 라이선스, 도메인/IP/이메일/암호화폐/소셜 미디어를 포괄하는 Enricher 생태계.
+
+**약점**: 초기 개발 단계(pre-1.0), 모니터링이 필요한 문서화된 CVE 존재, STIX/MISP 내보내기 없음, Docker 전용 배포, 문서 미완성.
+
+**평결**: CTI 연구 및 실험실 환경에 적합합니다. 추가적인 보안 강화 및 격리 없이 프로덕션 분석 파이프라인에 사용하는 것은 아직 권장되지 않습니다. 프로젝트의 발전 궤적(871 커밋, 활발한 커뮤니티, 빠른 스타 증가)은 지속적인 모니터링을 정당화하며, 오픈소스 OSINT 도구 키트의 표준 도구가 될 잠재력을 가지고 있습니다.
+
+> **면책 조항**: Flowsint는 합법적이고 윤리적인 조사 및 연구 목적으로만 설계되었습니다. 무단 감시, 신상 털기, 괴롭힘, 또는 모든 불법적 사용은 프로젝트의 ETHICS.md 가이드라인에 따라 금지됩니다.
+
+---
+
+## 8. 참고자료
+
+[1] reconurge/flowsint -- GitHub 저장소. <https://github.com/reconurge/flowsint>
+
+[2] Flowsint 공식 사이트. <https://flowsint.io>
 
 [3] Flowsint ETHICS.md. <https://github.com/reconurge/flowsint/blob/main/ETHICS.md>
 
@@ -320,13 +320,13 @@ Flowsint is a promising open-source OSINT graph exploration tool that has rapidl
 
 [5] Flowsint CHANGELOG.md. <https://github.com/reconurge/flowsint/blob/main/CHANGELOG.md>
 
-[6] Maltego -- Commercial OSINT Graph Platform. <https://www.maltego.com>
+[6] Maltego -- 상용 OSINT 그래프 플랫폼. <https://www.maltego.com>
 
-[7] SpiderFoot -- Open-Source OSINT Automation. <https://github.com/smicallef/spiderfoot>
+[7] SpiderFoot -- 오픈소스 OSINT 자동화. <https://github.com/smicallef/spiderfoot>
 
-[8] Recon-ng -- Web Reconnaissance Framework. <https://github.com/lanmaster53/recon-ng>
+[8] Recon-ng -- 웹 정찰 프레임워크. <https://github.com/lanmaster53/recon-ng>
 
 ---
 
-(c) 2026 Dennis Kim (HoKwang Kim) | Independent CTI Archive (TLP:GREEN)
-Contact: <gameworker@gmail.com> | GitHub: [gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
+(c) 2026 Dennis Kim (HoKwang Kim) | 독립 CTI 아카이브 (TLP:GREEN)
+연락처: <gameworker@gmail.com> | GitHub: [gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
