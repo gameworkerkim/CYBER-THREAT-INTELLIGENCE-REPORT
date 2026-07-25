@@ -1,17 +1,20 @@
 # Cyber Threat Intelligence Report
+<!--
+SEO Keywords: cyber threat intelligence, CTI, OSINT, APT, DPRK hacking, Lazarus, Kimsuky, supply chain attack, zero-day, AI security, LLM threats, Web3 security, cryptocurrency hacking, data breach, Korea cybersecurity, Dennis Kim, threat analysis, vulnerability research, security reports, threat actor, IOC
+-->
 
-> **Independent Cyber Threat Intelligence Archive**
-> *OSINT-based Defensive Research*
+> **Independent Cyber Threat Intelligence (CTI) Archive — OSINT-Based Defensive Research & Policy Analysis**
+> *Supply Chain · Zero-Day · DPRK APT · AI/LLM Threats · Web3/Crypto · Korea Breach & Policy*
 
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--07--20-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--07--25-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **Languages:** [한국어](README.md) · **English (this document)** · [日本語](README_JP.md) · [中文](README_CN.md)
 
-This repository is an independent archive of open-source cyber threat intelligence (CTI) reports for defensive, research, and policy purposes. Coverage includes supply-chain attacks, zero-days, DPRK/state-sponsored APT activity, AI/LLM-enabled threats, Web3/crypto security, and Korean breach/policy cases. All reports are OSINT-based and do not represent any organization's official position.
+This repository is an independent archive of open-source cyber threat intelligence (CTI) reports for defensive, research, and policy purposes. Coverage includes supply-chain attacks, zero-day exploits, DPRK/state-sponsored APT activity (Lazarus, Kimsuky, ScarCruft, Andariel), AI/LLM-enabled threats, Web3/crypto security, and Korean data breach/policy cases. All reports are OSINT-based and do not represent any organization's official position. Multilingual coverage in Korean, English, Japanese, and Chinese.
 
 LLM/agent index: [`llms.txt`](llms.txt)
 
@@ -290,6 +293,12 @@ Examples:
 
 ---
 
+## Keywords
+
+`Cyber Threat Intelligence` `CTI` `OSINT` `APT` `DPRK Hacking` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `Supply Chain Attack` `Zero-Day` `CVE` `Vulnerability` `AI Security` `LLM` `Artificial Intelligence Hacking` `Web3` `Blockchain` `Cryptocurrency` `DeFi` `Data Breach` `PII Leak` `Korea Cybersecurity` `Threat Analysis` `Security Research` `Incident Response` `MITRE ATT&CK` `IOC` `Dennis Kim` `Betalabs`
+
+---
+
 ## Contact & Contribution
 
 | Channel | Use |
@@ -316,7 +325,7 @@ Examples:
 | **Report series** | 81+ |
 | **Languages** | Korean · English · Japanese · Chinese |
 | **Key threat actors** | Lazarus · Kimsuky (APT43) · ScarCruft (APT37) · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE · and others |
-| **Last update** | 2026-07-20 |
+| **Last update** | 2026-07-25 |
 
 ---
 
@@ -324,3 +333,4 @@ Examples:
 [gameworker@gmail.com](mailto:gameworker@gmail.com) · [github.com/gameworkerkim](https://github.com/gameworkerkim/)
 
 *"Today's national strategic asset becomes tomorrow's cybercrime tool." — CTI-2026-0320*
+<!-- index:follow -->

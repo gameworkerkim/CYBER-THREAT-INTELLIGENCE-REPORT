@@ -1,17 +1,20 @@
 # Cyber Threat Intelligence Report
+<!--
+SEO Keywords: 网络威胁情报, CTI, OSINT, APT, 朝鲜黑客, Lazarus, Kimsuky, 供应链攻击, 零日漏洞, AI安全, LLM威胁, Web3安全, 加密货币黑客, 数据泄露, 韩国网络安全, Dennis Kim, 威胁分析, 漏洞研究, 安全报告
+-->
 
-> **独立网络威胁情报报告归档**
-> *OSINT-based Defensive Research*
+> **独立网络威胁情报(CTI)归档 — 基于OSINT的防御·研究·政策分析**
+> *供应链 · 零日漏洞 · 朝鲜APT · AI/LLM · Web3 · 韩国泄露与政策*
 
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--07--20-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--07--25-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **语言:** [한국어](README.md) · [English](README_EN.md) · [日本語](README_JP.md) · **中文（本文）**
 
-面向防御、研究与政策制定的公开 CTI 独立归档。覆盖供应链攻击、零日、朝鲜/国家支持型 APT、AI/LLM 威胁、Web3，以及韩国泄露与政策议题。LLM/代理索引: [`llms.txt`](llms.txt)
+面向防御、研究与政策制定的公开网络威胁情报(CTI/OSINT)独立归档。涵盖供应链攻击(Supply Chain Attack)、零日漏洞(Zero-Day)、朝鲜/国家支持型APT（Lazarus、Kimsuky、ScarCruft、Andariel）、AI/LLM威胁、Web3与加密货币安全，以及韩国数据泄露与政策议题。所有报告基于公开OSINT，不代表任何组织的官方立场。以韩语、英语、日语、中文多语言提供。
 
 ---
 
@@ -102,11 +105,11 @@ Arbitrum 上 RWA 永续合约 DEX Ostium 因预言机价格源被操纵，估计
 
 ## Awesome Security Series: Startup Security Guide & LLM CISO
 
-> **Published 2026-06-17** — Essential security guide for startups entering the Korean market
+> **2026-06-17 发布** — 进入韩国市场的创业公司必备安全指南
 
-As shown by the Tving, CU, and FastCampus breaches, a single misconfiguration can cascade into a massive data leak. Foreign startups entering Korea face **PIPA** obligations that differ from GDPR/CCPA.
+正如 TVING、CU、FastCampus 泄露事件所示，一次配置失误可能导致大规模数据泄露。进入韩国的海外创业公司面临与 GDPR/CCPA 截然不同的 **韩国个人信息保护法(PIPA)** 义务要求。
 
-[**Explore the Startup Security Guide →**](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
+[**浏览 Startup Security Guide →**](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
 
 | Language | Guide | LLM CISO Prompts | Dashboard |
 |----------|-------|-----------------|-----------|
@@ -118,7 +121,7 @@ As shown by the Tving, CU, and FastCampus breaches, a single misconfiguration ca
 
 ## Awesome Security Series: Static Analysis Security Tools
 
-Curated open-source SAST tools (Semgrep, CodeQL, SonarQube, and more).
+精选开源 SAST 工具（Semgrep、CodeQL、SonarQube 等）。
 
 [**Awesome Static Analysis Security (SAST) Tools →**](Awesome%20Static%20Analysis%20Security%20Tools.md)
 
@@ -127,9 +130,9 @@ Curated open-source SAST tools (Semgrep, CodeQL, SonarQube, and more).
 
 ## Awesome Security Series: LAON VaultGuard
 
-Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposure).
+多 LLM 交叉验证密钥扫描器（受 TVING AWS 密钥泄露启发）。
 
-[**LAON VaultGuard →**](https://github.com/gameworkerkim/vibe-investing/tree/main/LAON_VaultGuard) · [Report KR](CTI-2026-0607-LAON_VaultGuard_KR.md) · [EN](CTI-2026-0607-LAON_VaultGuard_EN.md)
+[**LAON VaultGuard →**](https://github.com/gameworkerkim/vibe-investing/tree/main/LAON_VaultGuard) · [报告 KR](CTI-2026-0607-LAON_VaultGuard_KR.md) · [EN](CTI-2026-0607-LAON_VaultGuard_EN.md)
 
 
 ---
@@ -244,6 +247,12 @@ Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposur
 
 ---
 
+## 关键词 (Keywords)
+
+`网络威胁情报` `CTI` `OSINT` `APT` `朝鲜黑客` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `供应链攻击` `零日漏洞` `CVE` `漏洞` `AI安全` `LLM` `人工智能黑客` `Web3` `区块链` `加密货币` `DeFi` `数据泄露` `个人信息泄露` `韩国网络安全` `威胁分析` `安全研究` `事件响应` `MITRE ATT&CK` `IOC` `Dennis Kim` `Betalabs`
+
+---
+
 ## Methodology
 
 ### Traffic Light Protocol (TLP)
@@ -292,14 +301,25 @@ Examples:
 
 ---
 
+## 联系与贡献 (Contact & Contribution)
+
+| 渠道 | 用途 |
+| --- | --- |
+| **Email** | [gameworker@gmail.com](mailto:gameworker@gmail.com) — 反馈·更正·情报提交 |
+| **GitHub Issues** | [创建 Issue](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/issues) — IoC·参考补充建议 |
+
+---
+
 ## 仓库统计
 
 | | |
 | --- | --- |
 | **报告系列** | 81+ |
 | **语言** | 한국어 · English · 日本語 · 中文 |
-| **最近更新** | 2026-07-20 |
+| **最近更新** | 2026-07-25 |
 
 ---
 
 **© 2026 Dennis Kim (김호광)** · [gameworker@gmail.com](mailto:gameworker@gmail.com)
+
+<!-- index:follow -->

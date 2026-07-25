@@ -1,17 +1,20 @@
 # Cyber Threat Intelligence Report
+<!--
+SEO Keywords: 사이버 위협 인텔리전스, CTI, OSINT, APT, 북한 해킹, 라자루스, 김수키, 공급망 공격, 제로데이, AI 보안, LLM 위협, Web3 보안, 암호화폐 해킹, 개인정보 유출, 한국 사이버 보안, Dennis Kim, 위협 분석, 취약점 분석, 보안 리포트
+-->
 
-> **독립 사이버 위협 인텔리전스 리포트 아카이브**
-> *Independent Cyber Threat Intelligence Archive · OSINT-based Defensive Research*
+> **독립 사이버 위협 인텔리전스(CTI) 리포트 아카이브 — OSINT 기반 방어·연구·정책 분석**
+> *Independent Cyber Threat Intelligence Archive · OSINT-based Defensive Research · Supply Chain · Zero-Day · DPRK APT · AI/LLM · Web3*
 
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--07--20-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--07--25-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **언어 / Languages:** **한국어 (이 문서)** · [English](README_EN.md) · [日本語](README_JP.md) · [中文](README_CN.md)
 
-본 저장소는 방어·연구·정책 수립 목적의 **공개 사이버 위협 인텔리전스(Open CTI) 리포트**를 수집·발행하는 독립 아카이브입니다. 공급망 공격, 제로데이, 북한·국가배후 APT, AI/LLM 위협, Web3·암호화폐, 한국 유출·정책 이슈를 다룹니다. 모든 리포트는 OSINT 기반이며 특정 조직의 공식 입장을 대변하지 않습니다.
+본 저장소는 방어·연구·정책 수립 목적의 **공개 사이버 위협 인텔리전스(Open CTI / OSINT) 리포트**를 수집·발행하는 독립 아카이브입니다. 공급망 공격(Supply Chain Attack), 제로데이(Zero-Day), 북한·국가배후 APT( Lazarus / Kimsuky / ScarCruft / Andariel ), AI·LLM 위협, Web3·암호화폐 보안, 한국 개인정보 유출·정책 이슈를 심층 분석합니다. 모든 리포트는 공개 OSINT 기반이며 특정 조직의 공식 입장을 대변하지 않습니다. 다국어(KR/EN/JP/ZH)로 제공됩니다.
 
 LLM/에이전트용 인덱스: [`llms.txt`](llms.txt)
 
@@ -294,6 +297,12 @@ Examples:
 
 ---
 
+## 키워드 (Keywords)
+
+`사이버 위협 인텔리전스` `CTI` `OSINT` `APT` `북한 해킹` `라자루스` `Lazarus` `김수키` `Kimsuky` `APT43` `스카크러프트` `ScarCruft` `APT37` `공급망 공격` `Supply Chain` `제로데이` `Zero-Day` `취약점` `CVE` `AI 보안` `LLM` `인공지능 해킹` `Web3` `블록체인` `암호화폐` `DeFi` `개인정보 유출` `데이터 유출` `한국 사이버 보안` `Korea Cybersecurity` `위협 분석` `Threat Intelligence` `보안 연구` `사고 대응` `MITRE ATT&CK` `IOC` `침해 지표` `Dennis Kim` `Betalabs`
+
+---
+
 ## 연락·기여 (Contact & Contribution)
 
 | 채널 | 용도 |
@@ -321,7 +330,7 @@ Examples:
 | **총 리포트 시리즈** | 81+ |
 | **커버 언어** | 한국어 · English · 日本語 · 中文 |
 | **주요 위협 행위자** | Lazarus · Kimsuky(APT43) · ScarCruft(APT37) · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE 외 |
-| **최근 업데이트** | 2026-07-20 |
+| **최근 업데이트** | 2026-07-25 |
 
 ---
 
@@ -329,3 +338,5 @@ Examples:
 [gameworker@gmail.com](mailto:gameworker@gmail.com) · [github.com/gameworkerkim](https://github.com/gameworkerkim/)
 
 *"오늘의 국가 전략 자산이 내일의 사이버 범죄 도구가 된다." — CTI-2026-0320*
+
+<!-- index:follow -->

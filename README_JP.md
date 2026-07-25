@@ -1,17 +1,20 @@
 # Cyber Threat Intelligence Report
+<!--
+SEO Keywords: サイバー脅威インテリジェンス, CTI, OSINT, APT, 北朝鮮ハッキング, Lazarus, キムスキー, サプライチェーン攻撃, ゼロデイ, AIセキュリティ, LLM脅威, Web3セキュリティ, 暗号通貨ハッキング, データ侵害, 韓国サイバーセキュリティ, Dennis Kim, 脅威分析, 脆弱性リサーチ, セキュリティレポート
+-->
 
-> **独立サイバー脅威インテリジェンス・アーカイブ**
-> *OSINT-based Defensive Research*
+> **独立サイバー脅威インテリジェンス(CTI)アーカイブ — OSINTベースの防御・研究・政策分析**
+> *サプライチェーン · ゼロデイ · 北朝鮮APT · AI/LLM · Web3 · 韓国侵害・政策*
 
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--07--20-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--07--25-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **言語:** [한국어](README.md) · [English](README_EN.md) · **日本語（この文書）** · [中文](README_CN.md)
 
-防御・研究・政策目的の公開 CTI レポート独立アーカイブです。サプライチェーン、ゼロデイ、北朝鮮・国家支援型 APT、AI/LLM 脅威、Web3、韓国の漏洩・政策案件を扱います。LLM/エージェント用索引: [`llms.txt`](llms.txt)
+防御・研究・政策目的の公開サイバー脅威インテリジェンス(CTI/OSINT)レポートの独立アーカイブです。サプライチェーン攻撃、ゼロデイ脆弱性、北朝鮮・国家支援型APT（Lazarus、Kimsuky、ScarCruft、Andariel）、AI/LLM脅威、Web3・暗号通貨セキュリティ、韓国のデータ侵害・政策案件を深く分析します。全レポートはOSINTベースで、特定組織の公式見解を代表するものではありません。韓国語・英語・日本語・中国語の多言語で提供しています。
 
 ---
 
@@ -102,11 +105,11 @@ Arbitrum 上の RWA 無期限先物 DEX Ostium で、オラクル価格フィー
 
 ## Awesome Security Series: Startup Security Guide & LLM CISO
 
-> **Published 2026-06-17** — Essential security guide for startups entering the Korean market
+> **2026-06-17 公開** — 韓国市場に進出するスタートアップ向け必須セキュリティガイド
 
-As shown by the Tving, CU, and FastCampus breaches, a single misconfiguration can cascade into a massive data leak. Foreign startups entering Korea face **PIPA** obligations that differ from GDPR/CCPA.
+TVING、CU、FastCampus の侵害事例が示すように、一つの設定ミスが大規模なデータ漏洩につながる可能性があります。韓国に進出する海外スタートアップは、GDPR/CCPA とは異なる **韓国個人情報保護法(PIPA)** の義務を見落としがちです。
 
-[**Explore the Startup Security Guide →**](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
+[**Startup Security Guide を見る →**](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Startup_Security_Guide)
 
 | Language | Guide | LLM CISO Prompts | Dashboard |
 |----------|-------|-----------------|-----------|
@@ -118,7 +121,7 @@ As shown by the Tving, CU, and FastCampus breaches, a single misconfiguration ca
 
 ## Awesome Security Series: Static Analysis Security Tools
 
-Curated open-source SAST tools (Semgrep, CodeQL, SonarQube, and more).
+厳選されたオープンソース SAST ツール（Semgrep、CodeQL、SonarQube など）。
 
 [**Awesome Static Analysis Security (SAST) Tools →**](Awesome%20Static%20Analysis%20Security%20Tools.md)
 
@@ -127,9 +130,9 @@ Curated open-source SAST tools (Semgrep, CodeQL, SonarQube, and more).
 
 ## Awesome Security Series: LAON VaultGuard
 
-Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposure).
+マルチLLM交差検証シークレットスキャナー（TVING AWS キー漏洩から着想）。
 
-[**LAON VaultGuard →**](https://github.com/gameworkerkim/vibe-investing/tree/main/LAON_VaultGuard) · [Report KR](CTI-2026-0607-LAON_VaultGuard_KR.md) · [EN](CTI-2026-0607-LAON_VaultGuard_EN.md)
+[**LAON VaultGuard →**](https://github.com/gameworkerkim/vibe-investing/tree/main/LAON_VaultGuard) · [レポート KR](CTI-2026-0607-LAON_VaultGuard_KR.md) · [EN](CTI-2026-0607-LAON_VaultGuard_EN.md)
 
 
 ---
@@ -216,7 +219,6 @@ Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposur
 | 2026-04-30 | [`CTI-2026-0430-COPYFAIL`](CTI-2026-0430-COPYFAIL_KR.md) — CopyFail (CVE-2026-31431) | HIGH | [KR](CTI-2026-0430-COPYFAIL_KR.md) |
 | 2026-04-27 | [`CTI-2026-0427-LITECOIN`](CTI-2026-0427-LITECOIN_KR.md) — Litecoin vulnerability | MEDIUM | [KR](CTI-2026-0427-LITECOIN_KR.md) · [EN](CTI-2026-0427-LITECOIN_EN.md) · [PDF](CTI-2026-0427-LITECOIN_KR.pdf) |
 | 2026-04-22 | [`CTI-2026-0422-MCP`](CTI-2026-0422-MCP_KR.md) — Intelligent/sleeper attacks targeting MCP | HIGH | [KR](CTI-2026-0422-MCP_KR.md) · [EN](CTI-2026-0422-MCP_EN.md) · [JP](CTI-2026-0422-MCP_JP.md) · [ZH](CTI-2026-0422-MCP_CN.md) · [PDF](CTI-2026-0422-MCP_KR.pdf) |
-| 2026-04-20 | [`CTI-2026-0420-VERCEL`](CTI-2026-0420-VERCEL_KR.md) — Vercel breach (AI SaaS supply chain) | HIGH | [KR](CTI-2026-0420-VERCEL_KR.md) · [EN](CTI-2026-0420-VERCEL_EN.md) · [PDF](CTI-2026-0420-VERCEL_KR.pdf) |
 | 2026-03-20 | [`CTI-2026-0320-CORUNA`](CTI-2026-0320-CORUNA_KR.md) — Coruna iOS Exploit Kit / cyber-weapon supply chain | CRITICAL | [KR](CTI-2026-0320-CORUNA_KR.md) · [EN](CTI-2026-0320-CORUNA_EN.md) · [ZH](CTI-2026-0320-CORUNA_ZH.md) · [PDF](CTI-2026-0320-CORUNA_KR.pdf) |
 
 ---
@@ -241,6 +243,12 @@ Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposur
 ### Korea Cybersecurity & Breaches
 `TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY`
 
+
+---
+
+## キーワード (Keywords)
+
+`サイバー脅威インテリジェンス` `CTI` `OSINT` `APT` `北朝鮮ハッキング` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `サプライチェーン攻撃` `ゼロデイ` `CVE` `脆弱性` `AIセキュリティ` `LLM` `AIハッキング` `Web3` `ブロックチェーン` `暗号通貨` `DeFi` `データ侵害` `個人情報漏洩` `韓国サイバーセキュリティ` `脅威分析` `セキュリティ研究` `インシデント対応` `MITRE ATT&CK` `IOC` `Dennis Kim` `Betalabs`
 
 ---
 
@@ -292,14 +300,24 @@ Examples:
 
 ---
 
+## 連絡先 (Contact & Contribution)
+
+| チャネル | 用途 |
+| --- | --- |
+| **Email** | [gameworker@gmail.com](mailto:gameworker@gmail.com) — フィードバック・修正・情報提供 |
+| **GitHub Issues** | [Issue を作成](https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/issues) — IoC・リファレンス追加提案 |
+
+---
+
 ## リポジトリ統計
 
 | | |
 | --- | --- |
 | **レポートシリーズ** | 81+ |
 | **言語** | 한국어 · English · 日本語 · 中文 |
-| **最終更新** | 2026-07-20 |
+| **最終更新** | 2026-07-25 |
 
 ---
 
 **© 2026 Dennis Kim (김호광)** · [gameworker@gmail.com](mailto:gameworker@gmail.com)
+<!-- index:follow -->
