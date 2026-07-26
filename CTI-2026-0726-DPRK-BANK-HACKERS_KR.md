@@ -1,5 +1,5 @@
 ---
-title: "北, \"내부 해커가 자국 중앙은행 털었다\" — 정권의 칼날이 주인을 물다"
+title: "北, 내부 해커가 자국 중앙은행 털었다 — 정권의 칼날이 주인을 물다"
 subtitle: "Daily NK 보도: 전직 군사 사이버 요원이 중앙은행·대외무역은행을 해킹하고 암호화폐로 세탁했다는 체포 사건 — 미검증 단보와 내부 통제 균열 신호"
 description: "2026-07-12 평양에서 북한 국가정보국이 자국 중앙은행·대외무역은행 해킹 혐의 내부 해커를 체포했다는 Daily NK 보도를 정리한다. 자금세탁 경로, 발각 단서, 20억 달러 오해, 검증 한계를 분리한다."
 abstract: |
@@ -43,7 +43,7 @@ robots: index,follow
 
 | id             | CTI-2026-0726-DPRK-BANK-HACKERS                                                      |
 | -------------- | ------------------------------------------------------------------------------------ |
-| 제목            | 北, "내부 해커가 자국 중앙은행 털었다" — 정권의 칼날이 주인을 물다                      |
+| 제목            | 北, 내부 해커가 자국 중앙은행 털었다 — 정권의 칼날이 주인을 물다                        |
 | 부제            | Daily NK 단보 기반 체포 사건 정리 · 미검증 명시 · 20억 달러 오해 분리                    |
 | 저자            | Dennis Kim (HoKwang Kim)                                                             |
 | 이메일          | <gameworker@gmail.com>                                                               |
@@ -55,7 +55,7 @@ robots: index,follow
 | 태그            | DPRK · Insider-Threat · Cryptocurrency-Laundering · Central-Bank                      |
 | 프레임워크      | N/A (사건 브리프 · OSINT)                                                             |
 
-# 北, "내부 해커가 자국 중앙은행 털었다" — 정권의 칼날이 주인을 물다
+# 北, 내부 해커가 자국 중앙은행 털었다 — 정권의 칼날이 주인을 물다
 
 > **보고서 ID** `CTI-2026-0726-DPRK-BANK-HACKERS` | **발행일** 2026-07-26 | **분류** `TLP:GREEN` | **심각도** MEDIUM  
 > **저자** Dennis Kim (HoKwang Kim) | <gameworker@gmail.com> | [@gameworkerkim](https://github.com/gameworkerkim)  

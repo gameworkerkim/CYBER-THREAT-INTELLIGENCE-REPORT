@@ -1,5 +1,5 @@
 ---
-title: "朝鲜逮捕“自家培养黑客”：涉嫌侵入本国央行并经加密货币洗钱"
+title: "朝鲜逮捕自家培养黑客：涉嫌侵入本国央行并经加密货币洗钱"
 subtitle: "Daily NK：前军事网络人员据称入侵中央银行与贸易银行后经加密货币洗钱——未经验证的单源报道与内部管控裂痕信号"
 description: "整理 Daily NK 关于 2026-07-12 平壤逮捕涉嫌入侵中央银行、贸易银行的内部黑客报道。区分洗钱路径、发现线索、20亿美元标题误解与验证局限。"
 abstract: |
@@ -40,7 +40,7 @@ robots: index,follow
 
 | id             | CTI-2026-0726-DPRK-BANK-HACKERS                                                      |
 | -------------- | ------------------------------------------------------------------------------------ |
-| 标题            | 朝鲜逮捕“自家培养黑客”：涉嫌侵入本国央行并经加密货币洗钱                                 |
+| 标题            | 朝鲜逮捕自家培养黑客：涉嫌侵入本国央行并经加密货币洗钱                                   |
 | 副标题          | Daily NK 单源逮捕叙事 · 未验证 · 20亿美元标题警示                                      |
 | 作者            | Dennis Kim (HoKwang Kim)                                                             |
 | 邮箱            | <gameworker@gmail.com>                                                               |
@@ -52,7 +52,7 @@ robots: index,follow
 | 标签            | DPRK · Insider-Threat · Cryptocurrency-Laundering · Central-Bank                      |
 | 框架            | N/A（事件简报 · OSINT）                                                                |
 
-# 朝鲜逮捕“自家培养黑客”：涉嫌侵入本国央行并经加密货币洗钱
+# 朝鲜逮捕自家培养黑客：涉嫌侵入本国央行并经加密货币洗钱
 
 > **报告 ID** `CTI-2026-0726-DPRK-BANK-HACKERS` | **发布日** 2026-07-26 | **分类** `TLP:GREEN` | **严重性** MEDIUM  
 > **作者** Dennis Kim (HoKwang Kim) | <gameworker@gmail.com> | [@gameworkerkim](https://github.com/gameworkerkim)  
