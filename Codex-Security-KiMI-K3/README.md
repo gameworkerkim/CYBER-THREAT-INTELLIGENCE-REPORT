@@ -1,4 +1,4 @@
-# Codex Open Security
+# Codex Open Security (수정 중)
 
 > **Open-weight alternative to OpenAI Codex Security** — CLI and TypeScript SDK for finding security vulnerabilities using **DeepSeek V4, Kimi K3, and Qwen**.
 
