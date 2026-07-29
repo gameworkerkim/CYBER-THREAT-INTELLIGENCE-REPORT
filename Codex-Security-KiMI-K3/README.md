@@ -12,7 +12,7 @@
 
 ### Why?
 
-OpenAI Codex Security requires `@openai/codex` — a closed-source Rust binary. This fork:
+OpenAI Codex Security requires `@openai/codex` — a closed-source Rust binary. This fork
 
 - Replaces the native binary with direct `openai` SDK calls
 - Supports **DeepSeek V4**, **Kimi K3**, and **Qwen3** via their OpenAI-compatible endpoints
@@ -125,7 +125,7 @@ codex-open-security (Node.js CLI)
 
 ### 왜 만들었나?
 
-OpenAI Codex Security는 `@openai/codex`라는 Rust 바이너리에 의존합니다. 이 포크는:
+OpenAI Codex Security는 `@openai/codex`라는 Rust 바이너리에 의존합니다. 이 포크는 다음의 컨셉으로 확장되었습니다.
 
 - 네이티브 바이너리 의존성을 제거하고 `openai` npm SDK로 대체
 - **DeepSeek V4**, **Kimi K3**, **Qwen3**의 OpenAI 호환 API를 지원
@@ -160,7 +160,7 @@ npx codex-open-security scan . --provider qwen --model qwen-max
 
 ### 라이선스
 
-Apache 2.0 — OpenAI Codex Security 원본 라이선스 유지.
+Apache 2.0 — OpenAI Codex Security 원본 라이선스 유지합니다.
 
 ---
 
