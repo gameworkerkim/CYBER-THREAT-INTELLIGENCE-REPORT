@@ -1,0 +1,49 @@
+{
+  "name": "@gameworkerkim/codex-open-security",
+  "version": "0.1.0",
+  "description": "Open-weight alternative to Codex Security — CLI and TypeScript SDK for finding security vulnerabilities using DeepSeek, Kimi K3, and Qwen",
+  "license": "CC-BY-NC-SA-4.0",
+  "author": "Dennis Kim <gameworker@gmail.com>",
+  "homepage": "https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT/tree/main/Codex-Security-KiMI-K3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT.git",
+    "directory": "Codex-Security-KiMI-K3"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "codex-open-security": "./bin/codex-open-security.mjs"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "pnpm run clean && tsc -p tsconfig.build.json",
+    "lint": "tsc --noEmit",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "openai": "^4.77.0",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}
