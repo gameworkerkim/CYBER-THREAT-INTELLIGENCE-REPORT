@@ -43,8 +43,9 @@
     "docker:providers": "docker run --rm codex-open-security:local providers"
   },
   "dependencies": {
-    "openai": "^4.77.0",
-    "commander": "^12.1.0"
+    "commander": "^12.1.0",
+    "fast-glob": "^3.3.3",
+    "openai": "^4.77.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

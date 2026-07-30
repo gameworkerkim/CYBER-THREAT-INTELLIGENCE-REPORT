@@ -4,6 +4,7 @@ import { Command } from "commander";
 import { SecurityScanner } from "./scanner.js";
 import { saveReport } from "./reporter.js";
 import { PROVIDERS } from "./providers.js";
+import { loadConfig } from "./config.js";
 import type { ScanOptions } from "./types.js";
 
 const program = new Command();
@@ -18,30 +19,58 @@ const providerNames = Object.keys(PROVIDERS).join(" | ");
 program
   .command("scan [target]")
   .description("Scan a repository or directory for security vulnerabilities")
-  .option("-p, --provider <provider>", `Model provider: ${providerNames}`, "deepseek")
+  .option("-p, --provider <provider>", `Model provider: ${providerNames}`)
   .option("-m, --model <model>", "Model ID override")
   .option("-k, --api-key <key>", "API key (or set env var)")
-  .option("-o, --output <dir>", "Output directory for reports", "./security-reports")
-  .option("-f, --format <format>", "Report format: json | sarif | markdown", "markdown")
-  .option("-s, --severity <level>", "Minimum severity: critical | high | medium | low", "low")
+  .option("-o, --output <dir>", "Output directory for reports")
+  .option("-f, --format <format>", "Report format: json | sarif | markdown")
+  .option("-s, --severity <level>", "Minimum severity: critical | high | medium | low")
   .option("--paths <paths...>", "Specific file paths to scan")
   .option("--prompt <prompt>", "Custom system prompt (or set CODEX_OPEN_SECURITY_PROMPT env var)")
   .option("--max-cost <dollars>", "Maximum budget in USD before stopping scan", parseFloat)
-  .option("--concurrency <n>", "Number of batches to process in parallel", parseInt, 3)
+  .option("--concurrency <n>", "Number of batches to process in parallel", parseInt)
+  .option("--dry-run", "List files that would be scanned without calling API")
   .action(async (target: string | undefined, options: Record<string, unknown>) => {
+    const config = await loadConfig();
+
     const scanTarget = target || ".";
-    const provider = String(options.provider || "deepseek");
-    const model = options.model ? String(options.model) : undefined;
+    const provider = String(
+      options.provider || config.provider || "deepseek",
+    );
+    const model = options.model
+      ? String(options.model)
+      : config.model
+        ? String(config.model)
+        : undefined;
     const apiKey = options.apiKey ? String(options.apiKey) : undefined;
-    const output = String(options.output || "./security-reports");
-    const format = String(options.format || "markdown") as ScanOptions["output"];
-    const severity = String(options.severity || "low") as ScanOptions["severity"];
+    const output = String(
+      options.output || config.output || "./security-reports",
+    );
+    const format = String(
+      options.format || config.format || "markdown",
+    ) as ScanOptions["output"];
+    const severity = String(
+      options.severity || config.severity || "low",
+    ) as ScanOptions["severity"];
     const paths = options.paths ? (options.paths as string[]) : undefined;
     const prompt = options.prompt ? String(options.prompt) : undefined;
-    const maxCost = typeof options.maxCost === "number" ? options.maxCost : undefined;
-    const concurrency = typeof options.concurrency === "number" ? options.concurrency : 3;
+    const maxCost =
+      typeof options.maxCost === "number"
+        ? options.maxCost
+        : config.maxCost;
+    const concurrency =
+      typeof options.concurrency === "number"
+        ? options.concurrency
+        : config.concurrency || 3;
+    const dryRun = Boolean(options.dryRun);
 
-    console.log(`\n[codex-open-security] Provider: ${provider} | Model: ${model || "default"}`);
+    const configuredVia = config.provider
+      ? ` | config: ~/.codex-open-security/config.json`
+      : "";
+
+    console.log(
+      `\n[codex-open-security] Provider: ${provider} | Model: ${model || "default"}${configuredVia}`,
+    );
     console.log(`[codex-open-security] Scanning: ${scanTarget}\n`);
 
     try {
@@ -57,7 +86,12 @@ program
         prompt,
         maxCost,
         concurrency,
+        dryRun,
       });
+
+      if (dryRun) {
+        return;
+      }
 
       const reportPaths = await saveReport(result, output, format || "markdown");
 

@@ -33,6 +33,7 @@ export interface ScanResult {
   cost: ScanCost;
   errors?: string[];
   truncated?: boolean;
+  files?: string[];
 }
 
 export interface ScanOptions {
@@ -46,6 +47,7 @@ export interface ScanOptions {
   maxCost?: number;
   prompt?: string;
   concurrency?: number;
+  dryRun?: boolean;
 }
 
 export interface ProviderConfig {

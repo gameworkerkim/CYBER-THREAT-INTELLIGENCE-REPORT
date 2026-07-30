@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { readFile } from "node:fs/promises";
-import { join, extname } from "node:path";
-import { glob } from "node:fs/promises";
+import { join, extname, resolve } from "node:path";
+import fg from "fast-glob";
 import type { SecurityFinding, ScanOptions, ScanResult } from "./types.js";
 import { getModelConfig } from "./providers.js";
 
@@ -44,6 +44,7 @@ const MAX_FILES = 200;
 const MAX_RETRIES = 3;
 const RETRY_BASE_DELAY_MS = 1000;
 const DEFAULT_CONCURRENCY = 3;
+const EXCLUDE_DIRS = ["node_modules", ".git", "dist", "build", "__pycache__", ".venv"];
 
 function resolveApiKey(provider: string): string {
   const key = provider.toLowerCase();
@@ -60,13 +61,14 @@ function resolveApiKey(provider: string): string {
 }
 
 async function listFiles(targetDir: string, paths?: string[]): Promise<string[]> {
+  const absDir = resolve(targetDir);
+
   if (paths && paths.length > 0) {
     const files: string[] = [];
     for (const p of paths) {
-      const full = join(targetDir, p);
-      for await (const entry of glob(full, { withFileTypes: true })) {
-        if (!entry.isFile()) continue;
-        const filePath = join(entry.parentPath, entry.name);
+      const pattern = join(absDir, p);
+      const entries = await fg([pattern], { onlyFiles: true, dot: true, absolute: true });
+      for (const filePath of entries) {
         if (FILE_EXTENSIONS.has(extname(filePath).toLowerCase())) {
           files.push(filePath);
         }
@@ -75,24 +77,25 @@ async function listFiles(targetDir: string, paths?: string[]): Promise<string[]>
     return files;
   }
 
-  const files: string[] = [];
-  const exclude = new Set(["node_modules", ".git", "dist", "build", "__pycache__", ".venv"]);
-  for await (const entry of glob(join(targetDir, "**/*"), { withFileTypes: true })) {
-    if (!entry.isFile()) continue;
-    const filePath = join(entry.parentPath, entry.name);
-    const rel = filePath.slice(targetDir.length + 1);
-    if (rel.split(/[\\/]/).some((part) => exclude.has(part))) continue;
-    if (!FILE_EXTENSIONS.has(extname(filePath).toLowerCase())) continue;
-    files.push(filePath);
-    if (files.length >= MAX_FILES) break;
-  }
-  return files;
+  const extGlobs = [...FILE_EXTENSIONS].map((ext) => `**/*${ext}`);
+  const ignoreGlobs = EXCLUDE_DIRS.map((d) => `**/${d}/**`);
+
+  const entries = await fg(extGlobs, {
+    cwd: absDir,
+    onlyFiles: true,
+    dot: true,
+    ignore: ignoreGlobs,
+    absolute: true,
+  });
+
+  return entries.slice(0, MAX_FILES);
 }
 
 function buildFileContext(files: string[], targetDir: string): string {
+  const absDir = resolve(targetDir);
   const parts: string[] = ["## Repository Structure\n```"];
   for (const f of files.slice(0, 80)) {
-    parts.push(`  ${f.slice(targetDir.length + 1)}`);
+    parts.push(`  ${f.slice(absDir.length + 1)}`);
   }
   parts.push("```\n");
   return parts.join("\n");
@@ -199,10 +202,35 @@ export class SecurityScanner {
 
   async scan(options: ScanOptions): Promise<ScanResult> {
     const startTime = Date.now();
-    const targetDir = options.target;
-    const systemPrompt = this.resolvePrompt(options);
+    const targetDir = resolve(options.target);
 
     const files = await listFiles(targetDir, options.paths);
+
+    if (options.dryRun) {
+      console.log(`\n[codex-open-security] Dry-run mode — listing files only\n`);
+      console.log(`Target: ${targetDir}`);
+      console.log(`Files found: ${files.length} (max ${MAX_FILES})`);
+      console.log(``);
+      for (const f of files) {
+        console.log(`  ${f.slice(targetDir.length + 1)}`);
+      }
+      console.log(``);
+
+      const batches = this.createBatches(files, 5);
+      console.log(`Batches: ${batches.length} (5 files/batch, concurrency: ${options.concurrency || DEFAULT_CONCURRENCY})`);
+      console.log(``);
+
+      return {
+        findings: [],
+        summary: { total: 0, critical: 0, high: 0, medium: 0, low: 0, info: 0 },
+        duration: Date.now() - startTime,
+        model: this.model,
+        provider: this.provider,
+        timestamp: new Date().toISOString(),
+        cost: { inputTokens: 0, outputTokens: 0, totalCost: 0 },
+        files: files.slice(0, MAX_FILES).map((f) => f.slice(targetDir.length + 1)),
+      };
+    }
 
     if (files.length === 0) {
       return {
@@ -216,6 +244,7 @@ export class SecurityScanner {
       };
     }
 
+    const systemPrompt = this.resolvePrompt(options);
     const client = this.ensureClient();
     const structure = buildFileContext(files, targetDir);
     const batches = this.createBatches(files, 5);
