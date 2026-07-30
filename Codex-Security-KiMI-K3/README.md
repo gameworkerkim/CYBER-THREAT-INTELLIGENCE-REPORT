@@ -141,9 +141,9 @@ await saveReport(result, "./reports", "markdown");
 
 ## 한국어
 
-### 무엇인가
+### 포크 확장의 컨셉
 
-OpenAI Codex Security의 오픈웨이트 포크입니다. DeepSeek / Kimi / Qwen API로 코드를 스캔하고 Markdown·JSON·SARIF 리포트를 만듭니다. **배포·실행은 Docker를 권장**합니다 (로컬 Node 설치 불필요).
+OpenAI Codex Security는 우수한 보안 솔루션입니다. 다만, ChatGPT 토큰 가격이 저렴하지 않다는 점이 문제입니다. 그래서 ChatGPT의 동급 성능을 가진 LLM으로 확장 사용할 수 있도록 오픈웨이트 포크를 했습니다. DeepSeek / Kimi / Qwen API로 코드를 스캔하고 Markdown·JSON·SARIF 리포트를 만듭니다. **배포·실행은 Docker를 권장**합니다 (로컬 Node 설치 불필요).
 
 ### Docker (권장)
 
