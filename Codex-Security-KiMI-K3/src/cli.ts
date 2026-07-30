@@ -35,37 +35,38 @@ program
     const severity = String(options.severity || "low") as ScanOptions["severity"];
     const paths = options.paths ? (options.paths as string[]) : undefined;
 
-    console.log(`\\n[codex-open-security] Provider: ${provider} | Model: ${model || "default"}`);
-    console.log(`[codex-open-security] Scanning: ${scanTarget}\\n`);
+    console.log(`\n[codex-open-security] Provider: ${provider} | Model: ${model || "default"}`);
+    console.log(`[codex-open-security] Scanning: ${scanTarget}\n`);
 
-    const scanner = new SecurityScanner(provider, model, apiKey);
-
-    await scanner.scan({
-      target: scanTarget,
-      provider,
-      model,
-      apiKey,
-      output: format,
-      severity,
-      paths,
-    }).then(async (result) => {
+    try {
+      const scanner = new SecurityScanner(provider, model, apiKey);
+      const result = await scanner.scan({
+        target: scanTarget,
+        provider,
+        model,
+        apiKey,
+        output: format,
+        severity,
+        paths,
+      });
       const reportPaths = await saveReport(result, output, format || "markdown");
 
-      console.log(`\\n=== Scan Complete ===`);
+      console.log(`\n=== Scan Complete ===`);
       console.log(`Critical: ${result.summary.critical}  High: ${result.summary.high}  Medium: ${result.summary.medium}  Low: ${result.summary.low}  Info: ${result.summary.info}`);
       console.log(`Duration: ${(result.duration / 1000).toFixed(1)}s | Model: ${result.model}`);
-      console.log(`\\nReports saved to:`);
+      console.log(`\nReports saved to:`);
       for (const p of reportPaths) {
         console.log(`  ${p}`);
       }
 
       if (result.summary.critical > 0 || result.summary.high > 0) {
-        process.exit(1);
+        process.exitCode = 1;
       }
-    }).catch((err: Error) => {
-      console.error(`\\nScan failed: ${err.message}`);
-      process.exit(2);
-    });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error(`\nScan failed: ${message}`);
+      process.exitCode = 2;
+    }
   });
 
 program
@@ -73,7 +74,7 @@ program
   .description("List available providers and models")
   .action(() => {
     for (const [key, config] of Object.entries(PROVIDERS)) {
-      console.log(`\\n${config.name} (${key})`);
+      console.log(`\n${config.name} (${key})`);
       console.log(`  Base URL: ${config.baseURL}`);
       console.log(`  Default: ${config.defaultModel}`);
       for (const [mid, m] of Object.entries(config.models)) {

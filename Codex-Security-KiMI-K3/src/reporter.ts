@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import type { ScanResult } from "./types.js";
 
@@ -7,6 +7,7 @@ export async function saveReport(
   outputDir: string,
   format: "json" | "sarif" | "markdown"
 ): Promise<string[]> {
+  await mkdir(outputDir, { recursive: true });
   const paths: string[] = [];
 
   if (format === "json" || format === "sarif") {
@@ -115,10 +116,10 @@ function toMarkdown(result: ScanResult): string {
 
 function emojiForSeverity(severity: string): string {
   switch (severity) {
-    case "critical": return "\\u{1F534}";
-    case "high": return "\\u{1F7E0}";
-    case "medium": return "\\u{1F7E1}";
-    case "low": return "\\u{1F7E2}";
-    default: return "\\u{26AA}";
+    case "critical": return "🔴";
+    case "high": return "🟠";
+    case "medium": return "🟡";
+    case "low": return "🟢";
+    default: return "⚪";
   }
 }

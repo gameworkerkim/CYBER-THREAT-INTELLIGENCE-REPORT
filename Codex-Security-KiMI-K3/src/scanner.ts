@@ -29,7 +29,8 @@ Focus on:
 9. Insecure cryptography (CWE-327)
 10. Dependency vulnerabilities
 
-Output ONLY a JSON array of findings. Do not include markdown formatting or explanations outside the JSON.`;
+Respond with a single JSON object of the form {"findings":[...]} where each finding has the fields above.
+Do not include markdown fences or any text outside the JSON object.`;
 
 const FILE_EXTENSIONS = new Set([
   ".ts", ".tsx", ".js", ".jsx", ".py", ".go", ".rs", ".java",
@@ -41,14 +42,30 @@ const FILE_EXTENSIONS = new Set([
 const MAX_FILE_SIZE = 100_000;
 const MAX_FILES = 200;
 
+function resolveApiKey(provider: string): string {
+  const key = provider.toLowerCase();
+  if (key === "deepseek") {
+    return process.env.DEEPSEEK_API_KEY || process.env.OPENAI_API_KEY || "";
+  }
+  if (key === "kimi") {
+    return process.env.MOONSHOT_API_KEY || process.env.KIMI_API_KEY || process.env.OPENAI_API_KEY || "";
+  }
+  if (key === "qwen") {
+    return process.env.DASHSCOPE_API_KEY || process.env.QWEN_API_KEY || process.env.OPENAI_API_KEY || "";
+  }
+  return process.env.OPENAI_API_KEY || "";
+}
+
 async function listFiles(targetDir: string, paths?: string[]): Promise<string[]> {
   if (paths && paths.length > 0) {
     const files: string[] = [];
     for (const p of paths) {
       const full = join(targetDir, p);
-      for await (const entry of glob(full)) {
-        if (FILE_EXTENSIONS.has(extname(entry).toLowerCase())) {
-          files.push(entry);
+      for await (const entry of glob(full, { withFileTypes: true })) {
+        if (!entry.isFile()) continue;
+        const filePath = join(entry.parentPath, entry.name);
+        if (FILE_EXTENSIONS.has(extname(filePath).toLowerCase())) {
+          files.push(filePath);
         }
       }
     }
@@ -57,11 +74,13 @@ async function listFiles(targetDir: string, paths?: string[]): Promise<string[]>
 
   const files: string[] = [];
   const exclude = new Set(["node_modules", ".git", "dist", "build", "__pycache__", ".venv"]);
-  for await (const entry of glob(join(targetDir, "**/*"), { nodir: true })) {
-    const rel = entry.slice(targetDir.length + 1);
-    if (exclude.has(rel.split("/")[0])) continue;
-    if (!FILE_EXTENSIONS.has(extname(entry).toLowerCase())) continue;
-    files.push(entry);
+  for await (const entry of glob(join(targetDir, "**/*"), { withFileTypes: true })) {
+    if (!entry.isFile()) continue;
+    const filePath = join(entry.parentPath, entry.name);
+    const rel = filePath.slice(targetDir.length + 1);
+    if (rel.split(/[\\/]/).some((part) => exclude.has(part))) continue;
+    if (!FILE_EXTENSIONS.has(extname(filePath).toLowerCase())) continue;
+    files.push(filePath);
     if (files.length >= MAX_FILES) break;
   }
   return files;
@@ -89,9 +108,12 @@ async function readFileContent(filePath: string): Promise<string | null> {
 }
 
 export class SecurityScanner {
-  private client: OpenAI;
+  private client: OpenAI | null = null;
   private provider: string;
   private model: string;
+  private providerKey: string;
+  private apiKey: string;
+  private baseURL: string;
 
   constructor(
     provider: string,
@@ -99,14 +121,31 @@ export class SecurityScanner {
     apiKey?: string
   ) {
     const { provider: providerConfig, model: modelConfig } = getModelConfig(provider, modelId);
-    
-    this.client = new OpenAI({
-      apiKey: apiKey || process.env.OPENAI_API_KEY || process.env.DEEPSEEK_API_KEY || process.env.MOONSHOT_API_KEY || process.env.DASHSCOPE_API_KEY || "",
-      baseURL: providerConfig.baseURL,
-    });
-    
+    this.providerKey = provider.toLowerCase();
+    this.apiKey = apiKey || resolveApiKey(provider);
+    this.baseURL = providerConfig.baseURL;
     this.provider = providerConfig.name;
     this.model = modelConfig.id;
+  }
+
+  private ensureClient(): OpenAI {
+    if (this.client) return this.client;
+    if (!this.apiKey) {
+      const hint =
+        this.providerKey === "kimi"
+          ? "MOONSHOT_API_KEY"
+          : this.providerKey === "qwen"
+            ? "DASHSCOPE_API_KEY"
+            : "DEEPSEEK_API_KEY";
+      throw new Error(
+        `Missing API key for provider "${this.providerKey}". Pass --api-key or set ${hint}.`
+      );
+    }
+    this.client = new OpenAI({
+      apiKey: this.apiKey,
+      baseURL: this.baseURL,
+    });
+    return this.client;
   }
 
   async scan(options: ScanOptions): Promise<ScanResult> {
@@ -114,7 +153,7 @@ export class SecurityScanner {
     const targetDir = options.target;
 
     const files = await listFiles(targetDir, options.paths);
-    
+
     if (files.length === 0) {
       return {
         findings: [],
@@ -126,6 +165,7 @@ export class SecurityScanner {
       };
     }
 
+    const client = this.ensureClient();
     const structure = buildFileContext(files, targetDir);
 
     const batches = this.createBatches(files, 5);
@@ -145,7 +185,7 @@ export class SecurityScanner {
       const prompt = `${structure}\n\n## Source Code to Analyze\n\n${fileContents.join("\n\n")}`;
 
       try {
-        const response = await this.client.chat.completions.create({
+        const response = await client.chat.completions.create({
           model: this.model,
           messages: [
             { role: "system", content: SYSTEM_PROMPT },
