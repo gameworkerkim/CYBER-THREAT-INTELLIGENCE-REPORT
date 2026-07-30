@@ -2,7 +2,7 @@
 
 > Open-weight alternative to [OpenAI Codex Security](https://github.com/openai/codex-security) — CLI + TypeScript SDK for vulnerability scanning with **DeepSeek V4**, **Kimi K3**, and **Qwen**.
 
-[English](#english) · [한국어](#한국어) · [日本語](#日本語)
+[English](#english) · [한국어](#한국어) · [日本語](#日本語) · [中文](#中文)
 
 | | |
 |---|---|
@@ -18,7 +18,7 @@
 
 ### What it is
 
-OpenAI Codex Security depends on `@openai/codex`, a closed-source Rust binary. This fork calls DeepSeek / Kimi / Qwen over OpenAI-compatible APIs and writes **Markdown · JSON · SARIF** reports. **Docker is the recommended way to run it** — no local Node install required.
+OpenAI Codex Security is an excellent security product. The catch is that ChatGPT token pricing is not cheap. So we built this open-weight fork to run the same class of workflow on LLMs with comparable capability — **DeepSeek / Kimi / Qwen** — instead of locking the scan path to ChatGPT. It scans code via those APIs and writes **Markdown · JSON · SARIF** reports. **Docker is the recommended way to deploy and run it** (no local Node install required).
 
 ### Docker (recommended)
 
@@ -229,7 +229,7 @@ node bin/codex-open-security.mjs scan . -o ./security-reports
 
 ### 概要
 
-OpenAI Codex Security のオープンウェイト版フォークです。DeepSeek / Kimi / Qwen API でスキャンし、Markdown・JSON・SARIF を出力します。**配布・実行は Docker を推奨**します（ローカルに Node 不要）。
+OpenAI Codex Security は優れたセキュリティ製品です。ただし ChatGPT のトークン単価は安くありません。そこで、ChatGPT と同等クラスの性能を持つ LLM でも同じワークフローを回せるよう、オープンウェイトのフォークを作りました。DeepSeek / Kimi / Qwen API でコードをスキャンし、Markdown・JSON・SARIF レポートを出力します。**配布・実行は Docker を推奨**します（ローカルに Node は不要）。
 
 ### Docker（推奨）
 
@@ -308,6 +308,92 @@ node bin/codex-open-security.mjs scan . -o ./security-reports
 2. API キーのみ（OAuth なし）  
 3. スキャン履歴 / workbench 未実装  
 4. モデル ID は各プロバイダの実名と一致させること  
+
+---
+
+## 中文
+
+### 这是什么
+
+OpenAI Codex Security 是一套优秀的安全方案。不过 ChatGPT 的 token 价格并不便宜。因此我们做了这个开源权重（open-weight）分支，以便用与 ChatGPT 同级能力的 LLM 扩展同一套工作流。通过 DeepSeek / Kimi / Qwen API 扫描代码，并生成 Markdown · JSON · SARIF 报告。**推荐用 Docker 部署与运行**（无需在本地安装 Node）。
+
+### Docker（推荐）
+
+**构建镜像**
+
+```bash
+cd Codex-Security-KiMI-K3
+docker build -t codex-open-security:local .
+# 或: npm run docker:build
+```
+
+**运行**
+
+```bash
+export DEEPSEEK_API_KEY="sk-..."
+
+docker run --rm codex-open-security:local providers
+
+mkdir -p security-reports
+docker run --rm \
+  -e DEEPSEEK_API_KEY \
+  -v "$PWD":/workspace:ro \
+  -v "$PWD/security-reports":/reports \
+  -w /workspace \
+  codex-open-security:local \
+  scan /workspace -o /reports --provider deepseek
+```
+
+**Compose**
+
+```bash
+export DEEPSEEK_API_KEY="sk-..."
+docker compose run --rm scan scan /workspace -o /reports --provider deepseek
+```
+
+**GHCR**
+
+```bash
+docker pull ghcr.io/<github-owner>/codex-open-security:latest
+docker run --rm -e DEEPSEEK_API_KEY \
+  -v "$PWD":/workspace:ro -v "$PWD/security-reports":/reports -w /workspace \
+  ghcr.io/<github-owner>/codex-open-security:latest \
+  scan /workspace -o /reports
+```
+
+- 在 Actions 中手动运行 **Publish Codex Open Security Docker image**  
+- 或推送标签 `codex-open-security-v0.1.0` → 推送 `:0.1.0` 与 `:latest`
+
+| 主机 | 容器 |
+|------|------|
+| 待扫描仓库 | `/workspace`（只读挂载） |
+| 报告输出 | `/reports`（`-o /reports`） |
+
+### API 密钥
+
+| 提供商 | 主环境变量 | 备选 |
+|--------|------------|------|
+| DeepSeek | `DEEPSEEK_API_KEY` | `OPENAI_API_KEY` |
+| Kimi K3 | `MOONSHOT_API_KEY` | `KIMI_API_KEY`, `OPENAI_API_KEY` |
+| Qwen | `DASHSCOPE_API_KEY` | `QWEN_API_KEY`, `OPENAI_API_KEY` |
+
+退出码：`0` = 无 critical/high · `1` = 存在 critical/high · `2` = 失败。
+
+### Node / npm（可选）
+
+```bash
+cd Codex-Security-KiMI-K3
+npm install && npm run build
+export DEEPSEEK_API_KEY="sk-..."
+node bin/codex-open-security.mjs scan . -o ./security-reports
+```
+
+### 限制
+
+1. 不支持多 Agent / 插件运行时  
+2. 仅支持 API Key（无 OAuth）  
+3. 无扫描历史 / workbench  
+4. 模型 ID 须与各提供商实际服务名一致  
 
 ---
 
