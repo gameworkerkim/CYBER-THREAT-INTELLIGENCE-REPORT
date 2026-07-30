@@ -5,7 +5,7 @@ import { glob } from "node:fs/promises";
 import type { SecurityFinding, ScanOptions, ScanResult } from "./types.js";
 import { getModelConfig } from "./providers.js";
 
-const SYSTEM_PROMPT = `You are a world-class application security expert. Analyze the provided code for security vulnerabilities.
+const DEFAULT_SYSTEM_PROMPT = `You are a world-class application security expert. Analyze the provided code for security vulnerabilities.
 
 For each vulnerability found, output a JSON object with these fields:
 - severity: "critical" | "high" | "medium" | "low" | "info"
@@ -41,6 +41,9 @@ const FILE_EXTENSIONS = new Set([
 
 const MAX_FILE_SIZE = 100_000;
 const MAX_FILES = 200;
+const MAX_RETRIES = 3;
+const RETRY_BASE_DELAY_MS = 1000;
+const DEFAULT_CONCURRENCY = 3;
 
 function resolveApiKey(provider: string): string {
   const key = provider.toLowerCase();
@@ -107,6 +110,46 @@ async function readFileContent(filePath: string): Promise<string | null> {
   }
 }
 
+async function withRetry<T>(
+  fn: () => Promise<T>,
+  label: string,
+  maxRetries: number = MAX_RETRIES,
+  baseDelay: number = RETRY_BASE_DELAY_MS,
+): Promise<T> {
+  let lastError: Error | undefined;
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      lastError = err instanceof Error ? err : new Error(String(err));
+      if (attempt < maxRetries) {
+        const delay = baseDelay * Math.pow(2, attempt) + Math.random() * 1000;
+        console.error(
+          `[codex-open-security] ${label} attempt ${attempt + 1}/${maxRetries + 1} failed, retrying in ${(delay / 1000).toFixed(1)}s: ${lastError.message.slice(0, 200)}`,
+        );
+        await new Promise((r) => setTimeout(r, delay));
+      }
+    }
+  }
+  throw lastError!;
+}
+
+function computeCost(
+  inputTokens: number,
+  outputTokens: number,
+  pricing: { input: number; output: number },
+): number {
+  return (inputTokens / 1_000_000) * pricing.input + (outputTokens / 1_000_000) * pricing.output;
+}
+
+function chunkArray<T>(arr: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < arr.length; i += size) {
+    chunks.push(arr.slice(i, i + size));
+  }
+  return chunks;
+}
+
 export class SecurityScanner {
   private client: OpenAI | null = null;
   private provider: string;
@@ -114,18 +157,16 @@ export class SecurityScanner {
   private providerKey: string;
   private apiKey: string;
   private baseURL: string;
+  private pricing: { input: number; output: number };
 
-  constructor(
-    provider: string,
-    modelId?: string,
-    apiKey?: string
-  ) {
+  constructor(provider: string, modelId?: string, apiKey?: string) {
     const { provider: providerConfig, model: modelConfig } = getModelConfig(provider, modelId);
     this.providerKey = provider.toLowerCase();
     this.apiKey = apiKey || resolveApiKey(provider);
     this.baseURL = providerConfig.baseURL;
     this.provider = providerConfig.name;
     this.model = modelConfig.id;
+    this.pricing = modelConfig.pricing;
   }
 
   private ensureClient(): OpenAI {
@@ -138,7 +179,7 @@ export class SecurityScanner {
             ? "DASHSCOPE_API_KEY"
             : "DEEPSEEK_API_KEY";
       throw new Error(
-        `Missing API key for provider "${this.providerKey}". Pass --api-key or set ${hint}.`
+        `Missing API key for provider "${this.providerKey}". Pass --api-key or set ${hint}.`,
       );
     }
     this.client = new OpenAI({
@@ -148,9 +189,18 @@ export class SecurityScanner {
     return this.client;
   }
 
+  private resolvePrompt(options: ScanOptions): string {
+    if (options.prompt) return options.prompt;
+    if (process.env.CODEX_OPEN_SECURITY_PROMPT) {
+      return process.env.CODEX_OPEN_SECURITY_PROMPT;
+    }
+    return DEFAULT_SYSTEM_PROMPT;
+  }
+
   async scan(options: ScanOptions): Promise<ScanResult> {
     const startTime = Date.now();
     const targetDir = options.target;
+    const systemPrompt = this.resolvePrompt(options);
 
     const files = await listFiles(targetDir, options.paths);
 
@@ -162,51 +212,65 @@ export class SecurityScanner {
         model: this.model,
         provider: this.provider,
         timestamp: new Date().toISOString(),
+        cost: { inputTokens: 0, outputTokens: 0, totalCost: 0 },
       };
     }
 
     const client = this.ensureClient();
     const structure = buildFileContext(files, targetDir);
-
     const batches = this.createBatches(files, 5);
+    const maxCost = options.maxCost;
+    const concurrency = options.concurrency || DEFAULT_CONCURRENCY;
+
+    let totalInputTokens = 0;
+    let totalOutputTokens = 0;
+    let budgetExceeded = false;
     const allFindings: SecurityFinding[] = [];
+    const errors: string[] = [];
 
-    for (const batch of batches) {
-      const fileContents: string[] = [];
-      for (const file of batch) {
-        const content = await readFileContent(file);
-        if (content) {
-          fileContents.push(
-            `### File: ${file.slice(targetDir.length + 1)}\n\`\`\`${extname(file).slice(1)}\n${content}\n\`\`\``
-          );
+    const batchChunks = chunkArray(batches, concurrency);
+
+    for (let chunkIdx = 0; chunkIdx < batchChunks.length; chunkIdx++) {
+      if (budgetExceeded) break;
+
+      const chunk = batchChunks[chunkIdx];
+
+      const results = await Promise.allSettled(
+        chunk.map((batch) =>
+          this.processBatch(client, batch, targetDir, structure, systemPrompt),
+        ),
+      );
+
+      for (const result of results) {
+        if (result.status === "fulfilled") {
+          allFindings.push(...result.value.findings);
+          totalInputTokens += result.value.inputTokens;
+          totalOutputTokens += result.value.outputTokens;
+        } else {
+          errors.push(result.reason instanceof Error ? result.reason.message : String(result.reason));
         }
       }
 
-      const prompt = `${structure}\n\n## Source Code to Analyze\n\n${fileContents.join("\n\n")}`;
-
-      try {
-        const response = await client.chat.completions.create({
-          model: this.model,
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            { role: "user", content: prompt },
-          ],
-          temperature: 0.1,
-          response_format: { type: "json_object" },
-        });
-
-        const text = response.choices[0]?.message?.content;
-        if (text) {
-          const parsed = this.parseFindings(text, targetDir);
-          allFindings.push(...parsed);
+      if (maxCost) {
+        const currentCost = computeCost(totalInputTokens, totalOutputTokens, this.pricing);
+        if (currentCost >= maxCost) {
+          budgetExceeded = true;
+          const msg = `Budget exceeded ($${currentCost.toFixed(4)} >= $${maxCost}). Stopping scan.`;
+          console.error(`[codex-open-security] ${msg}`);
+          errors.push(msg);
+          break;
         }
-      } catch (err) {
-        console.error(`Scan error for batch: ${err instanceof Error ? err.message : String(err)}`);
       }
+
+      const completed = Math.min((chunkIdx + 1) * concurrency, batches.length);
+      console.error(
+        `[codex-open-security] Progress: ${completed}/${batches.length} batches | Cost: $${computeCost(totalInputTokens, totalOutputTokens, this.pricing).toFixed(4)}`,
+      );
     }
 
     const deduped = this.deduplicate(allFindings);
     const filtered = this.filterBySeverity(deduped, options.severity);
+    const totalCost = computeCost(totalInputTokens, totalOutputTokens, this.pricing);
 
     return {
       findings: filtered,
@@ -215,6 +279,79 @@ export class SecurityScanner {
       model: this.model,
       provider: this.provider,
       timestamp: new Date().toISOString(),
+      cost: {
+        inputTokens: totalInputTokens,
+        outputTokens: totalOutputTokens,
+        totalCost: parseFloat(totalCost.toFixed(6)),
+      },
+      errors: errors.length > 0 ? errors : undefined,
+      truncated: budgetExceeded || undefined,
+    };
+  }
+
+  private async processBatch(
+    client: OpenAI,
+    batch: string[],
+    targetDir: string,
+    structure: string,
+    systemPrompt: string,
+  ): Promise<{ findings: SecurityFinding[]; inputTokens: number; outputTokens: number }> {
+    const fileContents: string[] = [];
+    for (const file of batch) {
+      const content = await readFileContent(file);
+      if (content) {
+        fileContents.push(
+          `### File: ${file.slice(targetDir.length + 1)}\n\`\`\`${extname(file).slice(1)}\n${content}\n\`\`\``,
+        );
+      }
+    }
+
+    if (fileContents.length === 0) {
+      return { findings: [], inputTokens: 0, outputTokens: 0 };
+    }
+
+    const prompt = `${structure}\n\n## Source Code to Analyze\n\n${fileContents.join("\n\n")}`;
+
+    let response: OpenAI.Chat.Completions.ChatCompletion;
+
+    try {
+      response = await withRetry(
+        () =>
+          client.chat.completions.create({
+            model: this.model,
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: prompt },
+            ],
+            temperature: 0.1,
+            response_format: { type: "json_object" },
+          }),
+        "batch (json_object)",
+      );
+    } catch {
+      console.error(
+        "[codex-open-security] json_object request failed, retrying without structured output...",
+      );
+      response = await withRetry(
+        () =>
+          client.chat.completions.create({
+            model: this.model,
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: prompt },
+            ],
+            temperature: 0.1,
+          }),
+        "batch (plain text fallback)",
+      );
+    }
+
+    const text = response.choices[0]?.message?.content || "";
+
+    return {
+      findings: this.parseFindings(text, targetDir),
+      inputTokens: response.usage?.prompt_tokens || 0,
+      outputTokens: response.usage?.completion_tokens || 0,
     };
   }
 
@@ -228,22 +365,57 @@ export class SecurityScanner {
 
   private parseFindings(text: string, targetDir: string): SecurityFinding[] {
     try {
-      const clean = text.replace(/^```json\s*/, "").replace(/\s*```$/, "").trim();
-      
-      const jsonStart = clean.indexOf("[");
-      const jsonEnd = clean.lastIndexOf("]");
-      if (jsonStart !== -1 && jsonEnd !== -1) {
-        const arr = JSON.parse(clean.slice(jsonStart, jsonEnd + 1));
-        return this.normalizeFindings(arr, targetDir);
+      let clean = text.trim();
+      clean = clean
+        .replace(/^```(?:json)?\s*\n?/i, "")
+        .replace(/\n?\s*```\s*$/i, "")
+        .trim();
+
+      try {
+        const obj = JSON.parse(clean);
+        if (obj.findings && Array.isArray(obj.findings)) {
+          return this.normalizeFindings(obj.findings, targetDir);
+        }
+        if (Array.isArray(obj)) {
+          return this.normalizeFindings(obj, targetDir);
+        }
+      } catch {
+        /* fall through to extraction */
       }
 
-      const obj = JSON.parse(clean);
-      if (Array.isArray(obj)) return this.normalizeFindings(obj, targetDir);
-      if (obj.findings && Array.isArray(obj.findings)) {
-        return this.normalizeFindings(obj.findings, targetDir);
+      const objMatch = clean.match(/\{[^{}]*"findings"\s*:\s*\[[\s\S]*?\][^{}]*\}/);
+      if (objMatch) {
+        try {
+          const obj = JSON.parse(objMatch[0]);
+          if (obj.findings && Array.isArray(obj.findings)) {
+            return this.normalizeFindings(obj.findings, targetDir);
+          }
+        } catch {
+          /* fall through */
+        }
+      }
+
+      const arrStart = clean.indexOf("[");
+      const arrEnd = clean.lastIndexOf("]");
+      if (arrStart !== -1 && arrEnd !== -1 && arrEnd > arrStart) {
+        try {
+          const arr = JSON.parse(clean.slice(arrStart, arrEnd + 1));
+          return this.normalizeFindings(arr, targetDir);
+        } catch {
+          /* fall through */
+        }
+      }
+
+      if (clean.length > 0) {
+        console.error(
+          `[codex-open-security] Failed to parse findings. Raw text (first 500 chars): ${clean.slice(0, 500)}`,
+        );
       }
       return [];
     } catch {
+      console.error(
+        `[codex-open-security] Unexpected parse error (first 500 chars): ${text.slice(0, 500)}`,
+      );
       return [];
     }
   }
@@ -254,7 +426,9 @@ export class SecurityScanner {
       .filter((f): f is Record<string, unknown> => typeof f === "object" && f !== null)
       .map((f, i) => ({
         id: `CS-${i.toString().padStart(4, "0")}`,
-        severity: validSeverities.has(String(f.severity)) ? String(f.severity) as SecurityFinding["severity"] : "info",
+        severity: validSeverities.has(String(f.severity))
+          ? (String(f.severity) as SecurityFinding["severity"])
+          : "info",
         title: String(f.title || "Untitled finding"),
         description: String(f.description || ""),
         file: String(f.file || "unknown").replace(targetDir + "/", ""),
@@ -277,7 +451,7 @@ export class SecurityScanner {
 
   private filterBySeverity(
     findings: SecurityFinding[],
-    minimum?: string
+    minimum?: string,
   ): SecurityFinding[] {
     if (!minimum) return findings;
     const order = ["critical", "high", "medium", "low", "info"];
@@ -286,10 +460,17 @@ export class SecurityScanner {
   }
 
   private computeSummary(findings: SecurityFinding[]): ScanResult["summary"] {
-    const counts = { critical: 0, high: 0, medium: 0, low: 0, info: 0 };
+    const counts: Record<string, number> = { critical: 0, high: 0, medium: 0, low: 0, info: 0 };
     for (const f of findings) {
-      counts[f.severity]++;
+      counts[f.severity] = (counts[f.severity] || 0) + 1;
     }
-    return { total: findings.length, ...counts };
+    return {
+      total: findings.length,
+      critical: counts.critical,
+      high: counts.high,
+      medium: counts.medium,
+      low: counts.low,
+      info: counts.info,
+    };
   }
 }

@@ -10,6 +10,12 @@ export interface SecurityFinding {
   confidence: number;
 }
 
+export interface ScanCost {
+  inputTokens: number;
+  outputTokens: number;
+  totalCost: number;
+}
+
 export interface ScanResult {
   findings: SecurityFinding[];
   summary: {
@@ -24,6 +30,9 @@ export interface ScanResult {
   model: string;
   provider: string;
   timestamp: string;
+  cost: ScanCost;
+  errors?: string[];
+  truncated?: boolean;
 }
 
 export interface ScanOptions {
@@ -35,6 +44,8 @@ export interface ScanOptions {
   severity?: "critical" | "high" | "medium" | "low";
   paths?: string[];
   maxCost?: number;
+  prompt?: string;
+  concurrency?: number;
 }
 
 export interface ProviderConfig {

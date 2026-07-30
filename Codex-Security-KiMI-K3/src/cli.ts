@@ -25,6 +25,9 @@ program
   .option("-f, --format <format>", "Report format: json | sarif | markdown", "markdown")
   .option("-s, --severity <level>", "Minimum severity: critical | high | medium | low", "low")
   .option("--paths <paths...>", "Specific file paths to scan")
+  .option("--prompt <prompt>", "Custom system prompt (or set CODEX_OPEN_SECURITY_PROMPT env var)")
+  .option("--max-cost <dollars>", "Maximum budget in USD before stopping scan", parseFloat)
+  .option("--concurrency <n>", "Number of batches to process in parallel", parseInt, 3)
   .action(async (target: string | undefined, options: Record<string, unknown>) => {
     const scanTarget = target || ".";
     const provider = String(options.provider || "deepseek");
@@ -34,6 +37,9 @@ program
     const format = String(options.format || "markdown") as ScanOptions["output"];
     const severity = String(options.severity || "low") as ScanOptions["severity"];
     const paths = options.paths ? (options.paths as string[]) : undefined;
+    const prompt = options.prompt ? String(options.prompt) : undefined;
+    const maxCost = typeof options.maxCost === "number" ? options.maxCost : undefined;
+    const concurrency = typeof options.concurrency === "number" ? options.concurrency : 3;
 
     console.log(`\n[codex-open-security] Provider: ${provider} | Model: ${model || "default"}`);
     console.log(`[codex-open-security] Scanning: ${scanTarget}\n`);
@@ -48,12 +54,29 @@ program
         output: format,
         severity,
         paths,
+        prompt,
+        maxCost,
+        concurrency,
       });
+
       const reportPaths = await saveReport(result, output, format || "markdown");
 
       console.log(`\n=== Scan Complete ===`);
-      console.log(`Critical: ${result.summary.critical}  High: ${result.summary.high}  Medium: ${result.summary.medium}  Low: ${result.summary.low}  Info: ${result.summary.info}`);
-      console.log(`Duration: ${(result.duration / 1000).toFixed(1)}s | Model: ${result.model}`);
+      console.log(
+        `Critical: ${result.summary.critical}  High: ${result.summary.high}  Medium: ${result.summary.medium}  Low: ${result.summary.low}  Info: ${result.summary.info}`,
+      );
+      console.log(
+        `Duration: ${(result.duration / 1000).toFixed(1)}s | Model: ${result.model} | Cost: $${result.cost.totalCost.toFixed(4)}`,
+      );
+      if (result.truncated) {
+        console.log(`[WARNING] Scan was truncated (budget exceeded or error).`);
+      }
+      if (result.errors && result.errors.length > 0) {
+        console.log(`\nErrors (${result.errors.length}):`);
+        for (const e of result.errors) {
+          console.log(`  - ${e}`);
+        }
+      }
       console.log(`\nReports saved to:`);
       for (const p of reportPaths) {
         console.log(`  ${p}`);
@@ -78,7 +101,9 @@ program
       console.log(`  Base URL: ${config.baseURL}`);
       console.log(`  Default: ${config.defaultModel}`);
       for (const [mid, m] of Object.entries(config.models)) {
-        console.log(`  - ${mid}: ${m.description}`);
+        console.log(
+          `  - ${mid}: ${m.description}  [$${m.pricing.input}/$1M input, $${m.pricing.output}/$1M output]`,
+        );
       }
     }
   });

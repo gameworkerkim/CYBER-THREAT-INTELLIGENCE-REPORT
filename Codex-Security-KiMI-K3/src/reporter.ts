@@ -75,6 +75,7 @@ function toMarkdown(result: ScanResult): string {
     ``,
     `**Provider:** ${result.provider} | **Model:** ${result.model}`,
     `**Date:** ${result.timestamp} | **Duration:** ${(result.duration / 1000).toFixed(1)}s`,
+    `**Cost:** $${result.cost.totalCost.toFixed(4)} (${result.cost.inputTokens} in / ${result.cost.outputTokens} out tokens)`,
     ``,
     `## Summary`,
     ``,
@@ -88,6 +89,18 @@ function toMarkdown(result: ScanResult): string {
     `| **Total**| **${result.summary.total}** |`,
     ``,
   ];
+
+  if (result.truncated) {
+    lines.push(`> **WARNING:** Scan was truncated (budget exceeded or error).`, ``);
+  }
+
+  if (result.errors && result.errors.length > 0) {
+    lines.push(`## Errors`, ``);
+    for (const e of result.errors) {
+      lines.push(`- ${e}`);
+    }
+    lines.push(``);
+  }
 
   if (result.findings.length > 0) {
     lines.push(`## Findings`, ``);
