@@ -1,0 +1,25 @@
+# Local Docker scan helper
+#
+#   export DEEPSEEK_API_KEY=sk-...
+#   docker compose run --rm scan scan /workspace -o /reports --provider deepseek
+#
+# Override the scan target:
+#   SCAN_TARGET=/path/to/repo REPORT_DIR=./out docker compose run --rm scan scan /workspace -o /reports
+
+services:
+  scan:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: codex-open-security:local
+    environment:
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      MOONSHOT_API_KEY: ${MOONSHOT_API_KEY:-}
+      DASHSCOPE_API_KEY: ${DASHSCOPE_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      KIMI_API_KEY: ${KIMI_API_KEY:-}
+      QWEN_API_KEY: ${QWEN_API_KEY:-}
+    volumes:
+      - ${SCAN_TARGET:-.}:/workspace:ro
+      - ${REPORT_DIR:-./security-reports}:/reports
+    working_dir: /workspace
