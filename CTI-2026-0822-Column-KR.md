@@ -1,3 +1,56 @@
+---
+id: CTI-2026-0822-CERT-BREACH
+title: "명함 한 장의 무게 — 인증기관 침해는 왜 '유출 사고'가 아니라 '2차 공격의 시그널'인가?"
+subtitle: "청와대 인사 명함 유출과 102개 기관 침해, 그리고 LLM이 싸게 만든 신원 도용 킬체인"
+description: "2026-08-20 국내 민간 인증기관 침해로 청와대 고위 인사 명함급 정보 유출. 6개월 잠복·102개 기관 침해·김수키 로컬 LLM/RAG·라자루스 Dream Job 0-day와 연결해 읽는 분석 칼럼."
+abstract: |
+  2026-08-20 경찰청은 민간 인증기관 서버 해킹으로 청와대 고위 인사 등 개인정보(이름·소속·직책·연락처) 유출 정황을 확인했다. 침해 자체는 2월경으로 보도되며 공표까지 약 6개월 간극이 있다.
+  금전 탈취와 달리 명함 데이터는 소모되지 않고 타 데이터셋과 결합될수록 사칭 능력이 커진다. 인증기관은 신뢰의 상류에 있어 다수 고가치 신원 대장을 한 번에 확보하는 표적이다.
+  김수키의 로컬 LLM·RAG 구축과 라자루스 Windows 0-day(CVE-2026-68820) 캠페인을 겹쳐 보면, AI는 공격을 정교하게가 아니라 싸게 만든다. 방어는 명함 본인확인 폐기·OOB 콜백·피싱저항 MFA·행위 탐지로 재설계해야 한다.
+summary_for_ai: |
+  CTI analytical column (KO), id CTI-2026-0822-CERT-BREACH, date 2026-08-22, TLP:GREEN.
+  Thesis: Blue House VIP business-card-level PII leak from a private Korean CA is dangerous for linkability, not raw sensitivity; LLM/RAG makes identity-theft kill chains cheap.
+  Facts (A1): KNPA 2026-08-20 — CA breach; name/org/title/phone; Blue House servers not compromised; separate probe of 102 orgs (media, pharma, hospitals) by state-backed group.
+  Timing: breach reportedly ~Feb 2026, disclosed Aug — ~6 month dwell. Contrast Upbit ₩44.5B theft execution ~54 minutes (spend-once access) vs dormant identity data (reusable feedstock).
+  Kill chain: collect (confirmed) → impersonate → escalate → persist. Hospitals supply identity fill-in, pretext, HUMINT leverage. Upstream trust targeting like Lazarus 2024 defense-vendor maintenance accounts.
+  AI: Genians 2026-08-10 — Kimsuky local LLM/RAG (Ollama/GPT4All/Msty), STT, Cursor; GTIG Promptflux/Promptspy runtime LLM rewrite. Lazarus CVE-2026-68820 AFD.sys UAF (patched 2026-08-11) in Operation Dream Job.
+  Defense proposals: retire card-data as authenticator; OOB callback; FIDO2; 12-month VIP monitoring; EDR hunting; assume org graph already in adversary RAG. Admiralty appendix. Not legal advice.
+date: 2026-08-22
+updated: 2026-08-22
+author: "Dennis Kim (김호광 / HoKwang Kim)"
+email: "gameworker@gmail.com"
+github: "gameworkerkim"
+lang: ko
+tags:
+  - Korea-Breach
+  - Certification-Authority
+  - Lazarus
+  - Kimsuky
+  - LLM
+  - Spearphishing
+  - Identity-Theft
+keywords:
+  - "인증기관 해킹"
+  - "청와대 인사 유출"
+  - "명함"
+  - "라자루스"
+  - "김수키"
+  - "로컬 LLM"
+  - "RAG"
+  - "CVE-2026-68820"
+  - "신원 도용"
+group: korea-breach
+featured: true
+featured_rank: 0
+schema_type: TechArticle
+classification: "TLP:GREEN"
+severity: HIGH
+confidence: "B2"
+license: "CC BY-NC-SA 4.0"
+draft: false
+robots: index,follow
+---
+
 # 명함 한 장의 무게 - 인증기관 침해는 왜 "유출 사고"가 아니라 "2차 공격의 시그널"인가?
 
 > **분류**: TLP:GREEN | **문서유형**: 분석 칼럼 (Analytical Column)
@@ -39,7 +92,7 @@
 
 기존 스피어피싱의 최대 병목은 "누구를 사칭해야 표적이 의심하지 않는가"였다. 이 질문에 답하려면 조직도, 보고 라인, 실제 업무 관계, 호칭 관행을 알아야 한다. 공격자가 몇 주에서 몇 달을 쓰던 부분이다.
 
-**명함 데이터는 이 병목과 허들을 통째로 제거헐 수 있다.** 청와대 관계자의 명함 자체는 엄청난 파급력을 가진다. 이름·소속·직책·전화번호는 조직도의 인접 행렬(adjacency matrix)을 복원할 수 있는 최소 충분 데이터이며 국가 안보에 중요 사건이다. 여기에 102개 기관 침해에서 확보했을 내부 문서가 결합되면, 공격자는 표적 조직의 사회적 지형도를 조직 내부자보다 더 정밀하게 보유하게 되었다.
+**명함 데이터는 이 병목과 허들을 통째로 제거할 수 있다.** 청와대 관계자의 명함 자체는 엄청난 파급력을 가진다. 이름·소속·직책·전화번호는 조직도의 인접 행렬(adjacency matrix)을 복원할 수 있는 최소 충분 데이터이며 국가 안보에 중요 사건이다. 여기에 102개 기관 침해에서 확보했을 내부 문서가 결합되면, 공격자는 표적 조직의 사회적 지형도를 조직 내부자보다 더 정밀하게 보유하게 되었다.
 
 ### 왜 하필 "인증기관"인가? - 정보가 모이는 상류 공격의 문법
 
@@ -97,11 +150,11 @@
 
 | 공격 단계 | 기존 (인력 집약) | 현재 (AI 보조) | 압축률 |
 |---|---|---|---|
-| 표적 조직 관계도 복원 | 2~6주 | 수 시간 | ~100x |
-| 표적별 맞춤 미끼 제작 | 2~5일/건 | 수 분/건 | ~500x |
-| 탈취 문서 분류·가치 판정 | 수 주 | 수 시간 | ~50x |
-| 취약점 스크립트 변형 | 수 일 | 수 시간 | ~20x |
-| **취약점 최초 발견 (0-day)** | **수 개월** | **수 개월** | **~1x** |
+| 표적 조직 관계도 복원 | 2–6주 | 수 시간 | 약 100배 |
+| 표적별 맞춤 미끼 제작 | 2–5일/건 | 수 분/건 | 약 500배 |
+| 탈취 문서 분류·가치 판정 | 수 주 | 수 시간 | 약 50배 |
+| 취약점 스크립트 변형 | 수 일 | 수 시간 | 약 20배 |
+| **취약점 최초 발견 (0-day)** | **수 개월** | **수 개월** | **약 1배** |
 
 마지막 정보가 중요하다. **AI는 아직 0-day를 대량 생산하지 못한다.** CVE-2026-68820은 여전히 고난도 연구의 산물이다. 그러나 나머지 모든 단계가 100배 빨라지면, 확보한 0-day 하나의 **전개 범위(blast radius)**가 100배가 된다.
 
@@ -130,7 +183,7 @@
 
 문제가 "속도의 비대칭"이라면, 해법도 속도여야 한다. 사람을 더 뽑는 것으로는 100배 격차를 메울 수 없다.
 
-### 제안 1 — 즉시 (0~30일) - 신원 검증 관행의 폐기와 재설계
+### 제안 1 — 즉시 (0–30일) - 신원 검증 관행의 폐기와 재설계
 
 가장 시급한 것은 기술이 아니라 **관행**과 법률의 버퍼링이다.
 
@@ -171,7 +224,7 @@
 
 ## 6. 맺으며 — 6개월의 침묵을 어떻게 읽을 것인가?
 
-2월에 뚫리고 8월에 알았다. 이 6개월 동안 공격자가 아무것도 하지 않았을 가능성은 낮다. 털리는 것을 모를 정도로 이 제로데이 백도어는 소스 레벨에서 털렸다고 믿을 정도이다. 북한은 그 동안 전략적인 인사의 신원을 탈췰하기 위해 전략적인 지점만 해킹했다. 데이터를 정리하고, 결합하고, 표적을 선별하고, 시나리오를 준비하기에 충분한 시간이다. 그리고 그 작업은 이제 사람이 아니라 로컬 LLM이 수행했다.
+2월에 뚫리고 8월에 알았다. 이 6개월 동안 공격자가 아무것도 하지 않았을 가능성은 낮다. 털리는 것을 모를 정도로 이 제로데이 백도어는 소스 레벨에서 털렸다고 믿을 정도이다. 북한은 그 동안 전략적인 인사의 신원을 탈취하기 위해 전략적인 지점만 해킹했다. 데이터를 정리하고, 결합하고, 표적을 선별하고, 시나리오를 준비하기에 충분한 시간이다. 그리고 그 작업은 이제 사람이 아니라 로컬 LLM이 수행했다.
 
 지난 1년간 국내를 겨냥한 북한 연계 공격은 최소 31건, 2025년 10월~2026년 9월 기준 북한 해킹 그룹의 APT 공격은 86건으로 전 세계 공개 APT의 절반 수준으로 집계된다. 이것은 산발적 사건들의 나열이 아니라 **하나의 데이터 수집 프로그램**으로 보는 편이 설명력이 높다.
 
@@ -193,7 +246,7 @@
 | CVE-2026-68820 악용 및 캠페인 상세 | **A1** | Check Point Research 기술 보고서, MS 패치 확인 |
 | 김수키 로컬 LLM/RAG 구축 | **B1** | 지니언스 분석 보고서, 단일 벤더 출처 |
 | 업비트 445억 원 사고 및 라자루스 지목 | **B2** | 당국 조사 진행, 언론 보도 |
-| **신원 도용 킬체인 2~4차 진행 추정** | **C3** | 본 분석의 추론. 직접 증거 없음 |
+| **신원 도용 킬체인 2–4차 진행 추정** | **C3** | 본 분석의 추론. 직접 증거 없음 |
 | **군 조직·군 병원 표적화** | **D4** | **공개 확인 불가. 개연성 기반 가설** |
 
 ## 부록 B — 분석의 한계
