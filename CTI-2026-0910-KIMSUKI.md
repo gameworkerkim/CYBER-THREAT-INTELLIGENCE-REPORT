@@ -1,6 +1,54 @@
+---
+id: CTI-2026-0910-KIMSUKI
+title: "북한 해킹 팀 김수키(Kimsuky)도 AI 딸깍 - AI 무기화 종합 분석"
+subtitle: "위협 행위자 프로파일부터 코딩 에이전트 악용, 그리고 다층 AI 방어 전략까지"
+description: "김수키가 오픈코드(opencode)로 미끼 문서를 만들어 GitHub C2와 AsyncRAT을 배포한 Operation GitPower 변종. AI 무기화와 다층 방어를 정리한 CTI 보고서."
+abstract: |
+  2026-09-07 지니언스 시큐리티센터는 북한 정찰총국 산하 김수키(Kimsuky)가 오픈소스 코딩 에이전트 opencode로 미끼 문서를 제작해 실전 스피어피싱에 사용한 정황을 공개했다.
+  카스퍼스키 HelloDoor LLM 흔적, 지니언스 로컬 LLM·RAG 관측과 수렴한다. GitHub Raw/PAT를 C2로 쓰는 Operation GitPower 변종이 AsyncRAT을 이미지 확장자로 위장 배포한다.
+  핵심 논지는 생성 비용 붕괴 대비 검토 비용 잔존. 다층 방어(L-1~L7)와 자격증명 계층을 권고한다. TLP:CLEAR.
+date: 2026-09-10
+updated: 2026-09-10
+author: "Dennis Kim (김호광 / HoKwang Kim)"
+email: "gameworker@gmail.com"
+github: "gameworkerkim"
+lang: ko
+tags:
+  - Kimsuky
+  - AsyncRAT
+  - Spearphishing
+  - GitHub-C2
+  - opencode
+  - DPRK
+  - LLM
+keywords:
+  - "김수키"
+  - "Kimsuky"
+  - "AsyncRAT"
+  - "스피어피싱"
+  - "GitHub C2"
+  - "opencode"
+  - "북한 해킹"
+  - "정찰총국"
+  - "Operation GitPower"
+group: dprk
+featured: true
+featured_rank: 0
+schema_type: TechArticle
+og_image: "https://vibequant.cc/og/kimsuky-20260910.jpg"
+classification: "TLP:CLEAR"
+severity: HIGH
+confidence: "B2"
+license: "CC BY-NC-SA 4.0"
+draft: false
+robots: index,follow
+---
+
 # 북한 해킹 팀 김수키(Kimsuky)도 AI 딸깍 - AI 무기화 종합 분석
 
 ## 위협 행위자 프로파일부터 코딩 에이전트 악용, 그리고 다층 AI 방어 전략까지
+
+![김정은과 북한 ICBM 이동발사대 — 김수키(Kimsuky) 배후인 정찰총국 국가 지원 사이버 위협의 상징](./images/kimsuky-20260910.jpg)
 
 북한의 해킹 부대인 김수키는 인공지능을 지엽적으로 사용하는 것에서 벗어나서 적극적으로 활용하기 시작했다. 2026년 9월 7일 지니언스 시큐리티센터(GSC)는 김수키가 오픈소스 AI 코딩 에이전트 **오픈코드(opencode)** 로 제작한 미끼 문서를 실제 공격에 사용한 정황을 공개했다. 이는 해킹 조직이 AI 코딩 에이전트를 실제 공격 파일 제작에 활용한 것이 확인된 최초 사례로 볼 수 있다.
 
@@ -231,48 +279,9 @@ AppleSeed 2.1 버전에서 2022년부터 `C:\GPKI` 디렉터리를 수집하는 
 
 ### 3-2. 전체 실행 흐름
 
-```
-[1] 스피어피싱 이메일 (AI 생성 미끼 문서 첨부/연계)
-     ↓
-[2] ZIP 압축파일 다운로드 → 해제
-     ↓
-[3] 문서 아이콘·문서 파일명으로 위장한 LNK(바로가기) 실행
-     │   · 약 3,800자 길이의 실행 인수
-     │   · 앞단에 약 300개 연속 공백 삽입 → 속성창에서 실제 명령 은닉
-     │   · LNK 설명란에 허위 메타정보 기입
-     │     (Type: Hangul Document / Size: 2.84 KB / 실제는 약 304KB)
-     ↓
-[4] 사용자 정의 Base64 디코더로 복호화
-     │   · [Convert]::FromBase64String() 의도적 회피
-     │   · Base64 문자표 + 비트 연산 직접 구현
-     ↓
-     %TEMP%\poqpwoqwdjoweij.ps1 생성 → 숨김 PowerShell 실행
-     ↓
-[5] GitHub Raw에서 정상 PDF 다운로드 → 화면 표시 (피해자 인지 차단)
-     │   · URL은 "ht" + "t" + "ps" 형태로 분할 결합
-     │   · 계정명·저장소명도 조각으로 분산 저장
-     │   · 요청 헤더에 GitHub PAT 하드코딩
-     │   ↕ 동시에 백그라운드에서 악성 행위 진행
-     ↓
-[6] %AppData%\irujkdnjhgttrhdkfdu.ps1 생성 (중간 단계 스크립트)
-     ↓
-[7] 숨김 예약 작업 등록
-     │   · 무작위 대문자명 (예: ZHUYHJGTYTFSUHIPOKLKHJHUYGVHGNFH)
-     │   · 신규 변종은 BitLocker / MATLAB / .NET 등 정상 명칭 위장
-     │   · 등록 후 약 5분 뒤 최초 실행, 이후 30분 주기 반복
-     ↓
-[8] GitHub Raw Contents API로 추가 명령 수신
-     │   · 차단 시 Pastebin / GitLab 백업 채널로 전환
-     ↓
-[9] 시스템 정보 수집 → C2 업로드
-     │   · <IP>-<MMDD_HHMM>-XXX_info.txt 형식
-     │   · OS 버전·아키텍처, 시스템 구성, PC 유형,
-     │     설치·부팅 이력, 실행 중 프로세스 목록
-     ↓
-[10] 이미지 확장자 위장 RC4 암호화 .NET 페이로드(AsyncRAT) 배포
-     │   · apple.png, fox.png, lion.png, rabbit.png, wolf.png
-     │   · 일부는 RTF 헤더로 변조 후 Gzip 헤더로 복구 → 압축 해제 → 로드
-```
+![스피어피싱 기반 GitHub 연계 악성코드 감염 및 AsyncRAT 배포 흐름도 — 김수키 Operation GitPower 변종 10단계](./images/kimsuky-gitpower-flow.jpg)
+
+스피어피싱 메일 → ZIP·위장 LNK → 커스텀 Base64 디코더 → GitHub Raw 미끼 PDF와 백그라운드 악성 행위 → 숨김 예약 작업 → GitHub/Pastebin/GitLab C2 → 이미지 위장 RC4 .NET 페이로드(AsyncRAT) 배포.
 
 ### 3-3. 탐지 회피 기능 (신규 변종 강화 사항)
 
@@ -493,41 +502,9 @@ LLM 산출물은 **틀렸을 때도 잘 쓰여 있다.** 인간은 문장의 유
 
 ### 6-2. 8계층 구조
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  L7  거버넌스 · 사람의 검토 (AI Risk Governance)             │
-│      AI 사용 정책 / HITL 의무화 / 검토 책임자 지정           │
-│      AI 도구 오탐·미탐률 정기 측정 / RAG 접근통제 감사       │
-├──────────────────────────────────────────────────────────────┤
-│  L6  상관분석 · 자동화 (AI SOC / Agentic Triage)             │
-│      계층 신호 결합 스코어링 / 알람 트리아지 / 대응 오케스트 │
-├──────────────────────────────────────────────────────────────┤
-│  L5  자격증명 · 인증서 (Credential Layer)   ★ 신규           │
-│      GPKI·인증서 저장소 접근 감시 / 계정 이상 로그인         │
-│      2FA 강제 / 브라우저 비밀번호 저장 금지                  │
-├──────────────────────────────────────────────────────────────┤
-│  L4  페이로드 (RAT / 암호화 바이너리)                        │
-│      확장자-시그니처 불일치 / 메모리 스캔 / .NET 로드 감시   │
-├──────────────────────────────────────────────────────────────┤
-│  L3  네트워크 · C2 (GitHub / GitLab / Pastebin / Dropbox /   │
-│      TryCloudflare / VS Code Tunnel)                         │
-│      정상 서비스 악용 탐지 / PAT 이상 사용 / 주기성 비콘     │
-├──────────────────────────────────────────────────────────────┤
-│  L2  지속성 (예약 작업 / 서비스 / 자동실행)                  │
-│      정상 명칭 위장 탐지 / 5분 지연·주기 실행 패턴           │
-├──────────────────────────────────────────────────────────────┤
-│  L1  실행 (LNK → PowerShell)              ★ 핵심 계층        │
-│      긴 실행 인수 / 커스텀 디코딩 / 숨김 실행 / 부모-자식    │
-├──────────────────────────────────────────────────────────────┤
-│  L0  콘텐츠 (미끼 문서 / 첨부파일)         ※ 반감기 짧음     │
-│      메타데이터 지문 / 플레이스홀더 / 유사도 클러스터링      │
-├──────────────────────────────────────────────────────────────┤
-│  L-1 사람 · 프로세스 (교육 / 신고 / 절차)                    │
-└──────────────────────────────────────────────────────────────┘
+![AI 기반 사이버 위협 대응을 위한 다층 방어 체계 — 사람·프로세스·기술·거버넌스가 함께하는 L-1부터 L7 보안](./images/kimsuky-defense-layers.jpg)
 
-   반감기 짧음 ←── L0 ─── L1 ─── L2 ─── L3 ─── L4 ─── L5 ──→ 반감기 긺
-   (공격자 한 단계 추가로 소멸)          (기술적 필연이라 회피 어려움)
-```
+하위 계층(L0·L1)은 반감기가 짧고, 자격증명·지속성·C2처럼 기술적 필연에 가까운 상위 계층은 회피가 어렵다. 단일 계층에 의존하지 말고 신호를 결합한다.
 
 ### 6-3. 계층별 대응
 
