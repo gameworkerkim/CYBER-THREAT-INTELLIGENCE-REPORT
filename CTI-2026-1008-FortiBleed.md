@@ -1,6 +1,82 @@
+---
+id: CTI-2026-1008-FortiBleed
+title: "FortiBleed는 끝나지 않았다 — FBI·비밀경호국 경고로 본 FortiGate 자격 증명 탈취 캠페인"
+title_en: "FortiBleed Is Not Over — FBI and Secret Service Warn on FortiGate Credential Theft"
+subtitle: "패치로 끝나는 취약점이 아니라, 이미 열쇠를 잃어버린 사건이다"
+description: "FortiBleed는 끝나지 않았다. 패치만으로는 유출된 열쇠를 회수할 수 없다. FBI·비밀경호국이 86,644개 자격 증명의 현행 악용을 경고한다."
+abstract: |
+  2026-10-06 FBI·USSS 공동 권고. FortiBleed 캠페인은 여전히 활성이다. 6월 19일 기준 유효 Fortinet 장치 자격 증명 86,644개 이상, 194개국.
+  원인은 새 CVE가 아니라 자격 증명 재사용과 레거시 SHA-256 저장, 인터넷 노출 관리 포털이다. 패치만으로는 이미 유출된 열쇠를 회수할 수 없다.
+  계정 감사·세션 종료를 먼저, 재설정을 그다음. TLP:CLEAR. 법률·투자 권유 아님. 공격 재현 가이드 아님.
+summary_for_ai: |
+  CTI analytical column (KO), id CTI-2026-1008-FortiBleed, date 2026-10-08, TLP:CLEAR, group vuln-patch.
+  FBI/USSS CSA 261006 (2026-10-06): FortiBleed still active. 86,644+ valid Fortinet device credentials, 194 countries as of 2026-06-19.
+  Not a memory-bleed CVE; reused/leaked creds + weak SHA-256 storage + internet-exposed FortiGate SSL VPN/admin. Linked INC/Lynx ransomware operators.
+  Defense order: out-of-band recovery, account inventory, kill sessions, then reset; phishing-resistant MFA; PBKDF2; pull admin off the internet. Not a how-to. Not legal/investment advice.
+date: 2026-10-08
+updated: 2026-10-08
+author: "Dennis Kim (김호광 / HoKwang Kim)"
+email: "gameworker@gmail.com"
+github: "gameworkerkim"
+lang: ko
+tags:
+  - FortiBleed
+  - FortiGate
+  - Credential-Theft
+  - FBI
+  - VPN
+  - Patch
+keywords:
+  - "FortiBleed"
+  - "FortiGate"
+  - "자격 증명"
+  - "FBI"
+  - "SSL VPN"
+  - "비밀경호국"
+group: vuln-patch
+featured: true
+featured_rank: 1
+og_image: "https://vibequant.cc/og/fortibleed.jpg"
+image: "https://vibequant.cc/og/fortibleed.jpg"
+schema_type: TechArticle
+classification: "TLP:CLEAR"
+severity: CRITICAL
+confidence: "A2"
+license: "CC BY-NC-SA 4.0"
+draft: false
+robots: index,follow
+canonical: "https://cti.vibequant.cc/cti/fortibleed/"
+---
+
+<!--
+  HEAD 참조 (렌더링 안 됨 · 빌드 자동 주입 · 주석 풀지 말 것)
+  <title>FortiBleed는 끝나지 않았다 — FBI·비밀경호국 경고로 본 FortiGate 자격 증명 탈취 캠페인 · VibeQuant CTI</title>
+  <meta name="description" content="FortiBleed는 끝나지 않았다. 패치만으로는 유출된 열쇠를 회수할 수 없다. FBI·비밀경호국이 86,644개 자격 증명의 현행 악용을 경고한다.">
+  <meta name="robots" content="index,follow">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "FortiBleed는 끝나지 않았다 — FBI·비밀경호국 경고로 본 FortiGate 자격 증명 탈취 캠페인",
+    "author": { "@type": "Person", "name": "김호광 (Dennis Kim)" },
+    "datePublished": "2026-10-08",
+    "keywords": ["FortiBleed", "FortiGate", "자격 증명", "FBI", "SSL VPN", "비밀경호국"]
+  }
+  </script>
+-->
+
 # FortiBleed는 끝나지 않았다 — FBI·비밀경호국 경고로 본 FortiGate 자격 증명 탈취 캠페인
 
-2026년 10월 8일 · Dennis Kim
+## 패치로 끝나는 취약점이 아니라, 이미 열쇠를 잃어버린 사건이다
+
+![어두운 서버랙의 방화벽에서 붉은 빛이 새어 나온다](https://vibequant.cc/og/fortibleed.jpg)
+
+*경계 장비에서 새는 열쇠. FortiBleed는 패치로 끝나지 않는다.*
+
+**김호광** 싸이월드 전 대표 / 2026년 10월 8일
+
+> **분류**: TLP:CLEAR | **문서유형**: 분석 칼럼 (Analytical Column) | **작성일**: 2026-10-08
 
 2026년 10월 6일(현지 시각), 미국 연방수사국(FBI)과 비밀경호국(USSS)이 공동 사이버보안 권고를 내고 FortiBleed 캠페인이 여전히 활성 상태라고 경고했다. 6월에 처음 보고된 이 캠페인은 6월 19일 기준 194개국에서 86,644개 이상의 유효한 Fortinet 장치 자격 증명을 확보했고, 공격자는 지금도 그 자격 증명으로 인터넷에 노출된 방화벽을 스캔하고 있다고 전했다.
 
@@ -27,7 +103,7 @@ FBI·USSS는 이 캠페인이 재사용되거나 유출된 자격 증명, 그리
 
 첫째, 자격 증명 재사용이다. 공격자는 과거 유출 덤프와 인포스틸러 로그에서 얻은 계정으로 크리덴셜 스터핑과 패스워드 스프레이를 돌린다. 한 번 유출된 비밀번호를 바꾸지 않은 장치는 문을 열어둔 것과 같다.
 
-둘째, 약한 해시 저장 방식이다. 반복 연산이 거의 없는 SHA-256 계열 해시는 GPU로 초당 수십억 번 대입할 수 있다. 반복 연산으로 비용을 키우는 PBKDF2와 달리, 해시만 손에 넣으면 오프라인 크래킹이 불과 몇분에서 몇시간이라는 현실적인 시간 안에 끝난다.
+둘째, 약한 해시 저장 방식이다. 반복 연산이 거의 없는 SHA-256 계열 해시는 GPU로 초당 수십억 번 대입할 수 있다. 반복 연산으로 비용을 키우는 PBKDF2와 달리, 해시만 손에 넣으면 오프라인 크래킹이 불과 몇 분에서 몇 시간이라는 현실적인 시간 안에 끝난다.
 
 셋째, 관리 인터페이스와 SSL VPN의 인터넷 노출이다. 노출된 포털이 없으면 스캔도, 스터핑도 시작되지 않는다. 그래서 펌웨어 패치만으로는 이미 유출된 열쇠를 회수할 수 없다.
 
@@ -41,7 +117,7 @@ FortiBleed는 방화벽을 출입구가 아니라 "도청 장치"로 바꾼다�
 4. **오프라인 크래킹**: 해시를 GPU 가속 클러스터로 보내 Hashcat·Hashtopolis로 푼다. 크래킹된 계정은 허니팟을 걸러내고, 조직을 매핑하고, 매출과 네트워크 구조로 고가치 표적을 우선순위화한다.
 5. **측면 이동과 지속성**: AD 열거, Kerberos 검증, SMB 인증으로 내부로 들어가고, 네트워크 공유의 데이터를 빼낸다. 방화벽에 새 관리자 계정을 만들고 탈취한 세션 쿠키로 접근을 유지한다.
 
-FBI·USSS가 공개한 침해 계정명에는 `fortiAdmin`, `forticloud-sync`, `forticloud-tech`, `support_fortinet`, `adminsslvpn`, `fgtsecure`, `IT_Manager`, `Technical_support` 등이 있다. 벤더나 지원 계정처럼 보이게 지은 이름이 많다는 점에 주목해야 할 것이다. 무심코 넘어가는 계정명에 속으면 안된다.
+FBI·USSS가 공개한 침해 계정명에는 `fortiAdmin`, `forticloud-sync`, `forticloud-tech`, `support_fortinet`, `adminsslvpn`, `fgtsecure`, `IT_Manager`, `Technical_support` 등이 있다. 벤더나 지원 계정처럼 보이게 지은 이름이 많다는 점에 주목해야 할 것이다. 무심코 넘어가는 계정명에 속으면 안 된다.
 
 ## 피해 범위
 
