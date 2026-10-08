@@ -1,7 +1,10 @@
 node_modules
-.env*
+.env
+.env.*
+!.env.example
 .next
 next-env.d.ts
 /dist/
 .vinext/
 .cloudflare/
+*.tsbuildinfo

@@ -51,7 +51,7 @@ Phase 1 ──▶ Phase 2 ──▶ Phase 3 ──▶ Phase 4 ──▶ Phase 5
 - **사용 기술**: `create-vinext-app`, vinext, Vite 8, Tailwind v4, TypeScript, `@cloudflare/vite-plugin`, `cf`.
 - **완료**: ✅ `npm run build` 통과, 기본 라우트(`/`, `/api/hello`) 동작.
 
-## 1.2 인증 (회원가입/로그인)
+## 1.2 인증 (회원가입/로그인) `[x]`
 
 - **목표**: 이메일+비밀번호 기반 계정과 JWT 세션을 구축해 이후 모든 기능의 접근 통제 기반을 마련.
 - **사용 기술**: `jose`(JWT), Web Crypto PBKDF2(비밀번호 해시), httpOnly 쿠키, Neon `users` 테이블.
@@ -62,7 +62,7 @@ Phase 1 ──▶ Phase 2 ──▶ Phase 3 ──▶ Phase 4 ──▶ Phase 5
   4. 로그인/회원가입 UI + 보호 라우트(미들웨어로 미인증 차단).
 - **완료 기준**: 회원가입→로그인→새로고침 세션 유지→로그아웃 동작.
 
-## 1.3 LLM 키 관리 (BYOK)
+## 1.3 LLM 키 관리 (BYOK) `[x]`
 
 - **목표**: 사용자가 자신의 LLM 키를 넣고, 암호화해 저장하며, 공급자·모델을 설정.
 - **사용 기술**: Web Crypto AES-256-GCM, Worker Secret(마스터 키), Neon `llm_keys` 테이블, Vercel AI SDK 프로바이더.
@@ -73,7 +73,7 @@ Phase 1 ──▶ Phase 2 ──▶ Phase 3 ──▶ Phase 4 ──▶ Phase 5
   4. 키 입력 UI + 공급자(anthropic/openai/호환) 선택 + `max_tokens` 가이드(OpenAI 16384 함정 안내).
 - **완료 기준**: 키 암호화 저장·목록 조회(마스킹)·삭제 동작, 평문 미노출.
 
-## 1.4 도메인 검증 (난독화 토큰 + 24시간)
+## 1.4 도메인 검증 (난독화 토큰 + 24시간) `[x]`
 
 - **목표**: "내 도메인 + 내 도메인 메일 + 내 서브 디렉터리" 삼중 소유 신호를 기술적으로 강제.
 - **사용 기술**: KV(토큰 TTL), `crypto.randomUUID`(토큰), fetch(HTTP 검증), DNS/MX 조회, 무료 이메일 도메인 차단 목록, Neon `domains`/`tokens` 테이블.
@@ -85,7 +85,7 @@ Phase 1 ──▶ Phase 2 ──▶ Phase 3 ──▶ Phase 4 ──▶ Phase 5
   5. 검증 성공 시 `domains` 에 24시간 만료 authorization 기록, 만료 체크/재검증 플로우.
 - **완료 기준**: 검증 성공/실패/만료 플로우 동작, 무료 이메일 도메인 요청 거부.
 
-## 1.5 i18n (한·영·중·일)
+## 1.5 i18n (한·영·중·일) `[x]`
 
 - **목표**: 4개 언어 라우팅과 문자열 관리 기반 구축.
 - **사용 기술**: `next-intl`, `/ko|en|zh|ja` 로케일 라우팅, 언어 전환 스위처.
@@ -263,7 +263,7 @@ Phase 1 ──▶ Phase 2 ──▶ Phase 3 ──▶ Phase 4 ──▶ Phase 5
 
 | Phase | 상태 | 비고 |
 |---|---|---|
-| Phase 1 | `[~]` | 스캐폴드 + 대시보드 MVP (1.1 완료) |
+| Phase 1 | `[x]` | 스캐폴드 + 대시보드 MVP (1.1~1.5 완료) |
 | Phase 2 | `[ ]` | 멀티 에이전트 + Neon |
 | Phase 3 | `[ ]` | CyberSecurityWiki |
 | Phase 4 | `[ ]` | 보고서 + 탐지 규칙 |
