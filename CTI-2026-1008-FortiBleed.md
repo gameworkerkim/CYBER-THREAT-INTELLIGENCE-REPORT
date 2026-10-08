@@ -1,3 +1,4 @@
+<!--
 ---
 id: CTI-2026-1008-FortiBleed
 title: "FortiBleed는 끝나지 않았다 — FBI·비밀경호국 경고로 본 FortiGate 자격 증명 탈취 캠페인"
