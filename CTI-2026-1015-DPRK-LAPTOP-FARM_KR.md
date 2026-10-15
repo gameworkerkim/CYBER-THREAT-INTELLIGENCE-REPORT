@@ -1,3 +1,4 @@
+<!--
 ---
 id: CTI-2026-1015-DPRK-LAPTOP-FARM
 title: "북한 '노트북 팜' 사건 — 특징과 시사점"
