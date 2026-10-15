@@ -138,7 +138,7 @@ flowchart LR
 
 | 발표일 | 사건 | 핵심 사실 | 결과 |
 | --- | --- | --- | --- |
-| 2026-10-13 | [Operation Lonestar Roundup + 오하이오 기소](https://www.justice.gov/opa/pr/justice-department-announces-coordinated-actions-combat-north-korean-remote-it-worker) | 9월 21~25일 텍사스 40곳 이상 주거지 수색, 노트북·KVM 약 187대 압수 (100대 이상 북텍사스). 별건 오하이오 기소: 2019~2025년 7월, 70곳 이상 기업, 수익 약 300만 달러 | 14명 기소(중국 거주 10명 실명, 2명 봉인), 미국인 조력자 2명 체포. 텍사스 수색 건은 아직 체포 없음 |
+| 2026-10-13 | [Operation Lonestar Roundup + 오하이오 기소](https://www.justice.gov/opa/pr/justice-department-announces-coordinated-actions-combat-north-korean-remote-it-worker) | 9월 21-25일 텍사스 40곳 이상 주거지 수색, 노트북·KVM 약 187대 압수 (100대 이상 북텍사스). 별건 오하이오 기소: 2019-2025년 7월, 70곳 이상 기업, 수익 약 300만 달러 | 14명 기소(중국 거주 10명 실명, 2명 봉인), 미국인 조력자 2명 체포. 텍사스 수색 건은 아직 체포 없음 |
 | 2026-04-15 | [커자 왕·전싱 왕 형제](https://www.justice.gov/opa/pr/two-us-nationals-sentenced-facilitating-fraudulent-remote-information-technology-worker) | 2021~2024년 10월, 미국인 80명 이상 신분 도용, 100곳 이상 기업 취업, 북한 수익 500만 달러 이상. 방산업체 ITAR 자료 유출 | 징역 108개월(9년), 92개월(7년 8개월). 공범 8명 도주, 국무부 최대 500만 달러 현상금 |
 | 2025-07-24 | [크리스티나 채프먼 (애리조나)](https://www.justice.gov/opa/pr/arizona-woman-sentenced-17m-information-technology-worker-fraud-scheme-generated-revenue) | 68명 신분 도용, 미국 기업 309곳 + 해외 2곳 피해, 수익 1,700만 달러 이상. 자택에서 노트북 90대 이상 압수, 49대는 북한 접경 중국 도시 등 해외로 발송 | 징역 102개월(8년 6개월) |
 
