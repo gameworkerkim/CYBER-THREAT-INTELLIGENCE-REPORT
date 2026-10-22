@@ -1,7 +1,72 @@
+<!--
+---
+id: CTI-2026-10-22-OPENJDK
+title: "eMudhra 중간 CA 개인 키 유출 사건과 CVE-2026-91403"
+title_en: "eMudhra Intermediate CA Key Compromise and CVE-2026-91403 — Why Your JVM Still Trusts It"
+subtitle: "브라우저는 몇 시간 만에 막았다. 해지 확인을 끈 JVM은 아직 믿는다"
+description: "eMudhra 중간 CA 8개의 개인 키가 숫자 4 같은 값이라 공개 인증서만으로 복구됐다. 브라우저는 막혔지만 해지 확인을 끄고 도는 JVM은 아니다. CVE-2026-91403 대응."
+abstract: |
+  eMudhra가 2025-04-30 키 의식에서 만든 중간 CA 8개(교차 서명 포함 16개 인증서)의 P-384 개인 키 엔트로피가 3~8비트였다. 키 값은 4, 56, 66, 115, 155, 156, 230, 237.
+  2026-10-17 발견 후 Chrome·Firefox·Apple·Microsoft가 차단했고, OpenJDK는 10-21 대역 외 권고 CVE-2026-91403(CVSS 9.1)을 냈다.
+  Java는 기본 설정에서 해지를 확인하지 않아 패치 전 JVM이 위조 체인을 신뢰한다. JDK 업그레이드, blocked.certs 교체, 해지 확인은 보조. TLP:CLEAR. 투자 권유 아님.
+summary_for_ai: |
+  CTI report (KO), id CTI-2026-10-22-OPENJDK, date 2026-10-22, TLP:CLEAR, group vuln-patch, severity CRITICAL.
+  Incident: eMudhra intermediate CA private keys (8 CAs: EM DV/OV/EV TLS CA G3B/G3C, EM OV CS CA G3B/G3C) generated 2025-04-30 with 3-8 bits of entropy; private key values 4,56,66,115,155,156,230,237; recoverable from public certs in under a second. Each CA also cross-signed by Sectigo AAA Certificate Services, so 16 certificates to block. No evidence of external intrusion.
+  Timeline: 10-17 discovered via CCADB and reported; Chrome/Firefox block within hours. 10-18 revoked CA_COMPROMISE. 10-19 Apple. 10-20 Microsoft; Mozilla removes emSign ECC Root CA - G3 from NSS. 10-21 OpenJDK out-of-band advisory CVE-2026-91403 (CVSS v3.1 9.1), Oracle alert, Azul OOB. 10-27 planned Chrome root removal.
+  Java risk: revocation checking off by default; unpatched JVMs (server apps, CI runners, containers) trust forged chains. Fix: upgrade to 27.0.1 patched build / 25.0.5 / 21.0.13 / 17.0.21 / 11.0.33 / 8u511-512 (verify vendor notes), or replace blocked.certs with 16 SHA-256 fingerprints and restart; removing the emSign root from cacerts alone is insufficient due to cross-sign. Revocation checking is secondary. Other ecosystems: Go, certifi, webpki-roots, curl, Alpine, Arch; Debian/FreeBSD pending; RHEL uses RHSB-2026-012.
+date: 2026-10-22
+updated: 2026-10-22
+author: "Dennis Kim (김호광 / HoKwang Kim)"
+email: "gameworker@gmail.com"
+github: "gameworkerkim"
+lang: ko
+tags:
+  - OpenJDK
+  - Java
+  - eMudhra
+  - PKI
+  - TLS
+  - CVE-2026-91403
+keywords:
+  - "eMudhra"
+  - "CVE-2026-91403"
+  - "OpenJDK 인증서"
+  - "blocked.certs"
+  - "중간 CA 개인 키 유출"
+  - "emSign"
+group: vuln-patch
+featured: true
+featured_rank: 1
+og_image: "https://vibequant.cc/og/openjdk-emudhra-20261022.jpg"
+image: "https://vibequant.cc/og/openjdk-emudhra-20261022.jpg"
+schema_type: TechArticle
+classification: "TLP:CLEAR"
+severity: CRITICAL
+confidence: "A2"
+license: "CC BY-NC-SA 4.0"
+draft: false
+robots: index,follow
+canonical: "https://cti.vibequant.cc/cti/openjdk-emudhra-20261022/"
+---
+
+<!--
+  HEAD 참조 (렌더링 안 됨 · 빌드 자동 주입 · 주석 풀지 말 것)
+  <title>eMudhra 중간 CA 개인 키 유출 사건과 CVE-2026-91403 · VibeQuant CTI</title>
+  <meta name="description" content="eMudhra 중간 CA 8개의 개인 키가 숫자 4 같은 값이라 공개 인증서만으로 복구됐다. 브라우저는 막혔지만 해지 확인을 끄고 도는 JVM은 아니다. CVE-2026-91403 대응.">
+  <meta name="robots" content="index,follow">
+-->
+
 # eMudhra 중간 CA 개인 키 유출 사건과 CVE-2026-91403
 
-작성일: 2026-10-22
-대상: Java/JVM 운영자, 백엔드 개발자, 보안 담당자
+![OpenJDK 로고](https://vibequant.cc/og/openjdk-emudhra-20261022.jpg)
+
+*OpenJDK. 브라우저가 몇 시간 만에 막은 인증서를, 해지 확인을 끈 JVM은 패치 전까지 계속 믿는다.*
+
+**김호광** 싸이월드 전 대표 / 2026년 10월 22일
+
+> **분류**: TLP:CLEAR | **문서유형**: CTI 리포트 | **작성일**: 2026-10-22
+> **심각도**: CRITICAL (CVSS v3.1 9.1) | **신뢰도**: A2 | **영향**: Java/JVM 런타임, 웹 PKI 신뢰 체인
+> **대상**: Java/JVM 운영자, 백엔드 개발자, 보안 담당자
 
 ---
 
