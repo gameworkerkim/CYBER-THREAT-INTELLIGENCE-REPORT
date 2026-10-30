@@ -10,7 +10,7 @@ SEO Keywords: 사이버 위협 인텔리전스, CTI, OSINT, APT, 북한 해킹, 
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
 ![Updated](https://img.shields.io/badge/Last%20Update-2026--10--30-informational?style=flat-square)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
+[![Ask DeepWiki](https://img.shields.io/badge/Ask-DeepWiki-1F6FEB?style=flat-square)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **언어 / Languages:** **한국어 (이 문서)** · [English](README_EN.md) · [日本語](README_JP.md) · [中文](README_CN.md)
 
