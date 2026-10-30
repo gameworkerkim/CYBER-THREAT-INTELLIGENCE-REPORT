@@ -1,0 +1,14 @@
+# CVE-2026-98432 Linux TCP ip_options UAF - pre-exploit detection
+# Snort 3 rule set
+# Note: Snort 3 does not support inline "threshold"; configure rate
+# limiting via rate_filter in your local.lua, or use Snort 2.9 rules.
+
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432 potential exploit: IPv4 SYN with IP options"; flow:stateless; flags:S; ipopts:any; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103001; rev:1;)
+
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432: SYN with Record Route IP option"; flow:stateless; flags:S; ipopts:rr; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103002; rev:1;)
+
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432: SYN with IP Timestamp option"; flow:stateless; flags:S; ipopts:ts; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103003; rev:1;)
+
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432: SYN with LSRR IP option"; flow:stateless; flags:S; ipopts:lsrr; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103004; rev:1;)
+
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432: SYN with SSRR IP option"; flow:stateless; flags:S; ipopts:ssrr; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103005; rev:1;)

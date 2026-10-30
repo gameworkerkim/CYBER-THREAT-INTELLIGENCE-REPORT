@@ -1,0 +1,23 @@
+# CVE-2026-98432 Linux TCP ip_options UAF - pre-exploit detection
+# Suricata 6/7 rule set
+# Detect: IPv4 SYN with IP options (attack precondition), plus the
+# high-frequency retransmission pattern used to win the race.
+
+# S1: any IPv4 option on a SYN, source-thresholded (probe/exploit attempt)
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432 potential exploit: IPv4 SYN with IP options (throttled)"; flow:stateless; flags:S; ipopts:any; threshold:type both, track by_src, count 3, seconds 10; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103001; rev:1;)
+
+# S1: Record Route option (type 7) - primary exploit vehicle per advisory
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432: SYN with Record Route IP option"; flow:stateless; flags:S; ipopts:rr; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103002; rev:1;)
+
+# S1: Timestamp option (type 68)
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432: SYN with IP Timestamp option"; flow:stateless; flags:S; ipopts:ts; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103003; rev:1;)
+
+# S1: Loose Source Route (type 131)
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432: SYN with LSRR IP option"; flow:stateless; flags:S; ipopts:lsrr; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103004; rev:1;)
+
+# S1: Strict Source Route (type 137)
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432: SYN with SSRR IP option"; flow:stateless; flags:S; ipopts:ssrr; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103005; rev:1;)
+
+# S2: same source retransmitting optioned SYNs much faster than 1s RTO
+# (window/retx knobs can be tuned with flowbits + threshold)
+alert tcp any any -> $HOME_NET any (msg:"CVE-2026-98432: burst of optioned SYN retransmissions from same source"; flow:stateless; flags:S; ipopts:any; threshold:type both, track by_src, count 5, seconds 1; classtype:attempted-recon; reference:url,https://www.cve.org/CVERecord?id=CVE-2026-98432; sid:2026103006; rev:1;)
