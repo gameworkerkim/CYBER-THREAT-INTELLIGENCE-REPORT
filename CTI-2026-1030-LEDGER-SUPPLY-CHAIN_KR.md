@@ -1,4 +1,61 @@
-# 보안 리포트: Ledger 하드웨어 지갑 공급망 임플란트 사건
+<!--
+---
+id: CTI-2026-1030-LEDGER-SUPPLY-CHAIN
+title: "Ledger 하드웨어 지갑 공급망 임플란트 사건"
+title_en: "Ledger Hardware-Wallet Supply-Chain Implant — Genuine Check Passed, the Screen Did Not"
+subtitle: "싱가포르 경찰 권고와 CryptoBilis 드레인. 에어갭 전제가 깨졌다"
+description: "정품 Ledger에 LTE 임플란트를 넣어 복구 문구를 유출한 공급망 공격. CryptoBilis 판매분과 싱가포르 경찰 경고, 한국 투자자 구매 경로 대응."
+abstract: |
+  정품 Ledger를 개봉해 화면 뒤에 LTE/eSIM 임플란트를 넣고 다시 유통망에 투입한 물리적 공급망 공격.
+  초기 설정의 24단어 복구 문구를 읽어 셀룰러로 빼내며, Secure Element와 Genuine Check는 그대로 통과한다.
+  Ledger가 확인한 손실은 동남아 공인 리셀러 CryptoBilis 판매분과 연결된다. 싱가포르 경찰은 2026-10-28 최소 2건, 약 S$350만을 경고했다.
+  한국 직접 피해 보고는 없으나 직구·중고 경로는 같은 수법에 열려 있다. 제조사 직판과 이기종 멀티시그가 핵심 대응. TLP:CLEAR. 투자 자문 아님.
+summary_for_ai: |
+  CTI report (KO), id CTI-2026-1030-LEDGER-SUPPLY-CHAIN, date 2026-10-30, TLP:CLEAR, group crypto-web3, severity HIGH.
+  Incident: physical supply-chain implant in genuine Ledger hardware wallets (Nano X and other models reported). Attackers opened devices, inserted an MCU plus LTE/eSIM behind the display, resealed them, and returned them to distribution.
+  Effect: during setup the implant reads the 24-word recovery phrase off the screen and exfiltrates it over cellular. Secure Element, Ledger OS, and Genuine Check are not modified, so attestation still passes. User USB/Bluetooth air-gap does not stop the implant's own radio.
+  Scope: Ledger says every confirmed loss ties to authorized reseller CryptoBilis (Malaysia, Indonesia, Philippines). Third-party loss estimates about $86M to $103M are unverified by Ledger. Singapore Police Force advisory 2026-10-28: at least two cases, about S$3.5M, since 2026-09-10; SPF did not name a shop and has not officially linked the cases to CryptoBilis.
+  Korea: no confirmed local victim reports as of 2026-10-30. Parallel imports and second-hand markets are exposed. Guidance: buy from the manufacturer, do not rely on one device, use heterogeneous multisig, never share a seed with recovery-support impersonators. Not investment or legal advice.
+date: 2026-10-30
+updated: 2026-10-30
+author: "Dennis Kim (김호광 / HoKwang Kim)"
+email: "gameworker@gmail.com"
+github: "gameworkerkim"
+lang: ko
+tags:
+  - Ledger
+  - Hardware-Wallet
+  - Supply-Chain
+  - Crypto
+  - Seed-Phrase
+keywords:
+  - "Ledger"
+  - "하드웨어 지갑"
+  - "공급망 임플란트"
+  - "CryptoBilis"
+  - "복구 문구"
+  - "싱가포르 경찰"
+  - "멀티시그"
+group: crypto-web3
+featured: true
+featured_rank: 0
+og_image: "https://vibequant.cc/og/ledger-supply-chain-20261030.jpg"
+image: "https://vibequant.cc/og/ledger-supply-chain-20261030.jpg"
+schema_type: TechArticle
+classification: "TLP:CLEAR"
+severity: HIGH
+confidence: "B2"
+license: "CC BY-NC-SA 4.0"
+draft: false
+robots: index,follow
+canonical: "https://cti.vibequant.cc/cti/ledger-supply-chain-20261030/"
+---
+-->
+
+# Ledger 하드웨어 지갑 공급망 임플란트 사건
+
+![Ledger 하드웨어 지갑 공급망 임플란트. 정품 칩은 검사를 통과하고, 화면 뒤 LTE가 복구 문구를 읽는다](https://vibequant.cc/og/ledger-supply-chain-20261030.jpg)
+
 
 **— 싱가포르 경찰 권고(2026-10-28)와 CryptoBilis 드레인 사건 종합 분석, 한국 투자자 대응 가이드**
 
