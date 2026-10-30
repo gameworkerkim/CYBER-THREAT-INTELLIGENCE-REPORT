@@ -15,6 +15,13 @@ Linux_TCP/
 ├── detector/
 │   ├── tcpopt_syn_detector.py           # 수동 네트워크 감지기 (SYN+IP옵션, 재전송 레이트)
 │   └── cve-2026-98432-host-check.sh     # 호스트 패치 상태/MPTCP/리스너 점검
+├── reproducer/
+│   └── tcp_race_reproducer.py           # 검증용 트래픽 리프로듀서 (탐지 검증·패치 검증)
+├── lab/
+│   ├── 01-build-kernel.sh               # 취약/수정 커널 빌드 (KASAN)
+│   ├── 02-build-initramfs.sh            # 정적 init + TCP 리스너 → initramfs
+│   ├── 03-boot-qemu.sh                  # QEMU 부팅 (hostfwd 4444)
+│   └── README.md                        # 런북
 └── ids/
     ├── suricata.rules                   # Suricata 6/7 시그니처
     ├── snort3.rules                     # Snort 3 시그니처
@@ -60,6 +67,30 @@ sudo bash detector/cve-2026-98432-host-check.sh
   burst 억제는 local.lua의 `rate_filter`로 설정.
 - Zeek: `zeek -C local.zeek ids/detect-tcpopt.zeek` 또는 site/local.zeek에서
   `@load /path/to/detect-tcpopt.zeek`.
+
+## 검증 (리프로듀서 + QEMU 랩)
+
+리프로듀서는 익스플로잇이 **아니라** 공격 전제 패턴(옵션 부착 SYN, 고빈도
+재전송, 핸드셰이크 완료 직후 파괴)만 재현하는 검증 도구입니다. 탐지 도구
+발화 검증과 패치 효과 검증(KASAN)에만 사용합니다.
+
+```bash
+# 탐지 도구 발화 검증 (로컬 루프백)
+sudo python3 detector/tcpopt_syn_detector.py --iface lo &
+python3 -m http.server 4444 &
+sudo python3 reproducer/tcp_race_reproducer.py --target 127.0.0.1:4444 --mode smoke --count 5
+sudo python3 reproducer/tcp_race_reproducer.py --target 127.0.0.1:4444 --mode groom --retx 8
+
+# 패치 검증 (격리 VM에서만): lab/README.md 런북 참조
+cd lab && ./01-build-kernel.sh both && ./02-build-initramfs.sh
+./03-boot-qemu.sh vuln     # + reproducer --mode race --confirm-lab ISOLATED-LAB-ONLY
+./03-boot-qemu.sh fixed    # 동일 재현 → KASAN 보고 없음 확인
+```
+
+- `--mode smoke`: 옵션 부착 SYN 발송 (S1 검증, 안전)
+- `--mode groom`: 동일 seq SYN 고빈도 재전송 (S2/race_grooming 검증, 안전)
+- `--mode race`: 레이스 창 유도 (미패치 커널 크래시 가능 → 격리 VM 전용,
+  `--confirm-lab ISOLATED-LAB-ONLY` 필수)
 
 ## 탐지 한계 (알고리즘 성질)
 
