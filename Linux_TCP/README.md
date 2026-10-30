@@ -7,10 +7,18 @@
 - 영향: Linux 4.4 이후, 인증 없이 원격 트리거 가능한 레이스 → UAF (CVSS 9.8)
 - 공격 전제 조건: **IPv4 옵션이 부착된 SYN** (정상 트래픽에서 거의 소멸한 패턴 → 탐지 특이도 높음)
 
+문서:
+
+- [MANUAL.md](MANUAL.md) — 도구별 사용 메뉴얼 (옵션 일람·배포·트러블슈팅)
+- [FEATURES.md](FEATURES.md) — 특징·설계 원칙·한계 요약
+- [docs/fix-commit-analysis.md](docs/fix-commit-analysis.md) — 취약점 메커니즘 분석
+
 ## 구성
 
 ```
 Linux_TCP/
+├── MANUAL.md                            # 사용 메뉴얼
+├── FEATURES.md                          # 특징·한계 요약
 ├── docs/fix-commit-analysis.md          # 수정 전후 코드 경로 분석 (레이스 시나리오 A/B)
 ├── detector/
 │   ├── tcpopt_syn_detector.py           # 수동 네트워크 감지기 (SYN+IP옵션, 재전송 레이트)
