@@ -9,7 +9,7 @@ SEO Keywords: 사이버 위협 인텔리전스, CTI, OSINT, APT, 북한 해킹, 
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--07--25-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--10--30-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **언어 / Languages:** **한국어 (이 문서)** · [English](README_EN.md) · [日本語](README_JP.md) · [中文](README_CN.md)
@@ -34,75 +34,77 @@ LLM/에이전트용 인덱스: [`llms.txt`](llms.txt)
 
 ## 최신 리포트 (Latest — Featured)
 
-> **2026-07-20 발행**
+> ⭐ 새 리포트를 놓치지 않으려면 저장소 우측 상단의 **Star**와 **Watch**를 눌러 주세요. 전체 목록은 아래 [전체 리포트 목록](#전체-리포트-목록-report-index)에 있습니다.
 
-### 국립외교원 온라인교육시스템 장기 해킹 침해 — 전·현직 외교관 개인정보 유출 정황
+> **2026-10-30 발행**
 
-**CTI-2026-0720-MOFA-KNDA** · CRITICAL · TLP:CLEAR
+### 리눅스 커널 TCP Use-After-Free (CVE-2026-98432) — 인증 없는 원격 루트, Ubuntu·RHEL 미수정
 
-제로데이 악용으로 약 10개월간 잠복 침투. 전·현직 외교관 ID·성명·이메일·암호화 비밀번호 유출 정황과 LLM 기반 사회공학·표적 명부 리스크를 분석합니다.
+**CTI-2026-1030-TCP** · HIGH · TLP:CLEAR
 
-**리포트:** [KR](CTI-2026-0720-MOFA-KNDA_KR.md) · [EN](CTI-2026-0720-MOFA-KNDA_EN.md) · [JP](CTI-2026-0720-MOFA-KNDA_JP.md)
+IPv4 TCP 핸드셰이크 경로의 UAF로 인증 없이 원격 루트까지 실증된 취약점. 커널 팀(9.8)과 벤더(5.9~8.1) 간 CVSS 혼선, 배포판별 패치 공백과 그 사이의 대응법을 정리합니다. 방어용 탐지 도구·검증랩은 [`Linux_TCP/`](Linux_TCP/)에 함께 공개합니다(익스플로잇 코드 미포함).
 
----
-
-> **2026-07-20 발행**
-
-### IITP 개인정보접속기록관리 시스템 침해 — 7개월 만의 재침해
-
-**CTI-2026-0720-IITP** · HIGH · TLP:CLEAR
-
-방화벽 '차단→허용' 설정 오류로 Elasticsearch 서버가 인터넷에 노출. 2025년 12월 APT 이후 7개월 만의 재침해와 9일 탐지 공백을 분석합니다.
-
-**리포트:** [KR](CTI-2026-0720-IITP_KR.md)
+**리포트:** [KR](CTI-2026-1030-TCP_KR.md) · **도구:** [Linux_TCP](Linux_TCP/README.md) · [MANUAL](Linux_TCP/MANUAL.md) · [FEATURES](Linux_TCP/FEATURES.md)
 
 ---
 
-> **2026-07-15 발행**
+> **2026-10-22 발행**
 
-### Ostium OLP Vault 오라클 조작 익스플로잇
+### PHP2Shell — PHP 코어 비인증 RCE 2종 (CVE-2026-109618 / CVE-2026-109619)
 
-**CTI-2026-0715-OSTIUM** · HIGH · TLP:GREEN
+**CTI-2026-10-22-PHP** · CRITICAL · TLP:CLEAR
 
-Arbitrum 기반 RWA 무기한 선물 DEX Ostium에서 오라클 가격 피드 조작으로 약 $11.86M–$23.7M 피해가 발생한 사건을 분석합니다.
+웹 요청을 처리하는 모든 PHP 서버에 영향을 주는 CVSS 9.2 취약점 2건. 공식 공개 전 세부 정보가 유출됐고 허니팟에서 악용 시도가 관측됐습니다. 즉시 업그레이드 대상 버전, SAPI별 위험도, EOL 버전 대응을 다룹니다.
 
-**리포트:** [KR](CTI-2026-0715-OSTIUM_KR.md)
-
----
-
-> **2026-07-15 발행**
-
-### LY(라인야후) LINE GAME 내부식별자 외부송신 사고
-
-**CTI-2026-0715-LINEYAHOO** · MEDIUM/HIGH · TLP:GREEN
-
-해킹이 아닌 설계상 오작동으로 710만 건 내부식별자가 외부 송신된 사고. 일본 APPI·전기통신사업법과 한국 개인정보보호법 교차 분석을 다룹니다.
-
-**리포트:** [KR](CTI-2026-0715-LINEYAHOO_KR.md)
+**리포트:** [KR](CTI-2026-10-22-PHP_KR.md)
 
 ---
 
-> **2026-07-13 발행**
+> **2026-10-22 발행**
 
-### 뉴지스탁 개인정보 유출 — 스피어피싱·MTTD 127일
+### eMudhra 중간 CA 개인 키 유출과 CVE-2026-91403 — 브라우저는 막았지만 JVM은 아직 믿는다
 
-**CTI-2026-0713-NEWJISTOCK** · HIGH · TLP:CLEAR
+**CTI-2026-10-22-OPENJDK** · CRITICAL · TLP:CLEAR
 
-관리자 계정 스피어피싱으로 개인정보가 유출되고 탐지까지 127일이 소요된 사건. MTTD·위기 커뮤니케이션·규제 리스크를 평가합니다.
+공개 인증서만으로 복구된 중간 CA 개인 키 8개. 기본 설정에서 해지 확인을 하지 않는 Java 환경이 위조 체인을 신뢰하는 문제와 JDK 업그레이드·blocked.certs 교체 대응을 정리합니다.
 
-**리포트:** [KR](CTI-2026-0713-NEWJISTOCK_KR.md)
+**리포트:** [KR](CTI-2026-10-22-OPENJDK_KR.md)
 
 ---
 
-> **2026-07-11 발행**
+> **2026-10-15 발행**
 
-### SWIFTVIBE — 72시간 AWS 클라우드 침해 (에이전틱 AI 공격)
+### 북한 '노트북 팜' 사건 — 채용을 통과하는 내부자 위협
 
-**CTI-2026-0711-SWIFTVIBE** · HIGH · TLP:GREEN
+**CTI-2026-1015-DPRK-LAPTOP-FARM** · HIGH · TLP:CLEAR
 
-신규 멀웨어·제로데이 없이 알려진 기법을 초인적 속도·규모로 실행한 에이전틱 AI 클라우드 침해 사례.
+방화벽이 아니라 인사·재무가 1차 공격 표면입니다. FBI PSA와 CrowdStrike 자료를 대조해 조력자 역할 확대, 소형·분산화되는 팜, 외화벌이 구조를 분석합니다.
 
-**리포트:** [KR](CTI-2026-0711-SWIFTVIBE_KR.md) · [EN](CTI-2026-0720-MOFA-KNDA_EN.md)
+**리포트:** [KR](CTI-2026-1015-DPRK-LAPTOP-FARM_KR.md)
+
+---
+
+> **2026-10-10 발행**
+
+### 아래아 한글은 왜 북한 해킹의 게이트웨이가 되었나
+
+**CTI-2026-1010-HWP** · HIGH · TLP:CLEAR
+
+10년 넘게 북한 APT의 가장 확실한 출입문이었던 HWP. 공문서 생태계의 잠금 효과, 30년 묵은 C 코드, APT37 사례와 포맷 전환만으로 끝나지 않는 이유를 다룹니다.
+
+**리포트:** [KR](CTI-2026-1010-HWP_KR.md) · [EN](CTI-2026-1010-HWP_EN.md) · [JP](CTI-2026-1010-HWP_JA.md) · [ZH](CTI-2026-1010-HWP_CN.md)
+
+---
+
+> **2026-10-08 발행**
+
+### FortiBleed는 끝나지 않았다 — FortiGate 자격 증명 탈취 캠페인
+
+**CTI-2026-1008-FortiBleed** · CRITICAL · TLP:CLEAR
+
+FBI·비밀경호국이 경고한 86,644개 유출 자격 증명의 현행 악용. 패치만으로는 잃어버린 열쇠를 회수할 수 없으며, 계정 감사·세션 종료를 먼저 해야 하는 이유를 정리합니다.
+
+**리포트:** [KR](CTI-2026-1008-FortiBleed.md)
 
 ---
 
@@ -142,6 +144,20 @@ Arbitrum 기반 RWA 무기한 선물 DEX Ostium에서 오라클 가격 피드 �
 
 ---
 
+## Open Security Tools & Guides
+
+방어·검증 목적의 오픈소스 도구와 실무 가이드입니다. 모든 도구는 **본인 소유 또는 서면 허가를 받은 대상**에만 사용하십시오.
+
+| 이름 | 설명 | 링크 |
+| --- | --- | --- |
+| **Linux_TCP** | CVE-2026-98432 방어 관점 분석·사전 탐지 도구, 수정 커밋 분석, QEMU 패치 검증랩 (익스플로잇 미포함) | [README](Linux_TCP/README.md) · [MANUAL](Linux_TCP/MANUAL.md) |
+| **Heimdallr (헤임달)** | ARTEX 컨셉을 계승한 LLM 멀티 에이전트 자율 모의 침투 + 사이버 보안 지식 축적 시스템 (방어 중심·권한 검증 기반) | [README](Heimdallr/README.md) · [Concept KR](Heimdallr/concept_KR.md) · [Roadmap](Heimdallr/roadmap.md) |
+| **Codex Open Security** | OpenAI Codex Security의 오픈웨이트 대안 — DeepSeek V4·Kimi K3·Qwen 기반 취약점 스캐닝 CLI·SDK | [README](Codex-Security-KiMI-K3/README.md) · [리포트 KR](Codex-Security-KiMI-K3/CTI-2026-0729-CODEX-OPEN-SECURITY_KR.md) |
+| **CVP 신청 가이드** | Anthropic Cyber Verification Program(CVP) 신청 실무 가이드 | [가이드](Claude%20Cyber%20Verification%20Program%20guide.md) |
+| **KISA AI 보안 위협 대응 매뉴얼 리뷰** | KISA 「AI 보안 위협 대응 매뉴얼」(2026.7)을 현업 CTI 관점에서 검토 | [리뷰](KISA-AI%20Security%20Threat%20Response%20Manual_Review.md) |
+
+---
+
 ## 전체 리포트 목록 (Report Index)
 
 > 새 리포트는 발행 시점에 맞춰 본 표의 **최상단**에 추가됩니다. 파일 명명: `CTI-YYYY-MMDD-<SUBJECT>_<LANG>.md`
@@ -149,6 +165,25 @@ Arbitrum 기반 RWA 무기한 선물 DEX Ostium에서 오라클 가격 피드 �
 
 | 발행일 | ID / 제목 | 심각도 | 언어 |
 | --- | --- | --- | --- |
+| 2026-10-30 | [`CTI-2026-1030-TCP`](CTI-2026-1030-TCP_KR.md) — 리눅스 커널 TCP Use-After-Free (CVE-2026-98432) | HIGH | [KR](CTI-2026-1030-TCP_KR.md) · [Tools](Linux_TCP/README.md) |
+| 2026-10-22 | [`CTI-2026-10-22-PHP`](CTI-2026-10-22-PHP_KR.md) — PHP2Shell — PHP 코어 비인증 RCE 2종 (CVE-2026-109618/109619) | CRITICAL | [KR](CTI-2026-10-22-PHP_KR.md) |
+| 2026-10-22 | [`CTI-2026-10-22-OPENJDK`](CTI-2026-10-22-OPENJDK_KR.md) — eMudhra 중간 CA 개인 키 유출과 CVE-2026-91403 (JVM 신뢰 체인) | CRITICAL | [KR](CTI-2026-10-22-OPENJDK_KR.md) |
+| 2026-10-15 | [`CTI-2026-1015-DPRK-LAPTOP-FARM`](CTI-2026-1015-DPRK-LAPTOP-FARM_KR.md) — 북한 노트북 팜 — 채용을 통과하는 내부자 위협 | HIGH | [KR](CTI-2026-1015-DPRK-LAPTOP-FARM_KR.md) |
+| 2026-10-10 | [`CTI-2026-1010-HWP`](CTI-2026-1010-HWP_KR.md) — 아래아 한글은 왜 북한 해킹의 게이트웨이가 되었나 | HIGH | [KR](CTI-2026-1010-HWP_KR.md) · [EN](CTI-2026-1010-HWP_EN.md) · [JP](CTI-2026-1010-HWP_JA.md) · [ZH](CTI-2026-1010-HWP_CN.md) |
+| 2026-10-08 | [`CTI-2026-1008-FortiBleed`](CTI-2026-1008-FortiBleed.md) — FortiBleed — FortiGate 자격 증명 탈취 캠페인 | CRITICAL | [KR](CTI-2026-1008-FortiBleed.md) |
+| 2026-10-07 | [`CTI-2026-10-07-Qilin-Japan-Arrest`](CTI-2026-10-07-Qilin-Japan-Arrest.md) — 키린(Qilin) 랜섬웨어 조직원 일본 체포가 의미하는 것 | CRITICAL | [KR](CTI-2026-10-07-Qilin-Japan-Arrest.md) |
+| 2026-10-04 | [`CTI-2026-1004-AI-HACKING-TREND`](CTI-2026-1004-AI-HACKING-TREND.md) — AI가 연 것은 새로운 문이 아니라 잠그지 않은 옆문이다 (AI 악용 금융·기업 해킹) | HIGH | [KR](CTI-2026-1004-AI-HACKING-TREND.md) |
+| 2026-10-02 | [`CTI-2026-1002-AI-BANK-HACKING`](CTI-2026-1002-AI-BANK-HACKING.md) — 은행이 뚫렸다 — AI 해킹의 시대, 방어의 판을 바꿔야 한다 | HIGH | [KR](CTI-2026-1002-AI-BANK-HACKING.md) |
+| 2026-09-13 | [`CTI-2026-0913-CHINA-HACKING`](CTI-2026-0913-CHINA-HACKING.md) — 왜 중국 해커는 한국을 털고 자랑했을까? | MEDIUM | [KR](CTI-2026-0913-CHINA-HACKING.md) |
+| 2026-09-10 | [`CTI-2026-0910-KIMSUKY`](CTI-2026-0910-KIMSUKY.md) — 김수키(Kimsuky) AI 무기화 종합 분석 (Operation GitPower 변종) | HIGH | [KR](CTI-2026-0910-KIMSUKY.md) |
+| 2026-08-22 | [`CTI-2026-0822-CERT-BREACH`](CTI-2026-0822-Column-KR.md) — 명함 한 장의 무게 — 인증기관 침해는 왜 2차 공격의 시그널인가 | HIGH | [KR](CTI-2026-0822-Column-KR.md) · [EN](CTI-2026-0822-Column-EN.md) · [JP](CTI-2026-0822-Column-JA.md) · [ZH](CTI-2026-0822-Column-CN.md) |
+| 2026-08-04 | [`CTI-2026-0804-COLDCARD-RNG`](CTI-2026-0804-COLDCARD-RNG_KR.md) — Coldcard 시드 엔트로피 결함과 8,860만 달러 시드 재현 스위핑 | CRITICAL | [KR](CTI-2026-0804-COLDCARD-RNG_KR.md) |
+| 2026-07-30 | [`CTI-2026-0730-WEMIX`](CTI-2026-0730-WEMIX_KR.md) — 위믹스(WEMIX) 연속 해킹 사태 — 오너 권한 침해와 보안 감사의 한계 | HIGH | [KR](CTI-2026-0730-WEMIX_KR.md) · [EN](CTI-2026-0730-WEMIX_EN.md) · [JP](CTI-2026-0730-WEMIX_JP.md) · [ZH](CTI-2026-0730-WEMIX_CN.md) |
+| 2026-07-29 | [`CTI-2026-0729-CODEX-OPEN-SECURITY`](Codex-Security-KiMI-K3/CTI-2026-0729-CODEX-OPEN-SECURITY_KR.md) — Codex Open Security — Codex Security의 오픈웨이트 전환 분석 | INFO | [KR](Codex-Security-KiMI-K3/CTI-2026-0729-CODEX-OPEN-SECURITY_KR.md) · [Tool](Codex-Security-KiMI-K3/README.md) |
+| 2026-07-28 | [`CTI-2026-0728-HANWHA`](CTI-2026-0728-HANWHA_KR.md) — 한화비전 카메라 펌웨어 GitHub 토큰 노출과 CI 파이프라인 붕괴 | HIGH | [KR](CTI-2026-0728-HANWHA_KR.md) · [EN](CTI-2026-0728-HANWHA_EN.md) · [JP](CTI-2026-0728-HANWHA_JP.md) · [ZH](CTI-2026-0728-HANWHA_CN.md) |
+| 2026-07-26 | [`CTI-2026-0726-DPRK-BANK-HACKERS`](CTI-2026-0726-DPRK-BANK-HACKERS_KR.md) — 北 내부 해커의 자국 중앙은행 해킹 보도 (미검증 단보) | MEDIUM | [KR](CTI-2026-0726-DPRK-BANK-HACKERS_KR.md) · [EN](CTI-2026-0726-DPRK-BANK-HACKERS_EN.md) · [JP](CTI-2026-0726-DPRK-BANK-HACKERS_JA.md) · [ZH](CTI-2026-0726-DPRK-BANK-HACKERS_CN.md) |
+| 2026-07-25 | [`CTI-2026-0725-FLOWSINT`](CTI-2026-0725-FLOWSINT_KR.md) — Flowsint — 오픈소스 OSINT 그래프 탐색 도구 리뷰 | INFO | [KR](CTI-2026-0725-FLOWSINT_KR.md) · [EN](CTI-2026-0725-FLOWSINT_EN.md) · [JP](CTI-2026-0725-FLOWSINT_JA.md) · [ZH](CTI-2026-0725-FLOWSINT_CN.md) |
+| 2026-07-24 | [`CTI-2026-0724-WEEKLY`](CTI-2026-0724-WEEKLY_KR.md) — 주간 사이버 위협 인텔리전스 (7/20–7/24) | CRITICAL | [KR](CTI-2026-0724-WEEKLY_KR.md) · [EN](CTI-2026-0724-WEEKLY_EN.md) · [JP](CTI-2026-0724-WEEKLY_JA.md) · [ZH](CTI-2026-0724-WEEKLY_CN.md) |
 | 2026-07-20 | [`CTI-2026-0720-MOFA-KNDA`](CTI-2026-0720-MOFA-KNDA_KR.md) — 국립외교원 온라인교육시스템 장기 해킹 침해 (외교관 개인정보 유출 정황) | CRITICAL | [KR](CTI-2026-0720-MOFA-KNDA_KR.md) · [EN](CTI-2026-0720-MOFA-KNDA_EN.md) · [JP](CTI-2026-0720-MOFA-KNDA_JP.md) |
 | 2026-07-20 | [`CTI-2026-0720-IITP`](CTI-2026-0720-IITP_KR.md) — IITP 개인정보접속기록관리 시스템 침해 (7개월 만의 재침해) | HIGH | [KR](CTI-2026-0720-IITP_KR.md) |
 | 2026-07-18 | [`CTI-2026-0718-WEEKLY`](CTI-2026-0718-WEEKLY_KR.md) — 주간 사이버 위협 인텔리전스 (7/13–7/18) | HIGH | [KR](CTI-2026-0718-WEEKLY_KR.md) |
@@ -235,22 +270,25 @@ Arbitrum 기반 RWA 무기한 선물 DEX Ostium에서 오라클 가격 피드 �
 ## 주제별 분류 (By Category)
 
 ### 공급망 공격
-`MIASMA_SPRINGBLIGHT` · `IRONWORM` · `CLAUDECODE` · `GLASSWORM` · `WEBSPHERE` · `GITEA` · `GOGS` · `DUALTHREAT` · `GITHUB` · `VERCEL` · `AISUPPLY` · `SWIFTVIBE`
+`MIASMA_SPRINGBLIGHT` · `IRONWORM` · `CLAUDECODE` · `GLASSWORM` · `WEBSPHERE` · `GITEA` · `GOGS` · `DUALTHREAT` · `GITHUB` · `VERCEL` · `AISUPPLY` · `SWIFTVIBE` · `HANWHA` · `OPENJDK`
 
 ### 제로데이·취약점
-`MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP`
+`MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP` · `TCP` · `PHP2Shell` · `OPENJDK` · `FortiBleed` · `COLDCARD-RNG`
 
 ### 북한·국가배후 위협
-`DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER`
+`DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER` · `DPRK-LAPTOP-FARM` · `HWP` · `KIMSUKY` · `DPRK-BANK-HACKERS` · `CHINA-HACKING` · `Qilin-Japan-Arrest`
 
 ### AI·LLM 위협
-`SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY`
+`SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY` · `AI-BANK-HACKING` · `AI-HACKING-TREND` · `KIMSUKY` · `CODEX-OPEN-SECURITY`
 
 ### Web3·암호화폐
-`KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO`
+`KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO` · `WEMIX` · `COLDCARD-RNG`
+
+### OSINT·도구 리뷰
+`FLOWSINT` · `CODEX-OPEN-SECURITY` · `LAON_VaultGuard`
 
 ### 한국 사이버 안보·유출
-`TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY`
+`TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY` · `HWP` · `AI-BANK-HACKING` · `CERT-BREACH` · `CHINA-HACKING` · `HANWHA` · `WEEKLY`
 
 
 ---
@@ -299,7 +337,7 @@ Examples:
 
 ## 키워드 (Keywords)
 
-`사이버 위협 인텔리전스` `CTI` `OSINT` `APT` `북한 해킹` `라자루스` `Lazarus` `김수키` `Kimsuky` `APT43` `스카크러프트` `ScarCruft` `APT37` `공급망 공격` `Supply Chain` `제로데이` `Zero-Day` `취약점` `CVE` `AI 보안` `LLM` `인공지능 해킹` `Web3` `블록체인` `암호화폐` `DeFi` `개인정보 유출` `데이터 유출` `한국 사이버 보안` `Korea Cybersecurity` `위협 분석` `Threat Intelligence` `보안 연구` `사고 대응` `MITRE ATT&CK` `IOC` `침해 지표` `Dennis Kim` `Betalabs`
+`사이버 위협 인텔리전스` `CTI` `OSINT` `APT` `북한 해킹` `라자루스` `Lazarus` `김수키` `Kimsuky` `APT43` `스카크러프트` `ScarCruft` `APT37` `공급망 공격` `Supply Chain` `제로데이` `Zero-Day` `취약점` `CVE` `AI 보안` `LLM` `인공지능 해킹` `Web3` `블록체인` `암호화폐` `DeFi` `개인정보 유출` `데이터 유출` `한국 사이버 보안` `Korea Cybersecurity` `위협 분석` `Threat Intelligence` `보안 연구` `사고 대응` `MITRE ATT&CK` `IOC` `침해 지표` `PHP2Shell` `리눅스 커널` `Linux Kernel` `FortiBleed` `Qilin` `랜섬웨어` `노트북 팜` `아래아 한글` `HWP` `Dennis Kim` `Betalabs`
 
 ---
 
@@ -327,10 +365,10 @@ Examples:
 
 | | |
 | --- | --- |
-| **총 리포트 시리즈** | 81+ |
+| **총 리포트 시리즈** | 100+ |
 | **커버 언어** | 한국어 · English · 日本語 · 中文 |
-| **주요 위협 행위자** | Lazarus · Kimsuky(APT43) · ScarCruft(APT37) · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE 외 |
-| **최근 업데이트** | 2026-07-25 |
+| **주요 위협 행위자** | Lazarus · Kimsuky(APT43) · ScarCruft(APT37) · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE · Qilin · FortiBleed 캠페인 외 |
+| **최근 업데이트** | 2026-10-30 |
 
 ---
 
