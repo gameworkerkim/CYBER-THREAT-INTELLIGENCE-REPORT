@@ -9,7 +9,7 @@ SEO Keywords: 网络威胁情报, CTI, OSINT, APT, 朝鲜黑客, Lazarus, Kimsuk
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--07--25-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--11--01-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **语言:** [한국어](README.md) · [English](README_EN.md) · [日本語](README_JP.md) · **中文（本文）**
@@ -30,6 +30,18 @@ SEO Keywords: 网络威胁情报, CTI, OSINT, APT, 朝鲜黑客, Lazarus, Kimsuk
 ---
 
 ## 最新报告（Featured）
+
+> **2026-11-01 发布**
+
+### 币安 63 亿美元黑客事件 — 事件分析与应对手册
+
+**CTI-2026-1101-NORTHKOREA-BINANCE** · CRITICAL · TLP:CLEAR
+
+史上最大规模的加密货币盗窃案：约 20 分钟内，币安热钱包在 10 条链上流出约 63 亿美元，FBI 于 10 月 31 日正式指认朝鲜 TraderTraitor 为幕后黑手。分析签名基础设施沦陷路径、ClickFix 与虚假招聘的社会工程手法、AI 加速的威胁及应对手册，以四种语言发布。
+
+**报告:** [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · **应对手册 PDF:** [KR](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) · [EN](binance-6.3b-hack-playbook-en.pdf) · [JP](binance-6.3b-hack-playbook-ja.pdf) · [ZH](binance-6.3b-hack-playbook-zh.pdf)
+
+---
 
 > **2026-07-20 发布**
 
@@ -141,6 +153,7 @@ Arbitrum 上 RWA 永续合约 DEX Ostium 因预言机价格源被操纵，估计
 
 | 日期 | ID / 标题 | 严重度 | 语言 |
 | --- | --- | --- | --- |
+| 2026-11-01 | [`CTI-2026-1101-NORTHKOREA-BINANCE`](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) — 币安 63 亿美元黑客事件 — 史上最大盗窃与应对手册 | CRITICAL | [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · [PDF](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) |
 | 2026-07-20 | [`CTI-2026-0720-MOFA-KNDA`](CTI-2026-0720-MOFA-KNDA_EN.md) — 国立外交院在线教育系统长期入侵（外交官个人信息疑似泄露） | CRITICAL | [KR](CTI-2026-0720-MOFA-KNDA_KR.md) · [EN](CTI-2026-0720-MOFA-KNDA_EN.md) · [JP](CTI-2026-0720-MOFA-KNDA_JP.md) |
 | 2026-07-20 | [`CTI-2026-0720-IITP`](CTI-2026-0720-IITP_KR.md) — IITP 个人信息访问记录管理系统遭入侵（7个月后再遭侵害） | HIGH | [KR](CTI-2026-0720-IITP_KR.md) |
 | 2026-07-18 | [`CTI-2026-0718-WEEKLY`](CTI-2026-0718-WEEKLY_KR.md) — 每周网络威胁情报简报（7/13–7/18） | HIGH | [KR](CTI-2026-0718-WEEKLY_KR.md) |
@@ -233,13 +246,13 @@ Arbitrum 上 RWA 永续合约 DEX Ostium 因预言机价格源被操纵，估计
 `MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP`
 
 ### DPRK & State-Sponsored
-`DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER`
+`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER`
 
 ### AI / LLM Threats
 `SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY`
 
 ### Web3 & Crypto
-`KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO`
+`NORTHKOREA-BINANCE` · `KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO`
 
 ### Korea Cybersecurity & Breaches
 `TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY`
@@ -249,7 +262,7 @@ Arbitrum 上 RWA 永续合约 DEX Ostium 因预言机价格源被操纵，估计
 
 ## 关键词 (Keywords)
 
-`网络威胁情报` `CTI` `OSINT` `APT` `朝鲜黑客` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `供应链攻击` `零日漏洞` `CVE` `漏洞` `AI安全` `LLM` `人工智能黑客` `Web3` `区块链` `加密货币` `DeFi` `数据泄露` `个人信息泄露` `韩国网络安全` `威胁分析` `安全研究` `事件响应` `MITRE ATT&CK` `IOC` `Dennis Kim` `Betalabs`
+`网络威胁情报` `CTI` `OSINT` `APT` `朝鲜黑客` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `供应链攻击` `零日漏洞` `CVE` `漏洞` `AI安全` `LLM` `人工智能黑客` `Web3` `区块链` `加密货币` `DeFi` `数据泄露` `个人信息泄露` `韩国网络安全` `威胁分析` `安全研究` `事件响应` `MITRE ATT&CK` `IOC` `币安` `Binance` `TraderTraitor` `Bybit` `Dennis Kim` `Betalabs`
 
 ---
 
@@ -314,9 +327,9 @@ Examples:
 
 | | |
 | --- | --- |
-| **报告系列** | 81+ |
+| **报告系列** | 100+ |
 | **语言** | 한국어 · English · 日本語 · 中文 |
-| **最近更新** | 2026-07-25 |
+| **最近更新** | 2026-11-01 |
 
 ---
 

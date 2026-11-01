@@ -9,7 +9,7 @@ SEO Keywords: サイバー脅威インテリジェンス, CTI, OSINT, APT, 北�
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--07--25-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--11--01-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **言語:** [한국어](README.md) · [English](README_EN.md) · **日本語（この文書）** · [中文](README_CN.md)
@@ -30,6 +30,18 @@ SEO Keywords: サイバー脅威インテリジェンス, CTI, OSINT, APT, 北�
 ---
 
 ## 最新レポート（Featured）
+
+> **2026-11-01 公開**
+
+### バイナンス63億ドルハッキング — 事件分析と対応プレイブック
+
+**CTI-2026-1101-NORTHKOREA-BINANCE** · CRITICAL · TLP:CLEAR
+
+史上最大の暗号資産窃取。10チェーンから約20分で約63億ドルが流出し、FBIは10月31日、北朝鮮の TraderTraitor による犯行と公式に断定しました。署名インフラ掌握の経路、ClickFix・偽採用のソーシャルエンジニアリング、AI加速の脅威と対応プレイブックを4言語で整理します。
+
+**レポート:** [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · **プレイブック PDF:** [KR](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) · [EN](binance-6.3b-hack-playbook-en.pdf) · [JP](binance-6.3b-hack-playbook-ja.pdf) · [ZH](binance-6.3b-hack-playbook-zh.pdf)
+
+---
 
 > **2026-07-20 公開**
 
@@ -141,6 +153,7 @@ TVING、CU、FastCampus の侵害事例が示すように、一つの設定ミ�
 
 | 日付 | ID / タイトル | 深刻度 | 言語 |
 | --- | --- | --- | --- |
+| 2026-11-01 | [`CTI-2026-1101-NORTHKOREA-BINANCE`](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) — バイナンス63億ドルハッキング — 史上最大の窃取と対応プレイブック | CRITICAL | [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · [PDF](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) |
 | 2026-07-20 | [`CTI-2026-0720-MOFA-KNDA`](CTI-2026-0720-MOFA-KNDA_JP.md) — 国立外交院オンライン教育システムの長期侵害（外交官個人情報流出の疑い） | CRITICAL | [KR](CTI-2026-0720-MOFA-KNDA_KR.md) · [EN](CTI-2026-0720-MOFA-KNDA_EN.md) · [JP](CTI-2026-0720-MOFA-KNDA_JP.md) |
 | 2026-07-20 | [`CTI-2026-0720-IITP`](CTI-2026-0720-IITP_KR.md) — IITP 個人情報アクセス記録管理システムの侵害（7か月ぶりの再侵害） | HIGH | [KR](CTI-2026-0720-IITP_KR.md) |
 | 2026-07-18 | [`CTI-2026-0718-WEEKLY`](CTI-2026-0718-WEEKLY_KR.md) — 週次サイバー脅威インテリジェンス（7/13–7/18） | HIGH | [KR](CTI-2026-0718-WEEKLY_KR.md) |
@@ -232,13 +245,13 @@ TVING、CU、FastCampus の侵害事例が示すように、一つの設定ミ�
 `MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP`
 
 ### DPRK & State-Sponsored
-`DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER`
+`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER`
 
 ### AI / LLM Threats
 `SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY`
 
 ### Web3 & Crypto
-`KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO`
+`NORTHKOREA-BINANCE` · `KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO`
 
 ### Korea Cybersecurity & Breaches
 `TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY`
@@ -248,7 +261,7 @@ TVING、CU、FastCampus の侵害事例が示すように、一つの設定ミ�
 
 ## キーワード (Keywords)
 
-`サイバー脅威インテリジェンス` `CTI` `OSINT` `APT` `北朝鮮ハッキング` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `サプライチェーン攻撃` `ゼロデイ` `CVE` `脆弱性` `AIセキュリティ` `LLM` `AIハッキング` `Web3` `ブロックチェーン` `暗号通貨` `DeFi` `データ侵害` `個人情報漏洩` `韓国サイバーセキュリティ` `脅威分析` `セキュリティ研究` `インシデント対応` `MITRE ATT&CK` `IOC` `Dennis Kim` `Betalabs`
+`サイバー脅威インテリジェンス` `CTI` `OSINT` `APT` `北朝鮮ハッキング` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `サプライチェーン攻撃` `ゼロデイ` `CVE` `脆弱性` `AIセキュリティ` `LLM` `AIハッキング` `Web3` `ブロックチェーン` `暗号通貨` `DeFi` `データ侵害` `個人情報漏洩` `韓国サイバーセキュリティ` `脅威分析` `セキュリティ研究` `インシデント対応` `MITRE ATT&CK` `IOC` `バイナンス` `Binance` `TraderTraitor` `Bybit` `Dennis Kim` `Betalabs`
 
 ---
 
@@ -313,9 +326,9 @@ Examples:
 
 | | |
 | --- | --- |
-| **レポートシリーズ** | 81+ |
+| **レポートシリーズ** | 100+ |
 | **言語** | 한국어 · English · 日本語 · 中文 |
-| **最終更新** | 2026-07-25 |
+| **最終更新** | 2026-11-01 |
 
 ---
 

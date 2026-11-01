@@ -9,7 +9,7 @@ SEO Keywords: cyber threat intelligence, CTI, OSINT, APT, DPRK hacking, Lazarus,
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--07--25-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--11--01-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **Languages:** [한국어](README.md) · **English (this document)** · [日本語](README_JP.md) · [中文](README_CN.md)
@@ -33,6 +33,18 @@ LLM/agent index: [`llms.txt`](llms.txt)
 ---
 
 ## Latest — Featured
+
+> **Published 2026-11-01**
+
+### The US$6.3 Billion Binance Hack — Incident Analysis and Response Playbook
+
+**CTI-2026-1101-NORTHKOREA-BINANCE** · CRITICAL · TLP:CLEAR
+
+The largest crypto theft on record: about US$6.3 billion drained from Binance hot wallets across 10 chains in roughly 20 minutes. The FBI officially attributed the attack to North Korea's TraderTraitor. Covers the signing-infrastructure takeover, ClickFix/fake-recruiter social engineering, AI acceleration, and the response playbook — in four languages.
+
+**Report:** [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · **Playbook PDF:** [KR](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) · [EN](binance-6.3b-hack-playbook-en.pdf) · [JP](binance-6.3b-hack-playbook-ja.pdf) · [ZH](binance-6.3b-hack-playbook-zh.pdf)
+
+---
 
 > **Published 2026-07-20**
 
@@ -149,6 +161,7 @@ Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposur
 
 | Date | ID / Title | Severity | Languages |
 | --- | --- | --- | --- |
+| 2026-11-01 | [`CTI-2026-1101-NORTHKOREA-BINANCE`](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) — The US$6.3 billion Binance hack — largest crypto theft on record and response playbook | CRITICAL | [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · [PDF](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) |
 | 2026-07-20 | [`CTI-2026-0720-MOFA-KNDA`](CTI-2026-0720-MOFA-KNDA_EN.md) — Long-term intrusion of KNDA online training system (diplomat PII exposure) | CRITICAL | [KR](CTI-2026-0720-MOFA-KNDA_KR.md) · [EN](CTI-2026-0720-MOFA-KNDA_EN.md) · [JP](CTI-2026-0720-MOFA-KNDA_JP.md) |
 | 2026-07-20 | [`CTI-2026-0720-IITP`](CTI-2026-0720-IITP_KR.md) — IITP personal-data access-log system breach (re-compromise in 7 months) | HIGH | [KR](CTI-2026-0720-IITP_KR.md) |
 | 2026-07-18 | [`CTI-2026-0718-WEEKLY`](CTI-2026-0718-WEEKLY_KR.md) — Weekly CTI briefing (Jul 13–18) | HIGH | [KR](CTI-2026-0718-WEEKLY_KR.md) |
@@ -241,13 +254,13 @@ Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposur
 `MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP`
 
 ### DPRK & State-Sponsored
-`DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER`
+`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER`
 
 ### AI / LLM Threats
 `SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY`
 
 ### Web3 & Crypto
-`KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO`
+`NORTHKOREA-BINANCE` · `KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO`
 
 ### Korea Cybersecurity & Breaches
 `TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY`
@@ -295,7 +308,7 @@ Examples:
 
 ## Keywords
 
-`Cyber Threat Intelligence` `CTI` `OSINT` `APT` `DPRK Hacking` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `Supply Chain Attack` `Zero-Day` `CVE` `Vulnerability` `AI Security` `LLM` `Artificial Intelligence Hacking` `Web3` `Blockchain` `Cryptocurrency` `DeFi` `Data Breach` `PII Leak` `Korea Cybersecurity` `Threat Analysis` `Security Research` `Incident Response` `MITRE ATT&CK` `IOC` `Dennis Kim` `Betalabs`
+`Cyber Threat Intelligence` `CTI` `OSINT` `APT` `DPRK Hacking` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `Supply Chain Attack` `Zero-Day` `CVE` `Vulnerability` `AI Security` `LLM` `Artificial Intelligence Hacking` `Web3` `Blockchain` `Cryptocurrency` `DeFi` `Data Breach` `PII Leak` `Korea Cybersecurity` `Threat Analysis` `Security Research` `Incident Response` `MITRE ATT&CK` `IOC` `Binance` `TraderTraitor` `Bybit` `Dennis Kim` `Betalabs`
 
 ---
 
@@ -322,10 +335,10 @@ Examples:
 
 | | |
 | --- | --- |
-| **Report series** | 81+ |
+| **Report series** | 100+ |
 | **Languages** | Korean · English · Japanese · Chinese |
-| **Key threat actors** | Lazarus · Kimsuky (APT43) · ScarCruft (APT37) · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE · and others |
-| **Last update** | 2026-07-25 |
+| **Key threat actors** | Lazarus · Kimsuky (APT43) · ScarCruft (APT37) · TraderTraitor · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE · and others |
+| **Last update** | 2026-11-01 |
 
 ---
 

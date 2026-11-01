@@ -9,7 +9,7 @@ SEO Keywords: 사이버 위협 인텔리전스, CTI, OSINT, APT, 북한 해킹, 
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--10--30-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--11--01-informational?style=flat-square)
 [![Ask DeepWiki](https://img.shields.io/badge/Ask-DeepWiki-1F6FEB?style=flat-square)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **언어 / Languages:** **한국어 (이 문서)** · [English](README_EN.md) · [日本語](README_JP.md) · [中文](README_CN.md)
@@ -35,6 +35,18 @@ LLM/에이전트용 인덱스: [`llms.txt`](llms.txt)
 ## 최신 리포트 (Latest — Featured)
 
 > ⭐ 새 리포트를 놓치지 않으려면 저장소 우측 상단의 **Star**와 **Watch**를 눌러 주세요. 전체 목록은 아래 [전체 리포트 목록](#전체-리포트-목록-report-index)에 있습니다.
+
+> **2026-11-01 발행**
+
+### 바이낸스 63억 달러 해킹 — 사건 분석과 대응 플레이북
+
+**CTI-2026-1101-NORTHKOREA-BINANCE** · CRITICAL · TLP:CLEAR
+
+역대 최대 규모 암호화폐 탈취. 10개 체인에서 약 20분 만에 63억 달러가 유출됐고, FBI는 10월 31일 북한 TraderTraitor를 공식 지목했습니다. 서명 인프라 장악 경로, ClickFix·가짜 채용 사회공학, AI 가속 위협과 대응 플레이북을 4개 언어로 정리합니다.
+
+**리포트:** [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · **플레이북 PDF:** [KR](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) · [EN](binance-6.3b-hack-playbook-en.pdf) · [JP](binance-6.3b-hack-playbook-ja.pdf) · [ZH](binance-6.3b-hack-playbook-zh.pdf)
+
+---
 
 > **2026-10-30 발행**
 
@@ -165,6 +177,7 @@ FBI·비밀경호국이 경고한 86,644개 유출 자격 증명의 현행 악�
 
 | 발행일 | ID / 제목 | 심각도 | 언어 |
 | --- | --- | --- | --- |
+| 2026-11-01 | [`CTI-2026-1101-NORTHKOREA-BINANCE`](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) — 바이낸스 63억 달러 해킹 — 역대 최대 규모 탈취와 대응 플레이북 | CRITICAL | [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · [PDF](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) |
 | 2026-10-30 | [`CTI-2026-1030-TCP`](CTI-2026-1030-TCP_KR.md) — 리눅스 커널 TCP Use-After-Free (CVE-2026-98432) | HIGH | [KR](CTI-2026-1030-TCP_KR.md) · [Tools](Linux_TCP/README.md) |
 | 2026-10-22 | [`CTI-2026-10-22-PHP`](CTI-2026-10-22-PHP_KR.md) — PHP2Shell — PHP 코어 비인증 RCE 2종 (CVE-2026-109618/109619) | CRITICAL | [KR](CTI-2026-10-22-PHP_KR.md) |
 | 2026-10-22 | [`CTI-2026-10-22-OPENJDK`](CTI-2026-10-22-OPENJDK_KR.md) — eMudhra 중간 CA 개인 키 유출과 CVE-2026-91403 (JVM 신뢰 체인) | CRITICAL | [KR](CTI-2026-10-22-OPENJDK_KR.md) |
@@ -276,13 +289,13 @@ FBI·비밀경호국이 경고한 86,644개 유출 자격 증명의 현행 악�
 `MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP` · `TCP` · `PHP2Shell` · `OPENJDK` · `FortiBleed` · `COLDCARD-RNG`
 
 ### 북한·국가배후 위협
-`DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER` · `DPRK-LAPTOP-FARM` · `HWP` · `KIMSUKY` · `DPRK-BANK-HACKERS` · `CHINA-HACKING` · `Qilin-Japan-Arrest`
+`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER` · `DPRK-LAPTOP-FARM` · `HWP` · `KIMSUKY` · `DPRK-BANK-HACKERS` · `CHINA-HACKING` · `Qilin-Japan-Arrest`
 
 ### AI·LLM 위협
 `SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY` · `AI-BANK-HACKING` · `AI-HACKING-TREND` · `KIMSUKY` · `CODEX-OPEN-SECURITY`
 
 ### Web3·암호화폐
-`KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO` · `WEMIX` · `COLDCARD-RNG`
+`NORTHKOREA-BINANCE` · `KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO` · `WEMIX` · `COLDCARD-RNG`
 
 ### OSINT·도구 리뷰
 `FLOWSINT` · `CODEX-OPEN-SECURITY` · `LAON_VaultGuard`
@@ -337,7 +350,7 @@ Examples:
 
 ## 키워드 (Keywords)
 
-`사이버 위협 인텔리전스` `CTI` `OSINT` `APT` `북한 해킹` `라자루스` `Lazarus` `김수키` `Kimsuky` `APT43` `스카크러프트` `ScarCruft` `APT37` `공급망 공격` `Supply Chain` `제로데이` `Zero-Day` `취약점` `CVE` `AI 보안` `LLM` `인공지능 해킹` `Web3` `블록체인` `암호화폐` `DeFi` `개인정보 유출` `데이터 유출` `한국 사이버 보안` `Korea Cybersecurity` `위협 분석` `Threat Intelligence` `보안 연구` `사고 대응` `MITRE ATT&CK` `IOC` `침해 지표` `PHP2Shell` `리눅스 커널` `Linux Kernel` `FortiBleed` `Qilin` `랜섬웨어` `노트북 팜` `아래아 한글` `HWP` `Dennis Kim` `Betalabs`
+`사이버 위협 인텔리전스` `CTI` `OSINT` `APT` `북한 해킹` `라자루스` `Lazarus` `김수키` `Kimsuky` `APT43` `스카크러프트` `ScarCruft` `APT37` `공급망 공격` `Supply Chain` `제로데이` `Zero-Day` `취약점` `CVE` `AI 보안` `LLM` `인공지능 해킹` `Web3` `블록체인` `암호화폐` `DeFi` `개인정보 유출` `데이터 유출` `한국 사이버 보안` `Korea Cybersecurity` `위협 분석` `Threat Intelligence` `보안 연구` `사고 대응` `MITRE ATT&CK` `IOC` `침해 지표` `PHP2Shell` `리눅스 커널` `Linux Kernel` `FortiBleed` `Qilin` `랜섬웨어` `노트북 팜` `아래아 한글` `HWP` `바이낸스` `Binance` `TraderTraitor` `바이비트` `Bybit` `Dennis Kim` `Betalabs`
 
 ---
 
@@ -367,8 +380,8 @@ Examples:
 | --- | --- |
 | **총 리포트 시리즈** | 100+ |
 | **커버 언어** | 한국어 · English · 日本語 · 中文 |
-| **주요 위협 행위자** | Lazarus · Kimsuky(APT43) · ScarCruft(APT37) · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE · Qilin · FortiBleed 캠페인 외 |
-| **최근 업데이트** | 2026-10-30 |
+| **주요 위협 행위자** | Lazarus · Kimsuky(APT43) · ScarCruft(APT37) · TraderTraitor · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE · Qilin · FortiBleed 캠페인 외 |
+| **최근 업데이트** | 2026-11-01 |
 
 ---
 
