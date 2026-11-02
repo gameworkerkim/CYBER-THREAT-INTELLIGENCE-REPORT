@@ -1,7 +1,8 @@
 # CyberStrike 완전 가이드
 
 > **Open-source AI-powered offensive security harness** — 대상을 설명하면 도구 선택·에이전트 배치·취약점 테스트·보고서 작성을 자율 수행하는 AI 기반 공격적 보안 하네스.
-> 본 문서는 **공식 문서(docs.cyberstrike.io, 한국어판 · v1.1.16)** 와 **공식 저장소 README**를 종합해 재구성한 통합 가이드입니다. 소개·분석(왜/무엇)부터 설치·실전 사용(어떻게)까지 하나로 다룹니다.
+> 본 문서는 **공식 문서(docs.cyberstrike.io, 한국어판 · v1.1.16)** 와 **공식 저장소 README**를 종합해 재구성한 통합 가이드입니다.
+> CyberStrike의 컨셉과 소개, 분석부터 설치·실전 사용(어떻게)까지 하나로 다루는 문서입니다. 
 
 ![CyberStrike](./images/hero-dark.png)
 
@@ -15,21 +16,15 @@
 | 언어 | TypeScript |
 | 커뮤니티 | <https://discord.gg/dr97wVJVbn> |
 
-> ℹ️ **수치 표기 안내** — 프로젝트의 공식 문서와 README는 세부 수치(에이전트·도구·모델 수 등)를 서로 다르게 집계합니다. 본 가이드는 **최신 공식 문서(v1.1.16) 수치**를 기준으로 통일했습니다.
+> **수치 표기 안내** — 프로젝트의 공식 문서와 README는 세부 수치(에이전트·도구·모델 수 등)를 서로 다르게 집계합니다. 본 가이드는 **최신 공식 문서(v1.1.16) 수치**를 기준으로 통일했습니다.
 
-> 📁 **이미지 안내** — 이 문서는 모든 그림을 **`images/` 폴더의 로컬 파일**로 삽입합니다(원격 링크가 아니므로 뷰어·GitHub·오프라인에서 안정적으로 표시됩니다). 함께 배포할 파일: **`CyberStrike-완전가이드.md` + `images/` 폴더**.
-> - ✅ 바로 표시되는 이미지: 히어로 배너(`images/hero-dark.png`), 아키텍처 인포그래픽(`images/CyberStrike-architecture.png`)
-> - 📥 공식 스크린샷 5종(TUI·인증·첫 실행)은 별도 문서 사이트 자산이라 동봉되어 있지 않습니다. 아래 명령 한 번으로 `images/`에 받으면 즉시 표시됩니다(또는 본인이 직접 캡처한 이미지를 같은 파일명으로 넣어 교체):
-> ```bash
-> bash images/download-screenshots.sh
-> ```
-> Windows(또는 스크립트 미사용)라면 아래 URL을 브라우저에서 저장해 `images/`에 같은 파일명으로 두세요.
-> - `g01-first-run.gif` · `s01-installation.png` · `g02-auth-login.gif` · `s02-auth.jpg` · `s03-tui-main.png`
-> - 원본 경로: `https://docs.cyberstrike.io/docs/images/{gifs|screenshots}/<파일명>`
+> **이미지 안내** — 이 문서의 모든 그림은 **`images/` 폴더에 동봉된 로컬 파일**입니다(원격 링크가 아니므로 GitHub·뷰어·오프라인에서 그대로 표시됩니다). 저장소에 올릴 때는 **이 `.md`와 `images/` 폴더를 함께 커밋**하세요.
+> - 포함된 이미지: `hero-dark.png`, `CyberStrike-architecture.png`, `illus-install-run.png`, `illus-auth.png`, `illus-tui.png`
+> - 화면 일러스트(설치·인증·TUI)는 문서를 위해 제작한 **개념 일러스트**입니다. 공식 실제 화면으로 바꾸려면 <https://docs.cyberstrike.io/ko/docs/getting-started/> 에서 캡처해 같은 파일명으로 교체하면 됩니다.
 
 ---
 
-## 🚨 사용 전 반드시 읽을 것
+## 사용 전 반드시 읽을 것
 
 > - CyberStrike는 **명시적·서면 허가를 받은 시스템**에만 사용합니다. 권한 없는 대상 테스트는 **불법**이며, 한국에서는 「정보통신망법」 위반에 해당할 수 있습니다(형사 처벌 대상).
 > - **에이전트는 샌드박싱되지 않습니다.** 권한 시스템은 "실행 전 확인"을 돕는 UX 기능일 뿐, 보안 격리가 아닙니다. 실제 격리가 필요하면 **Docker 컨테이너 또는 VM 안에서 실행**하세요(공식 SECURITY.md 권고).
@@ -87,8 +82,6 @@ CyberStrike는 **AI 펜테스터가 함께 일하는** 구조입니다. 웹 앱�
 - **버그바운티 헌터** — 빠른 정찰, 넓은 커버리지, 프로그램 간 일관된 방법론
 - **보안팀** — 재현 가능한 OWASP 평가와 표준 기반 보고서
 - **보안 연구자** — 커스텀 에이전트·MCP 서버로 확장 가능한 플랫폼
-
-![CyberStrike 설치 및 첫 실행](./images/g01-first-run.gif)
 
 ---
 
@@ -254,7 +247,7 @@ npm install -g @cyberstrike-io/cyberstrike@latest
 cyberstrike --version
 ```
 
-![설치 후 Cyberstrike TUI](./images/s01-installation.png)
+![설치 & 첫 실행 (개념 일러스트)](./images/illus-install-run.png)
 
 ### 11.2 curl (Linux / macOS)
 
@@ -268,7 +261,7 @@ curl -fsSL https://cyberstrike.io/install | bash
 iwr -useb https://cyberstrike.io/install.ps1 | iex
 ```
 
-> ⚠️ **주의** — 스크립트는 실행 전 반드시 검토하세요. 설치 스크립트는 저장소에서 확인할 수 있습니다.
+> **주의** — 스크립트는 실행 전 반드시 검토하세요. 설치 스크립트는 저장소에서 확인할 수 있습니다.
 
 ### 11.4 아직 제공되지 않는 방식 (출시 예정)
 
@@ -286,7 +279,7 @@ iwr -useb https://cyberstrike.io/install.ps1 | iex
 
 CyberStrike는 작동에 **AI 제공자**가 반드시 필요합니다(지원 제공자 표는 [4.3](#43-지원-llm-제공자일부) 참조).
 
-![Cyberstrike 인증 로그인 흐름](./images/g02-auth-login.gif)
+![AI 제공자 연결 · 인증 (개념 일러스트)](./images/illus-auth.png)
 
 ### 12.1 인증 설정 (`/connect`)
 
@@ -303,8 +296,6 @@ CyberStrike는 작동에 **AI 제공자**가 반드시 필요합니다(지원 �
 /models
 ```
 
-![Cyberstrike 모델 선택 대화상자](./images/s02-auth.jpg)
-
 ### 12.2 환경 변수로 설정 (선택)
 
 ```bash
@@ -319,7 +310,7 @@ export OPENROUTER_API_KEY="sk-or-..."
 ```
 
 > 영구 적용하려면 쉘 프로필(`~/.bashrc`, `~/.zshrc`)에 추가하세요.
-> 💡 **무료로 시작하기** — GitHub Copilot(구독 보유 시)·OpenRouter·Google Gemini, 또는 완전 로컬 Ollama를 쓰면 별도 API 비용 없이 시작할 수 있습니다.
+> **무료로 시작하기** — GitHub Copilot(구독 보유 시)·OpenRouter·Google Gemini, 또는 완전 로컬 Ollama를 쓰면 별도 API 비용 없이 시작할 수 있습니다.
 
 ---
 
@@ -333,7 +324,7 @@ cyberstrike
 
 입력 프롬프트 · 응답 영역 · 상태 표시줄로 구성된 TUI가 나타납니다.
 
-![Cyberstrike TUI 메인 인터페이스](./images/s03-tui-main.png)
+![TUI 메인 인터페이스 (개념 일러스트)](./images/illus-tui.png)
 
 ### 13.2 대상 설명
 
@@ -537,6 +528,6 @@ cloudflared tunnel --url http://localhost:4096 run your-tunnel
 
 ---
 
-> ℹ️ 모든 그림은 `images/` 폴더의 로컬 파일로 삽입됩니다. 배포 시 **`CyberStrike-완전가이드.md`와 `images/` 폴더를 함께** 두세요(GitHub에 올릴 때도 `images/`를 함께 커밋). 히어로·아키텍처 이미지는 포함되어 있으며, 공식 스크린샷 5종은 `bash images/download-screenshots.sh`로 받거나 직접 캡처한 이미지를 같은 파일명으로 넣어 교체할 수 있습니다. 공식 스크린샷 원본은 <https://docs.cyberstrike.io/ko/docs/getting-started/> 에서 확인·저장할 수 있습니다.
+> 모든 그림은 `images/` 폴더에 동봉되어 있습니다. 저장소에 올릴 때 **이 `.md`와 `images/` 폴더를 함께 커밋**하면 그대로 표시됩니다(`.md`만 올리면 이미지가 깨집니다). 화면 일러스트는 개념 일러스트이며, 공식 실제 화면 캡처로 자유롭게 교체할 수 있습니다.
 >
-> ⚠️ **최종 고지** — 본 가이드는 인가된 보안 테스트·연구·교육 목적의 참고 자료입니다. CyberStrike는 명시적 서면 허가를 받은 시스템에만 사용해야 하며, 무단 사용은 불법입니다. 작성자·배포자는 본 문서의 오용으로 인한 결과에 책임지지 않습니다.
+> **최종 고지** — 본 가이드는 인가된 보안 테스트·연구·교육 목적의 참고 자료입니다. CyberStrike는 명시적 서면 허가를 받은 시스템에만 사용해야 하며, 무단 사용은 불법입니다. 작성자·배포자는 본 문서의 오용으로 인한 결과에 책임지지 않습니다.
