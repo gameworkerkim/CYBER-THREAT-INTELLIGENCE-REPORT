@@ -1,7 +1,7 @@
 # CyberStrike 완전 가이드
 
 > **Open-source AI-powered offensive security harness** — 대상을 설명하면 도구 선택·에이전트 배치·취약점 테스트·보고서 작성을 자율 수행하는 AI 기반 공격적 보안 하네스.
-> 본 문서는 **공식 문서(docs.cyberstrike.io, 한국어판 · v1.1.16)** 와 **공식 저장소 README**를 종합해 재구성한 통합 가이드입니다. 이 오픈 소스의 목표와 특징부터 설치·실전 사용(어떻게)까지 하나로 다룹니다.
+> 본 문서는 **공식 문서(docs.cyberstrike.io, 한국어판 · v1.1.16)** 와 **공식 저장소 README**를 종합해 재구성한 통합 가이드입니다. 소개·분석(왜/무엇)부터 설치·실전 사용(어떻게)까지 하나로 다룹니다.
 
 ![CyberStrike](./images/hero-dark.png)
 
@@ -15,11 +15,11 @@
 | 언어 | TypeScript |
 | 커뮤니티 | <https://discord.gg/dr97wVJVbn> |
 
-> **수치 표기 안내** — 프로젝트의 공식 문서와 README는 세부 수치(에이전트·도구·모델 수 등)를 서로 다르게 집계합니다. 본 가이드는 **최신 공식 문서(v1.1.16) 수치**를 기준으로 통일했습니다.
+> ℹ️ **수치 표기 안내** — 프로젝트의 공식 문서와 README는 세부 수치(에이전트·도구·모델 수 등)를 서로 다르게 집계합니다. 본 가이드는 **최신 공식 문서(v1.1.16) 수치**를 기준으로 통일했습니다.
 
 > 📁 **이미지 안내** — 이 문서는 모든 그림을 **`images/` 폴더의 로컬 파일**로 삽입합니다(원격 링크가 아니므로 뷰어·GitHub·오프라인에서 안정적으로 표시됩니다). 함께 배포할 파일: **`CyberStrike-완전가이드.md` + `images/` 폴더**.
-> - 바로 표시되는 이미지: 히어로 배너(`images/hero-dark.png`), 아키텍처 인포그래픽(`images/CyberStrike-아키텍처.svg`)
-> - 공식 스크린샷 5종(TUI·인증·첫 실행)은 별도 문서 사이트 자산이라 동봉되어 있지 않습니다. 아래 명령 한 번으로 `images/`에 받으면 즉시 표시됩니다(또는 본인이 직접 캡처한 이미지를 같은 파일명으로 넣어 교체):
+> - ✅ 바로 표시되는 이미지: 히어로 배너(`images/hero-dark.png`), 아키텍처 인포그래픽(`images/CyberStrike-architecture.png`)
+> - 📥 공식 스크린샷 5종(TUI·인증·첫 실행)은 별도 문서 사이트 자산이라 동봉되어 있지 않습니다. 아래 명령 한 번으로 `images/`에 받으면 즉시 표시됩니다(또는 본인이 직접 캡처한 이미지를 같은 파일명으로 넣어 교체):
 > ```bash
 > bash images/download-screenshots.sh
 > ```
@@ -29,7 +29,7 @@
 
 ---
 
-## 사용 전 반드시 읽을 것
+## 🚨 사용 전 반드시 읽을 것
 
 > - CyberStrike는 **명시적·서면 허가를 받은 시스템**에만 사용합니다. 권한 없는 대상 테스트는 **불법**이며, 한국에서는 「정보통신망법」 위반에 해당할 수 있습니다(형사 처벌 대상).
 > - **에이전트는 샌드박싱되지 않습니다.** 권한 시스템은 "실행 전 확인"을 돕는 UX 기능일 뿐, 보안 격리가 아닙니다. 실제 격리가 필요하면 **Docker 컨테이너 또는 VM 안에서 실행**하세요(공식 SECURITY.md 권고).
@@ -105,7 +105,7 @@ LLM 제공자를 연결하면 CyberStrike가 매 상호작용에 도메인 컨�
 
 ## 3. 아키텍처 개요
 
-![CyberStrike 아키텍처 인포그래픽](./images/CyberStrike-아키텍처.svg)
+![CyberStrike 아키텍처 인포그래픽](./images/CyberStrike-architecture.png)
 
 > 인터페이스(TUI·CLI·Web UI) → 인텔리전스 레이어 → 핵심 3요소(에이전트·WSTG 스크립트·도구) → 실행/원격(HackBrowser·Vortex·Bolt·Cloudflare Tunnel) → LLM 백엔드 순으로 구성되며, 전 과정은 **정찰 → 발견 → 익스플로잇 → 보고서** 파이프라인으로 자율 수행됩니다.
 
@@ -537,6 +537,6 @@ cloudflared tunnel --url http://localhost:4096 run your-tunnel
 
 ---
 
-> 모든 그림은 `images/` 폴더의 로컬 파일로 삽입됩니다. 배포 시 **`CyberStrike-완전가이드.md`와 `images/` 폴더를 함께** 두세요(GitHub에 올릴 때도 `images/`를 함께 커밋). 히어로·아키텍처 이미지는 포함되어 있으며, 공식 스크린샷 5종은 `bash images/download-screenshots.sh`로 받거나 직접 캡처한 이미지를 같은 파일명으로 넣어 교체할 수 있습니다. 공식 스크린샷 원본은 <https://docs.cyberstrike.io/ko/docs/getting-started/> 에서 확인·저장할 수 있습니다.
+> ℹ️ 모든 그림은 `images/` 폴더의 로컬 파일로 삽입됩니다. 배포 시 **`CyberStrike-완전가이드.md`와 `images/` 폴더를 함께** 두세요(GitHub에 올릴 때도 `images/`를 함께 커밋). 히어로·아키텍처 이미지는 포함되어 있으며, 공식 스크린샷 5종은 `bash images/download-screenshots.sh`로 받거나 직접 캡처한 이미지를 같은 파일명으로 넣어 교체할 수 있습니다. 공식 스크린샷 원본은 <https://docs.cyberstrike.io/ko/docs/getting-started/> 에서 확인·저장할 수 있습니다.
 >
-> **최종 고지** — 본 가이드는 인가된 보안 테스트·연구·교육 목적의 참고 자료입니다. CyberStrike는 명시적 서면 허가를 받은 시스템에만 사용해야 하며, 무단 사용은 불법입니다. 작성자·배포자는 본 문서의 오용으로 인한 결과에 책임지지 않습니다.
+> ⚠️ **최종 고지** — 본 가이드는 인가된 보안 테스트·연구·교육 목적의 참고 자료입니다. CyberStrike는 명시적 서면 허가를 받은 시스템에만 사용해야 하며, 무단 사용은 불법입니다. 작성자·배포자는 본 문서의 오용으로 인한 결과에 책임지지 않습니다.
