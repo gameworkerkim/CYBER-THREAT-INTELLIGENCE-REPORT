@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1140" font-family="'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Segoe UI',sans-serif" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo5NDk2NTY3ZS04MzRiLTQwNTctYjcwNC00MTdkNTExNjRkNTQAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaLmXMv413kVaIBNtWomM71IAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDpmZjg0NjFmMy0xZDM3LTQ0OTktYjJkZi02YzVlMjgyOGQzNjlscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoTchitfHD7q90GB/iqVLwQQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggzgjHqGRgcg0umtD3BLAla6SmQJbWU2CmtWfnMCrY8e+kZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaLGIWyadGmMlTYAiy16HaNoAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCD0MW3l6oAtRLQp+ZKoH0pHhIiKHBH4Td+gWpL0mI1qqmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjYZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjk0OTY1NjdlLTgzNGItNDA1Ny1iNzA0LTQxN2Q1MTE2NGQ1NC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjg2OTg0NDQzLWQyYzctNGY5Yi05ZjM2LWYwYjZjY2Y5NzFlZXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDOCMeoZGByDS6a0PcEsCVrpKZAltZTYKa1Z+cwKtjx76JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggJmXxWVqJyx2XWX53gZyiIt+89HRKUF7Cid3BrY6n+DGiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFgg+pMjZeDA0rvH8oqNOOkoScGQK3Jc7eKqCgiPBvpGEJ10Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQD+flNPNahR9pou+NyinZZLkJpuJYx8Wbog3FfThS3Xc4zrvyNrPWVGLSAIka08AxVcGEJyrNPV+1VNb0pQPLPc=</c2pa:manifest></metadata>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1526"/>
+      <stop offset="1" stop-color="#0a1120"/>
+    </linearGradient>
+    <linearGradient id="pipe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.1" fill="#ffffff" opacity="0.045"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- canvas -->
+  <rect x="0" y="0" width="1000" height="1140" rx="26" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1000" height="1140" rx="26" fill="url(#dots)"/>
+  <rect x="0.5" y="0.5" width="999" height="1139" rx="26" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <!-- ===== Header ===== -->
+  <g transform="translate(60,52)">
+    <rect x="0" y="0" width="34" height="34" rx="9" fill="#38bdf8" filter="url(#glow)" opacity="0.95"/>
+    <path d="M9 17 L15 23 L26 10" stroke="#0a1120" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="50" y="18" font-size="33" font-weight="700" fill="#eef4fc">CyberStrike 아키텍처 개요</text>
+    <text x="52" y="46" font-size="15.5" fill="#8fa4be">LLM을 자율 공격 보안 에이전트로 전환하는 인텔리전스 레이어 구조</text>
+  </g>
+  <g transform="translate(790,44)" font-size="12" font-weight="600">
+    <rect x="0" y="0" width="150" height="24" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.1"/>
+    <text x="75" y="16" text-anchor="middle" fill="#c9d6e8">AGPL-3.0 · TypeScript</text>
+    <rect x="0" y="30" width="150" height="24" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.1"/>
+    <text x="75" y="46" text-anchor="middle" fill="#c9d6e8">230+ 제공자 · 9,000+ 모델</text>
+  </g>
+
+  <!-- ===== Pipeline strip ===== -->
+  <g transform="translate(60,128)">
+    <text x="0" y="12" font-size="12.5" font-weight="700" fill="#6b82a0" letter-spacing="2">자율 수행 파이프라인</text>
+    <g transform="translate(0,22)" font-size="14" font-weight="700">
+      <rect x="0" y="0" width="196" height="40" rx="10" fill="#0e2234" stroke="#22d3ee" stroke-opacity="0.55"/>
+      <text x="98" y="25" text-anchor="middle" fill="#bdeefb">① 정찰</text>
+      <rect x="228" y="0" width="196" height="40" rx="10" fill="#122234" stroke="#38bdf8" stroke-opacity="0.55"/>
+      <text x="326" y="25" text-anchor="middle" fill="#cfe6fb">② 취약점 발견</text>
+      <rect x="456" y="0" width="196" height="40" rx="10" fill="#161f3a" stroke="#818cf8" stroke-opacity="0.55"/>
+      <text x="554" y="25" text-anchor="middle" fill="#d8ddfb">③ 익스플로잇</text>
+      <rect x="684" y="0" width="196" height="40" rx="10" fill="#1b1b36" stroke="#a78bfa" stroke-opacity="0.6"/>
+      <text x="782" y="25" text-anchor="middle" fill="#e4dbfb">④ 보고서</text>
+      <g stroke="#6b82a0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M202 20 L222 20 M217 15 L223 20 L217 25"/>
+        <path d="M430 20 L450 20 M445 15 L451 20 L445 25"/>
+        <path d="M658 20 L678 20 M673 15 L679 20 L673 25"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- helper: layer label + panel drawn inline per layer -->
+
+  <!-- ===== L1 Interface ===== -->
+  <g transform="translate(60,214)">
+    <rect x="0" y="0" width="880" height="104" rx="16" fill="#111c30" stroke="#ffffff" stroke-opacity="0.07" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="6" height="104" rx="3" fill="#38bdf8"/>
+    <text x="26" y="34" font-size="13" font-weight="700" fill="#38bdf8" letter-spacing="1">LAYER 1</text>
+    <text x="26" y="58" font-size="19" font-weight="700" fill="#eaf1fb">인터페이스</text>
+    <text x="26" y="80" font-size="12" fill="#8094ad">사용자 접점</text>
+    <!-- cards -->
+    <g font-size="15" font-weight="700">
+      <rect x="210" y="22" width="206" height="60" rx="11" fill="#0f2130" stroke="#38bdf8" stroke-opacity="0.3"/>
+      <text x="228" y="46" fill="#e8f3fb">Terminal TUI</text>
+      <text x="228" y="67" font-size="12" font-weight="500" fill="#8fb6cf">대화형 · Tab으로 에이전트 전환</text>
+      <rect x="432" y="22" width="206" height="60" rx="11" fill="#0f2130" stroke="#38bdf8" stroke-opacity="0.3"/>
+      <text x="450" y="46" fill="#e8f3fb">CLI · run</text>
+      <text x="450" y="67" font-size="12" font-weight="500" fill="#8fb6cf">스크립트 / CI 비대화형 실행</text>
+      <rect x="654" y="22" width="206" height="60" rx="11" fill="#0f2130" stroke="#38bdf8" stroke-opacity="0.3"/>
+      <text x="672" y="46" fill="#e8f3fb">Web UI : 4096</text>
+      <text x="672" y="67" font-size="12" font-weight="500" fill="#8fb6cf">브라우저 대시보드 · 원격 접속</text>
+    </g>
+  </g>
+  <path d="M500 320 L500 340 M493 333 L500 341 L507 333" stroke="#64809e" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ===== L2 Intelligence ===== -->
+  <g transform="translate(60,350)">
+    <rect x="0" y="0" width="880" height="96" rx="16" fill="#171430" stroke="#ffffff" stroke-opacity="0.07" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="6" height="96" rx="3" fill="#a78bfa"/>
+    <text x="26" y="32" font-size="13" font-weight="700" fill="#a78bfa" letter-spacing="1">LAYER 2</text>
+    <text x="26" y="56" font-size="19" font-weight="700" fill="#eaf1fb">인텔리전스 레이어</text>
+    <text x="26" y="78" font-size="12" fill="#9a8fc0">모델에 보안 지능 주입</text>
+    <g font-size="13.5" font-weight="700">
+      <rect x="210" y="26" width="156" height="44" rx="10" fill="#1b1838" stroke="#a78bfa" stroke-opacity="0.35"/>
+      <text x="288" y="53" text-anchor="middle" fill="#e5def9">스키마 정규화</text>
+      <rect x="378" y="26" width="156" height="44" rx="10" fill="#1b1838" stroke="#a78bfa" stroke-opacity="0.35"/>
+      <text x="456" y="53" text-anchor="middle" fill="#e5def9">컨텍스트 가드</text>
+      <rect x="546" y="26" width="156" height="44" rx="10" fill="#1b1838" stroke="#a78bfa" stroke-opacity="0.35"/>
+      <text x="624" y="53" text-anchor="middle" fill="#e5def9">제공자 자동감지</text>
+      <rect x="714" y="26" width="146" height="44" rx="10" fill="#1b1838" stroke="#a78bfa" stroke-opacity="0.35"/>
+      <text x="787" y="53" text-anchor="middle" fill="#e5def9">도구 오케스트레이션</text>
+    </g>
+  </g>
+  <path d="M500 446 L500 466 M493 459 L500 467 L507 459" stroke="#64809e" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ===== L3 Core pillars ===== -->
+  <g transform="translate(60,476)">
+    <rect x="0" y="0" width="880" height="196" rx="16" fill="#0f1b2a" stroke="#ffffff" stroke-opacity="0.07" filter="url(#shadow)"/>
+    <text x="26" y="34" font-size="13" font-weight="700" fill="#2dd4bf" letter-spacing="1">LAYER 3 · CORE</text>
+    <text x="210" y="34" font-size="19" font-weight="700" fill="#eaf1fb">핵심 3요소</text>
+    <text x="340" y="34" font-size="12" fill="#7f94ad">발견에 따라 동적으로 결합</text>
+    <!-- pillar 1 agents -->
+    <g>
+      <rect x="26" y="52" width="270" height="120" rx="13" fill="#0c2520" stroke="#2dd4bf" stroke-opacity="0.4"/>
+      <circle cx="52" cy="82" r="8" fill="#2dd4bf"/>
+      <text x="72" y="78" font-size="26" font-weight="800" fill="#eafcf6">15+</text>
+      <text x="72" y="98" font-size="14" font-weight="700" fill="#b9f3e6">전문 에이전트</text>
+      <text x="26" y="128" font-size="12.5" font-weight="600" fill="#8fc9bd">WSTG 파이프라인 · triage</text>
+      <text x="26" y="150" font-size="12" fill="#7bb3a7">escalation · general · explore</text>
+    </g>
+    <!-- pillar 2 skills -->
+    <g>
+      <rect x="306" y="52" width="270" height="120" rx="13" fill="#2a2410" stroke="#fbbf24" stroke-opacity="0.4"/>
+      <circle cx="332" cy="82" r="8" fill="#fbbf24"/>
+      <text x="352" y="78" font-size="26" font-weight="800" fill="#fdf6e3">65+</text>
+      <text x="352" y="98" font-size="14" font-weight="700" fill="#f6dfa0">WSTG 스크립트</text>
+      <text x="306" y="128" font-size="12.5" font-weight="600" fill="#d9c488">결정론적 테스트 · 런타임 로드</text>
+      <text x="306" y="150" font-size="12" fill="#c6b27a">OWASP WSTG 기반</text>
+    </g>
+    <!-- pillar 3 tools -->
+    <g>
+      <rect x="586" y="52" width="268" height="120" rx="13" fill="#2a1420" stroke="#fb7185" stroke-opacity="0.4"/>
+      <circle cx="612" cy="82" r="8" fill="#fb7185"/>
+      <text x="632" y="78" font-size="26" font-weight="800" fill="#fdeef0">100+</text>
+      <text x="632" y="98" font-size="14" font-weight="700" fill="#f7b9c3">보안 도구</text>
+      <text x="586" y="128" font-size="12.5" font-weight="600" fill="#e2a3af">내장 도구 + Bolt 30+ 컨테이너</text>
+      <text x="586" y="150" font-size="12" fill="#d492a0">MCP: github-security·cve·osint</text>
+    </g>
+  </g>
+  <path d="M500 672 L500 692 M493 685 L500 693 L507 685" stroke="#64809e" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ===== L4 Execution ===== -->
+  <g transform="translate(60,702)">
+    <rect x="0" y="0" width="880" height="140" rx="16" fill="#241c0f" stroke="#ffffff" stroke-opacity="0.07" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="6" height="140" rx="3" fill="#fb923c"/>
+    <text x="26" y="34" font-size="13" font-weight="700" fill="#fb923c" letter-spacing="1">LAYER 4</text>
+    <text x="26" y="58" font-size="19" font-weight="700" fill="#eaf1fb">실행 · 원격</text>
+    <text x="26" y="80" font-size="12" fill="#b79a78">도구 실행 엔진</text>
+    <g>
+      <rect x="210" y="22" width="206" height="96" rx="12" fill="#1f1810" stroke="#fb923c" stroke-opacity="0.35"/>
+      <text x="228" y="48" font-size="15" font-weight="700" fill="#fde3c6">HackBrowser</text>
+      <text x="228" y="72" font-size="12" fill="#d7b48c">Chromium + 프록시 캡처</text>
+      <text x="228" y="92" font-size="12" fill="#d7b48c">Vortex 트래픽 분석 연계</text>
+      <rect x="432" y="22" width="206" height="96" rx="12" fill="#1f1810" stroke="#fb923c" stroke-opacity="0.35"/>
+      <text x="450" y="48" font-size="15" font-weight="700" fill="#fde3c6">Bolt (원격)</text>
+      <text x="450" y="72" font-size="12" fill="#d7b48c">VPS·Docker 도구 분산</text>
+      <text x="450" y="92" font-size="12" fill="#d7b48c">Ed25519 키 페어링</text>
+      <rect x="654" y="22" width="206" height="96" rx="12" fill="#1f1810" stroke="#fb923c" stroke-opacity="0.35"/>
+      <text x="672" y="48" font-size="15" font-weight="700" fill="#fde3c6">원격 접속</text>
+      <text x="672" y="72" font-size="12" fill="#d7b48c">Cloudflare Tunnel</text>
+      <text x="672" y="92" font-size="12" fill="#d7b48c">제로 오픈포트 · E2E 암호화</text>
+    </g>
+  </g>
+  <path d="M500 842 L500 862 M493 855 L500 863 L507 855" stroke="#64809e" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ===== L5 LLM backend ===== -->
+  <g transform="translate(60,872)">
+    <rect x="0" y="0" width="880" height="156" rx="16" fill="#0e1f1a" stroke="#ffffff" stroke-opacity="0.07" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="6" height="156" rx="3" fill="#34d399"/>
+    <text x="26" y="34" font-size="13" font-weight="700" fill="#34d399" letter-spacing="1">LAYER 5</text>
+    <text x="26" y="58" font-size="19" font-weight="700" fill="#eaf1fb">LLM 백엔드</text>
+    <text x="26" y="80" font-size="12" fill="#7fb8a3">플러그인 가능</text>
+    <g font-size="12.5" font-weight="700" fill="#d6f3e6">
+      <rect x="210" y="20" width="124" height="34" rx="9" fill="#0f2a22" stroke="#34d399" stroke-opacity="0.3"/><text x="272" y="42" text-anchor="middle">Anthropic</text>
+      <rect x="346" y="20" width="124" height="34" rx="9" fill="#0f2a22" stroke="#34d399" stroke-opacity="0.3"/><text x="408" y="42" text-anchor="middle">OpenAI</text>
+      <rect x="482" y="20" width="124" height="34" rx="9" fill="#0f2a22" stroke="#34d399" stroke-opacity="0.3"/><text x="544" y="42" text-anchor="middle">Google</text>
+      <rect x="618" y="20" width="124" height="34" rx="9" fill="#0f2a22" stroke="#34d399" stroke-opacity="0.3"/><text x="680" y="42" text-anchor="middle">Bedrock</text>
+      <rect x="754" y="20" width="106" height="34" rx="9" fill="#0f2a22" stroke="#34d399" stroke-opacity="0.3"/><text x="807" y="42" text-anchor="middle">Azure</text>
+      <rect x="210" y="62" width="124" height="34" rx="9" fill="#0f2a22" stroke="#34d399" stroke-opacity="0.3"/><text x="272" y="84" text-anchor="middle">xAI · Groq</text>
+      <rect x="346" y="62" width="124" height="34" rx="9" fill="#0f2a22" stroke="#34d399" stroke-opacity="0.3"/><text x="408" y="84" text-anchor="middle">Mistral</text>
+      <rect x="482" y="62" width="124" height="34" rx="9" fill="#0f2a22" stroke="#34d399" stroke-opacity="0.3"/><text x="544" y="84" text-anchor="middle">DeepSeek</text>
+      <rect x="618" y="62" width="242" height="34" rx="9" fill="#0f2a22" stroke="#34d399" stroke-opacity="0.3"/><text x="739" y="84" text-anchor="middle">OpenRouter · 230+ providers</text>
+    </g>
+    <!-- offline highlight -->
+    <rect x="210" y="106" width="650" height="34" rx="9" fill="#13261f" stroke="#6ee7b7" stroke-opacity="0.55"/>
+    <circle cx="232" cy="123" r="5" fill="#6ee7b7"/>
+    <text x="246" y="127" font-size="12.5" font-weight="700" fill="#bff3dd">오프라인 · 에어갭 : Ollama / LM Studio / vLLM — 데이터가 로컬을 벗어나지 않음</text>
+  </g>
+
+  <!-- footer -->
+  <text x="60" y="1066" font-size="11.5" fill="#5f7693">인가된 보안 테스트 전용 · 샌드박싱 미적용(VM/전용 호스트 권장) · 출처: docs.cyberstrike.io · github.com/CyberStrikeus/CyberStrike</text>
+</svg>
