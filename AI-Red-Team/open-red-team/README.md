@@ -189,6 +189,7 @@ See [Deployment & Operations Guide](docs/deployment.md).
 - [Architecture](docs/architecture.md) — middleware design and data flow
 - [Porting Guide](docs/porting-guide.md) — Claude skill → model-agnostic conversion rules
 - [Model Matrix](docs/model-matrix.md) — DeepSeek/GLM/open-weight characteristics and constraints
+- [Uncensored Open-Weight Models](docs/uncensored-models.md) — LM Studio + uncensored GGUF lab guide ⚠️
 - [Roadmap](docs/roadmap.md) — porting phases and middleware plans
 
 ## License

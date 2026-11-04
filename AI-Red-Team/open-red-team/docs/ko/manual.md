@@ -64,7 +64,10 @@ npx ort chat --provider openweight --model qwen2.5:32b
 
 ### vLLM / LM Studio
 
-OpenAI 호환 서버라면 모두 동작 — `OPENWEIGHT_BASE_URL`을 해당 서버의 `/v1` 엔드포인트로 지정합니다.
+OpenAI 호환 서버라면 모두 동작 — `OPENWEIGHT_BASE_URL`을 해당 서버의 `/v1` 엔드포인트로
+지정합니다. LM Studio는 `http://localhost:1234/v1`에 노출합니다. 웹 모델 검열·기본 안전
+정렬이 제약이 되는 무검열 GGUF 랩 테스트는 [무검열 오픈웨이트 모델 가이드](uncensored-models.md)
+참고. ⚠️ 격리·허가된 환경에서만 사용하십시오.
 
 ## 4. CLI 레퍼런스
 

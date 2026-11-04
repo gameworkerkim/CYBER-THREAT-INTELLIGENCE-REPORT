@@ -64,7 +64,11 @@ npx ort chat --provider openweight --model qwen2.5:32b
 
 ### vLLM / LM Studio
 
-OpenAI互換サーバならすべて動作 — `OPENWEIGHT_BASE_URL` をそのサーバの `/v1` エンドポイントに設定します。
+OpenAI互換サーバならすべて動作 — `OPENWEIGHT_BASE_URL` をそのサーバの `/v1` エンドポイントに
+設定します。LM Studio は `http://localhost:1234/v1` に公開します。Webモデルの検閲・既定の
+安全アライメントが制約となる無検閲GGUFラボのテストは
+[無検閲オープンウェイトモデルガイド](uncensored-models.md) を参照。
+⚠️ 隔離・許可された環境のみで使用してください。
 
 ## 4. CLIリファレンス
 

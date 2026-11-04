@@ -48,6 +48,10 @@
 - 7B級モデルはスキル本文1件超の注入で指示遵守率が急落 → `ORT_MAX_SKILLS=1`
 - GGUF量子化モデルは詳細ペイロード（SQLi/シェルコード）の再現性が低い — 32B以上を推奨
 - Ollamaは `keep_alive`/`num_ctx` でコンテキスト拡張が可能
+- **無検閲GGUFラボ（LM Studio）**: Webモデルの検閲・既定の安全アライメントが制約となる
+  AIレッドチームテストには [無検閲オープンウェイトモデルガイド](uncensored-models.md) を参照 —
+  LM Studio は `http://localhost:1234/v1` にOpenAI互換APIを公開し、`openweight` プロバイダへ
+  直接接続できます。⚠️ 隔離・許可された環境のみで使用。
 
 ## 共通の制約
 

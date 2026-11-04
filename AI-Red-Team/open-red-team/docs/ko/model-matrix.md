@@ -48,6 +48,10 @@
 - 7B급 모델은 스킬 본문 1개 이상 주입 시 지시사항 준수율 급감 → `ORT_MAX_SKILLS=1`
 - GGUF 양자화 모델은 상세 페이로드(SQLi/쉘코드) 재현력 낮음 — 32B+ 권장
 - Ollama는 `keep_alive`/`num_ctx`로 컨텍스트 확장 가능
+- **무검열 GGUF 랩(LM Studio)**: 웹 모델 검열·기본 안전 정렬이 제약이 되는 AI 레드팀
+  테스트에는 [무검열 오픈웨이트 모델 가이드](uncensored-models.md) 참고 — LM Studio는
+  `http://localhost:1234/v1`에 OpenAI 호환 API를 노출하여 `openweight` 프로바이더에
+  직접 연결됩니다. ⚠️ 격리·허가된 환경에서만 사용.
 
 ## 공통 제약
 

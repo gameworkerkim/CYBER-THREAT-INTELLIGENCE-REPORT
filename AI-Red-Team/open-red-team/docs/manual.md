@@ -65,6 +65,10 @@ npx ort chat --provider openweight --model qwen2.5:32b
 ### vLLM / LM Studio
 
 Any OpenAI-compatible server works — point `OPENWEIGHT_BASE_URL` at its `/v1` endpoint.
+LM Studio exposes it at `http://localhost:1234/v1`. For uncensored GGUF labs (testing where
+web-model censorship and default safety alignment get in the way), see the
+[Uncensored Open-Weight Models guide](uncensored-models.md). ⚠️ Isolated, authorized
+environments only.
 
 ## 4. CLI Reference
 

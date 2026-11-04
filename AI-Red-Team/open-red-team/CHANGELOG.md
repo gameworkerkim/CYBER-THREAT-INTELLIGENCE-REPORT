@@ -5,6 +5,12 @@ All notable changes to Open AI Red Team are recorded here.
 ## [Unreleased]
 
 ### Added
+- **Uncensored open-weight model guide** (`docs/uncensored-models.md`, EN/KO/JA/ZH) —
+  LM Studio + uncensored GGUF quantization setup (Q2_K/Q4_K_M/Q8_0), folder layout, vision
+  `mmproj`, and direct integration with the `openweight` provider via
+  `http://localhost:1234/v1`. Prominent ⚠️ warnings: isolated/offline environments,
+  authorized scope only, quantization accuracy trade-offs.
+- Model matrix & manual links to the new guide; README documentation index updated (4 languages)
 - **Web management dashboard** (`ort dashboard`) for multi-operator, audited operations
   - Express API: `/api/health` (backend reachability), `/api/config` (masked keys),
     `/api/skills`, `/api/skills/:name`, `/api/chat` (SSE streaming), `/api/audit` (JSONL), `/api/reset`

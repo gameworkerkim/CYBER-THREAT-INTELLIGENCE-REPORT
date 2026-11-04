@@ -185,6 +185,7 @@ docker compose --profile serving up -d           # 本番: アプリ + vLLM
 - [アーキテクチャ](docs/architecture.md) — ミドルウェア設計とデータフロー
 - [移植ガイド](docs/porting-guide.md) — Claudeスキル → モデル非依存への変換規則
 - [モデルマトリクス](docs/model-matrix.md) — DeepSeek/GLM/オープンウェイトの特性と制約
+- [無検閲オープンウェイトモデル](docs/uncensored-models.md) — LM Studio + 無検閲GGUFラボガイド ⚠️
 - [ロードマップ](docs/roadmap.md) — 移植フェーズとミドルウェア計画
 
 ## ライセンス

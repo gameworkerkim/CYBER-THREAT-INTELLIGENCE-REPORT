@@ -183,6 +183,7 @@ docker compose --profile serving up -d           # 生产：应用 + vLLM
 - [架构](docs/architecture.md) — 中间件设计与数据流
 - [移植指南](docs/porting-guide.md) — Claude 技能 → 模型无关的转换规则
 - [模型矩阵](docs/model-matrix.md) — DeepSeek/GLM/开源权重的特性与限制
+- [无审查开源权重模型](docs/uncensored-models.md) — LM Studio + 无审查 GGUF 实验室指南 ⚠️
 - [路线图](docs/roadmap.md) — 移植阶段与中间件规划
 
 ## 许可证

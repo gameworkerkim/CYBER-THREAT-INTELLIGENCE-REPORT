@@ -48,6 +48,11 @@ Notes:
 - 7B-class models lose instruction adherence with more than one skill body → `ORT_MAX_SKILLS=1`
 - Quantized GGUF models reproduce detailed payloads (SQLi/shellcode) poorly — 32B+ recommended
 - Ollama: extend context with `keep_alive`/`num_ctx`
+- **Uncensored GGUF labs (LM Studio)**: for AI red-team testing where web-model censorship and
+  default safety alignment get in the way, see the
+  [Uncensored Open-Weight Models guide](uncensored-models.md) — LM Studio exposes an
+  OpenAI-compatible API at `http://localhost:1234/v1` that plugs directly into the
+  `openweight` provider. ⚠️ Isolated, authorized environments only.
 
 ## Common constraints
 
