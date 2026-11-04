@@ -203,6 +203,47 @@ See [Deployment & Operations Guide](docs/deployment.md).
 - [Compliance Controls](docs/compliance.md) — what the code enforces vs. operator responsibilities
 - [Roadmap](docs/roadmap.md) — porting phases and middleware plans
 
+## Verification Status
+
+Accumulated review findings (4 rounds) and their current status. Details: [Manual — Review Findings & Verification Status](docs/manual.md).
+
+### P0 — critical findings, resolved and measured
+
+| # | Finding | Status |
+|---|---------|--------|
+| 1 | Full skill-body injection → context overflow (single skill ~138K tokens) | Token budget engine + 6 oversized skills `index_only`; runtime prompt measured in the ~6-8K token range |
+| 2 | No tests | vitest suite: 63 tests across 12 files |
+| 3 | CLI-only app; `up -d` broken | Express dashboard + `command: ["dashboard"]` |
+| 4 | No scope enforcement | `deny` returns before the provider call — counter-verified 0 calls |
+| 5 | Fail-open startup (no auth / no scope) | Both refuse to start with exit code 1 |
+
+### P1 — reliability & operations, resolved
+
+| # | Finding | Status |
+|---|---------|--------|
+| 6 | LangFuse audit not wired | `recordChat` tracing + JSONL audit with `promptSha256` (no plaintext) |
+| 7 | Keycloak (OIDC) not wired | OIDC middleware: discovery + JWKS + RS256 |
+| 8 | Broken npm bin (`npx ort` impossible) | Fixed to `dist/src/cli.js` |
+| 9 | No LICENSE | Added (MIT + claude-red attribution) |
+| 10 | `reasoning_content` discarded; stream-only | Reasoning captured + non-stream fallback |
+| 11 | All secrets `change-me` | `docker-compose.infra.yml` with required `${VAR:?}` |
+| 12 | PoC LLM defaults mismatched | Ollama defaults + `ollama-pull` gating |
+| 13 | Shared history across operators | `SessionStore` (LRU) + OIDC `sub` ownership |
+| 14 | Unbounded history | Turn budget + `[earlier turns omitted]` marker |
+| 15 | No retrieval baseline | 30 fixtures, thresholds top-1 ≥ 0.85 / top-3 ≥ 0.95 |
+
+### P2 — polish & boundaries, resolved
+
+CLI version loaded from `package.json` · dead metrics/route labels cleaned · compliance/architecture
+control tables in 4 languages · `index_only` badge in the Skills tab.
+
+### Known limitations (non-critical)
+
+1. CI workflow lives at the repository root (path-filtered); local runs verified, hosted gate not yet exercised.
+2. vLLM runtime and Keycloak OIDC round-trip are code/config-validated; live verification needs GPU/Docker infra.
+3. Image default `CMD` is `chat`; compose overrides it to `dashboard` (intentional dual use).
+4. Denied requests record `flaggedTargets` (hosts only — never prompt plaintext) in the audit log.
+
 ## License
 
 MIT. Original skills: [SnailSploit/claude-red](https://github.com/SnailSploit/Claude-Red) (MIT) — each skill's

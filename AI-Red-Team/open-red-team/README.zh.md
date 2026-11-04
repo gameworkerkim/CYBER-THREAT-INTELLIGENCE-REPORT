@@ -191,6 +191,47 @@ docker compose --profile serving up -d           # 生产：应用 + vLLM
 - [合规控制](docs/compliance.md) — 代码强制实施的内容 vs 操作员责任
 - [路线图](docs/roadmap.md) — 移植阶段与中间件规划
 
+## 验证状态
+
+累积评审意见（4 轮）与当前状态。详情：[手册 — 评审意见与验证状态](docs/manual.md)。
+
+### P0 — 致命问题，全部解决并经实测确认
+
+| # | 问题 | 状态 |
+|---|------|------|
+| 1 | 技能正文全量注入 → 上下文溢出（单技能约 138K token） | 令牌预算引擎 + 6 个超大技能 `index_only`，运行时提示词约 6-8K token |
+| 2 | 完全没有测试 | vitest 63 项/12 个文件 |
+| 3 | 只有 CLI → `up -d` 无法运行 | Express 面板 + `command: ["dashboard"]` |
+| 4 | 无范围强制 | `deny` 在提供商调用前返回 — 计数器确认 0 次 |
+| 5 | fail-open 启动（无认证/无范围） | 两者均以 exit 1 拒绝 |
+
+### P1 — 可靠性与运营问题，已解决
+
+| # | 问题 | 状态 |
+|---|------|------|
+| 6 | LangFuse 审计未接入代码 | `recordChat` 追踪 + JSONL 审计 `promptSha256`（不存原文） |
+| 7 | Keycloak（OIDC）未接入代码 | OIDC 中间件：discovery + JWKS + RS256 |
+| 8 | npm bin 路径损坏 | 修正为 `dist/src/cli.js` |
+| 9 | 无 LICENSE | 已添加（MIT + claude-red 署名） |
+| 10 | `reasoning_content` 丢弃·仅流式 | 捕获推理 + 非流式回退 |
+| 11 | 所有密钥 `change-me` | `docker-compose.infra.yml` + 必需替换 `${VAR:?}` |
+| 12 | PoC LLM 默认值不匹配 | 对齐 Ollama + `ollama-pull` 门禁 |
+| 13 | 操作员之间共享历史 | `SessionStore`（LRU）+ OIDC `sub` 归属 |
+| 14 | 历史无限增长 | 轮次预算 + `[earlier turns omitted]` 标记 |
+| 15 | 无检索质量基准 | 30 条 fixture，阈值 top-1 ≥ 0.85 / top-3 ≥ 0.95 |
+
+### P2 — 收尾与边界，已解决
+
+CLI 版本从 `package.json` 动态加载 · 清理失效指标/路由标签 · 合规/架构控制表 4 种语言 ·
+`index_only` 徽章。
+
+### 已知限制（轻微）
+
+1. CI 工作流位于仓库根目录（路径过滤）— 本地运行已验证，托管门禁未实机运行。
+2. vLLM 实机运行·Keycloak OIDC 往返已通过代码/配置验证 — 需 GPU/Docker 基础设施。
+3. 镜像默认 `CMD` 为 `chat`，compose 覆盖为 `dashboard`（有意保留的双重用途）。
+4. 拒绝审计记录 `flaggedTargets`（仅主机，不含提示词原文）。
+
 ## 许可证
 
 MIT。原始技能：[SnailSploit/claude-red](https://github.com/SnailSploit/Claude-Red)（MIT）— 各技能 frontmatter 的 `source` 字段注明出处。

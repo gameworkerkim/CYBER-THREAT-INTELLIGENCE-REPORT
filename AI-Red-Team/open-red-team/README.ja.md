@@ -193,6 +193,47 @@ docker compose --profile serving up -d           # 本番: アプリ + vLLM
 - [コンプライアンス統制](docs/compliance.md) — コードが強制するもの vs 運用者の責任
 - [ロードマップ](docs/roadmap.md) — 移植フェーズとミドルウェア計画
 
+## 検証状況
+
+累積レビュー指摘（4ラウンド）と現状。詳細: [マニュアル — レビュー指摘と検証状況](docs/manual.md)。
+
+### P0 — 致命的指摘、すべて解決・実測確認
+
+| # | 指摘 | 状態 |
+|---|------|------|
+| 1 | スキル本文の全量注入 → コンテキストオーバーフロー（単一スキル ~138Kトークン） | トークン予算エンジン + 巨大スキル6種 `index_only`、実行時プロンプト ~6-8Kトークン実測 |
+| 2 | テスト皆無 | vitest 63件/12ファイル |
+| 3 | CLIのみ → `up -d` が動作せず | Expressダッシュボード + `command: ["dashboard"]` |
+| 4 | 範囲強制なし | `deny` でプロバイダ呼び出し前に返却 — カウンタで0回を確認 |
+| 5 | fail-open起動（無認証/無スコープ） | どちらも exit 1 で拒否 |
+
+### P1 — 信頼性・運用の指摘、解決
+
+| # | 指摘 | 状態 |
+|---|------|------|
+| 6 | LangFuse監査がコード未連携 | `recordChat` トレーシング + JSONL監査 `promptSha256`（原文なし） |
+| 7 | Keycloak（OIDC）未連携 | OIDCミドルウェア: discovery + JWKS + RS256 |
+| 8 | npm binパス破損 | `dist/src/cli.js` に修正 |
+| 9 | LICENSEなし | 追加（MIT + claude-red 出典表示） |
+| 10 | `reasoning_content` 破棄・ストリーミング固定 | 推論の捕捉 + non-stream フォールバック |
+| 11 | シークレットが全て `change-me` | `docker-compose.infra.yml` + 必須置換 `${VAR:?}` |
+| 12 | PoCのLLM既定値不一致 | Ollama に整合 + `ollama-pull` ゲート |
+| 13 | 運用者間の履歴共有 | `SessionStore`（LRU）+ OIDC `sub` 帰属 |
+| 14 | 履歴の無限増加 | ターン予算 + `[earlier turns omitted]` マーカー |
+| 15 | 検索品質の基準線なし | 30クエリfixture、閾値 top-1 ≥ 0.85 / top-3 ≥ 0.95 |
+
+### P2 — 仕上げ・境界、解決
+
+CLIバージョンを `package.json` から動的ロード · 死んだメトリクス/ルートラベルを整理 ·
+compliance/アーキテクチャ統制表を4言語で整備 · `index_only` バッジ。
+
+### 既知の制限（軽微）
+
+1. CIワークフローはリポジトリルートに配置（パスフィルタ）— ローカル実行は検証済み、ホストされたゲートの実動作は未確認。
+2. vLLM実起動・Keycloak OIDC往復はコード/構成を検証済み — GPU/Dockerインフラが必要。
+3. イメージ既定 `CMD` は `chat`、compose が `dashboard` に上書き（意図的な二重用途）。
+4. 拒否監査に `flaggedTargets`（ホストのみ、プロンプト原文なし）を記録。
+
 ## ライセンス
 
 MIT。元スキル: [SnailSploit/claude-red](https://github.com/SnailSploit/Claude-Red)（MIT）— 各スキルの frontmatter の `source` フィールドに出典を明記。
