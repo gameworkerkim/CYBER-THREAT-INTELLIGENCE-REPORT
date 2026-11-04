@@ -1,241 +1,77 @@
 # Open AI Red Team
 
-**模型无关的进攻性安全技能集 + 中间件 — Claude Red 的替代与扩展，面向 DeepSeek、GLM 和开源权重模型**
-
-将 [claude-red](https://github.com/SnailSploit/Claude-Red) 技能库（MIT）完整移植，摆脱 Claude 锁定：
-同一套红队技能现可运行于 DeepSeek、GLM（智谱）、开源权重模型（Ollama / vLLM / LM Studio）—
-支持云端、本地部署和完全离线（物理隔离）环境。
+> **一个模型无关的红队方法论中间件，让经过验证的 Claude Red 技能可用于 DeepSeek、GLM 和开放权重模型。**
 
 **文档语言:** [English](README.md)（基准） · [한국어](README.ko.md) · [日本語](README.ja.md) · 中文（本文档）
 
-## 目的 — Claude Red 的替代与扩展
+## 概述
 
-| Claude Red（原始） | Open AI Red Team（本项目） |
-|--------------------|-------------------------|
-| 仅 Claude 可用（Claude 技能系统的 `SKILL.md`） | 模型无关技能：同一方法学可在 **DeepSeek、GLM、开源权重**上运行 |
-| 绑定 Anthropic API（数据流出网络） | **本地/物理隔离部署** — 内部数据不离开组织 |
-| 厂商定价与数据留存 | **成本降低** — 开源权重模型（零 token 成本）与低成本 API |
-| 技能局限于 Claude 原生技能系统 | **扩展** — 触发器引擎、英/韩双语触发器、显式加载、完整 CLI |
+Open AI Red Team 是一个**模型无关的红队方法论中间件**，旨在让安全技能集能够在不同 LLM 提供商
+之间复用。它将原本绑定于 Anthropic Claude 模型的 Claude Red 技能库移植到 DeepSeek、GLM 以及
+通过 Ollama/vLLM 运行的开放权重模型上。
 
-## 主要功能
+它支持 OpenAI 兼容 API，并可通过 `openweight` 提供程序在本地运行模型，从而支持
+**本地部署和气隙/隔离环境**，避免敏感数据外泄。
 
-- **79 个已移植技能、23 个类别** — claude-red 全库：Web、Infrastructure & Red Team、
-  API Security、Cloud、AI Security、Active Directory、Wireless、Exploit Development、Fuzzing 等
-- **面向红队的 LLM 扩展** — 为任意 OpenAI 兼容模型复现 Claude Skills 的渐进式披露与
-  基于触发器的按需加载
-- **提供商抽象** — DeepSeek、GLM（智谱）、开源权重（Ollama/vLLM/LM Studio/llama.cpp）统一接口
-- **触发器引擎** — 关键词 + 正则匹配与打分，韩文、英文触发器关键词
-- **显式控制** — `/use <skill>`、`--skills` 参数、自动加载开关、技能索引开关
-- **CLI + 库** — 交互式 `ort chat`、单次 `ort ask`、技能查看、TypeScript API
-- **Web 管理面板** — 浏览器管理控制台（流式对话、技能浏览器、JSONL 审计追踪、
-  脱敏配置）— 多操作员·审计运营，无 CDN，适配物理隔离网络
-- **上下文预算引擎** — 按模型的 token 上限＋按节截断技能正文，超大技能 `index_only`
-  （防止上下文溢出）
-- **安全护栏** — 已申报的任务范围（`ORT_SCOPE`/`ORT_SCOPE_DOMAINS`）与范围外目标标记、
-  归属操作员的审计记录
-- **合规对接** — Prometheus `/metrics`、OIDC（Keycloak）API 认证、LangFuse 追踪
-- **本地账户（SQLite）** — HMAC 令牌登录，默认 admin/admin 首次登录强制改密，
-  范围·预算·引擎设置可在面板 Settings 页修改
-- **多语言文档** — 英语（基准）、韩语、日语、中文
-- **本地部署就绪** — 本地模型确保敏感目标信息留在内部环境
+## 为什么选择 Open AI Red Team — 核心优势
+
+- **模型无关设计**：不锁定单一 LLM 提供商。支持 OpenAI 兼容 API 和开放权重模型，提高模型选择
+  自由度。
+- **本地部署与气隙支持**：通过本地模型运行保障数据主权，并可在隔离网络中继续使用红队方法论。
+- **庞大且经过验证的技能库**：移植了 Claude Red 的 **79 项技能、23 个类别**，包括 16 项
+  Web 应用技能、7 项基础设施/红队技能和 6 项漏洞利用开发技能。
+- **内置企业级运营功能**：提供 Web 仪表盘、JSONL 审计追踪、Prometheus 指标、OIDC 认证
+  （Keycloak）和 LangFuse 追踪。还包含 `ORT_SCOPE` 范围限定和操作员归属审计等安全护栏。
+- **上下文管理与多语言支持**：提供上下文预算引擎和大技能截断功能，避免上下文溢出。文档支持
+  英语、韩语、日语和中文。
 
 ## 截图
 
 | 管理面板 — Chat | 管理面板 — Skills |
 |-----------------|-------------------|
 | ![Chat 页](assets/screenshots/dashboard-chat.png) | ![Skills 页](assets/screenshots/dashboard-skills.png) |
-| **管理面板 — Audit** | **管理面板 — Config** |
+| **管理面板 — Audit** | **管理面板 — Settings** |
 | ![Audit 页](assets/screenshots/dashboard-audit.png) | ![Config 页](assets/screenshots/dashboard-config.png) |
 
-## 组成部分
+## 产品定位与边界
 
-| 目录 | 内容 |
-|------|------|
-| `skills/` | 已移植技能（模型无关的 `SKILL.md`）— 基于触发器的按需加载 |
-| `src/` | 中间件 — 提供商抽象（OpenAI 兼容）、技能加载器、触发器引擎、CLI |
-| `docs/` | 架构、用户手册、移植指南、模型矩阵、路线图 |
-| `scripts/` | 技能同步/转换工具 |
+Open AI Red Team 是**面向授权工作的方法论注入中间件**。它**不会**在主机上执行命令，也**不包含**
+工具执行代理循环。它基于技能提出攻击**方法**，但不会自动执行扫描、漏洞利用或后渗透。
 
-## 移植状态 — claude-red 全库（79 个技能、23 个类别）
+这是有意的产品边界。如果需要自动化的端到端红队执行，应将其与 PyRIT、Decepticon 等以执行为中心
+的框架结合使用。
 
-| 类别 | 技能数 | 类别 | 技能数 |
-|------|-------:|------|-------:|
-| Web Application | 16 | Fuzzing & Vuln Research | 4 |
-| Infrastructure & Red Team | 7 | Reconnaissance | 2 |
-| API Security | 2 | Container & Kubernetes | 2 |
-| Cloud | 1 | CI/CD & Pipeline | 2 |
-| AI Security | 1 | Cryptography | 2 |
-| Active Directory | 2 | Privilege Escalation | 2 |
-| Auth & Identity | 2 | Post-Exploitation | 3 |
-| Wireless | 14 | Forensics & C2 | 2 |
-| Mobile | 1 | Supply Chain | 2 |
-| IoT & Embedded | 1 | Social Engineering | 2 |
-| Exploit Development | 6 | Network Attacks | 1 |
-| Utility | 2 | **合计** | **79** |
+## 竞争项目对比
 
-## 快速开始
+| 项目 | 核心定位 | 与 Open AI Red Team 的关系 |
+| :--- | :--- | :--- |
+| **NVIDIA Garak** | 漏洞扫描器（以检测为中心） | 互补。Garak 侧重扫描，Open AI Red Team 侧重方法论注入 |
+| **Microsoft PyRIT** | 自动化攻击编排器 | 竞争关系。提供 Open AI Red Team 所缺少的执行代理循环 |
+| **Promptfoo** | CI/CD 集成评估/红队 | 竞争关系。Open AI Red Team 更侧重本地运营而非 CI/CD 集成 |
+| **Decepticon / Pojun 等** | 自主攻击代理 | 不同类别。侧重执行自动化 |
+
+## 适用对象
+
+- 希望将 Claude Red 技能用于 DeepSeek、GLM 和开放权重模型的组织
+- 重视数据主权和本地/气隙运营的安全团队
+- 需要在授权范围内获得受控红队方法论支持的团队
+
+## 快速开始与文档
 
 ```bash
 npm install
 npm run build
-cp .env.example .env   # 配置 API 密钥
-node dist/src/cli.js chat          # 交互式会话（或：npm i -g . → ort chat）
-node dist/src/cli.js dashboard     # Web 管理面板（http://localhost:8081）
-npm test                           # 运行测试
+cp .env.example .env
+node dist/src/cli.js dashboard   # Web 管理面板（http://localhost:8081）
 ```
 
-### 支持的提供商
+面板首次登录：**admin / admin**（强制改密）。
 
-| 提供商 | 端点 | 模型示例 |
-|--------|------|----------|
-| `deepseek` | `https://api.deepseek.com/v1`（OpenAI 兼容） | `deepseek-chat`, `deepseek-reasoner` |
-| `glm` | `https://open.bigmodel.cn/api/paas/v4`（OpenAI 兼容） | `glm-4-plus`, `glm-4-flash` |
-| `openweight` | Ollama / vLLM / LM Studio（OpenAI 兼容 `/v1`） | `qwen2.5:32b`, `deepseek-r1:32b` |
-
-## 使用方法
-
-### CLI
-
-`ort` 需要全局安装（`npm i -g .`）— 否则直接运行 `node dist/src/cli.js`。
-
-```bash
-npx ort chat --provider deepseek --model deepseek-chat   # 交互式，自动加载技能
-npx ort chat --skills offensive-sqli --provider glm      # 强制加载技能
-npx ort skills list                                      # 技能列表
-npx ort skills show offensive-sqli                       # 输出技能正文
-npx ort ask "如何测试这个登录表单的 SQLi" --provider deepseek  # 单次查询
-npx ort dashboard                                        # Web 管理面板（http://localhost:8081）
-```
-
-### 库
-
-```typescript
-import { OpenRedTeam } from "open-red-team";
-
-const ort = new OpenRedTeam({
-  provider: "deepseek",
-  model: "deepseek-chat",
-  apiKey: process.env.DEEPSEEK_API_KEY,
-  skillsDir: "./skills",
-});
-
-const reply = await ort.chat("如何测试 SQL 注入？");
-console.log(reply);
-```
-
-## 应用场景
-
-### 公共机构与金融机构 — 合规驱动
-
-- 依据监管框架（ISMS-P、金融安全规范、PCI-DSS、NIST 等）开展内部红队演练与自查，
-  **不将内部系统信息发送至境外云 API**
-- 在严格数据治理要求下对电子政务、金融服务进行安全审查
-
-> 代码强制实施的控制与操作员/组织责任的划分，参见[合规控制](docs/compliance.md)。
-
-### 企业 — 内部安全运营
-
-- 为安全团队培训、CTF 备战、授权渗透测试规划、日常漏洞分级提供操作员级方法学库
-- 本地部署使专有架构、源代码和目标信息保留在公司内部
-
-### 面向红队的 LLM 扩展
-
-- 将任意 OpenAI 兼容模型转变为上下文感知的红队操作员：
-  技能索引 + 按需方法学注入 + 对话历史
-- 灵活组合：敏感任务使用本地模型，大批量任务使用云 API
-
-## 成本与数据保护
-
-### 成本降低
-
-| 选项 | token 单价 | 说明 |
-|------|------------|------|
-| Claude（原始） | 最高价位 | 技能仅 Claude 可用 |
-| DeepSeek / GLM API | 低成本 API | 相同技能内容，成本大幅降低 |
-| 开源权重（Ollama/vLLM） | **边际成本为零** | 在现有 GPU/硬件上运行 |
-
-### 公共机构 · 金融机构 · 企业内部信息保护
-
-- 使用 `openweight` 提供商时**数据不离开组织** — 目标信息、发现结果和方法学
-  保留在本地或物理隔离环境
-- 提示词与安全发现无第三方留存
-- 企业友好 — 支持代理环境、隔离网络和离线实验室
-
-## 工作原理
-
-1. **技能索引注入** — 将所有技能的 `name` + `description` 注入系统提示词（复现 Claude Skills 的渐进式披露，最小化上下文成本）
-2. **触发器匹配** — 将用户输入与各技能的 `triggers`（关键词/正则，英/韩）匹配，将排名前 N 的技能正文注入系统提示词
-3. **模型调用** — 通过 OpenAI 兼容 API 向所选提供商发送请求
-
-## 部署与运营（物理隔离 / 本地部署）
-
-金融、公共机构和企业部署（망분리·网络隔离）采用 5 层架构支持：离线转入（skopeo/crane）
-→ 镜像仓库安全（Harbor + Trivy + Cosign）→ LLM 推理（vLLM/Ollama）→ 加固后的应用容器
-（非 root·只读·资源限制）→ 认证与审计（Keycloak + LangFuse + Prometheus/Grafana）。
-
-```bash
-docker build -t open-ai-red-team:latest .       # 构建加固镜像（含 SQLite）
-docker compose --profile poc up -d               # PoC：应用 + Ollama
-docker compose --profile serving up -d           # 生产：应用 + vLLM
-./scripts/sbom/scan.sh open-ai-red-team:latest   # CVE 扫描 + SBOM
-./scripts/offline/export-images.sh               # 物理隔离转入
-```
-
-面板将本地账户与设置保存于 SQLite `/data/ort.db`（卷 `./data`）。
-首次登录：**admin / admin**（强制改密）。
-
-详见：[部署与运营指南](docs/deployment.md)
-
-## 文档
-
-- [用户手册](docs/manual.md) — 安装、提供商、CLI、故障排查
-- [架构](docs/architecture.md) — 中间件设计与数据流
-- [移植指南](docs/porting-guide.md) — Claude 技能 → 模型无关的转换规则
-- [模型矩阵](docs/model-matrix.md) — DeepSeek/GLM/开源权重的特性与限制
-- [无审查开源权重模型](docs/uncensored-models.md) — LM Studio + 无审查 GGUF 实验室指南
-- [合规控制](docs/compliance.md) — 代码强制实施的内容 vs 操作员责任
-- [路线图](docs/roadmap.md) — 移植阶段与中间件规划
-
-## 验证状态
-
-累积评审意见（4 轮）与当前状态。详情：[手册 — 评审意见与验证状态](docs/manual.md)。
-
-### P0 — 致命问题，全部解决并经实测确认
-
-| # | 问题 | 状态 |
-|---|------|------|
-| 1 | 技能正文全量注入 → 上下文溢出（单技能约 138K token） | 令牌预算引擎 + 6 个超大技能 `index_only`，运行时提示词约 6-8K token |
-| 2 | 完全没有测试 | vitest 63 项/12 个文件 |
-| 3 | 只有 CLI → `up -d` 无法运行 | Express 面板 + `command: ["dashboard"]` |
-| 4 | 无范围强制 | `deny` 在提供商调用前返回 — 计数器确认 0 次 |
-| 5 | fail-open 启动（无认证/无范围） | 两者均以 exit 1 拒绝 |
-
-### P1 — 可靠性与运营问题，已解决
-
-| # | 问题 | 状态 |
-|---|------|------|
-| 6 | LangFuse 审计未接入代码 | `recordChat` 追踪 + JSONL 审计 `promptSha256`（不存原文） |
-| 7 | Keycloak（OIDC）未接入代码 | OIDC 中间件：discovery + JWKS + RS256 |
-| 8 | npm bin 路径损坏 | 修正为 `dist/src/cli.js` |
-| 9 | 无 LICENSE | 已添加（MIT + claude-red 署名） |
-| 10 | `reasoning_content` 丢弃·仅流式 | 捕获推理 + 非流式回退 |
-| 11 | 所有密钥 `change-me` | `docker-compose.infra.yml` + 必需替换 `${VAR:?}` |
-| 12 | PoC LLM 默认值不匹配 | 对齐 Ollama + `ollama-pull` 门禁 |
-| 13 | 操作员之间共享历史 | `SessionStore`（LRU）+ OIDC `sub` 归属 |
-| 14 | 历史无限增长 | 轮次预算 + `[earlier turns omitted]` 标记 |
-| 15 | 无检索质量基准 | 30 条 fixture，阈值 top-1 ≥ 0.85 / top-3 ≥ 0.95 |
-
-### P2 — 收尾与边界，已解决
-
-CLI 版本从 `package.json` 动态加载 · 清理失效指标/路由标签 · 合规/架构控制表 4 种语言 ·
-`index_only` 徽章。
-
-### 已知限制（轻微）
-
-1. CI 工作流位于仓库根目录（路径过滤）— 本地运行已验证，托管门禁未实机运行。
-2. vLLM 实机运行·Keycloak OIDC 往返已通过代码/配置验证 — 需 GPU/Docker 基础设施。
-3. 镜像默认 `CMD` 为 `chat`，compose 覆盖为 `dashboard`（有意保留的双重用途）。
-4. 拒绝审计记录 `flaggedTargets`（仅主机，不含提示词原文）。
+- [用户手册](docs/manual.md) — 安装、提供商、CLI、面板、护栏、故障排查
+- [部署与运营](docs/deployment.md) — 物理隔离/本地部署 5 层架构
+- [架构](docs/architecture.md) · [移植指南](docs/porting-guide.md) ·
+  [模型矩阵](docs/model-matrix.md) · [合规控制](docs/compliance.md) ·
+  [路线图](docs/roadmap.md)
 
 ## 版本
 
@@ -248,8 +84,12 @@ CLI 版本从 `package.json` 动态加载 · 清理失效指标/路由标签 · 
 | 0.5.0 | 范围拒绝（0 调用）、会话隔离、历史预算、fail-closed、PoC compose、必需密钥、检索基准 |
 | 0.6.0 | SQLite 本地账户（admin/admin 强制改密）、面板 Settings 页 |
 
+## 验证状态
+
+全部评审意见（P0/P1/P2）均已解决并经实测确认 —
+参见[手册 — 评审意见与验证状态](docs/manual.md)。
+
 ## 许可证
 
-MIT。原始技能：[SnailSploit/claude-red](https://github.com/SnailSploit/Claude-Red)（MIT）— 各技能 frontmatter 的 `source` 字段注明出处。
-
-> 仅在授权环境中使用（渗透测试、范围内的漏洞赏金、安全研究、CTF）。
+MIT。原始技能：[SnailSploit/claude-red](https://github.com/SnailSploit/Claude-Red)（MIT）。
+仅限授权安全测试。
