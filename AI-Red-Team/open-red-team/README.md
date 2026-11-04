@@ -30,8 +30,21 @@ Claude lock-in: the same red-team skills now run on DeepSeek, GLM (Zhipu), and o
 - **CLI + library** — interactive `ort chat`, one-shot `ort ask`, skill inspection, TypeScript API
 - **Web dashboard** — browser-based management console (streaming chat, skill browser, JSONL audit
   trail, masked config) for multi-operator, audited operations; CDN-free for air-gapped networks
+- **Context budget engine** — model-aware token limits with section-wise skill truncation and
+  `index_only` for oversized skills (no silent context overflow)
+- **Safety guardrails** — declared engagement scope (`ORT_SCOPE`/`ORT_SCOPE_DOMAINS`) with
+  out-of-scope target flagging, operator-attributed audit records
+- **Compliance wiring** — Prometheus `/metrics`, OIDC (Keycloak) API auth, LangFuse tracing
 - **Multilingual documentation** — English (base), Korean, Japanese, Chinese
 - **On-prem ready** — local models keep sensitive target data inside your environment
+
+## Screenshots
+
+| Dashboard — Chat | Dashboard — Skills |
+|------------------|--------------------|
+| ![Chat tab](assets/screenshots/dashboard-chat.png) | ![Skills tab](assets/screenshots/dashboard-skills.png) |
+| **Dashboard — Audit** | **Dashboard — Config** |
+| ![Audit tab](assets/screenshots/dashboard-audit.png) | ![Config tab](assets/screenshots/dashboard-config.png) |
 
 ## Components
 
@@ -65,7 +78,9 @@ Claude lock-in: the same red-team skills now run on DeepSeek, GLM (Zhipu), and o
 npm install
 npm run build
 cp .env.example .env   # set provider API keys
-npx ort chat            # interactive session
+node dist/src/cli.js chat          # interactive session (or: npm i -g . → ort chat)
+node dist/src/cli.js dashboard     # web dashboard (http://localhost:8081)
+npm test                           # run the test suite
 ```
 
 ### Supported providers

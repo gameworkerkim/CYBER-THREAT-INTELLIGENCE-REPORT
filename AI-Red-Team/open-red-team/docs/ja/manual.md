@@ -167,6 +167,12 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearerトークン保護
 | Audit | JSONL監査ログの直近のやり取りを表示 |
 | Config | キーをマスクした読み取り専用設定 |
 
+| Chat | Skills |
+|------|--------|
+| ![Chat](../../assets/screenshots/dashboard-chat.png) | ![Skills](../../assets/screenshots/dashboard-skills.png) |
+| **Audit** | **Config** |
+| ![Audit](../../assets/screenshots/dashboard-audit.png) | ![Config](../../assets/screenshots/dashboard-config.png) |
+
 環境変数:
 
 | 変数 | デフォルト | 説明 |
@@ -184,7 +190,30 @@ docker compose --profile dashboard up -d   # http://localhost:8081
 フロントエンドは外部アセット（CDN）なしで完全オフライン動作 — エアギャップ環境に適します。
 企業SSOはリバースプロキシの手前に Keycloak（OIDC）を置き、`ORT_DASHBOARD_TOKEN` を無効化してください。
 
-## 10. セキュリティと倫理
+## 10. ガードレール・予算・可観測性
+
+### コンテキスト予算（オーバーフロー防止）
+
+スキル本文はトークン予算までしか注入されません — 静かにオーバーフローしたコンテキストは送られません。
+プロバイダ別デフォルト: deepseek 64K/16K、glm 128K/24K、openweight 32K/8K（コンテキスト上限/スキル毎予算）。
+`ORT_MAX_CONTEXT`・`ORT_SKILL_BUDGET`・`ORT_RESERVE_TOKENS` で上書き可能。超過本文はセクション単位で
+切り詰め（`… [truncated by token budget]`）、`index_only` スキル（例: 554KB `offensive-windows-boundaries`）は
+本文注入なしでインデックスのみ維持 — `ort skills show <name>` で閲覧。
+
+### エンゲージメントスコープガードレール
+
+| 変数 | 効果 |
+|------|------|
+| `ORT_SCOPE` | 申告済みエンゲージメント説明 — システムプロンプトに注入、監査・トレースに記録 |
+| `ORT_SCOPE_DOMAINS` | 範囲内ホスト/ドメイン（カンマ区切り）。範囲外ターゲットはフラグしスコープ確認を推奨 |
+| `ORT_OPERATOR` | 監査エントリ・LangFuseトレースに記録されるオペレータ識別子 |
+
+### 可観測性
+
+- **LangFuse**: `LANGFUSE_PUBLIC_KEY`/`LANGFUSE_SECRET_KEY`/`LANGFUSE_BASEURL` 設定時に全チャットをトレース。
+- **Prometheus**: ダッシュボードの `/metrics` を compose monitoring プロファイルが自動収集。
+
+## 11. セキュリティと倫理
 
 - スキルは**許可されたテスト専用**の攻撃手法です。
 - 書面許可のない実システムに対しては絶対に使用しないでください。

@@ -215,3 +215,4 @@ nxc smb <dc> -u <user> -p <pass> -d <domain>
 - crack.sh — NetNTLMv1 (MSCHAPv2) rainbow service
 - RFC 3748 (EAP), RFC 5216 (EAP-TLS), RFC 7170 (EAP-TEAP)
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/wireless.md
+

@@ -609,3 +609,4 @@ CVE-2023-34362 (MOVEit Transfer), CVE-2023-46604 (ActiveMQ RCE)
 "Marshalling Pickles" (Frohoff/Lawrence, AppSecCali 2015), "Friday the 13th: JSON
 Attacks" (Munoz/Mirosh, BlackHat 2017), "Are You My Type?" (Munoz/Mirosh, .NET
 serializers), OWASP Deserialization Cheat Sheet, PortSwigger Insecure Deserialization.
+

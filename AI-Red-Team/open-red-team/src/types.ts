@@ -7,6 +7,7 @@ export interface SkillFrontmatter {
   category: string;
   model_note?: string;
   source?: string;
+  index_only?: boolean;
 }
 
 export interface Skill {
@@ -56,4 +57,7 @@ export interface ChatResult {
   matchedSkills: string[];
   provider: ProviderName;
   model: string;
+  promptTokens?: number;
+  maxContextTokens?: number;
+  reasoningTokens?: number;
 }

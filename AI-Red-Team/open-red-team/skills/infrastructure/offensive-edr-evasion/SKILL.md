@@ -13,6 +13,7 @@ triggers:
   - "edr 우회"
   - "백신 우회"
 category: infrastructure
+index_only: true
 model_note: "모델 비종속 — OpenAI 호환 API(DeepSeek/GLM/Ollama 등)에서 동작"
 source: "https://github.com/SnailSploit/Claude-Red (MIT)"
 ---
@@ -1805,3 +1806,4 @@ sequenceDiagram
     K->>S: Return to User Mode
     S->>L: Continue Execution
 ```
+

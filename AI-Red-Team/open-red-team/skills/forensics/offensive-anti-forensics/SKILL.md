@@ -475,3 +475,4 @@ Forensic analysts and SOC teams look for the following indicators of anti-forens
 - Timestomp (Metasploit): https://docs.metasploit.com/
 - SDelete (Sysinternals): https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete
 - NTFS Alternate Data Streams: https://docs.microsoft.com/en-us/archive/blogs/askcore/alternate-data-streams-in-ntfs
+

@@ -9,6 +9,11 @@ export interface ProviderOptions {
   maxTokens?: number;
 }
 
+export interface ChatStreamCallbacks {
+  onDelta?: (delta: string) => void;
+  onReasoning?: (delta: string) => void;
+}
+
 export abstract class BaseProvider {
   protected client: OpenAI;
   protected model: string;
@@ -27,7 +32,23 @@ export abstract class BaseProvider {
 
   abstract get name(): string;
 
-  async chat(messages: ChatMessage[], onDelta?: (delta: string) => void): Promise<string> {
+  async chat(
+    messages: ChatMessage[],
+    cb: ChatStreamCallbacks = {},
+  ): Promise<{ content: string; reasoningLength: number }> {
+    try {
+      return await this.chatStream(messages, cb);
+    } catch (err) {
+      const fallback = await this.chatOnce(messages);
+      cb.onDelta?.(fallback.content);
+      return { content: fallback.content, reasoningLength: fallback.reasoningLength };
+    }
+  }
+
+  private async chatStream(
+    messages: ChatMessage[],
+    cb: ChatStreamCallbacks,
+  ): Promise<{ content: string; reasoningLength: number }> {
     const stream = await this.client.chat.completions.create({
       model: this.model,
       messages: messages.map((m) => ({ role: m.role, content: m.content })),
@@ -37,17 +58,45 @@ export abstract class BaseProvider {
     });
 
     let full = "";
+    let reasoningLength = 0;
     for await (const chunk of stream) {
       const delta = this.extractDelta(chunk);
-      if (delta) {
-        full += delta;
-        onDelta?.(delta);
+      if (delta.content) {
+        full += delta.content;
+        cb.onDelta?.(delta.content);
+      }
+      if (delta.reasoning) {
+        reasoningLength += delta.reasoning.length;
+        cb.onReasoning?.(delta.reasoning);
       }
     }
-    return full;
+    return { content: full, reasoningLength };
   }
 
-  protected extractDelta(chunk: OpenAI.Chat.Completions.ChatCompletionChunk): string {
-    return chunk.choices[0]?.delta?.content ?? "";
+  private async chatOnce(
+    messages: ChatMessage[],
+  ): Promise<{ content: string; reasoningLength: number }> {
+    const res = await this.client.chat.completions.create({
+      model: this.model,
+      messages: messages.map((m) => ({ role: m.role, content: m.content })),
+      temperature: this.temperature,
+      ...(this.maxTokens ? { max_tokens: this.maxTokens } : {}),
+      stream: false,
+    });
+    const content = res.choices[0]?.message?.content ?? "";
+    return { content, reasoningLength: 0 };
+  }
+
+  protected extractDelta(chunk: OpenAI.Chat.Completions.ChatCompletionChunk): {
+    content: string;
+    reasoning: string;
+  } {
+    const delta = chunk.choices[0]?.delta as (OpenAI.Chat.Completions.ChatCompletionChunk.Choice.Delta & {
+      reasoning_content?: string;
+    }) | undefined;
+    return {
+      content: delta?.content ?? "",
+      reasoning: delta?.reasoning_content ?? "",
+    };
   }
 }

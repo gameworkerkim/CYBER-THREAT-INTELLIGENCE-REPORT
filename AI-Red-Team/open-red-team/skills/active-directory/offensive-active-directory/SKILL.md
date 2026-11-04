@@ -443,3 +443,4 @@ bloodhound-python -d corp.local -u user -p pass -ns dc -c All --zip
 - BloodHound: bloodhound.specterops.io
 - Coercion: github.com/p0dalirius/Coercer (unified coercion toolkit)
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/active-directory.md
+

@@ -8,6 +8,7 @@ triggers:
   - "classification"
   - "취약점 분류"
 category: fuzzing
+index_only: true
 model_note: "모델 비종속 — OpenAI 호환 API(DeepSeek/GLM/Ollama 등)에서 동작"
 source: "https://github.com/SnailSploit/Claude-Red (MIT)"
 ---
@@ -1223,3 +1224,4 @@ For each CVE below, determine:
 - Mitigation/detection guidance and remediation priority
 
 <!-- Written by AnotherOne from @Pwn3rzs Telegram channel -->
+

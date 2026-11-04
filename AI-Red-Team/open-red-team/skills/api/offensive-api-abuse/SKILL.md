@@ -508,3 +508,4 @@ When you execute these techniques, you generate specific artifacts that defender
 - GraphQL Voyager: https://github.com/graphql-kit/graphql-voyager
 - "Black Hat GraphQL" by Nick Aleks and Dolev Farhi (No Starch Press)
 - RFC 7519 -- JSON Web Token: https://datatracker.ietf.org/doc/html/rfc7519
+

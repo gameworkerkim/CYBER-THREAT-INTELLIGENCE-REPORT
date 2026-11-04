@@ -481,3 +481,4 @@ A combination of my own methodology and the Web Application Hacker's Handbook Ta
   - SQLi: Comments (`/**/`), Encoding, Case Variation.
   - XSS: Obfuscation, different tags/events, encoding.
 - [ ] HTTP/2/3 behavior differences, domain fronting checks, SNI/Host mismatch.
+

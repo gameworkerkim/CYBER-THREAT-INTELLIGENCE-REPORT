@@ -590,3 +590,4 @@ A specific case of parameter pollution that affects social sharing functionality
 - **Explicit Parser Settings**: e.g., in Express set a custom query parser and explicitly forbid duplicates without `[]` suffix for arrays
 - **GraphQL Query Complexity Limits**: Enforce maximum query depth and alias counts
 - **WebSocket Frame Validation**: Parse and validate WS message structures consistently with HTTP parameter handling
+

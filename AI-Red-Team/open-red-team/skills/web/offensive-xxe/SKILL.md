@@ -993,3 +993,4 @@ $old = libxml_disable_entity_loader(true);
 $xml = simplexml_load_string($data, "SimpleXMLElement", LIBXML_NONET | LIBXML_NOENT);
 libxml_disable_entity_loader($old);
 ```
+

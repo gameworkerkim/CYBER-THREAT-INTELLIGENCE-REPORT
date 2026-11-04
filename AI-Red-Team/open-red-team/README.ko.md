@@ -29,8 +29,21 @@
 - **CLI + 라이브러리** — 대화형 `ort chat`, 1회성 `ort ask`, 스킬 조회, TypeScript API
 - **웹 대시보드** — 브라우저 기반 관리 콘솔 (스트리밍 채팅, 스킬 브라우저, JSONL 감사 추적,
   마스킹된 설정) — 다중 운영자·감사 운영, CDN 없이 에어갭 네트워크 동작
+- **컨텍스트 예산 엔진** — 모델별 토큰 한도 + 섹션 단위 스킬 트랜케이션, 대형 스킬 `index_only`
+  (컨텍스트 오버플로 방지)
+- **안전장치** — 신고된 임무 스코프(`ORT_SCOPE`/`ORT_SCOPE_DOMAINS`)와 범위 밖 대상 플래깅,
+  운영자 귀속 감사 기록
+- **컴플라이언스 연동** — Prometheus `/metrics`, OIDC(Keycloak) API 인증, LangFuse 트레이싱
 - **다국어 문서** — 영어(기준), 한국어, 일본어, 중국어
 - **온프레미스 지원** — 로컬 모델로 민감한 대상 정보를 내부 환경에 유지
+
+## 스크린샷
+
+| 대시보드 — Chat | 대시보드 — Skills |
+|-----------------|-------------------|
+| ![Chat 탭](assets/screenshots/dashboard-chat.png) | ![Skills 탭](assets/screenshots/dashboard-skills.png) |
+| **대시보드 — Audit** | **대시보드 — Config** |
+| ![Audit 탭](assets/screenshots/dashboard-audit.png) | ![Config 탭](assets/screenshots/dashboard-config.png) |
 
 ## 구성 요소
 
@@ -64,7 +77,9 @@
 npm install
 npm run build
 cp .env.example .env   # API 키 설정
-npx ort chat            # 대화형 세션
+node dist/src/cli.js chat          # 대화형 세션 (또는: npm i -g . → ort chat)
+node dist/src/cli.js dashboard     # 웹 대시보드 (http://localhost:8081)
+npm test                           # 테스트 실행
 ```
 
 ### 지원 프로바이더

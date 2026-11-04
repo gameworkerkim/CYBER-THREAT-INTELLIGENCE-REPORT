@@ -2,6 +2,11 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
+  # ort dashboard /metrics (chat requests, durations, tokens, http)
+  - job_name: ort
+    static_configs:
+      - targets: ["ort:8081"]
+
   # vLLM exposes OpenAI-compatible server metrics on :8000/metrics
   - job_name: vllm
     static_configs:

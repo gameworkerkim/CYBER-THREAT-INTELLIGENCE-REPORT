@@ -592,3 +592,4 @@ CLEANUP
 - CVE-2016-5195 (DirtyCow): https://dirtycow.ninja/
 - CVE-2021-4034 (PwnKit): https://blog.qualys.com/vulnerabilities-threat-research/2022/01/25/pwnkit-local-privilege-escalation-vulnerability-discovered-in-polkits-pkexec-cve-2021-4034
 - MITRE ATT&CK T1548 -- Abuse Elevation Control Mechanism: https://attack.mitre.org/techniques/T1548/
+

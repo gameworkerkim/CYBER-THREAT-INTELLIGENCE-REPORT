@@ -203,3 +203,4 @@ jadx -d app_src vendor.apk
 - Bluetooth Core Spec 5.x — Volume 3 (Host) for GATT/SMP
 - "Bluetooth Low Energy Hacking" (Cap Gemini, NCC research)
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/wireless.md
+

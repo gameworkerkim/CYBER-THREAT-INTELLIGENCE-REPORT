@@ -1067,3 +1067,4 @@ Avoid inserting user input into code that gets evaluated. Also treat user upload
 - **Command Injection**: Burp Intruder, `commix`
 - **General**: Burp ActiveScan, `nuclei` templates, `jaeles` signatures
 - **OAST**: Burp Collaborator, Interactsh, canarytokens.org
+

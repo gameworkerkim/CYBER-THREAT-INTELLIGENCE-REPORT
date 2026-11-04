@@ -164,3 +164,4 @@ internalblue → log keys → re-pair target
 - BlueBorne: armis.com/blueborne
 - Bluetooth Core Spec — Volume 2 (BR/EDR Controller)
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/wireless.md
+

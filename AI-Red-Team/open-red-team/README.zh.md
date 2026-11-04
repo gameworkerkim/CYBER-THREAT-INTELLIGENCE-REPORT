@@ -29,8 +29,21 @@
 - **CLI + 库** — 交互式 `ort chat`、单次 `ort ask`、技能查看、TypeScript API
 - **Web 管理面板** — 浏览器管理控制台（流式对话、技能浏览器、JSONL 审计追踪、
   脱敏配置）— 多操作员·审计运营，无 CDN，适配物理隔离网络
+- **上下文预算引擎** — 按模型的 token 上限＋按节截断技能正文，超大技能 `index_only`
+  （防止上下文溢出）
+- **安全护栏** — 已申报的任务范围（`ORT_SCOPE`/`ORT_SCOPE_DOMAINS`）与范围外目标标记、
+  归属操作员的审计记录
+- **合规对接** — Prometheus `/metrics`、OIDC（Keycloak）API 认证、LangFuse 追踪
 - **多语言文档** — 英语（基准）、韩语、日语、中文
 - **本地部署就绪** — 本地模型确保敏感目标信息留在内部环境
+
+## 截图
+
+| 管理面板 — Chat | 管理面板 — Skills |
+|-----------------|-------------------|
+| ![Chat 页](assets/screenshots/dashboard-chat.png) | ![Skills 页](assets/screenshots/dashboard-skills.png) |
+| **管理面板 — Audit** | **管理面板 — Config** |
+| ![Audit 页](assets/screenshots/dashboard-audit.png) | ![Config 页](assets/screenshots/dashboard-config.png) |
 
 ## 组成部分
 
@@ -64,7 +77,9 @@
 npm install
 npm run build
 cp .env.example .env   # 配置 API 密钥
-npx ort chat            # 交互式会话
+node dist/src/cli.js chat          # 交互式会话（或：npm i -g . → ort chat）
+node dist/src/cli.js dashboard     # Web 管理面板（http://localhost:8081）
+npm test                           # 运行测试
 ```
 
 ### 支持的提供商

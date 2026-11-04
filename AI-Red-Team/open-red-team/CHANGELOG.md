@@ -13,6 +13,38 @@ All notable changes to Open AI Red Team are recorded here.
   - Zero-build vanilla-JS frontend (Chat / Skills / Audit / Config tabs), no CDN — air-gap ready
   - Docker Compose `dashboard` profile (port 8081, read-only, audit volume)
 - Deployment & operations tooling for air-gapped / on-premises environments
+
+## [0.4.0] — 2026-11-04
+
+### Added
+- **Token budget engine** (`src/skills/inject.ts`) — model context limits (deepseek 64K /
+  glm 128K / open-weight 32K, `ORT_MAX_CONTEXT`), per-skill body budgets (`ORT_SKILL_BUDGET`),
+  section-aware truncation, `index_only` flag for oversized skills (auto-marked in sync script).
+  Fixes context overflow: e.g. windows-boundaries (554 KB ≈ 138K tokens) is now index-only.
+- **Test suite (vitest, 60 tests)** — loader / trigger / inject budget / config / safety;
+  `npm test` + CI workflow for the subproject
+- **Code-level safety guardrails** (`src/safety.ts`) — `ORT_SCOPE` engagement declaration
+  injected into the prompt and audited; `ORT_SCOPE_DOMAINS` flags out-of-scope targets;
+  `ORT_OPERATOR` recorded in audit/traces
+- **Streaming fallback** — non-streaming retry when streaming fails; `reasoning_content`
+  captured (DeepSeek reasoner / GLM) instead of discarded
+- **Prometheus `/metrics`** on the dashboard (http/chat counters, durations, tokens, RSS)
+- **OIDC (Keycloak) verification** for the dashboard API (`ORT_OIDC_ISSUER`,
+  `ORT_OIDC_AUDIENCE`) — RS256 JWT + JWKS validation, replaces/augments the static token
+- **LangFuse tracing** (`src/observability.ts`) — every chat is traced with input/output/
+  metadata (provider, model, matched skills, scope, token counts) when
+  `LANGFUSE_PUBLIC_KEY`/`LANGFUSE_SECRET_KEY` are set
+- **LICENSE** file (MIT + claude-red attribution)
+
+### Changed
+- Compose: `ort` now runs the dashboard server (daemon-friendly, healthcheck); interactive
+  CLI moved to a `cli` profile; PoC defaults point at Ollama (11434/v1); vLLM `read_only`
+  removed (needs writable cache); Loki added to the monitoring profile; Prometheus scrapes
+  `ort:8081/metrics`
+- Fixed npm bin path (`./dist/src/cli.js`) and package `files`/`main`/`types`
+- `systemPrompt` custom option now actually wired into prompt assembly
+- `scripts/fetch-skills.ts`: retry with backoff, rate limiting, code-fence-aware Claude
+  replacement, description fallback, automatic `index_only` marking
   - `Dockerfile` — multi-stage, non-root user, read-only rootfs support, healthcheck
   - `docker-compose.yml` — 5-layer stack with profiles: `ort` (app), `serving` (vLLM),
     `poc` (Ollama), `auth` (Keycloak), `observability` (LangFuse), `monitoring` (Prometheus/Grafana)

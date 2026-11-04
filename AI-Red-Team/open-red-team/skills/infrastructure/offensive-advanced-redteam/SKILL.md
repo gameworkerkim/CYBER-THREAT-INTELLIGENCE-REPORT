@@ -651,3 +651,4 @@ C2 PROFILE CHECKLIST
 - LOLBAS Project (Living Off The Land Binaries): https://lolbas-project.github.io/
 - SysWhispers3: https://github.com/klezVirus/SysWhispers3
 - HellsGate / HalosGate: https://github.com/am0nsec/HellsGate
+

@@ -167,6 +167,12 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 토큰 보호
 | Audit | JSONL 감사 로그의 최근 상호작용 조회 |
 | Config | 키 마스킹된 읽기 전용 설정 |
 
+| Chat | Skills |
+|------|--------|
+| ![Chat](../../assets/screenshots/dashboard-chat.png) | ![Skills](../../assets/screenshots/dashboard-skills.png) |
+| **Audit** | **Config** |
+| ![Audit](../../assets/screenshots/dashboard-audit.png) | ![Config](../../assets/screenshots/dashboard-config.png) |
+
 환경변수:
 
 | 변수 | 기본값 | 설명 |
@@ -184,7 +190,30 @@ docker compose --profile dashboard up -d   # http://localhost:8081
 프론트엔드는 외부 자산(CDN)이 없어 완전 오프라인 동작 — 에어갭 환경에 적합합니다.
 기업 SSO는 리버스 프록시 앞단에 Keycloak(OIDC)을 두고 `ORT_DASHBOARD_TOKEN`을 비활성화하십시오.
 
-## 10. 보안 및 윤리
+## 10. 가드레일·예산·관측
+
+### 컨텍스트 예산 (오버플로 방지)
+
+스킬 본문은 토큰 예산까지만 주입됩니다 — 모델에 조용히 오버플로된 컨텍스트가 전달되지 않습니다.
+프로바이더별 기본값: deepseek 64K/16K, glm 128K/24K, openweight 32K/8K (컨텍스트 한도/스킬당 예산).
+`ORT_MAX_CONTEXT`, `ORT_SKILL_BUDGET`, `ORT_RESERVE_TOKENS`로 재정의 가능. 초과 본문은 섹션 단위로
+잘리고(`… [truncated by token budget]`), `index_only` 스킬(예: 554KB `offensive-windows-boundaries`)은
+본문 주입 없이 인덱스만 유지됩니다 — `ort skills show <name>`으로 열람.
+
+### 임무 스코프 가드레일
+
+| 변수 | 효과 |
+|------|------|
+| `ORT_SCOPE` | 신고된 임무 설명 — 시스템 프롬프트에 주입되고 감사·트레이스에 기록 |
+| `ORT_SCOPE_DOMAINS` | 범위 내 호스트/도메인(쉼표 구분). 범위 밖 대상은 플래그 후 스코프 확인 권고 |
+| `ORT_OPERATOR` | 감사 항목·LangFuse 트레이스에 기록되는 운영자 식별자 |
+
+### 관측
+
+- **LangFuse**: `LANGFUSE_PUBLIC_KEY`/`LANGFUSE_SECRET_KEY`/`LANGFUSE_BASEURL` 설정 시 모든 채팅 트레이싱.
+- **Prometheus**: 대시보드 `/metrics` 노출, compose monitoring 프로파일이 자동 수집.
+
+## 11. 보안 및 윤리
 
 - 스킬은 **허가된 테스트 전용** 공격 방법론입니다.
 - 서면 허가 없이 실제 시스템에 절대 사용하지 마십시오.

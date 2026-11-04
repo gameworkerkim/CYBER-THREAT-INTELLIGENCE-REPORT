@@ -271,3 +271,28 @@ async function loadConfig() {
 
 loadHealth();
 loadSkills();
+
+/* ---------- deep links: #skills | #audit | #config | #demo ---------- */
+function applyHash() {
+  const h = location.hash.replace("#", "").toLowerCase();
+  if (["skills", "audit", "config"].includes(h)) {
+    document.querySelector(`.tab[data-tab="${h}"]`)?.click();
+  }
+  if (h === "demo") {
+    addBubble("user", "이 로그인 폼에서 SQL 인젝션 테스트 방법을 알려줘");
+    addBubble(
+      "assistant",
+      [
+        "1. 맵핑 — URL 파라미터·POST 바디·쿠키·헤더 중 DB로 도달하는 입력 벡터 식별",
+        "2. 탐지 — `' \" ; -- /* #` 기본 프로브 → 오류 기반 / 불리언 / 시간 기반 판별",
+        "3. 자동화 — sqlmap -m urls --dbs --batch, 시간 기반은 ghauri",
+        "4. 익스플로잇 — UNION 컬럼 수 확인 → information_schema 스키마 열거",
+        "5. 보고 — 파라미터화 쿼리(PreparedStatement) 전환 권고",
+      ].join("\n"),
+      ["offensive-sqli", "offensive-waf-bypass"],
+    );
+    $("#chat-status").textContent = "demo";
+  }
+}
+window.addEventListener("hashchange", applyHash);
+applyHash();

@@ -112,17 +112,19 @@ Open AI Red Team supports every OpenAI-compatible backend. Choose per requiremen
 
 ```bash
 # production: vLLM (profile serving), then the app
-docker compose --profile serving up -d
+ORT_LLM_BASE_URL=http://vllm:8000/v1 ORT_LLM_MODEL=qwen2.5-32b docker compose --profile serving up -d
 docker compose up -d ort
 
-# PoC: Ollama (profile poc)
+# PoC: Ollama (profile poc) — the app defaults to Ollama, no override needed
 docker compose --profile poc up -d
 ```
 
-The app connects via the OpenAI-compatible base URL (already wired in `docker-compose.yml`):
+The app connects via the OpenAI-compatible base URL (wired in `docker-compose.yml`,
+default `http://ollama:11434/v1` for the PoC profile):
 
 ```
-OPENWEIGHT_BASE_URL=http://vllm:8000/v1
+OPENWEIGHT_BASE_URL=http://vllm:8000/v1   # production (serving profile)
+OPENWEIGHT_BASE_URL=http://ollama:11434/v1 # PoC (default)
 ```
 
 For cloud APIs (DeepSeek/GLM) set `ORT_PROVIDER=deepseek`/`glm` and the corresponding keys —
@@ -132,25 +134,35 @@ only permitted where the engagement data is allowed to leave the network.
 
 ## Layer 4 — Red-team application
 
-`ort` is containerized via the repository `Dockerfile` and deployed through Harbor.
+The `ort` container runs the **web dashboard server** (daemon-friendly, healthcheck, Prometheus
+`/metrics`, OIDC/static-token auth, JSONL audit). An interactive CLI container is available under
+the `cli` profile for manual operation.
 
-Hardening already applied:
+Hardening applied to both containers:
 
 - **Non-root user** (`ort`) in the runtime stage
-- **Read-only root filesystem** (`read_only: true` + `tmpfs /tmp` in compose)
+- **Read-only root filesystem** (`read_only: true` + `tmpfs /tmp`)
 - **Resource limits** (CPU/memory caps in compose)
 - **Capability drop** (`cap_drop: ALL`) and `no-new-privileges`
 - `skills/` shipped inside the image — fully offline after deployment
 
 ### Web dashboard (multi-operator / audited)
 
-A browser-based management dashboard (`ort dashboard`) is included: streaming chat with matched
-skills, skill search/browse, JSONL audit trail, and masked configuration. No external assets
-(CDN-free) — fully offline. Protect it with `ORT_DASHBOARD_TOKEN` or put Keycloak (OIDC) in front.
-
 ```bash
-docker compose --profile dashboard up -d   # http://localhost:8081 (auth via ORT_DASHBOARD_TOKEN)
+docker compose up -d ort                # dashboard server, http://localhost:8081
+docker compose --profile cli run cli    # interactive CLI (attached TTY)
 ```
+
+Code-level safety & compliance wiring:
+
+| Concern | Implementation |
+|---------|----------------|
+| Scope guardrails | `ORT_SCOPE` / `ORT_SCOPE_DOMAINS` — out-of-scope targets flagged |
+| Audit trail | `ORT_AUDIT_LOG` JSONL (volume-mounted `/data`) |
+| LLM audit | LangFuse tracing via `LANGFUSE_PUBLIC_KEY` / `LANGFUSE_SECRET_KEY` / `LANGFUSE_BASEURL` |
+| SSO/RBAC | `ORT_OIDC_ISSUER` — dashboard verifies Keycloak access tokens (RS256 + JWKS) |
+| Metrics | `/metrics` endpoint scraped by Prometheus (`ort:8081`) |
+| Context safety | Token budget engine (`ORT_MAX_CONTEXT` / `ORT_SKILL_BUDGET`) — no silent overflow |
 
 ### Manual run
 
@@ -170,6 +182,8 @@ docker run --rm -it --read-only --tmpfs /tmp \
 ### Access control — Keycloak
 
 - OIDC-compatible IdP inside the separated network → SSO + RBAC for operators
+- Wired into the application: `ORT_OIDC_ISSUER=http://keycloak:8080/realms/open-red-team` makes
+  the dashboard verify Keycloak access tokens (RS256 JWTs against the realm JWKS)
 - Satisfies audit-logging and regulatory requirements (BAIT/VAIT-style supervision)
 - Compose profile `auth`; realm import recommended via `--import-realm` in production
 
@@ -179,21 +193,24 @@ docker compose --profile auth up -d   # http://localhost:8080
 
 ### LLM observability & audit — LangFuse
 
-- Collects prompts, responses, tokens, latency → operational quality + audit trail
+- Wired into the application code: set `LANGFUSE_PUBLIC_KEY` / `LANGFUSE_SECRET_KEY` /
+  `LANGFUSE_BASEURL` on the `ort` service — every chat completion is traced (input, output,
+  provider, model, matched skills, scope, token counts)
 - On-premises deployment keeps engagement data under full control
 
 ```bash
 docker compose --profile observability up -d   # http://localhost:3000
 ```
 
-### Infrastructure monitoring — Prometheus / Grafana (+ Loki optional)
+### Infrastructure monitoring — Prometheus / Grafana / Loki
 
-- vLLM `/metrics` and Ollama `/metrics` are pre-wired in `deploy/monitoring/prometheus/prometheus.yml`
-- Grafana datasource pre-provisioned
-- Loki (optional) for log aggregation and retention
+- The app's `/metrics` (chat counters, durations, tokens) plus vLLM `/metrics` and Ollama
+  `/metrics` are pre-wired in `deploy/monitoring/prometheus/prometheus.yml`
+- Grafana datasources for Prometheus and Loki pre-provisioned
+- Loki included in the monitoring profile for log aggregation and retention
 
 ```bash
-docker compose --profile monitoring up -d   # Grafana http://localhost:3001
+docker compose --profile monitoring up -d   # Grafana http://localhost:3001 · Loki :3100
 ```
 
 ---

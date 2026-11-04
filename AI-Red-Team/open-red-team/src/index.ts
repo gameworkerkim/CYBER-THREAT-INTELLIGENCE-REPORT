@@ -1,11 +1,13 @@
 import { loadConfig } from "./config.js";
 import { loadSkills, getSkillByName } from "./skills/loader.js";
 import { matchSkills, extractExplicitSkills, stripExplicitDirectives } from "./skills/trigger.js";
-import { buildSystemPrompt } from "./skills/inject.js";
+import { buildSystemPrompt, BASE_SYSTEM_PROMPT } from "./skills/inject.js";
 import { BaseProvider } from "./providers/base.js";
 import { DeepSeekProvider } from "./providers/deepseek.js";
 import { GlmProvider } from "./providers/glm.js";
 import { OpenWeightProvider } from "./providers/openweight.js";
+import { loadScopeGuard, scopePromptBlock, checkScope, scopeWarningLine } from "./safety.js";
+import { initObservability, recordChat } from "./observability.js";
 import type {
   ChatMessage,
   ChatResult,
@@ -20,6 +22,7 @@ export class OpenRedTeam {
   readonly skills: Skill[] = [];
   private provider: BaseProvider;
   private history: ChatMessage[] = [];
+  private systemPrompt?: string;
 
   constructor(opts?: Partial<OrtOptions>) {
     this.config = loadConfig({
@@ -33,6 +36,8 @@ export class OpenRedTeam {
       includeIndex: opts?.includeIndex,
     });
     this.provider = createProvider(this.config, opts);
+    this.systemPrompt = opts?.systemPrompt;
+    initObservability();
   }
 
   async init(): Promise<void> {
@@ -50,7 +55,7 @@ export class OpenRedTeam {
 
   async chat(
     input: string,
-    opts?: { skills?: string[]; onDelta?: (delta: string) => void },
+    opts?: { skills?: string[]; onDelta?: (delta: string) => void; onReasoning?: (delta: string) => void },
   ): Promise<ChatResult> {
     if (this.skills.length === 0) await this.init();
 
@@ -70,23 +75,53 @@ export class OpenRedTeam {
       if (!loaded.includes(skill)) loaded.push(skill);
     }
 
-    const systemPrompt = buildSystemPrompt({
+    const guard = loadScopeGuard();
+    const scopeCheck = guard ? checkScope(stripped, guard) : null;
+    const warning = scopeCheck ? scopeWarningLine(scopeCheck) : "";
+
+    const base = [this.systemPrompt ?? BASE_SYSTEM_PROMPT];
+    if (guard) base.push(scopePromptBlock(guard));
+
+    const { prompt, stats } = buildSystemPrompt({
       skills: this.skills,
       loadedSkills: loaded,
       includeIndex: this.config.includeIndex,
+      custom: base.join("\n\n"),
+      provider: this.config.provider,
     });
 
     this.history.push({ role: "user", content: input });
-    const messages: ChatMessage[] = [{ role: "system", content: systemPrompt }, ...this.history];
+    const systemContent = warning ? `${prompt}\n\n${warning}` : prompt;
+    const messages: ChatMessage[] = [{ role: "system", content: systemContent }, ...this.history];
 
-    const content = await this.provider.chat(messages, opts?.onDelta);
+    const { content, reasoningLength } = await this.provider.chat(messages, {
+      onDelta: opts?.onDelta,
+      onReasoning: opts?.onReasoning,
+    });
     this.history.push({ role: "assistant", content });
+
+    const matchedSkills = loaded.map((s) => s.frontmatter.name);
+    void recordChat({
+      input,
+      output: content,
+      provider: this.config.provider,
+      model: this.config.model,
+      matchedSkills,
+      scope: guard?.scope,
+      flaggedTargets: scopeCheck?.flaggedTargets,
+      promptTokens: stats.totalTokens,
+      reasoningTokens: reasoningLength,
+      operator: guard?.operator ?? process.env.ORT_OPERATOR ?? "unknown",
+    });
 
     return {
       content,
-      matchedSkills: loaded.map((s) => s.frontmatter.name),
+      matchedSkills,
       provider: this.config.provider,
       model: this.config.model,
+      promptTokens: stats.totalTokens,
+      maxContextTokens: stats.maxContextTokens,
+      reasoningTokens: reasoningLength,
     };
   }
 

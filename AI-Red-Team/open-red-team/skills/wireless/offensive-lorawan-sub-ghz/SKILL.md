@@ -192,3 +192,4 @@ gqrx                           # spectrum view to find activity
 - RollingPwn (KeeLoq research): github.com/AndrewMohawk/RollingPwn
 - LoRaWAN Specification: lora-alliance.org
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/wireless.md
+

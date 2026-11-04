@@ -818,3 +818,4 @@ kubectl port-forward svc/SERVICE 8080:80 -n NAMESPACE
 - Kubernetes Threat Matrix (Microsoft) - https://microsoft.github.io/Threat-Matrix-for-Kubernetes/
 - Kubernetes Hardening Guide (NSA/CISA) - https://media.defense.gov/2022/Aug/29/2003066362/-1/-1/0/CTR_KUBERNETES_HARDENING_GUIDANCE_1.2_20220829.PDF
 - HackTricks Kubernetes Pentesting - https://book.hacktricks.xyz/cloud-security/pentesting-kubernetes
+

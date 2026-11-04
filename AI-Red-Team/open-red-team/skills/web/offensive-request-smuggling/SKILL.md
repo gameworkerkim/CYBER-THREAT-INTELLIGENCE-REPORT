@@ -769,3 +769,4 @@ Transfer-Encoding: chunked\x0d\x0a
 - **WebSocket Security**: Validate WebSocket upgrade requests; sanitize Sec-WebSocket-\* headers; limit concurrent upgrades
 - **Client-Side Desync Prevention**: Set `Connection: close` on sensitive responses; use HTTP/2 exclusively; implement strict cache controls
 - **Monitoring**: Log anomalous header patterns; alert on multiple Content-Length or Transfer-Encoding headers; track connection reuse metrics
+

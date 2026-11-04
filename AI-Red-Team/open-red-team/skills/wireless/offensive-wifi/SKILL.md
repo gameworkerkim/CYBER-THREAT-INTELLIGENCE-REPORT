@@ -351,3 +351,4 @@ hashcat -m 22000 hash.hc22000 wordlist.txt -r best64.rule
 - WPA3 Spec / Wi-Fi Alliance: dragonblood.net for vuln tracking
 - hcxtools / hashcat WPA modes: docs at hashcat.net
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/wireless.md
+

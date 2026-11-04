@@ -553,3 +553,4 @@ npm pack <package> && tar -xzf *.tgz && cat package/package.json | jq '.scripts'
 - "Backstabber's Knife Collection" -- academic survey of malicious packages (2020)
 - Snyk supply chain security research: https://snyk.io/blog/
 - GitHub Advisory Database: https://github.com/advisories
+

@@ -1,24 +1,36 @@
 {
-  "name": "open-red-team",
-  "version": "0.1.0",
+  "name": "open-ai-red-team",
+  "version": "0.4.0",
   "description": "Model-agnostic offensive security skills middleware for DeepSeek, GLM, and open-weight models",
   "type": "module",
   "bin": {
-    "ort": "./dist/cli.js"
+    "ort": "./dist/src/cli.js"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "dist",
+    "skills",
+    "docs",
+    "scripts",
+    "assets",
+    "README*",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc && cp -r src/dashboard/static dist/src/dashboard/static",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "dev": "tsx src/cli.ts",
     "fetch:skills": "tsx scripts/fetch-skills.ts",
     "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
     "docker:build": "docker build -t open-ai-red-team:latest .",
     "docker:up": "docker compose up -d ort",
     "docker:up:poc": "docker compose --profile poc up -d",
     "docker:up:prod": "docker compose --profile serving --profile auth --profile observability --profile monitoring up -d",
-    "docker:down": "docker compose --profile serving --profile poc --profile auth --profile observability --profile monitoring down",
+    "docker:down": "docker compose --profile serving --profile poc --profile cli --profile auth --profile observability --profile monitoring down",
     "offline:export": "bash scripts/offline/export-images.sh",
     "offline:import": "bash scripts/offline/import-images.sh",
     "models:export": "bash scripts/offline/export-models.sh",
@@ -32,13 +44,15 @@
     "commander": "^12.1.0",
     "dotenv": "^16.4.5",
     "express": "^5.3.0",
+    "langfuse": "^3.39.2",
     "openai": "^4.68.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^22.5.0",
     "tsx": "^4.19.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "vitest": "^5.1.0"
   },
   "license": "MIT"
 }

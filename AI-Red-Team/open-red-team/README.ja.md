@@ -29,8 +29,21 @@
 - **CLI + ライブラリ** — 対話型 `ort chat`、単発 `ort ask`、スキル確認、TypeScript API
 - **Webダッシュボード** — ブラウザベース管理コンソール（ストリーミングチャット、スキルブラウザ、
   JSONL監査証跡、マスク済み設定）— 複数オペレータ・監査運用、CDNなしでエアギャップ対応
+- **コンテキスト予算エンジン** — モデル別トークン上限＋セクション単位のスキル切り詰め、
+  巨大スキルの `index_only`（コンテキストオーバーフロー防止）
+- **安全ガードレール** — 申告済みエンゲージメントスコープ（`ORT_SCOPE`/`ORT_SCOPE_DOMAINS`）と
+  範囲外ターゲットのフラグ、オペレータ帰属の監査記録
+- **コンプライアンス連携** — Prometheus `/metrics`、OIDC（Keycloak）API認証、LangFuseトレーシング
 - **多言語ドキュメント** — 英語（基準）、韓国語、日本語、中国語
 - **オンプレミス対応** — ローカルモデルで機微な対象情報を社内環境に保持
+
+## スクリーンショット
+
+| ダッシュボード — Chat | ダッシュボード — Skills |
+|-----------------------|-------------------------|
+| ![Chat タブ](assets/screenshots/dashboard-chat.png) | ![Skills タブ](assets/screenshots/dashboard-skills.png) |
+| **ダッシュボード — Audit** | **ダッシュボード — Config** |
+| ![Audit タブ](assets/screenshots/dashboard-audit.png) | ![Config タブ](assets/screenshots/dashboard-config.png) |
 
 ## 構成要素
 
@@ -64,7 +77,9 @@
 npm install
 npm run build
 cp .env.example .env   # APIキー設定
-npx ort chat            # 対話セッション
+node dist/src/cli.js chat          # 対話セッション（または: npm i -g . → ort chat）
+node dist/src/cli.js dashboard     # Webダッシュボード（http://localhost:8081）
+npm test                           # テスト実行
 ```
 
 ### 対応プロバイダ

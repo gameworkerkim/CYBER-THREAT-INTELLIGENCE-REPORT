@@ -818,3 +818,4 @@ Combine multiple techniques for more effective bypassing:
 8. Use ML-generated payloads that evade signature detection
 9. Align TLS/JA3 with real browsers and switch to HTTP/3 where inspection is weaker
 10. Pivot to origin when feasible; fall back to stealth browser automation with humanization
+

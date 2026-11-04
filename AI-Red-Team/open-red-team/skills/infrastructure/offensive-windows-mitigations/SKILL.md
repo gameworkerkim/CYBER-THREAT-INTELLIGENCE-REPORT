@@ -11,6 +11,7 @@ triggers:
   - "code integrity guard"
   - "윈도우 보호기법"
 category: infrastructure
+index_only: true
 model_note: "모델 비종속 — OpenAI 호환 API(DeepSeek/GLM/Ollama 등)에서 동작"
 source: "https://github.com/SnailSploit/Claude-Red (MIT)"
 ---
@@ -14543,3 +14544,4 @@ After completing Weeks 6-7 (understanding mitigations), Week 8 teaches bypass te
 - **ARM64 Exploitation — PAC, BTI & MTE Bypass**: Learn ARM64-specific exploitation including pointer authentication code signing bypasses, branch target identification circumvention, and memory tagging exploitation
 
 <!-- Written by AnotherOne from @Pwn3rzs Telegram channel -->
+

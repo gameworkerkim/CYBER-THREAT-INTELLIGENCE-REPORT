@@ -630,3 +630,4 @@ arjun -u http://target.example.com/page --stable
 - Freemarker Security: https://freemarker.apache.org/docs/app_faq.html#faq_template_uploading_security
 - OWASP SSTI Testing: https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Tests/07-Input_Validation_Testing/18-Testing_for_Server-side_Template_Injection
 - CWE-1336: https://cwe.mitre.org/data/definitions/1336.html
+

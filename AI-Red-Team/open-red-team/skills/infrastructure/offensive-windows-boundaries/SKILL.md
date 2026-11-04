@@ -9,6 +9,7 @@ triggers:
   - "windows sandbox"
   - "샌드박스 탈출"
 category: infrastructure
+index_only: true
 model_note: "모델 비종속 — OpenAI 호환 API(DeepSeek/GLM/Ollama 등)에서 동작"
 source: "https://github.com/SnailSploit/Claude-Red (MIT)"
 ---
@@ -15148,3 +15149,4 @@ Week 10 covers operational evasion:
 - ETW blinding
 - Kernel callback manipulation
 - Complete EDR bypass chains
+

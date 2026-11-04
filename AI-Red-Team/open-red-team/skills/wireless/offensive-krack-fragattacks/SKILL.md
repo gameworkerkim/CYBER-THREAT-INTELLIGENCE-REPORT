@@ -120,3 +120,4 @@ For each vulnerable CVE:
 - Original papers: USENIX Security 2017 (KRACK), USENIX Security 2021 (FragAttacks)
 - CISA advisories tracking embedded vendor patches
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/wireless.md
+

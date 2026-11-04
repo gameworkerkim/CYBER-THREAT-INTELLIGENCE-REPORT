@@ -587,3 +587,4 @@ CLEANUP
 - MITRE ATT&CK T1548 -- Abuse Elevation Control Mechanism: https://attack.mitre.org/techniques/T1548/
 - MITRE ATT&CK T1574 -- Hijack Execution Flow: https://attack.mitre.org/techniques/T1574/
 - PayloadsAllTheThings Windows Privesc: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md
+

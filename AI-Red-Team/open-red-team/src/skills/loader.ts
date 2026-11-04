@@ -54,6 +54,7 @@ export function parseSkill(content: string, path: string): Skill {
     category: String(fm.category ?? "uncategorized"),
     model_note: fm.model_note !== undefined ? String(fm.model_note) : undefined,
     source: fm.source !== undefined ? String(fm.source) : undefined,
+    index_only: fm.index_only === true || fm.index_only === "true",
   };
 
   if (!frontmatter.name) throw new Error(`Skill at ${path} has no name`);

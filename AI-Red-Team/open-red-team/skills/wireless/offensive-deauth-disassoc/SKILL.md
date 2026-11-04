@@ -141,3 +141,4 @@ Document for each test:
 - IEEE 802.11w-2009 (PMF spec, now folded into 802.11-2020)
 - "Why MAC Address Randomization Doesn't Work" — research on action-frame leakage
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/wireless.md
+

@@ -604,3 +604,4 @@ IDOR vulnerabilities can often be chained with other issues or used to escalate 
 - **Deny-by-Default**: Authorize on object owner and tenant at the very first layer; fail closed.
 - **Unit/Contract Tests**: Add authorization unit tests per endpoint/field and CI scanners that auto-generate BOLA cases.
 - **Cache Partitioning**: Partition CDN caches by auth headers; avoid cacheable 200/304 for private resources.
+

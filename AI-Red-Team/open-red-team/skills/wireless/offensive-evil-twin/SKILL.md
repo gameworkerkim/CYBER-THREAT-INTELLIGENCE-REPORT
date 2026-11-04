@@ -228,3 +228,4 @@ mitmproxy --mode transparent --showhost --ssl-insecure
 - KARMA / Mana original talks (DEF CON, Sensepost research)
 - "Probing into the Past" research on PNL exploitation
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/wireless.md
+

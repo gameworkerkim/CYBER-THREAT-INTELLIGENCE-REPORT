@@ -126,9 +126,18 @@ const CLAUDE_REPLACEMENTS: Array<[RegExp, string]> = [
 ];
 
 function sanitize(value: string): string {
-  let out = value;
-  for (const [re, repl] of CLAUDE_REPLACEMENTS) {
-    out = out.replace(re, repl);
+  let out = "";
+  let inFence = false;
+  for (const line of value.split("\n")) {
+    const isFence = /^\s*```/.test(line);
+    let processed = line;
+    if (!inFence) {
+      for (const [re, repl] of CLAUDE_REPLACEMENTS) {
+        processed = processed.replace(re, repl);
+      }
+    }
+    out += `${processed}\n`;
+    if (isFence) inFence = !inFence;
   }
   return out;
 }
@@ -172,20 +181,47 @@ function extractBody(raw: string): string {
   return sanitize(body.trim());
 }
 
-function buildFrontmatter(name: string, category: string, description: string, triggers: string[]): string {
+const INDEX_ONLY_BODY_CHARS = 80_000;
+
+function shouldBeIndexOnly(body: string): boolean {
+  return body.length > INDEX_ONLY_BODY_CHARS;
+}
+
+function buildFrontmatter(name: string, category: string, description: string, triggers: string[], indexOnly: boolean): string {
   const triggerYaml = triggers.map((t) => `  - "${t}"`).join("\n");
-  return [
+  const lines = [
     "---",
     `name: ${name}`,
     `description: "${description.replace(/"/g, '\\"')}"`,
     "triggers:",
     triggerYaml,
     `category: ${category}`,
-    'model_note: "모델 비종속 — OpenAI 호환 API(DeepSeek/GLM/Ollama 등)에서 동작"',
-    'source: "https://github.com/SnailSploit/Claude-Red (MIT)"',
-    "---",
-    "",
-  ].join("\n");
+  ];
+  if (indexOnly) lines.push("index_only: true");
+  lines.push('model_note: "모델 비종속 — OpenAI 호환 API(DeepSeek/GLM/Ollama 등)에서 동작"');
+  lines.push('source: "https://github.com/SnailSploit/Claude-Red (MIT)"');
+  lines.push("---", "");
+  return lines.join("\n");
+}
+
+async function fetchWithRetry(url: string, attempts = 3): Promise<Response> {
+  let lastError: unknown;
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      const res = await fetch(url, { headers: { "User-Agent": "open-red-team-sync" } });
+      if (res.ok) return res;
+      if (res.status === 404) return res;
+      lastError = new Error(`HTTP ${res.status}`);
+    } catch (err) {
+      lastError = err;
+    }
+    if (i < attempts) await sleep(1000 * i);
+  }
+  throw lastError instanceof Error ? lastError : new Error(String(lastError));
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
 }
 
 async function fetchSkill(spec: SkillSpec): Promise<{ ok: boolean; error?: string }> {
@@ -194,14 +230,17 @@ async function fetchSkill(spec: SkillSpec): Promise<{ ok: boolean; error?: strin
   const target = join(targetDir, "SKILL.md");
 
   try {
-    const res = await fetch(url, { headers: { "User-Agent": "open-red-team-sync" } });
+    const res = await fetchWithRetry(url);
     if (!res.ok) {
       return { ok: false, error: `HTTP ${res.status} for ${spec.name}` };
     }
     const raw = await res.text();
     const desc = extractDescription(raw);
     const body = extractBody(raw);
-    const frontmatter = buildFrontmatter(spec.name, spec.category, desc, spec.triggers);
+    const indexOnly = shouldBeIndexOnly(body);
+    const finalDesc =
+      desc || truncateAtWord(body.split("\n").find((l) => l.trim() !== "" && !l.trim().startsWith("#"))?.trim() ?? "");
+    const frontmatter = buildFrontmatter(spec.name, spec.category, finalDesc, spec.triggers, indexOnly);
 
     await mkdir(targetDir, { recursive: true });
     await writeFile(target, `${frontmatter}${body}\n`, "utf-8");
@@ -226,6 +265,7 @@ async function main() {
       errors.push(`${spec.name}: ${result.error}`);
       console.log(`FAIL  ${spec.category}/${spec.name} — ${result.error}`);
     }
+    await sleep(150);
   }
 
   console.log(`\nDone: ${ok} fetched, ${failed} failed`);

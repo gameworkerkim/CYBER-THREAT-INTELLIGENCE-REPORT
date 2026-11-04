@@ -606,3 +606,4 @@ Network defenders and threat hunters target C2 at multiple layers:
 - Red Team Infrastructure Wiki: https://github.com/bluscreenofjeff/Red-Team-Infrastructure-Wiki
 - Malleable C2 Profile Collection: https://github.com/threatexpress/malleable-c2
 - RITA (Real Intelligence Threat Analytics): https://github.com/activecm/rita
+

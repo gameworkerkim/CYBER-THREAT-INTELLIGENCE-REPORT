@@ -482,3 +482,4 @@ flowchart TD
   - Use full URL parsing rather than simple string checks
   - Implement CSRF protection for redirect endpoints
   - For mobile deep links, validate package/bundle IDs and enforce App Links/Universal Links verification.
+

@@ -527,3 +527,4 @@ Key defensive controls:
 - Attacking and Defending CI/CD Pipelines (NCC Group): https://research.nccgroup.com
 - GitLab CI/CD Security: https://docs.gitlab.com/ee/ci/security/
 - Azure DevOps Pipeline Security: https://learn.microsoft.com/en-us/azure/devops/pipelines/security/
+

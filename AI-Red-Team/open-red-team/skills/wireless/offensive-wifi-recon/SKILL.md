@@ -211,3 +211,4 @@ sudo airodump-ng -c <ch> --bssid <BSSID> -w <name> wlan0mon
 - Kismet documentation: kismetwireless.net
 - WIGLE: wigle.net (read the API ToS before automated submissions)
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/wireless.md
+

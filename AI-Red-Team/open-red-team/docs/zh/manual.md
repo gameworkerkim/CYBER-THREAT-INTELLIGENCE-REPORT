@@ -167,6 +167,12 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 令牌保护
 | Audit | 查看 JSONL 审计日志中的近期交互 |
 | Config | 密钥脱敏后的只读配置 |
 
+| Chat | Skills |
+|------|--------|
+| ![Chat](../../assets/screenshots/dashboard-chat.png) | ![Skills](../../assets/screenshots/dashboard-skills.png) |
+| **Audit** | **Config** |
+| ![Audit](../../assets/screenshots/dashboard-audit.png) | ![Config](../../assets/screenshots/dashboard-config.png) |
+
 环境变量：
 
 | 变量 | 默认值 | 说明 |
@@ -184,7 +190,30 @@ docker compose --profile dashboard up -d   # http://localhost:8081
 前端不含外部资源（无 CDN），可完全离线运行 — 适合物理隔离网络。
 企业 SSO 可在反向代理前放置 Keycloak（OIDC），并停用 `ORT_DASHBOARD_TOKEN`。
 
-## 10. 安全与伦理
+## 10. 护栏·预算·可观测性
+
+### 上下文预算（防止溢出）
+
+技能正文仅注入到 token 预算为止 — 不会向模型静默发送溢出的上下文。
+按提供商的默认值：deepseek 64K/16K、glm 128K/24K、openweight 32K/8K（上下文上限/单技能预算）。
+可用 `ORT_MAX_CONTEXT`、`ORT_SKILL_BUDGET`、`ORT_RESERVE_TOKENS` 覆盖。超限正文按节截断
+（`… [truncated by token budget]`）；`index_only` 技能（如 554KB 的 `offensive-windows-boundaries`）
+不注入正文、仅保留索引 — 用 `ort skills show <name>` 查看。
+
+### 任务范围护栏
+
+| 变量 | 效果 |
+|------|------|
+| `ORT_SCOPE` | 已申报任务说明 — 注入系统提示词并记录到审计/追踪 |
+| `ORT_SCOPE_DOMAINS` | 范围内的主机/域名（逗号分隔）。范围外目标将被标记并建议确认范围 |
+| `ORT_OPERATOR` | 记录到审计条目和 LangFuse 追踪的操作员标识 |
+
+### 可观测性
+
+- **LangFuse**：设置 `LANGFUSE_PUBLIC_KEY`/`LANGFUSE_SECRET_KEY`/`LANGFUSE_BASEURL` 后追踪全部对话。
+- **Prometheus**：面板暴露 `/metrics`，compose monitoring 配置文件自动采集。
+
+## 11. 安全与伦理
 
 - 技能仅用于**授权测试**的攻击方法论。
 - 未经书面许可，绝不用于真实系统。

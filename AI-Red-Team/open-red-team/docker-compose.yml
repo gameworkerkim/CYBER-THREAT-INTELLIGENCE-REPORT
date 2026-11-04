@@ -1,61 +1,46 @@
 # Open AI Red Team — layered deployment stack (air-gapped / on-prem)
 #
 # Layer 3 (LLM serving): vllm (production, `serving` profile) / ollama (PoC, `poc` profile)
-# Layer 4 (red-team app):  ort (CLI) / dashboard (web, `dashboard` profile)
+# Layer 4 (red-team app):  ort (web dashboard server, always-on) / cli (`cli` profile, interactive)
 # Layer 5 (auth / observability): keycloak (`auth`), langfuse (`observability`),
-#                                  prometheus+grafana (`monitoring`)
+#                                  prometheus+grafana+loki (`monitoring`)
 #
-# Basic:      docker compose up -d ort
-# PoC:        docker compose --profile poc up -d
-# Production: docker compose --profile serving --profile auth --profile observability --profile monitoring up -d
+# Dashboard (default):  docker compose up -d ort                 -> http://localhost:8081
+# PoC (app + Ollama):   docker compose --profile poc up -d
+# Production:           docker compose --profile serving --profile auth \
+#                          --profile observability --profile monitoring up -d
+# vLLM override (serving):
+#   ORT_LLM_BASE_URL=http://vllm:8000/v1 ORT_LLM_MODEL=qwen2.5-32b \
+#     docker compose --profile serving up -d
 #
 # Registry (Harbor), image scanning (Trivy), signing (Cosign) and offline transfer
 # (skopeo/crane) are covered by scripts/ and docs/deployment.md — see Layer 1 & 2.
 
 services:
-  # ---------------- Layer 4: red-team application ----------------
+  # ---------------- Layer 4: red-team application (web dashboard server) ----------------
   ort:
     build: .
     image: ${REGISTRY:-}open-ai-red-team:${ORT_TAG:-latest}
-    environment:
-      ORT_PROVIDER: ${ORT_PROVIDER:-openweight}
-      OPENWEIGHT_BASE_URL: ${ORT_LLM_BASE_URL:-http://vllm:8000/v1}
-      OPENWEIGHT_MODEL: ${ORT_LLM_MODEL:-qwen2.5-32b}
-      OPENWEIGHT_API_KEY: ${OPENWEIGHT_API_KEY:-none}
-      ORT_MAX_SKILLS: ${ORT_MAX_SKILLS:-3}
-      ORT_INCLUDE_INDEX: ${ORT_INCLUDE_INDEX:-on}
-      ORT_SKILLS_DIR: /app/skills
-      ORT_AUTO_LOAD: ${ORT_AUTO_LOAD:-on}
-      NODE_OPTIONS: --max-old-space-size=512
-    networks:
-      - redteam
-    read_only: true
-    tmpfs:
-      - /tmp
-    security_opt:
-      - no-new-privileges:true
-    cap_drop:
-      - ALL
-    mem_limit: 512m
-    cpus: 1.0
-    stdin_open: true
-    tty: true
-
-  # ---------------- Layer 4: red-team web dashboard ----------------
-  dashboard:
-    build: .
-    image: ${REGISTRY:-}open-ai-red-team:${ORT_TAG:-latest}
-    profiles: ["dashboard"]
     command: ["dashboard"]
     environment:
       ORT_PROVIDER: ${ORT_PROVIDER:-openweight}
-      OPENWEIGHT_BASE_URL: ${ORT_LLM_BASE_URL:-http://vllm:8000/v1}
-      OPENWEIGHT_MODEL: ${ORT_LLM_MODEL:-qwen2.5-32b}
-      OPENWEIGHT_API_KEY: ${OPENWEIGHT_API_KEY:-none}
+      OPENWEIGHT_BASE_URL: ${ORT_LLM_BASE_URL:-http://ollama:11434/v1}
+      OPENWEIGHT_MODEL: ${ORT_LLM_MODEL:-qwen2.5:32b}
+      OPENWEIGHT_API_KEY: ${OPENWEIGHT_API_KEY:-ollama}
       ORT_SKILLS_DIR: /app/skills
       ORT_DASHBOARD_PORT: "8081"
       ORT_DASHBOARD_TOKEN: ${ORT_DASHBOARD_TOKEN:-}
+      ORT_OIDC_ISSUER: ${ORT_OIDC_ISSUER:-}
+      ORT_OIDC_AUDIENCE: ${ORT_OIDC_AUDIENCE:-}
       ORT_AUDIT_LOG: /data/audit.jsonl
+      ORT_SCOPE: ${ORT_SCOPE:-}
+      ORT_SCOPE_DOMAINS: ${ORT_SCOPE_DOMAINS:-}
+      ORT_OPERATOR: ${ORT_OPERATOR:-}
+      ORT_MAX_CONTEXT: ${ORT_MAX_CONTEXT:-}
+      ORT_SKILL_BUDGET: ${ORT_SKILL_BUDGET:-}
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      LANGFUSE_BASEURL: ${LANGFUSE_BASEURL:-http://langfuse:3000}
     volumes:
       - ./data:/data
     ports:
@@ -71,6 +56,37 @@ services:
       - ALL
     mem_limit: 512m
     cpus: 1.0
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:8081/api/health').then(r=>{if(!r.ok)process.exit(1)})"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+
+  # interactive CLI (manual operation over an attachable TTY)
+  cli:
+    build: .
+    image: ${REGISTRY:-}open-ai-red-team:${ORT_TAG:-latest}
+    profiles: ["cli"]
+    command: ["chat"]
+    environment:
+      ORT_PROVIDER: ${ORT_PROVIDER:-openweight}
+      OPENWEIGHT_BASE_URL: ${ORT_LLM_BASE_URL:-http://ollama:11434/v1}
+      OPENWEIGHT_MODEL: ${ORT_LLM_MODEL:-qwen2.5:32b}
+      OPENWEIGHT_API_KEY: ${OPENWEIGHT_API_KEY:-ollama}
+      ORT_SKILLS_DIR: /app/skills
+      ORT_SCOPE: ${ORT_SCOPE:-}
+      ORT_SCOPE_DOMAINS: ${ORT_SCOPE_DOMAINS:-}
+      ORT_OPERATOR: ${ORT_OPERATOR:-}
+      ORT_MAX_CONTEXT: ${ORT_MAX_CONTEXT:-}
+      ORT_SKILL_BUDGET: ${ORT_SKILL_BUDGET:-}
+    networks:
+      - redteam
+    read_only: true
+    tmpfs:
+      - /tmp
+    stdin_open: true
+    tty: true
 
   # ---------------- Layer 3: LLM serving ----------------
   vllm:
@@ -84,8 +100,10 @@ services:
       --port 8000
     environment:
       HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN:-}
+      VLLM_CACHE_ROOT: /cache
     volumes:
       - ${MODELS_DIR:-./artifacts/models}:/models:ro
+      - vllm-cache:/cache
     deploy:
       resources:
         reservations:
@@ -97,7 +115,6 @@ services:
       - "8000"
     networks:
       - redteam
-    read_only: true
     tmpfs:
       - /tmp
 
@@ -106,13 +123,11 @@ services:
     profiles: ["poc"]
     volumes:
       - ollama-data:/root/.ollama
-    expose:
-      - "11434"
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
     networks:
       - redteam
     mem_limit: ${OLLAMA_MEM_LIMIT:-16g}
-    # bind local /v1 alias for OpenAI compatibility
-    entrypoint: ["/bin/sh", "-c", "ollama serve"]
 
   # ---------------- Layer 5: authentication ----------------
   keycloak:
@@ -200,6 +215,18 @@ services:
     networks:
       - redteam
 
+  loki:
+    image: grafana/loki:${LOKI_TAG:-latest}
+    profiles: ["monitoring"]
+    command: -config.file=/etc/loki/loki.yml
+    volumes:
+      - ./deploy/monitoring/loki/loki.yml:/etc/loki/loki.yml:ro
+      - loki-data:/loki
+    ports:
+      - "${LOKI_PORT:-3100}:3100"
+    networks:
+      - redteam
+
 networks:
   redteam:
     driver: bridge
@@ -208,7 +235,9 @@ networks:
 
 volumes:
   ollama-data:
+  vllm-cache:
   keycloak-db-data:
   langfuse-db-data:
   prometheus-data:
   grafana-data:
+  loki-data:

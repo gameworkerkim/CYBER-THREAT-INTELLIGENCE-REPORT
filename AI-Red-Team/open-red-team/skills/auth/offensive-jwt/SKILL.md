@@ -284,3 +284,4 @@ python3 jwt_tool.py <token> -C -d wordlist.txt
 - **PASETO** — removes algorithm negotiation entirely; eliminates confusion attacks
 - **Macaroons** — bearer tokens with attenuable, caveat-based delegation
 - **DPoP and mTLS** — bind tokens to the client to prevent replay
+

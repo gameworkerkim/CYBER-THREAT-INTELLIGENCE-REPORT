@@ -448,3 +448,4 @@ For each finding capture:
 - IoT Hackers Handbook (Aditya Gupta) — canonical methodology
 - CISA ICS-CERT advisory feed
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/iot-embedded.md
+

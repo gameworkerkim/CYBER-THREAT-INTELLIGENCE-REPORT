@@ -166,7 +166,13 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # bearer-token protected
 | Chat | Streaming chat with auto-loaded skills shown as chips |
 | Skills | Search/filter all 79 skills by name, category, or trigger; view full bodies |
 | Audit | Recent interactions from the JSONL audit log |
-| Config | Read-only configuration with masked keys |
+| Config | Read-only configuration with masked keys, scope and auth status |
+
+| Chat | Skills |
+|------|--------|
+| ![Chat](../assets/screenshots/dashboard-chat.png) | ![Skills](../assets/screenshots/dashboard-skills.png) |
+| **Audit** | **Config** |
+| ![Audit](../assets/screenshots/dashboard-audit.png) | ![Config](../assets/screenshots/dashboard-config.png) |
 
 Environment variables:
 
@@ -174,7 +180,9 @@ Environment variables:
 |----------|---------|-------------|
 | `ORT_DASHBOARD_PORT` | `8081` | Listen port |
 | `ORT_DASHBOARD_TOKEN` | *(empty)* | Bearer token for `/api/*`. Empty = unauthenticated (dev only) |
-| `ORT_AUDIT_LOG` | *(empty)* | JSONL audit log path (each chat completion appended: time, provider, model, matched skills, lengths) |
+| `ORT_OIDC_ISSUER` | *(empty)* | Keycloak/OIDC issuer — when set, API requires a valid OIDC access token (takes precedence over the static token) |
+| `ORT_OIDC_AUDIENCE` | *(empty)* | Expected `aud` claim |
+| `ORT_AUDIT_LOG` | *(empty)* | JSONL audit log path (each chat completion appended: time, provider, model, matched skills, lengths, operator, scope) |
 
 Docker:
 
@@ -183,10 +191,45 @@ docker compose --profile dashboard up -d   # http://localhost:8081
 ```
 
 The frontend has no external assets (no CDN) and works fully offline — suitable for air-gapped
-networks. For enterprise SSO, put Keycloak (OIDC) in front of the dashboard via a reverse proxy
+networks. For enterprise SSO, set `ORT_OIDC_ISSUER` to your Keycloak realm (the middleware
+verifies RS256 JWTs against the realm's JWKS) or put Keycloak in front via a reverse proxy
 and disable `ORT_DASHBOARD_TOKEN`.
 
-## 10. Security & Ethics
+## 10. Guardrails, Budget & Observability
+
+### Context budget (prevents overflow)
+
+Skill bodies are injected up to a token budget — models never receive a silently overflowing
+context. Defaults per provider:
+
+| Provider | Context limit | Per-skill budget |
+|----------|---------------|------------------|
+| deepseek | 64,000 | 16,000 |
+| glm | 128,000 | 24,000 |
+| openweight | 32,000 | 8,000 |
+
+Override with `ORT_MAX_CONTEXT`, `ORT_SKILL_BUDGET`, `ORT_RESERVE_TOKENS`. Oversized skill bodies
+are truncated section-by-section (marked with `… [truncated by token budget]`); skills marked
+`index_only` in their frontmatter (e.g., the 554 KB `offensive-windows-boundaries`) are never
+injected as a body — read them with `ort skills show <name>`.
+
+### Engagement scope guardrails
+
+| Variable | Effect |
+|----------|--------|
+| `ORT_SCOPE` | Declared engagement description — injected into the system prompt and recorded in audit/traces |
+| `ORT_SCOPE_DOMAINS` | Comma-separated in-scope hosts/domains. Hosts outside this list are flagged and the operator is advised to confirm scope |
+| `ORT_OPERATOR` | Identity recorded in audit entries and LangFuse traces |
+
+### Observability
+
+- **LangFuse**: set `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_BASEURL` — every
+  chat is traced (input, output, provider, model, matched skills, scope, token counts).
+- **Prometheus**: the dashboard exposes `/metrics` (`ort_chat_requests_total`,
+  `ort_chat_duration_seconds_total`, `ort_http_requests_total`, …). The compose monitoring
+  profile scrapes it automatically.
+
+## 11. Security & Ethics
 
 - Skills describe offensive methodology for **authorized testing only**.
 - Never run against systems without written permission.

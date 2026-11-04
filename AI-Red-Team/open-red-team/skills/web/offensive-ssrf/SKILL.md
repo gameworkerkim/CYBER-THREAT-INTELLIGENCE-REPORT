@@ -826,3 +826,4 @@ http://rancher.cattle-system.svc.cluster.local
 - Spring framework protections
 - Apache HttpClient considerations
 - Apache CXF Aegis databinding SSRF (CVE-2024-28752)
+

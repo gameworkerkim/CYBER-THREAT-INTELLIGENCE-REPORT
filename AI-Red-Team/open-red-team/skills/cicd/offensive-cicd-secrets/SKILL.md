@@ -586,3 +586,4 @@ Key defensive controls: use OIDC with narrow claim constraints over long-lived c
 - AWS OIDC with GitHub Actions: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
 - truffleHog: https://github.com/trufflesecurity/trufflehog
 - detect-secrets: https://github.com/Yelp/detect-secrets
+

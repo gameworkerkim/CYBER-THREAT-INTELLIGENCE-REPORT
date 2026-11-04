@@ -820,3 +820,4 @@ for test in test_cases:
 - HTTP chunked smuggling: proxies may stream parts to backends before full validation; ensure backends validate final file after full receive.
 - Parallel/multipart chunk races: verify server holds uploads in a quarantine path until all validations complete; deny direct reads from temp locations.
 - Image pipelines with `?url=` sources: treat as SSRF; block private IPs, localhost, and metadata endpoints; enforce DNS rebinding protections.
+

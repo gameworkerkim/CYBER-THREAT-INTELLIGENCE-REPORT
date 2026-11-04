@@ -2097,3 +2097,4 @@ tar czf corpus_archive/with_symlink.tar.gz /tmp/symlink_test 2>/dev/null || true
 Next week, you'll learn patch diffing - analyzing security updates to understand what was fixed and discovering variant vulnerabilities. You'll see how fuzzing discoveries lead to patches, and how analyzing those patches can reveal additional bugs.
 
 <!-- Written by AnotherOne from @Pwn3rzs Telegram channel -->
+

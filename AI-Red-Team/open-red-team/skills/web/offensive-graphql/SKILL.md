@@ -574,3 +574,4 @@ INFO DISCLOSURE
 - OWASP GraphQL Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html
 - HackTricks GraphQL: https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-web/graphql.html
 - Damn Vulnerable GraphQL Application: https://github.com/dolevf/Damn-Vulnerable-GraphQL-Application
+

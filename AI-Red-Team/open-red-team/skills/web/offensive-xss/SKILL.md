@@ -785,3 +785,4 @@ to poison future writes and achieve DOM‑XSS. Test wherever `Object.assign` or
 | **Burp Suite 2024.8**  | “DAST+AI” context‑aware scan mode |
 | **XSSInspector AI/ML** | RL‑based payload generator        |
 | **ParamSpider 3**      | LLM‑enhanced parameter discovery  |
+

@@ -5,6 +5,9 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { OpenRedTeam } from "../index.js";
 import type { OrtConfig } from "../types.js";
+import { loadScopeGuard } from "../safety.js";
+import { metricsText, trackChatEnd, trackChatStart, trackHttp } from "./metrics.js";
+import { oidcConfigured, oidcMiddleware } from "./oidc.js";
 
 export interface DashboardOptions {
   port?: number;
@@ -19,6 +22,9 @@ interface AuditEntry {
   matchedSkills: string[];
   promptChars: number;
   responseChars: number;
+  promptTokens?: number;
+  operator?: string;
+  scope?: string;
 }
 
 function maskKey(value?: string): string {
@@ -48,11 +54,20 @@ export async function startDashboard(
   const port = opts.port ?? Number(process.env.ORT_DASHBOARD_PORT ?? 8081);
   const token = opts.token ?? process.env.ORT_DASHBOARD_TOKEN ?? "";
   const auditLog = opts.auditLog ?? process.env.ORT_AUDIT_LOG ?? "";
+  const guard = loadScopeGuard();
 
   const app = express();
   app.use(express.json({ limit: "1mb" }));
 
-  if (token) {
+  app.use((req, _res, next) => {
+    trackHttp(req.method, req.path);
+    next();
+  });
+
+  if (oidcConfigured()) {
+    app.use("/api", oidcMiddleware);
+    console.log("[ort] auth: OIDC verification enabled (ORT_OIDC_ISSUER)");
+  } else if (token) {
     app.use("/api", (req, res, next) => {
       const auth = req.headers.authorization ?? "";
       if (auth !== `Bearer ${token}`) {
@@ -75,6 +90,11 @@ export async function startDashboard(
       /* audit failure must not break the request */
     }
   };
+
+  app.get("/metrics", (_req, res) => {
+    res.setHeader("Content-Type", "text/plain; version=0.0.4");
+    res.send(metricsText());
+  });
 
   app.get("/api/health", async (_req, res) => {
     const backend = await checkBackend(ort.config);
@@ -101,6 +121,11 @@ export async function startDashboard(
       includeIndex: ort.config.includeIndex,
       auditLog: auditLog || null,
       dashboardTokenSet: Boolean(token),
+      oidcEnabled: oidcConfigured(),
+      scope: guard?.scope ?? null,
+      scopeDomains: guard?.domains ?? [],
+      operator: guard?.operator ?? null,
+      langfuseEnabled: Boolean(process.env.LANGFUSE_PUBLIC_KEY && process.env.LANGFUSE_SECRET_KEY),
     });
   });
 
@@ -113,6 +138,7 @@ export async function startDashboard(
         triggers: s.frontmatter.triggers,
         modelNote: s.frontmatter.model_note,
         source: s.frontmatter.source,
+        indexOnly: s.frontmatter.index_only ?? false,
       })),
     );
   });
@@ -151,12 +177,20 @@ export async function startDashboard(
       res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
     };
 
+    trackChatStart();
+    const started = Date.now();
+    let failed = false;
     try {
       const result = await ort.chat(message, {
         skills: forced,
         onDelta: (d) => send("delta", { text: d }),
       });
-      send("done", { matchedSkills: result.matchedSkills });
+      send("done", {
+        matchedSkills: result.matchedSkills,
+        promptTokens: result.promptTokens,
+        maxContextTokens: result.maxContextTokens,
+        reasoningTokens: result.reasoningTokens,
+      });
       await audit({
         ts: new Date().toISOString(),
         provider: result.provider,
@@ -164,10 +198,15 @@ export async function startDashboard(
         matchedSkills: result.matchedSkills,
         promptChars: message.length,
         responseChars: result.content.length,
+        promptTokens: result.promptTokens,
+        operator: guard?.operator,
+        scope: guard?.scope,
       });
     } catch (err) {
+      failed = true;
       send("error", { message: err instanceof Error ? err.message : String(err) });
     } finally {
+      trackChatEnd(Date.now() - started, 0, failed);
       res.end();
     }
   });
@@ -194,8 +233,13 @@ export async function startDashboard(
   return new Promise<Server>((resolve) => {
     const server = app.listen(port, () => {
       console.log(`[ort] dashboard listening on http://0.0.0.0:${port}`);
-      if (token) console.log("[ort] auth: Bearer token required (ORT_DASHBOARD_TOKEN)");
-      else console.warn("[ort] WARNING: no ORT_DASHBOARD_TOKEN set — API is unauthenticated");
+      if (oidcConfigured()) {
+        console.log("[ort] auth: OIDC (Keycloak) enabled");
+      } else if (token) {
+        console.log("[ort] auth: Bearer token required (ORT_DASHBOARD_TOKEN)");
+      } else {
+        console.warn("[ort] WARNING: no auth configured — API is unauthenticated");
+      }
       console.log(`[ort] provider=${ort.config.provider} model=${ort.config.model} skills=${ort.listSkills().length}`);
       resolve(server);
     });

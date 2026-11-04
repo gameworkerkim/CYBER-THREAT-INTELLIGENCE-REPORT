@@ -432,3 +432,4 @@ Multiple apps from same vendor share — secrets here cross app boundary.
 - Frida CodeShare — codeshare.frida.re for ready-to-use hooks
 - mobile-security-framework / MobSF for automated triage
 - Source: https://github.com/SnailSploit/offensive-checklist/blob/main/mobile.md
+

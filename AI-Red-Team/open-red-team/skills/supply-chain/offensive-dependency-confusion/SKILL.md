@@ -610,3 +610,4 @@ the engagement window closes.
 - "Backstabber's Knife Collection: A Review of Open Source Software Supply Chain Attacks" (2020)
 - MITRE ATT&CK T1195.001 -- Supply Chain Compromise: Compromise Software Dependencies and Development Tools
 - GitHub Advisory Database: https://github.com/advisories
+

@@ -502,3 +502,4 @@ MITRE ATT&CK references:
 - The Hacker Recipes -- NTLM relay: https://www.thehacker.recipes/ad/movement/ntlm/relay
 - MITRE ATT&CK T1557: https://attack.mitre.org/techniques/T1557/
 - MITRE ATT&CK T1040: https://attack.mitre.org/techniques/T1040/
+

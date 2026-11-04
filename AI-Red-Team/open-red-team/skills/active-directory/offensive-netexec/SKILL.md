@@ -854,3 +854,4 @@ nxc smb 192.168.1.0/24 -u DomainAdmin -p 'Pass' --dpapi nosystem
 | `--delegate` | RBCD/S4U2Self impersonation |
 | `--gmsa` | Dump gMSA passwords |
 | `--ignore-opsec-warnings` | Suppress opsec warnings |
+

@@ -594,3 +594,4 @@ Strategies to prevent and fix AI/LLM vulnerabilities:
 | RAG Embedding Leakage  | Encrypt vector indices at rest, enforce row‑level ACLs, implement access‑pattern privacy (e.g., OPAL)           |
 | Overreliance           | Educate users on limitations, implement verification mechanisms, clearly mark AI-generated content              |
 | Model Theft            | Secure APIs and infrastructure, implement watermarking, enforce legal agreements, limit model exposure          |
+

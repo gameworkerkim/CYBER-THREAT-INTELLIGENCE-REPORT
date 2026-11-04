@@ -681,3 +681,4 @@ hostname; id; cat /etc/os-release; docker ps 2>/dev/null
 - Tool: nsenter - Linux util-linux package
 - Docker Socket Escape - https://book.hacktricks.xyz/linux-hardening/privilege-escalation/docker-security/docker-breakout-privilege-escalation
 - CIS Docker Benchmark - runtime security configuration baselines
+
