@@ -34,6 +34,8 @@
 - **安全护栏** — 已申报的任务范围（`ORT_SCOPE`/`ORT_SCOPE_DOMAINS`）与范围外目标标记、
   归属操作员的审计记录
 - **合规对接** — Prometheus `/metrics`、OIDC（Keycloak）API 认证、LangFuse 追踪
+- **本地账户（SQLite）** — HMAC 令牌登录，默认 admin/admin 首次登录强制改密，
+  范围·预算·引擎设置可在面板 Settings 页修改
 - **多语言文档** — 英语（基准）、韩语、日语、中文
 - **本地部署就绪** — 本地模型确保敏感目标信息留在内部环境
 

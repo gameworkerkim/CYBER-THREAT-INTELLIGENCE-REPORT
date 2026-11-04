@@ -47,6 +47,16 @@ All notable changes to Open AI Red Team are recorded here.
 ## [Unreleased]
 
 ### Added
+- **Local accounts (SQLite)** — `ORT_DB_PATH` database with users/settings tables
+  (`better-sqlite3`); default **admin/admin** seeded on first start with a forced password
+  change (`403 password change required` gate); HMAC-signed login tokens (12 h TTL,
+  `ORT_AUTH_SECRET` env or persisted secret); `POST /api/auth/login`, `GET /api/auth/me`,
+  `POST /api/auth/change-password`; auth priority OIDC > local > static token > anonymous
+- **Dashboard runtime settings** — Settings tab + `GET/PUT /api/settings` (admin role):
+  scope, domains, mode, operator, context budget, skill budget, reserve, maxSkills,
+  includeIndex, autoLoad are applied live via a runtime store (DB > env > default);
+  provider/model/API-key changes still require a restart
+- Login screen + forced password-change modal in the dashboard UI
 - Manual section "Review Findings & Verification Status" (EN/KO/JA/ZH):
   accumulated 4-round review findings with resolved status (P0/P1/P2) and the
   remaining known limitations (CI hosted-gate unexercised, vLLM/Keycloak live

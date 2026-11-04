@@ -28,19 +28,21 @@ function clearEnv() {
     "ORT_DASHBOARD_TOKEN", "ORT_METRICS_TOKEN", "ORT_ALLOW_ANONYMOUS", "ORT_OIDC_ISSUER",
     "ORT_OIDC_AUDIENCE", "ORT_SCOPE", "ORT_SCOPE_DOMAINS", "ORT_SCOPE_MODE", "ORT_OPERATOR",
     "ORT_AUDIT_LOG", "ORT_AUDIT_REQUIRED", "LANGFUSE_PUBLIC_KEY", "LANGFUSE_SECRET_KEY",
+    "ORT_DB_PATH", "ORT_DISABLE_LOCAL_AUTH", "ORT_AUTH_SECRET",
   ]) setEnv(k, undefined);
 }
 
-async function startTestServer(extra: Record<string, string> = {}) {
+async function startTestServer(extra: Record<string, string> = {}, anonymous = true) {
   clearEnv();
-  setEnv("ORT_ALLOW_ANONYMOUS", "1");
+  setEnv("ORT_DB_PATH", ":memory:");
+  if (anonymous) setEnv("ORT_ALLOW_ANONYMOUS", "1");
   setEnv("ORT_SCOPE", "test engagement");
   setEnv("ORT_SCOPE_DOMAINS", "demo.example.com");
   for (const [k, v] of Object.entries(extra)) setEnv(k, v);
   const mock = new MockProvider();
   const ort = new OpenRedTeam({ provider: "deepseek", providerOverride: mock as never });
   await ort.init();
-  const server = await startDashboard(ort, { port: 0 });
+  const server = await startDashboard(ort, { port: 0, dbPath: ":memory:" });
   const port = (server.address() as { port: number }).port;
   return { server, port, base: `http://127.0.0.1:${port}` };
 }
@@ -69,9 +71,10 @@ async function sseEvents(base: string, path: string, opts: { body?: unknown; hea
 }
 
 describe("dashboard fail-closed startup", () => {
-  it("refuses to start without authentication", async () => {
+  it("refuses to start without authentication when local auth is disabled", async () => {
     clearEnv();
     setEnv("ORT_SCOPE", "x");
+    setEnv("ORT_DISABLE_LOCAL_AUTH", "1");
     const ort = new OpenRedTeam({ provider: "deepseek" });
     await ort.init();
     await expect(startDashboard(ort, { port: 0 })).rejects.toThrow(/unauthenticated/);
@@ -104,12 +107,97 @@ describe("dashboard HTTP", () => {
   afterEach(() => {});
 
   it("enforces the bearer token when configured", async () => {
-    const { server, base } = await startTestServer({ ORT_DASHBOARD_TOKEN: "secret" });
+    const { server, base } = await startTestServer({ ORT_DASHBOARD_TOKEN: "secret" }, false);
     try {
       const noAuth = await fetch(`${base}/api/skills`);
       expect(noAuth.status).toBe(401);
       const withAuth = await fetch(`${base}/api/skills`, { headers: { Authorization: "Bearer secret" } });
       expect(withAuth.status).toBe(200);
+    } finally {
+      await new Promise<void>((r) => server.close(() => r()));
+    }
+  });
+
+  it("logs in with admin/admin and forces a password change", async () => {
+    const { server, base } = await startTestServer({}, false);
+    try {
+      const login = await fetch(`${base}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "admin", password: "admin" }),
+      });
+      expect(login.status).toBe(200);
+      const data = (await login.json()) as { token: string; mustChangePassword: boolean };
+      expect(data.mustChangePassword).toBe(true);
+      const auth = { Authorization: `Bearer ${data.token}` };
+
+      const blocked = await fetch(`${base}/api/skills`, { headers: auth });
+      expect(blocked.status).toBe(403);
+
+      const wrongLogin = await fetch(`${base}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "admin", password: "nope" }),
+      });
+      expect(wrongLogin.status).toBe(401);
+
+      const change = await fetch(`${base}/api/auth/change-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...auth },
+        body: JSON.stringify({ currentPassword: "admin", newPassword: "new-password-123" }),
+      });
+      expect(change.status).toBe(200);
+
+      const allowed = await fetch(`${base}/api/skills`, { headers: auth });
+      expect(allowed.status).toBe(200);
+
+      const relogin = await fetch(`${base}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "admin", password: "admin" }),
+      });
+      expect(relogin.status).toBe(401);
+    } finally {
+      await new Promise<void>((r) => server.close(() => r()));
+    }
+  });
+
+  it("updates runtime settings as admin and applies them to the scope guard", async () => {
+    const { server, base } = await startTestServer({}, false);
+    try {
+      const login = await fetch(`${base}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "admin", password: "admin" }),
+      });
+      const { token } = (await login.json()) as { token: string };
+      const auth = { Authorization: `Bearer ${token}` };
+
+      await fetch(`${base}/api/auth/change-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...auth },
+        body: JSON.stringify({ currentPassword: "admin", newPassword: "new-password-123" }),
+      });
+
+      const put = await fetch(`${base}/api/settings`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", ...auth },
+        body: JSON.stringify({ key: "ORT_SCOPE_DOMAINS", value: "other.example.com" }),
+      });
+      expect(put.status).toBe(200);
+
+      const settings = (await (await fetch(`${base}/api/settings`, { headers: auth })).json()) as {
+        values: Record<string, string>;
+        editable: boolean;
+      };
+      expect(settings.editable).toBe(true);
+      expect(settings.values["ORT_SCOPE_DOMAINS"]).toBe("other.example.com");
+
+      const events = await sseEvents(base, "/api/chat", {
+        headers: auth,
+        body: { message: "scan https://demo.example.com" },
+      });
+      expect(events.some((e) => e.event === "denied")).toBe(true);
     } finally {
       await new Promise<void>((r) => server.close(() => r()));
     }

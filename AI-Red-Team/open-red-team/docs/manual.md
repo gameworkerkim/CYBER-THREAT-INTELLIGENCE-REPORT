@@ -185,12 +185,35 @@ Environment variables:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `ORT_DASHBOARD_PORT` | `8081` | Listen port |
-| `ORT_DASHBOARD_TOKEN` | *(empty)* | Bearer token for `/api/*`. The dashboard refuses to start without a token or OIDC (`ORT_ALLOW_ANONYMOUS=1` for local labs) |
-| `ORT_OIDC_ISSUER` | *(empty)* | Keycloak/OIDC issuer — when set, API requires a valid OIDC access token (takes precedence over the static token) |
+| `ORT_DB_PATH` | `./data/ort.db` | SQLite database for local accounts and runtime settings |
+| `ORT_AUTH_SECRET` | *(auto)* | HMAC secret for login tokens (generated and persisted in the DB when empty) |
+| `ORT_DISABLE_LOCAL_AUTH` | `0` | `1` disables local accounts (OIDC/static-token only) |
+| `ORT_DASHBOARD_TOKEN` | *(empty)* | Static bearer token (alternative to local accounts) |
+| `ORT_OIDC_ISSUER` | *(empty)* | Keycloak/OIDC issuer — when set, API requires a valid OIDC access token (takes precedence) |
 | `ORT_OIDC_AUDIENCE` | *(empty)* | Expected `aud` claim |
 | `ORT_METRICS_TOKEN` | *(empty)* | Token for `/metrics` (falls back to dashboard auth when empty) |
 | `ORT_AUDIT_LOG` | *(empty)* | JSONL audit log path (sessionId, operator, decision, matched skills, prompt SHA-256 — no prompt plaintext) |
 | `ORT_AUDIT_REQUIRED` | `0` | `1` fails requests when the audit write fails |
+
+### Local accounts (SQLite)
+
+The dashboard seeds a default **admin / admin** account on first start and forces a password
+change before any other API use (`403 password change required`). Login issues an HMAC-signed
+token (12 h TTL) accepted as `Authorization: Bearer <token>`.
+
+| Endpoint | Purpose |
+|----------|---------|
+| `POST /api/auth/login` | `{username, password}` → `{token, username, role, mustChangePassword}` |
+| `GET /api/auth/me` | Current user (`username`, `role`, `mustChangePassword`) |
+| `POST /api/auth/change-password` | `{currentPassword, newPassword}` (min 8 chars) |
+
+### Runtime settings (Settings tab)
+
+Admins can change scope, budget and engine settings from the dashboard (Settings tab,
+`GET/PUT /api/settings`). Database values override environment variables; an empty value falls
+back to the env. Mutable keys: `ORT_SCOPE`, `ORT_SCOPE_DOMAINS`, `ORT_SCOPE_MODE`,
+`ORT_OPERATOR`, `ORT_MAX_CONTEXT`, `ORT_SKILL_BUDGET`, `ORT_RESERVE_TOKENS`, `ORT_MAX_SKILLS`,
+`ORT_INCLUDE_INDEX`, `ORT_AUTO_LOAD`. Provider/model/API-key changes still require a restart.
 
 Sessions: the client sends `X-Ort-Session`; the server issues a session id in the first `session`
 SSE event and returns it again in `done`/`denied`. Sessions are in-memory (LRU cap, idle eviction) —

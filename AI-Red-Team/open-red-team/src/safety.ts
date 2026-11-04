@@ -1,3 +1,5 @@
+import { runtimeEnv } from "./runtime.js";
+
 export interface ScopeGuard {
   scope: string;
   domains: string[];
@@ -19,14 +21,14 @@ const IP_RE = new RegExp(`\\b${OCTET}\\.${OCTET}\\.${OCTET}\\.${OCTET}\\b`, "g")
 const FILE_EXT_RE = /\.(?:js|ts|mjs|cjs|py|rb|go|rs|java|php|c|cpp|h|cs|sh|md|txt|json|yaml|yml|xml|html|css|sql|log|zip|tar|gz|pdf|png|jpg|jpeg|gif|svg|exe|dll|so|dylib|bin|pem|key|crt|cer|p12|conf|config|ini|toml|lock)$/i;
 
 export function loadScopeGuard(): ScopeGuard | null {
-  const scope = process.env.ORT_SCOPE?.trim();
+  const scope = runtimeEnv("ORT_SCOPE")?.trim();
   if (!scope) return null;
-  const domains = (process.env.ORT_SCOPE_DOMAINS ?? "")
+  const domains = (runtimeEnv("ORT_SCOPE_DOMAINS") ?? "")
     .split(",")
     .map((d) => d.trim().toLowerCase())
     .filter(Boolean);
-  const operator = process.env.ORT_OPERATOR?.trim() || "unknown";
-  const mode = (process.env.ORT_SCOPE_MODE ?? "enforce").toLowerCase() === "open" ? "open" : "enforce";
+  const operator = runtimeEnv("ORT_OPERATOR")?.trim() || "unknown";
+  const mode = (runtimeEnv("ORT_SCOPE_MODE") ?? "enforce").toLowerCase() === "open" ? "open" : "enforce";
   return { scope, domains, operator, mode };
 }
 

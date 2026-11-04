@@ -8,14 +8,19 @@ import { OpenRedTeam } from "../index.js";
 import { SessionStore } from "../sessions.js";
 import type { OrtConfig, ScopeDecision } from "../types.js";
 import { loadScopeGuard } from "../safety.js";
+import { attachRuntimeStore, runtimeEnv } from "../runtime.js";
 import { metricsText, trackChatEnd, trackChatStart, trackHttp } from "./metrics.js";
 import { oidcConfigured, oidcMiddleware } from "./oidc.js";
+import { openDb } from "./db.js";
+import { issueToken, verifyToken } from "./auth.js";
+import type { AuthContext } from "./auth.js";
 
 export interface DashboardOptions {
   port?: number;
   token?: string;
   auditLog?: string;
   sessions?: SessionStore;
+  dbPath?: string;
 }
 
 interface AuditEntry {
@@ -30,6 +35,21 @@ interface AuditEntry {
   provider: string;
   model: string;
 }
+
+const MUTABLE_SETTINGS = [
+  "ORT_SCOPE",
+  "ORT_SCOPE_DOMAINS",
+  "ORT_SCOPE_MODE",
+  "ORT_OPERATOR",
+  "ORT_MAX_CONTEXT",
+  "ORT_SKILL_BUDGET",
+  "ORT_RESERVE_TOKENS",
+  "ORT_MAX_SKILLS",
+  "ORT_INCLUDE_INDEX",
+  "ORT_AUTO_LOAD",
+] as const;
+
+const AUTH_WHITELIST = ["/auth/login", "/auth/me", "/auth/change-password"];
 
 function maskKey(value?: string): string {
   if (!value) return "";
@@ -65,16 +85,36 @@ export async function startDashboard(
   const auditRequired = process.env.ORT_AUDIT_REQUIRED === "1";
   const allowAnonymous = process.env.ORT_ALLOW_ANONYMOUS === "1";
   const metricsToken = process.env.ORT_METRICS_TOKEN ?? "";
-  const guard = loadScopeGuard();
+  const localAuthEnabled = process.env.ORT_DISABLE_LOCAL_AUTH !== "1";
 
   const oidcOn = oidcConfigured();
-  if (!oidcOn && !token && !allowAnonymous) {
+  if (!oidcOn && !localAuthEnabled && !token && !allowAnonymous) {
     throw new Error(
       "Refusing to start unauthenticated: set ORT_DASHBOARD_TOKEN or ORT_OIDC_ISSUER, " +
         "or explicitly allow local lab access with ORT_ALLOW_ANONYMOUS=1",
     );
   }
-  if (!guard && process.env.ORT_SCOPE_MODE !== "open") {
+
+  const db = localAuthEnabled ? openDb(opts?.dbPath ?? process.env.ORT_DB_PATH) : null;
+  const runtimeStore = db
+    ? {
+        get: (key: string): string | undefined => {
+          try {
+            return db.getSetting(key);
+          } catch {
+            return undefined;
+          }
+        },
+        set: (key: string, value: string): void => {
+          db.setSetting(key, value);
+        },
+        keys: (): string[] => MUTABLE_SETTINGS as unknown as string[],
+      }
+    : null;
+  attachRuntimeStore(runtimeStore);
+
+  const guard = loadScopeGuard();
+  if (!guard && runtimeEnv("ORT_SCOPE_MODE") !== "open") {
     throw new Error(
       "Refusing to start without an engagement scope: set ORT_SCOPE (and ORT_SCOPE_DOMAINS), " +
         "or explicitly allow a local lab with ORT_SCOPE_MODE=open",
@@ -91,14 +131,54 @@ export async function startDashboard(
     next();
   });
 
-  const apiAuth: express.RequestHandler =
-    oidcOn ? oidcMiddleware : token ? staticTokenMiddleware(token) : (_req, _res, next) => next();
+  const requireAuth: express.RequestHandler = (req, res, next) => {
+    const bearer = (req.headers.authorization ?? "").startsWith("Bearer ")
+      ? req.headers.authorization!.slice(7)
+      : "";
 
-  const metricsAuth: express.RequestHandler = metricsToken
-    ? staticTokenMiddleware(metricsToken)
-    : apiAuth;
+    if (db && bearer) {
+      const ctx = verifyToken(db, bearer);
+      if (ctx) {
+        res.locals.ortUser = ctx;
+        next();
+        return;
+      }
+    }
+    if (token && bearer === token) {
+      res.locals.ortUser = { username: "(static)", role: "admin", mustChangePassword: false } satisfies AuthContext;
+      next();
+      return;
+    }
+    if (!bearer && allowAnonymous) {
+      res.locals.ortUser = { username: "(anonymous)", role: "operator", mustChangePassword: false } satisfies AuthContext;
+      next();
+      return;
+    }
+    res.status(401).json({ error: "unauthorized" });
+  };
 
-  app.use("/api", apiAuth);
+  const apiAuth: express.RequestHandler = oidcOn ? oidcMiddleware : requireAuth;
+  const metricsAuth: express.RequestHandler = metricsToken ? staticTokenMiddleware(metricsToken) : apiAuth;
+
+  app.use("/api", (req, res, next) => {
+    if (req.path === "/auth/login") {
+      next();
+      return;
+    }
+    apiAuth(req, res, next);
+  });
+  app.use("/api", (req, res, next) => {
+    if (AUTH_WHITELIST.includes(req.path)) {
+      next();
+      return;
+    }
+    const user = res.locals.ortUser as AuthContext | undefined;
+    if (user?.mustChangePassword) {
+      res.status(403).json({ error: "password change required" });
+      return;
+    }
+    next();
+  });
   app.use("/metrics", metricsAuth);
 
   const staticDir = join(dirname(fileURLToPath(import.meta.url)), "static");
@@ -116,6 +196,101 @@ export async function startDashboard(
     }
   };
 
+  // ---------- local auth ----------
+  app.post("/api/auth/login", (req, res) => {
+    if (!db) {
+      res.status(404).json({ error: "local auth disabled" });
+      return;
+    }
+    const { username, password } = (req.body ?? {}) as { username?: unknown; password?: unknown };
+    if (typeof username !== "string" || typeof password !== "string") {
+      res.status(400).json({ error: "username and password required" });
+      return;
+    }
+    if (!db.verifyPassword(username, password)) {
+      res.status(401).json({ error: "invalid credentials" });
+      return;
+    }
+    const user = db.getUser(username)!;
+    const tokenValue = issueToken(db, {
+      username: user.username,
+      role: user.role as AuthContext["role"],
+      mustChangePassword: user.must_change_password === 1,
+    });
+    res.json({
+      token: tokenValue,
+      username: user.username,
+      role: user.role,
+      mustChangePassword: user.must_change_password === 1,
+    });
+  });
+
+  app.get("/api/auth/me", (_req, res) => {
+    const user = res.locals.ortUser as AuthContext | undefined;
+    res.json({ username: user?.username ?? "", role: user?.role ?? "operator", mustChangePassword: user?.mustChangePassword ?? false });
+  });
+
+  app.post("/api/auth/change-password", (req, res) => {
+    if (!db) {
+      res.status(404).json({ error: "local auth disabled" });
+      return;
+    }
+    const user = res.locals.ortUser as AuthContext | undefined;
+    if (!user || user.username.startsWith("(")) {
+      res.status(403).json({ error: "local password change requires local user login" });
+      return;
+    }
+    const { currentPassword, newPassword } = (req.body ?? {}) as { currentPassword?: unknown; newPassword?: unknown };
+    if (typeof currentPassword !== "string" || typeof newPassword !== "string" || newPassword.length < 8) {
+      res.status(400).json({ error: "newPassword must be at least 8 characters" });
+      return;
+    }
+    if (!db.verifyPassword(user.username, currentPassword)) {
+      res.status(401).json({ error: "current password is incorrect" });
+      return;
+    }
+    db.setPassword(user.username, newPassword, false);
+    res.json({ ok: true });
+  });
+
+  // ---------- runtime settings ----------
+  app.get("/api/settings", (_req, res) => {
+    const user = res.locals.ortUser as AuthContext | undefined;
+    const values: Record<string, string> = {};
+    for (const key of MUTABLE_SETTINGS) {
+      values[key] = runtimeEnv(key) ?? "";
+    }
+    res.json({
+      values,
+      editable: user?.role === "admin",
+      note: "Provider/model/API-key changes require a restart. DB values override environment variables; empty value falls back to env.",
+    });
+  });
+
+  app.put("/api/settings", (req, res) => {
+    const user = res.locals.ortUser as AuthContext | undefined;
+    if (user?.role !== "admin") {
+      res.status(403).json({ error: "admin role required" });
+      return;
+    }
+    const { key, value } = (req.body ?? {}) as { key?: unknown; value?: unknown };
+    if (typeof key !== "string" || typeof value !== "string") {
+      res.status(400).json({ error: "key and value required" });
+      return;
+    }
+    if (!(MUTABLE_SETTINGS as readonly string[]).includes(key)) {
+      res.status(400).json({ error: `not a mutable setting (allowed: ${MUTABLE_SETTINGS.join(", ")})` });
+      return;
+    }
+    if (!db) {
+      res.status(404).json({ error: "local settings require the SQLite backend" });
+      return;
+    }
+    db.setSetting(key, value);
+    res.json({ ok: true, key, value });
+  });
+
+  // ---------- health / config ----------
   app.get("/metrics", (_req, res) => {
     res.setHeader("Content-Type", "text/plain; version=0.0.4");
     res.send(metricsText());
@@ -150,6 +325,7 @@ export async function startDashboard(
       dashboardTokenSet: Boolean(token),
       metricsTokenSet: Boolean(metricsToken),
       oidcEnabled: oidcOn,
+      localAuthEnabled: Boolean(db),
       scope: guard?.scope ?? null,
       scopeMode: guard?.mode ?? "open",
       scopeDomains: guard?.domains ?? [],
@@ -232,7 +408,12 @@ export async function startDashboard(
     }
     const forced = Array.isArray(skills) ? skills.filter((s): s is string => typeof s === "string") : undefined;
 
-    const operator = oidcOn ? res.locals.ortUser?.sub ?? "" : guard?.operator ?? process.env.ORT_OPERATOR ?? "dashboard";
+    const authUser = res.locals.ortUser as AuthContext | undefined;
+    const operator = oidcOn
+      ? res.locals.ortUser?.sub ?? ""
+      : authUser && !authUser.username.startsWith("(")
+        ? authUser.username
+        : guard?.operator ?? process.env.ORT_OPERATOR ?? "dashboard";
     const sessionIdHeader = req.header("X-Ort-Session") ?? "";
     let session = sessionIdHeader ? sessions.get(sessionIdHeader) : undefined;
     if (sessionIdHeader && !session) {
@@ -331,12 +512,14 @@ export async function startDashboard(
     const server = app.listen(port, () => {
       console.log(`[ort] dashboard listening on http://0.0.0.0:${port}`);
       if (oidcOn) console.log("[ort] auth: OIDC (Keycloak) enabled");
+      else if (db) console.log("[ort] auth: local accounts (SQLite) — default admin/admin, forced password change on first login");
       else if (token) console.log("[ort] auth: Bearer token required (ORT_DASHBOARD_TOKEN)");
       else console.log("[ort] auth: anonymous allowed (ORT_ALLOW_ANONYMOUS=1)");
       console.log(`[ort] scope: ${guard?.scope ?? "(open lab mode)"}`);
       console.log(`[ort] provider=${ort.config.provider} model=${ort.config.model} skills=${ort.listSkills().length}`);
       resolve(server);
     });
+    server.on("close", () => attachRuntimeStore(null));
   });
 }
 

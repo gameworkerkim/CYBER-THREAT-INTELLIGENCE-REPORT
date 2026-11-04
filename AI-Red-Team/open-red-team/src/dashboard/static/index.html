@@ -23,6 +23,7 @@
     <button class="tab active" data-tab="chat">Chat</button>
     <button class="tab" data-tab="skills">Skills <span id="skills-count"></span></button>
     <button class="tab" data-tab="audit">Audit</button>
+    <button class="tab" data-tab="settings">Settings</button>
     <button class="tab" data-tab="config">Config</button>
   </nav>
 
@@ -70,6 +71,23 @@
       </table>
     </section>
 
+    <!-- Settings -->
+    <section id="panel-settings" class="panel">
+      <p class="hint" id="settings-note"></p>
+      <table id="settings-table">
+        <thead><tr><th>Key</th><th>Value</th><th>Action</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <h3>Change password</h3>
+      <div class="pw-row">
+        <input type="password" id="pw-current" placeholder="Current password" />
+        <input type="password" id="pw-new" placeholder="New password (min 8 chars)" />
+        <button id="btn-pw-change">Change password</button>
+        <span class="hint" id="pw-status"></span>
+      </div>
+      <p class="hint">Provider/model/API-key changes require a restart. DB values override environment variables; leave empty to fall back to env.</p>
+    </section>
+
     <!-- Config -->
     <section id="panel-config" class="panel">
       <table id="config-table">
@@ -77,6 +95,27 @@
       </table>
     </section>
   </main>
+
+  <div id="login-overlay" class="overlay hidden">
+    <div class="login-card">
+      <h2>Sign in — Open AI Red Team</h2>
+      <input type="text" id="login-username" placeholder="Username" autocomplete="username" />
+      <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" />
+      <button id="btn-login">Sign in</button>
+      <span class="hint" id="login-error"></span>
+    </div>
+  </div>
+
+  <div id="pw-modal" class="overlay hidden">
+    <div class="login-card">
+      <h2>Password change required</h2>
+      <p class="hint">The default password must be changed before use.</p>
+      <input type="password" id="pwm-current" placeholder="Current password" autocomplete="current-password" />
+      <input type="password" id="pwm-new" placeholder="New password (min 8 chars)" autocomplete="new-password" />
+      <button id="btn-pwm-save">Change password</button>
+      <span class="hint" id="pwm-error"></span>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

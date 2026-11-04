@@ -6,13 +6,8 @@ import { BaseProvider } from "./providers/base.js";
 import { DeepSeekProvider } from "./providers/deepseek.js";
 import { GlmProvider } from "./providers/glm.js";
 import { OpenWeightProvider } from "./providers/openweight.js";
-import {
-  loadScopeGuard,
-  scopePromptBlock,
-  checkScope,
-  scopeWarningLine,
-  SCOPE_DENIED_REPLY,
-} from "./safety.js";
+import { loadScopeGuard, scopePromptBlock, checkScope, scopeWarningLine, SCOPE_DENIED_REPLY } from "./safety.js";
+import { runtimeBoolean, runtimeNumber } from "./runtime.js";
 import { initObservability, recordChat } from "./observability.js";
 import type { ChatSession } from "./sessions.js";
 import type {
@@ -81,8 +76,12 @@ export class OpenRedTeam {
     const stripped = stripExplicitDirectives(input);
     explicit.push(...extractExplicitSkills(stripped, this.skills));
 
-    const autoMatched = this.config.autoLoad
-      ? matchSkills(this.skills, stripped, this.config.maxSkills).map((m) => m.skill)
+    const autoLoad = runtimeBoolean("ORT_AUTO_LOAD") ?? this.config.autoLoad;
+    const maxSkills = runtimeNumber("ORT_MAX_SKILLS") ?? this.config.maxSkills;
+    const includeIndex = runtimeBoolean("ORT_INCLUDE_INDEX") ?? this.config.includeIndex;
+
+    const autoMatched = autoLoad
+      ? matchSkills(this.skills, stripped, maxSkills).map((m) => m.skill)
       : [];
 
     const loaded: Skill[] = [];
@@ -128,7 +127,7 @@ export class OpenRedTeam {
     const { prompt, stats } = buildSystemPrompt({
       skills: this.skills,
       loadedSkills: loaded,
-      includeIndex: this.config.includeIndex,
+      includeIndex,
       custom: base.join("\n\n"),
       provider: this.config.provider,
     });

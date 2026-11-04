@@ -35,6 +35,8 @@ Claude lock-in: the same red-team skills now run on DeepSeek, GLM (Zhipu), and o
 - **Safety guardrails** — declared engagement scope (`ORT_SCOPE`/`ORT_SCOPE_DOMAINS`) with
   out-of-scope target flagging, operator-attributed audit records
 - **Compliance wiring** — Prometheus `/metrics`, OIDC (Keycloak) API auth, LangFuse tracing
+- **Local accounts (SQLite)** — sign-in flow with HMAC tokens; default admin/admin forces a password
+  change on first login; scope/budget/engine settings editable from the dashboard Settings tab
 - **Multilingual documentation** — English (base), Korean, Japanese, Chinese
 - **On-prem ready** — local models keep sensitive target data inside your environment
 

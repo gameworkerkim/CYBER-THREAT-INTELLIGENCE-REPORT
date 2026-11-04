@@ -1,4 +1,5 @@
 import type { ProviderName, Skill } from "../types.js";
+import { runtimeNumber } from "../runtime.js";
 
 export interface PromptStats {
   baseTokens: number;
@@ -74,12 +75,12 @@ function hardCut(text: string, budget: number): string {
 export function buildSystemPrompt(opts: BuildPromptOptions): { prompt: string; stats: PromptStats } {
   const maxContext =
     opts.maxContextTokens ??
-    (Number(process.env.ORT_MAX_CONTEXT ?? 0) || DEFAULT_CONTEXT_LIMITS[opts.provider]);
+    (runtimeNumber("ORT_MAX_CONTEXT") || DEFAULT_CONTEXT_LIMITS[opts.provider]);
   const skillBudget =
     opts.skillBudgetTokens ??
-    (Number(process.env.ORT_SKILL_BUDGET ?? 0) || DEFAULT_SKILL_BUDGETS[opts.provider]);
+    (runtimeNumber("ORT_SKILL_BUDGET") || DEFAULT_SKILL_BUDGETS[opts.provider]);
   const reserve =
-    opts.reserveTokens ?? (Number(process.env.ORT_RESERVE_TOKENS ?? 0) || DEFAULT_RESERVE_TOKENS);
+    opts.reserveTokens ?? (runtimeNumber("ORT_RESERVE_TOKENS") || DEFAULT_RESERVE_TOKENS);
 
   const stats: PromptStats = {
     baseTokens: 0,

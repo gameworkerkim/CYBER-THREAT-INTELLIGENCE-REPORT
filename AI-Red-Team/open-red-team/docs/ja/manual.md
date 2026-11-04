@@ -184,8 +184,35 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearerトークン保護
 | 変数 | デフォルト | 説明 |
 |------|-----------|------|
 | `ORT_DASHBOARD_PORT` | `8081` | リッスンポート |
-| `ORT_DASHBOARD_TOKEN` | *(なし)* | `/api/*` 用 Bearerトークン。空の場合は認証なし（開発専用） |
-| `ORT_AUDIT_LOG` | *(なし)* | JSONL監査ログパス（完了時刻・プロバイダ・モデル・一致スキル・文字数を記録） |
+| `ORT_DB_PATH` | `./data/ort.db` | ローカルアカウント・ランタイム設定用 SQLite パス |
+| `ORT_AUTH_SECRET` | *(自動)* | ログイントークン HMAC シークレット（空なら生成してDBに保存） |
+| `ORT_DISABLE_LOCAL_AUTH` | `0` | `1` でローカルアカウント無効化（OIDC/静的トークンのみ） |
+| `ORT_DASHBOARD_TOKEN` | *(なし)* | 静的 Bearer トークン（ローカルアカウントの代替） |
+| `ORT_OIDC_ISSUER` | *(なし)* | Keycloak/OIDC 発行者 — 設定時はOIDCアクセストークン必須（優先） |
+| `ORT_OIDC_AUDIENCE` | *(なし)* | 期待する `aud` クレーム |
+| `ORT_METRICS_TOKEN` | *(なし)* | `/metrics` トークン（空ならダッシュボード認証を適用） |
+| `ORT_AUDIT_LOG` | *(なし)* | JSONL監査ログパス（sessionId・operator・decision・一致スキル・プロンプトSHA-256 — 原文なし） |
+| `ORT_AUDIT_REQUIRED` | `0` | `1` なら監査書込失敗時にリクエスト失敗 |
+
+### ローカルアカウント（SQLite）
+
+初回起動時にデフォルトアカウント **admin / admin** を生成し、他のAPI利用前にパスワード変更を強制します
+（`403 password change required`）。ログインでHMAC署名トークン（12時間）を発行し、
+`Authorization: Bearer <token>` で使用します。
+
+| エンドポイント | 用途 |
+|----------------|------|
+| `POST /api/auth/login` | `{username, password}` → `{token, username, role, mustChangePassword}` |
+| `GET /api/auth/me` | 現在ユーザー（`username`, `role`, `mustChangePassword`） |
+| `POST /api/auth/change-password` | `{currentPassword, newPassword}`（8文字以上） |
+
+### ランタイム設定（Settingsタブ）
+
+管理者はダッシュボードのSettingsタブからスコープ・予算・エンジン設定を変更できます
+（`GET/PUT /api/settings`）。DB値が環境変数より優先され、空値は環境変数へフォールバックします。
+変更可能キー: `ORT_SCOPE`, `ORT_SCOPE_DOMAINS`, `ORT_SCOPE_MODE`, `ORT_OPERATOR`,
+`ORT_MAX_CONTEXT`, `ORT_SKILL_BUDGET`, `ORT_RESERVE_TOKENS`, `ORT_MAX_SKILLS`,
+`ORT_INCLUDE_INDEX`, `ORT_AUTO_LOAD`。プロバイダ/モデル/APIキーの変更は再起動が必要です。
 
 Docker:
 

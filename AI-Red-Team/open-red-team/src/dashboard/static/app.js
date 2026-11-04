@@ -26,6 +26,7 @@ $$(".tab").forEach((btn) =>
     if (btn.dataset.tab === "audit") loadAudit();
     if (btn.dataset.tab === "config") loadConfig();
     if (btn.dataset.tab === "skills") loadSkills();
+    if (btn.dataset.tab === "settings") loadSettings();
   }),
 );
 
@@ -34,9 +35,9 @@ async function loadHealth() {
   try {
     const res = await fetch("/api/health", { headers: authHeaders() });
     if (res.status === 401) {
-      $("#backend-text").textContent = "unauthorized — set token";
+      $("#backend-text").textContent = "unauthorized — sign in";
       $("#backend-dot").className = "dot warn";
-      promptToken();
+      showLogin();
       return;
     }
     const h = await res.json();
@@ -58,6 +59,163 @@ function promptToken() {
     else localStorage.setItem(TOKEN_KEY, next);
     loadHealth();
     loadSkills();
+  }
+}
+
+/* ---------- login / auth ---------- */
+function showLogin() {
+  $("#login-overlay").classList.remove("hidden");
+}
+function hideLogin() {
+  $("#login-overlay").classList.add("hidden");
+}
+function showPasswordModal() {
+  $("#pw-modal").classList.remove("hidden");
+}
+function hidePasswordModal() {
+  $("#pw-modal").classList.add("hidden");
+}
+
+async function authCheck() {
+  const token = localStorage.getItem(TOKEN_KEY) ?? "";
+  if (!token) {
+    showLogin();
+    return;
+  }
+  try {
+    const res = await fetch("/api/auth/me", { headers: { Authorization: `Bearer ${token}` } });
+    if (res.status === 401) {
+      showLogin();
+      return;
+    }
+    if (!res.ok) return;
+    const me = await res.json();
+    if (me.mustChangePassword) showPasswordModal();
+    else {
+      hideLogin();
+      hidePasswordModal();
+    }
+  } catch {
+    /* offline */
+  }
+}
+
+$("#btn-login").addEventListener("click", async () => {
+  const username = $("#login-username").value.trim();
+  const password = $("#login-password").value;
+  $("#login-error").textContent = "";
+  try {
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!res.ok) {
+      $("#login-error").textContent = "invalid credentials";
+      return;
+    }
+    const data = await res.json();
+    localStorage.setItem(TOKEN_KEY, data.token);
+    if (data.mustChangePassword) {
+      $("#pwm-current").value = password;
+      showPasswordModal();
+      hideLogin();
+    } else {
+      hideLogin();
+    }
+    loadHealth();
+    loadSkills();
+  } catch {
+    $("#login-error").textContent = "network error";
+  }
+});
+
+async function submitPasswordChange(current, next, errorEl) {
+  try {
+    const res = await fetch("/api/auth/change-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...authHeaders() },
+      body: JSON.stringify({ currentPassword: current, newPassword: next }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      errorEl.textContent = err.error ?? "failed";
+      return false;
+    }
+    errorEl.textContent = "";
+    return true;
+  } catch {
+    errorEl.textContent = "network error";
+    return false;
+  }
+}
+
+$("#btn-pwm-save").addEventListener("click", async () => {
+  const ok = await submitPasswordChange($("#pwm-current").value, $("#pwm-new").value, $("#pwm-error"));
+  if (ok) {
+    hidePasswordModal();
+    authCheck();
+  }
+});
+
+$("#btn-pw-change").addEventListener("click", async () => {
+  const ok = await submitPasswordChange($("#pw-current").value, $("#pw-new").value, $("#pw-status"));
+  if (ok) {
+    $("#pw-status").textContent = "password updated";
+    $("#pw-current").value = "";
+    $("#pw-new").value = "";
+  }
+});
+
+/* ---------- settings ---------- */
+async function loadSettings() {
+  try {
+    const res = await fetch("/api/settings", { headers: authHeaders() });
+    if (res.status === 401) {
+      showLogin();
+      return;
+    }
+    if (res.status === 403) {
+      showPasswordModal();
+      return;
+    }
+    if (!res.ok) return;
+    const data = await res.json();
+    $("#settings-note").textContent = data.note;
+    const rows = Object.entries(data.values)
+      .map(
+        ([key, value]) => `<tr>
+        <td><strong>${esc(key)}</strong></td>
+        <td><input class="setting-value" data-key="${esc(key)}" value="${esc(value)}" ${data.editable ? "" : "disabled"} /></td>
+        <td>${data.editable ? `<button class="btn-save-setting" data-key="${esc(key)}">Save</button>` : "read-only"}</td>
+      </tr>`,
+      )
+      .join("");
+    $("#settings-table tbody").innerHTML = rows;
+    $$(".btn-save-setting").forEach((btn) =>
+      btn.addEventListener("click", async () => {
+        const key = btn.dataset.key;
+        const value = document.querySelector(`.setting-value[data-key="${key}"]`).value;
+        const res = await fetch("/api/settings", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json", ...authHeaders() },
+          body: JSON.stringify({ key, value }),
+        });
+        if (res.ok) {
+          btn.textContent = "Saved";
+          setTimeout(() => {
+            btn.textContent = "Save";
+          }, 1500);
+        } else {
+          btn.textContent = "Error";
+          setTimeout(() => {
+            btn.textContent = "Save";
+          }, 1500);
+        }
+      }),
+    );
+  } catch {
+    /* offline */
   }
 }
 
@@ -304,6 +462,7 @@ async function loadConfig() {
 
 loadHealth();
 loadSkills();
+authCheck();
 
 /* ---------- deep links: #skills | #audit | #config | #demo ---------- */
 function applyHash() {

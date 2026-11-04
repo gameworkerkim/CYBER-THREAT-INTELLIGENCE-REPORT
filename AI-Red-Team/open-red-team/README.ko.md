@@ -34,6 +34,8 @@
 - **안전장치** — 신고된 임무 스코프(`ORT_SCOPE`/`ORT_SCOPE_DOMAINS`)와 범위 밖 대상 플래깅,
   운영자 귀속 감사 기록
 - **컴플라이언스 연동** — Prometheus `/metrics`, OIDC(Keycloak) API 인증, LangFuse 트레이싱
+- **로컬 계정 (SQLite)** — HMAC 토큰 로그인, 기본 admin/admin 최초 로그인 시 비밀번호 변경 강제,
+  스코프·예산·엔진 설정을 대시보드 Settings 탭에서 변경
 - **다국어 문서** — 영어(기준), 한국어, 일본어, 중국어
 - **온프레미스 지원** — 로컬 모델로 민감한 대상 정보를 내부 환경에 유지
 

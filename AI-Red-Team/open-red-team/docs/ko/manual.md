@@ -183,8 +183,35 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 토큰 보호
 | 변수 | 기본값 | 설명 |
 |------|--------|------|
 | `ORT_DASHBOARD_PORT` | `8081` | 리슨 포트 |
-| `ORT_DASHBOARD_TOKEN` | *(없음)* | `/api/*`용 Bearer 토큰. 비어 있으면 인증 없음(개발 전용) |
-| `ORT_AUDIT_LOG` | *(없음)* | JSONL 감사 로그 경로 (채팅 완료 시각·프로바이더·모델·매칭 스킬·길이 기록) |
+| `ORT_DB_PATH` | `./data/ort.db` | 로컬 계정·런타임 설정용 SQLite 경로 |
+| `ORT_AUTH_SECRET` | *(자동)* | 로그인 토큰 HMAC 시크릿 (비어 있으면 생성해 DB에 저장) |
+| `ORT_DISABLE_LOCAL_AUTH` | `0` | `1`이면 로컬 계정 비활성화(OIDC/정적 토큰 전용) |
+| `ORT_DASHBOARD_TOKEN` | *(없음)* | 정적 Bearer 토큰 (로컬 계정의 대안) |
+| `ORT_OIDC_ISSUER` | *(없음)* | Keycloak/OIDC 발급자 — 설정 시 OIDC 액세스 토큰 필수 (우선 적용) |
+| `ORT_OIDC_AUDIENCE` | *(없음)* | 기대 `aud` 클레임 |
+| `ORT_METRICS_TOKEN` | *(없음)* | `/metrics` 토큰 (비어 있으면 대시보드 인증 적용) |
+| `ORT_AUDIT_LOG` | *(없음)* | JSONL 감사 로그 경로 (sessionId·operator·decision·매칭 스킬·프롬프트 SHA-256 — 원문 미기록) |
+| `ORT_AUDIT_REQUIRED` | `0` | `1`이면 감사 기록 실패 시 요청 실패 |
+
+### 로컬 계정 (SQLite)
+
+최초 기동 시 기본 계정 **admin / admin**을 생성하고, 다른 API 사용 전 비밀번호 변경을 강제합니다
+(`403 password change required`). 로그인 시 HMAC 서명 토큰(12시간)을 발급하며
+`Authorization: Bearer <token>`으로 사용합니다.
+
+| 엔드포인트 | 용도 |
+|-----------|------|
+| `POST /api/auth/login` | `{username, password}` → `{token, username, role, mustChangePassword}` |
+| `GET /api/auth/me` | 현재 사용자 (`username`, `role`, `mustChangePassword`) |
+| `POST /api/auth/change-password` | `{currentPassword, newPassword}` (최소 8자) |
+
+### 런타임 설정 (Settings 탭)
+
+관리자는 대시보드 Settings 탭에서 스코프·예산·엔진 설정을 변경할 수 있습니다
+(`GET/PUT /api/settings`). DB 값이 환경변수보다 우선하며, 빈 값은 환경변수로 폴백됩니다.
+변경 가능 키: `ORT_SCOPE`, `ORT_SCOPE_DOMAINS`, `ORT_SCOPE_MODE`, `ORT_OPERATOR`,
+`ORT_MAX_CONTEXT`, `ORT_SKILL_BUDGET`, `ORT_RESERVE_TOKENS`, `ORT_MAX_SKILLS`,
+`ORT_INCLUDE_INDEX`, `ORT_AUTO_LOAD`. 프로바이더/모델/API 키 변경은 재시작이 필요합니다.
 
 Docker:
 

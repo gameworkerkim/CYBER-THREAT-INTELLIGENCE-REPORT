@@ -183,8 +183,35 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 令牌保护
 | 变量 | 默认值 | 说明 |
 |------|--------|------|
 | `ORT_DASHBOARD_PORT` | `8081` | 监听端口 |
-| `ORT_DASHBOARD_TOKEN` | *(空)* | `/api/*` 的 Bearer 令牌。为空则不鉴权（仅开发） |
-| `ORT_AUDIT_LOG` | *(空)* | JSONL 审计日志路径（记录完成时间、提供商、模型、命中技能、长度） |
+| `ORT_DB_PATH` | `./data/ort.db` | 本地账户与运行时设置的 SQLite 路径 |
+| `ORT_AUTH_SECRET` | *(自动)* | 登录令牌 HMAC 密钥（为空则生成并存入 DB） |
+| `ORT_DISABLE_LOCAL_AUTH` | `0` | `1` 禁用本地账户（仅 OIDC/静态令牌） |
+| `ORT_DASHBOARD_TOKEN` | *(空)* | 静态 Bearer 令牌（本地账户的替代方案） |
+| `ORT_OIDC_ISSUER` | *(空)* | Keycloak/OIDC 颁发者 — 设置后要求 OIDC 访问令牌（优先） |
+| `ORT_OIDC_AUDIENCE` | *(空)* | 期望的 `aud` 声明 |
+| `ORT_METRICS_TOKEN` | *(空)* | `/metrics` 令牌（为空则套用面板认证） |
+| `ORT_AUDIT_LOG` | *(空)* | JSONL 审计日志路径（sessionId·operator·decision·命中技能·提示词 SHA-256 — 不存原文） |
+| `ORT_AUDIT_REQUIRED` | `0` | `1` 时审计写入失败即请求失败 |
+
+### 本地账户（SQLite）
+
+首次启动时创建默认账户 **admin / admin**，并在使用其他 API 前强制修改密码
+（`403 password change required`）。登录颁发 HMAC 签名令牌（12 小时），以
+`Authorization: Bearer <token>` 使用。
+
+| 端点 | 用途 |
+|------|------|
+| `POST /api/auth/login` | `{username, password}` → `{token, username, role, mustChangePassword}` |
+| `GET /api/auth/me` | 当前用户（`username`、`role`、`mustChangePassword`） |
+| `POST /api/auth/change-password` | `{currentPassword, newPassword}`（至少 8 位） |
+
+### 运行时设置（Settings 页）
+
+管理员可在面板 Settings 页修改范围、预算与引擎设置（`GET/PUT /api/settings`）。
+DB 值优先于环境变量，空值回退到环境变量。可修改键：`ORT_SCOPE`、`ORT_SCOPE_DOMAINS`、
+`ORT_SCOPE_MODE`、`ORT_OPERATOR`、`ORT_MAX_CONTEXT`、`ORT_SKILL_BUDGET`、
+`ORT_RESERVE_TOKENS`、`ORT_MAX_SKILLS`、`ORT_INCLUDE_INDEX`、`ORT_AUTO_LOAD`。
+提供商/模型/API 密钥变更仍需重启。
 
 Docker：
 

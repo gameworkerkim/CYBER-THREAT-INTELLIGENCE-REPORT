@@ -143,6 +143,48 @@ tr:last-child td { border-bottom: none; }
 .skill-link { color: var(--accent); text-decoration: none; }
 .skill-link:hover { text-decoration: underline; }
 
+/* overlays */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+.overlay.hidden { display: none; }
+.login-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.login-card h2 { margin: 0 0 4px; font-size: 16px; color: var(--accent); }
+.login-card input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: inherit;
+}
+.login-card .hint { color: var(--accent); }
+
+.pw-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.pw-row input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: inherit;
+}
+
 /* skill detail */
 .detail {
   position: fixed;
