@@ -149,7 +149,7 @@ OPENWEIGHT_BASE_URL=http://vllm:8000/v1
 `ORT_DASHBOARD_TOKEN` で保護するか、手前に Keycloak（OIDC）を配置してください。
 
 ```bash
-docker compose --profile dashboard up -d   # http://localhost:8081（ORT_DASHBOARD_TOKEN認証）
+docker compose up -d ort    # http://localhost:8081
 ```
 
 ### 手動実行

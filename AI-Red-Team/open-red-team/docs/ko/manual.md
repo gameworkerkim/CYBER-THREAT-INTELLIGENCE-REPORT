@@ -67,11 +67,13 @@ npx ort chat --provider openweight --model qwen2.5:32b
 OpenAI 호환 서버라면 모두 동작 — `OPENWEIGHT_BASE_URL`을 해당 서버의 `/v1` 엔드포인트로
 지정합니다. LM Studio는 `http://localhost:1234/v1`에 노출합니다. 웹 모델 검열·기본 안전
 정렬이 제약이 되는 무검열 GGUF 랩 테스트는 [무검열 오픈웨이트 모델 가이드](uncensored-models.md)
-참고. ⚠️ 격리·허가된 환경에서만 사용하십시오.
+참고. 격리·허가된 환경에서만 사용하십시오.
 
 ## 4. CLI 레퍼런스
 
 ### `ort chat` — 대화형 세션
+
+`ort`는 글로벌 설치(`npm i -g .`)가 필요하며, 아니면 `ort` 대신 `node dist/src/cli.js`를 사용하세요.
 
 ```
 npx ort chat [--provider <p>] [--model <m>] [--skills <s1,s2>]
@@ -187,7 +189,7 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 토큰 보호
 Docker:
 
 ```bash
-docker compose --profile dashboard up -d   # http://localhost:8081
+docker compose up -d ort    # http://localhost:8081
 ```
 
 프론트엔드는 외부 자산(CDN)이 없어 완전 오프라인 동작 — 에어갭 환경에 적합합니다.

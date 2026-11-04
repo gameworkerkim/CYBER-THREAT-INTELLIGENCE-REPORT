@@ -2,7 +2,7 @@
 
 **Languages:** English (base) · [한국어](ko/uncensored-models.md) · [日本語](ja/uncensored-models.md) · [中文](zh/uncensored-models.md)
 
-> ## ⚠️ WARNING — READ BEFORE USE
+> ## WARNING— READ BEFORE USE
 >
 > Web-based LLMs are heavily censored, and local LLMs (Gemma, Qwen, …) ship with default safety
 > alignment. Both constrain AI red-team testing. This guide combines **LM Studio** with
@@ -27,7 +27,7 @@
 2. **Change the model storage directory (important)**
    - LM Studio stores models on the system drive by default, which can run out of space.
      Change the directory **before** downloading large GGUF files.
-   - **GUI**: LM Studio → ⚙️ **Settings** (bottom left) → **Models Directory** → **Change / Browse**
+   - **GUI**: LM Studio →  **Settings** (bottom left) → **Models Directory** → **Change / Browse**
      → create a folder on a drive with enough free space → **restart**.
    - **Note**: if models are already downloaded, move the files into the new folder first,
      then change the path.
@@ -98,7 +98,7 @@ ORT_SKILL_BUDGET=6000
 > `ORT_MAX_SKILLS=1` and `ORT_INCLUDE_INDEX=off` for ≤ 14B models (see
 > [Model Matrix](../model-matrix.md)).
 
-## 6. Precautions — repeat ⚠️
+## 6. Precautions — repeat 
 
 - **Isolation**: run every test in an isolated, offline local environment; manage outputs so
   nothing leaks outside.

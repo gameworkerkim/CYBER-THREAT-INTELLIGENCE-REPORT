@@ -796,7 +796,7 @@ Additionally implemented input validation and enabled `-Wformat-security` compil
 
 ### IOCTL/Syscall Handler Vulnerabilities
 
-**What It Is**: Faulty user↔kernel marshalling and validation in system calls or device control paths (e.g., Windows `DeviceIoControl`, Linux `ioctl`).
+**What It Is**: Faulty userkernel marshalling and validation in system calls or device control paths (e.g., Windows `DeviceIoControl`, Linux `ioctl`).
 
 **Case Study - CVE-2023-21768 (Windows AFD.sys Buffer Size Confusion)**:
 

@@ -19,7 +19,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc && cp -r src/dashboard/static dist/src/dashboard/static",
+    "build": "tsc -p tsconfig.build.json && cp -r src/dashboard/static dist/src/dashboard/static",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "dev": "tsx src/cli.ts",

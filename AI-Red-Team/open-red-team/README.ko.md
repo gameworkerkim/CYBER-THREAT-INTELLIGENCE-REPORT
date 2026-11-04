@@ -94,6 +94,8 @@ npm test                           # 테스트 실행
 
 ### CLI
 
+`ort`는 글로벌 설치(`npm i -g .`)가 필요합니다 — 아니면 `node dist/src/cli.js`로 직접 실행하세요.
+
 ```bash
 npx ort chat --provider deepseek --model deepseek-chat   # 대화형, 스킬 자동 로딩
 npx ort chat --skills offensive-sqli --provider glm      # 스킬 강제 로딩
@@ -183,7 +185,7 @@ docker compose --profile serving up -d           # 프로덕션: 앱 + vLLM
 - [아키텍처](docs/architecture.md) — 미들웨어 설계 및 데이터 흐름
 - [포팅 가이드](docs/porting-guide.md) — Claude 스킬 → 모델 비종속 변환 규칙
 - [모델 매트릭스](docs/model-matrix.md) — DeepSeek/GLM/오픈웨이트 특성과 제약
-- [무검열 오픈웨이트 모델](docs/uncensored-models.md) — LM Studio + 무검열 GGUF 랩 가이드 ⚠️
+- [무검열 오픈웨이트 모델](docs/uncensored-models.md) — LM Studio + 무검열 GGUF 랩 가이드 
 - [로드맵](docs/roadmap.md) — 포팅 단계와 미들웨어 계획
 
 ## 라이선스

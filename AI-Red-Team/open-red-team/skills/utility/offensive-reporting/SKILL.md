@@ -332,7 +332,7 @@ A good bounty report is read in 2 minutes and reproduced in 5. A bad one bounces
 |---------|-------------------|---------------|-------------------|
 | #1 | Critical | ✓ Fixed (verified) | 2025-05-10 |
 | #2 | High | ✓ Fixed | 2025-05-10 |
-| #5 | Medium | ⚠ Partially fixed — see notes | 2025-05-10 |
+| #5 | Medium |  Partially fixed — see notes | 2025-05-10 |
 | #11 | High | ✗ Not fixed — finding stands | 2025-05-10 |
 | #14 | Low | • Accepted Risk (client decision) | 2025-05-10 |
 ```

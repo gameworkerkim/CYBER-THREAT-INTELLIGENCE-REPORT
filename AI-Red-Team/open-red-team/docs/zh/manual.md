@@ -67,11 +67,13 @@ npx ort chat --provider openweight --model qwen2.5:32b
 任何 OpenAI 兼容服务器均可 — 将 `OPENWEIGHT_BASE_URL` 指向其 `/v1` 端点。
 LM Studio 暴露于 `http://localhost:1234/v1`。当 Web 模型审查与默认安全对齐构成限制时，
 无审查 GGUF 实验室测试参见[无审查开源权重模型指南](uncensored-models.md)。
-⚠️ 仅限隔离、授权环境使用。
+ 仅限隔离、授权环境使用。
 
 ## 4. CLI 参考
 
 ### `ort chat` — 交互式会话
+
+`ort` 需要全局安装（`npm i -g .`）；否则用 `node dist/src/cli.js` 代替 `ort`。
 
 ```
 npx ort chat [--provider <p>] [--model <m>] [--skills <s1,s2>]
@@ -187,7 +189,7 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 令牌保护
 Docker：
 
 ```bash
-docker compose --profile dashboard up -d   # http://localhost:8081
+docker compose up -d ort    # http://localhost:8081
 ```
 
 前端不含外部资源（无 CDN），可完全离线运行 — 适合物理隔离网络。

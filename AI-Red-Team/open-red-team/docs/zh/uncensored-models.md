@@ -2,7 +2,7 @@
 
 **语言:** [English](../uncensored-models.md)（基准） · [한국어](uncensored-models.md) · [日本語](uncensored-models.md) · 中文（本文档）
 
-> ## ⚠️ 警告 — 使用前必读
+> ## 警告 — 使用前必读
 >
 > 基于 Web 的 LLM 受到严格审查，本地 LLM（Gemma、Qwen 等）也带有默认安全对齐，
 > 导致 AI 红队测试经常受限。本指南结合 **LM Studio** 与 Hugging Face 上的
@@ -25,7 +25,7 @@
 2. **更改模型存储目录（重要）**
    - LM Studio 默认将模型保存在系统盘，可能造成空间不足。
      下载大型 GGUF **之前**务必更改存储目录。
-   - **图形界面**：LM Studio → 左下角 **⚙️ Settings** → **Models Directory** →
+   - **图形界面**：LM Studio → 左下角 ** Settings** → **Models Directory** →
      **Change / Browse** → 在空间充足的磁盘创建新文件夹并指定 → **重启**。
    - **注意**：如果已下载模型，请先将文件复制到新文件夹，再更改路径。
 
@@ -91,7 +91,7 @@ ORT_SKILL_BUDGET=6000
 > 注意：量化模型复现详细载荷的能力较差 — 14B 以下模型建议
 > `ORT_MAX_SKILLS=1`、`ORT_INCLUDE_INDEX=off`（见[模型矩阵](../model-matrix.md)）。
 
-## 6. 注意事项 — 再次强调 ⚠️
+## 6. 注意事项 — 再次强调 
 
 - **隔离**：所有测试在隔离的离线本地环境进行，确保产物不外泄。
 - **量化权衡**：Q2_K 优先速度/显存，精度损失大。精确分析与代码生成在显存允许时

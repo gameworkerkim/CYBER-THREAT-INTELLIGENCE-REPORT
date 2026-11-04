@@ -414,7 +414,7 @@ V8 now uses a multi-tier JIT pipeline with distinct exploitation characteristics
 
 #### Coverage‑first recon checklist
 
-- Produce one baseline coverage run (e.g., `drcov`, Intel® PT, or Lighthouse import)
+- Produce one baseline coverage run (e.g., `drcov`, Intel PT, or Lighthouse import)
 - Identify cold paths reachable from attacker inputs
 - Seed corpus: include minimal valid examples that traverse target parsers
 - Enable lightweight oracles (ASan/UBSan/KASAN) where feasible to maximize signal

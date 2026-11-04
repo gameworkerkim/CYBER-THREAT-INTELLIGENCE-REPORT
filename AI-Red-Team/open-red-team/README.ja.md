@@ -94,6 +94,8 @@ npm test                           # テスト実行
 
 ### CLI
 
+`ort` にはグローバルインストール（`npm i -g .`）が必要です — それ以外は `node dist/src/cli.js` を直接実行してください。
+
 ```bash
 npx ort chat --provider deepseek --model deepseek-chat   # 対話、スキル自動ロード
 npx ort chat --skills offensive-sqli --provider glm      # スキル強制ロード
@@ -185,7 +187,7 @@ docker compose --profile serving up -d           # 本番: アプリ + vLLM
 - [アーキテクチャ](docs/architecture.md) — ミドルウェア設計とデータフロー
 - [移植ガイド](docs/porting-guide.md) — Claudeスキル → モデル非依存への変換規則
 - [モデルマトリクス](docs/model-matrix.md) — DeepSeek/GLM/オープンウェイトの特性と制約
-- [無検閲オープンウェイトモデル](docs/uncensored-models.md) — LM Studio + 無検閲GGUFラボガイド ⚠️
+- [無検閲オープンウェイトモデル](docs/uncensored-models.md) — LM Studio + 無検閲GGUFラボガイド 
 - [ロードマップ](docs/roadmap.md) — 移植フェーズとミドルウェア計画
 
 ## ライセンス

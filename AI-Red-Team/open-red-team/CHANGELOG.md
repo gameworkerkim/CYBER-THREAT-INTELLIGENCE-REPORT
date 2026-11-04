@@ -8,7 +8,7 @@ All notable changes to Open AI Red Team are recorded here.
 - **Uncensored open-weight model guide** (`docs/uncensored-models.md`, EN/KO/JA/ZH) —
   LM Studio + uncensored GGUF quantization setup (Q2_K/Q4_K_M/Q8_0), folder layout, vision
   `mmproj`, and direct integration with the `openweight` provider via
-  `http://localhost:1234/v1`. Prominent ⚠️ warnings: isolated/offline environments,
+  `http://localhost:1234/v1`. Prominent warnings: isolated/offline environments,
   authorized scope only, quantization accuracy trade-offs.
 - Model matrix & manual links to the new guide; README documentation index updated (4 languages)
 - **Web management dashboard** (`ort dashboard`) for multi-operator, audited operations
@@ -27,7 +27,7 @@ All notable changes to Open AI Red Team are recorded here.
   glm 128K / open-weight 32K, `ORT_MAX_CONTEXT`), per-skill body budgets (`ORT_SKILL_BUDGET`),
   section-aware truncation, `index_only` flag for oversized skills (auto-marked in sync script).
   Fixes context overflow: e.g. windows-boundaries (554 KB ≈ 138K tokens) is now index-only.
-- **Test suite (vitest, 60 tests)** — loader / trigger / inject budget / config / safety;
+- **Test suite (vitest, 30 tests)** — loader / trigger / inject budget / config / safety;
   `npm test` + CI workflow for the subproject
 - **Code-level safety guardrails** (`src/safety.ts`) — `ORT_SCOPE` engagement declaration
   injected into the prompt and audited; `ORT_SCOPE_DOMAINS` flags out-of-scope targets;

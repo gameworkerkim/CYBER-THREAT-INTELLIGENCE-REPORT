@@ -2,7 +2,7 @@
 
 **언어:** [English](../uncensored-models.md)(기준) · 한국어(본 문서) · [日本語](uncensored-models.md) · [中文](uncensored-models.md)
 
-> ## ⚠️ 경고 — 사용 전 필독
+> ## 경고 — 사용 전 필독
 >
 > 웹 기반 LLM은 검열이 강하고, 로컬 LLM(Gemma, Qwen 등)은 기본 안전 정렬이 적용되어
 > AI 레드팀 테스트가 제약받는 경우가 많습니다. 본 가이드는 **LM Studio**와 Hugging Face의
@@ -27,7 +27,7 @@
 2. **모델 저장 경로 변경 (중요)**
    - LM Studio는 기본적으로 모델을 시스템 드라이브에 저장하여 공간 부족을 일으킬 수 있습니다.
      대용량 GGUF를 받기 전에 저장 경로를 반드시 변경하세요.
-   - **GUI**: LM Studio 실행 → 좌측 하단 **⚙️ Settings** → **Models Directory** →
+   - **GUI**: LM Studio 실행 → 좌측 하단 ** Settings** → **Models Directory** →
      **Change / Browse** → 용량이 충분한 드라이브에 새 폴더 생성·지정 → **재시작**.
    - **참고**: 이미 모델을 받았다면 파일을 새 폴더로 복사한 후 경로를 변경하세요.
 
@@ -94,7 +94,7 @@ ORT_SKILL_BUDGET=6000
 > 참고: 양자화 모델은 상세 페이로드 재현력이 낮습니다 — 14B 이하 모델은
 > `ORT_MAX_SKILLS=1`, `ORT_INCLUDE_INDEX=off` 권장 ([모델 매트릭스](../model-matrix.md)).
 
-## 6단계: 유의사항 — 다시 한번 ⚠️
+## 6단계: 유의사항 — 다시 한번 
 
 - **격리**: 모든 테스트를 격리된 오프라인 로컬 환경에서 수행하고 생성물이 외부로 유출되지 않게 관리.
 - **양자화 트레이드오프**: Q2_K는 속도·VRAM 효율 우선, 정확도 손실 큼. 정밀 분석·코드 생성은

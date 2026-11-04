@@ -326,16 +326,16 @@ ECR/ACR/Artifact Registry — if you have push perms on a tag in use by producti
 
 | Tool | AWS | Azure | GCP | Use |
 |------|-----|-------|-----|-----|
-| ScoutSuite | ✓ | ✓ | ✓ | Posture audit |
-| Prowler | ✓ | ✓ | ✓ | CIS/PCI checks |
-| Pacu | ✓ |   |   | Offensive framework |
-| CloudGoat | ✓ |   |   | Vulnerable lab |
-| BloodHound + AzureHound |   | ✓ |   | Graph-based escalation |
-| ROADtools |   | ✓ |   | AAD recon + offline analysis |
-| MicroBurst |   | ✓ |   | PS-based offensive |
-| Stormspotter |   | ✓ |   | MS' own offensive enum |
-| gcp_scanner |   |   | ✓ | Token-based recon |
-| GCPBucketBrute |   |   | ✓ | GCS bucket discovery |
+| ScoutSuite | Yes | Yes | Yes | Posture audit |
+| Prowler | Yes | Yes | Yes | CIS/PCI checks |
+| Pacu | Yes |   |   | Offensive framework |
+| CloudGoat | Yes |   |   | Vulnerable lab |
+| BloodHound + AzureHound |   | Yes |   | Graph-based escalation |
+| ROADtools |   | Yes |   | AAD recon + offline analysis |
+| MicroBurst |   | Yes |   | PS-based offensive |
+| Stormspotter |   | Yes |   | MS' own offensive enum |
+| gcp_scanner |   |   | Yes | Token-based recon |
+| GCPBucketBrute |   |   | Yes | GCS bucket discovery |
 
 ---
 

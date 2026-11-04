@@ -67,12 +67,14 @@ npx ort chat --provider openweight --model qwen2.5:32b
 Any OpenAI-compatible server works — point `OPENWEIGHT_BASE_URL` at its `/v1` endpoint.
 LM Studio exposes it at `http://localhost:1234/v1`. For uncensored GGUF labs (testing where
 web-model censorship and default safety alignment get in the way), see the
-[Uncensored Open-Weight Models guide](uncensored-models.md). ⚠️ Isolated, authorized
+[Uncensored Open-Weight Models guide](uncensored-models.md). Isolated, authorized
 environments only.
 
 ## 4. CLI Reference
 
 ### `ort chat` — interactive session
+
+`ort` requires a global install (`npm i -g .`); otherwise run `node dist/src/cli.js` in place of `ort`.
 
 ```
 npx ort chat [--provider <p>] [--model <m>] [--skills <s1,s2>]
@@ -191,7 +193,7 @@ Environment variables:
 Docker:
 
 ```bash
-docker compose --profile dashboard up -d   # http://localhost:8081
+docker compose up -d ort    # http://localhost:8081
 ```
 
 The frontend has no external assets (no CDN) and works fully offline — suitable for air-gapped

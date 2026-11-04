@@ -125,16 +125,22 @@ const CLAUDE_REPLACEMENTS: Array<[RegExp, string]> = [
   [/\bClaude\b/g, "the model"],
 ];
 
+const EMOJI_RE = /[\p{Emoji_Presentation}\p{Extended_Pictographic}]|\uFE0F|\u200D/gu;
+
 function sanitize(value: string): string {
   let out = "";
   let inFence = false;
   for (const line of value.split("\n")) {
     const isFence = /^\s*```/.test(line);
-    let processed = line;
+    let processed = line.replace(EMOJI_RE, "");
     if (!inFence) {
       for (const [re, repl] of CLAUDE_REPLACEMENTS) {
         processed = processed.replace(re, repl);
       }
+      processed = processed
+        .replace(/\u26A0/g, "WARNING:")
+        .replace(/\u2713/g, "Yes")
+        .replace(/\u2717/g, "No");
     }
     out += `${processed}\n`;
     if (isFence) inFence = !inFence;

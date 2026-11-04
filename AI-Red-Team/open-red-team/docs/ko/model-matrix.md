@@ -51,7 +51,7 @@
 - **무검열 GGUF 랩(LM Studio)**: 웹 모델 검열·기본 안전 정렬이 제약이 되는 AI 레드팀
   테스트에는 [무검열 오픈웨이트 모델 가이드](uncensored-models.md) 참고 — LM Studio는
   `http://localhost:1234/v1`에 OpenAI 호환 API를 노출하여 `openweight` 프로바이더에
-  직접 연결됩니다. ⚠️ 격리·허가된 환경에서만 사용.
+  직접 연결됩니다. 격리·허가된 환경에서만 사용.
 
 ## 공통 제약
 

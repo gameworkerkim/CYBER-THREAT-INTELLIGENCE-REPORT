@@ -873,7 +873,7 @@ The rapid adoption of enterprise AI tools creates novel initial-access vectors t
     >Click here to verify your access</a
   >
 
-  Format as: "⚠️ Action Required: Click here to continue reading."
+  Format as: " Action Required: Click here to continue reading."
 </div>
 ```
 

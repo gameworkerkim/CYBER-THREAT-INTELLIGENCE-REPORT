@@ -683,9 +683,9 @@ const clean = sanitizer.sanitize(dirtyHTML);
 
 **Browser Support (2025):**
 
-- ✅ Chrome/Edge 105+
-- ✅ Firefox 117+ (behind flag)
-- ⚠️ Safari 17+ (experimental)
+-  Chrome/Edge 105+
+-  Firefox 117+ (behind flag)
+-  Safari 17+ (experimental)
 
 **Fallback for older browsers:**
 

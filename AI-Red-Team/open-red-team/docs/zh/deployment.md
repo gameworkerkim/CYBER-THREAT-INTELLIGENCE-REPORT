@@ -148,7 +148,7 @@ JSONL 审计追踪、脱敏配置查看。无外部资源（无 CDN），完全�
 使用 `ORT_DASHBOARD_TOKEN` 保护，或在前端放置 Keycloak（OIDC）。
 
 ```bash
-docker compose --profile dashboard up -d   # http://localhost:8081（ORT_DASHBOARD_TOKEN 认证）
+docker compose up -d ort    # http://localhost:8081
 ```
 
 ### 手动运行

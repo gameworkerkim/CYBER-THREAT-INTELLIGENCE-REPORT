@@ -141,7 +141,7 @@ nxc smb <target> -u ~/users.txt -p 'Pass123' --jitter 2-5
 nxc smb <target> -u ~/users.txt -p 'Password' --continue-on-success
 ```
 
-> ⚠️ **OpSec**: Jitter works per-host. Spraying against multiple hosts
+>  **OpSec**: Jitter works per-host. Spraying against multiple hosts
 > multiplies authentication attempts. Monitor domain lockout policy before
 > spraying (use `--pass-pol` first).
 

@@ -50,7 +50,7 @@
 - Ollama 可通过 `keep_alive`/`num_ctx` 扩展上下文
 - **无审查 GGUF 实验室（LM Studio）**：当 Web 模型审查与默认安全对齐构成限制时，参见
   [无审查开源权重模型指南](uncensored-models.md) — LM Studio 在 `http://localhost:1234/v1`
-  暴露 OpenAI 兼容 API，可直接接入 `openweight` 提供商。⚠️ 仅限隔离、授权环境使用。
+  暴露 OpenAI 兼容 API，可直接接入 `openweight` 提供商。 仅限隔离、授权环境使用。
 
 ## 共同限制
 

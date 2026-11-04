@@ -68,11 +68,13 @@ OpenAI互換サーバならすべて動作 — `OPENWEIGHT_BASE_URL` をその�
 設定します。LM Studio は `http://localhost:1234/v1` に公開します。Webモデルの検閲・既定の
 安全アライメントが制約となる無検閲GGUFラボのテストは
 [無検閲オープンウェイトモデルガイド](uncensored-models.md) を参照。
-⚠️ 隔離・許可された環境のみで使用してください。
+ 隔離・許可された環境のみで使用してください。
 
 ## 4. CLIリファレンス
 
 ### `ort chat` — 対話セッション
+
+`ort` にはグローバルインストール（`npm i -g .`）が必要です。それ以外は `ort` の代わりに `node dist/src/cli.js` を使用してください。
 
 ```
 npx ort chat [--provider <p>] [--model <m>] [--skills <s1,s2>]
@@ -188,7 +190,7 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearerトークン保護
 Docker:
 
 ```bash
-docker compose --profile dashboard up -d   # http://localhost:8081
+docker compose up -d ort    # http://localhost:8081
 ```
 
 フロントエンドは外部アセット（CDN）なしで完全オフライン動作 — エアギャップ環境に適します。

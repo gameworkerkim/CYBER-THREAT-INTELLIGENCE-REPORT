@@ -52,7 +52,7 @@ Notes:
   default safety alignment get in the way, see the
   [Uncensored Open-Weight Models guide](uncensored-models.md) — LM Studio exposes an
   OpenAI-compatible API at `http://localhost:1234/v1` that plugs directly into the
-  `openweight` provider. ⚠️ Isolated, authorized environments only.
+  `openweight` provider. Isolated, authorized environments only.
 
 ## Common constraints
 
