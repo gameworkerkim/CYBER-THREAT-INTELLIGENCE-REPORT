@@ -5,6 +5,7 @@
 
 - Implementation: [`open-red-team/`](open-red-team/)
 - Design & architecture: [`open-red-team/docs/architecture.md`](open-red-team/docs/architecture.md)
+- Deployment & operations (air-gapped / on-premises, 망분리): [`open-red-team/docs/deployment.md`](open-red-team/docs/deployment.md)
 - Documentation languages: English (base) · 한국어 · 日本語 · 中文
 
 ## Goals

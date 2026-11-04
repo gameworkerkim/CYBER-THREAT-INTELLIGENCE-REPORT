@@ -148,6 +148,23 @@ console.log(reply);
    and the top N skill bodies are injected into the system prompt.
 3. **Model call** — the request is sent to the selected provider via its OpenAI-compatible API.
 
+## Deployment & Operations (air-gapped / on-premises)
+
+Financial, public, and enterprise deployments (망분리 / network separation) are covered by a
+5-layer architecture: offline transfer (skopeo/crane) → registry security (Harbor + Trivy + Cosign)
+→ LLM serving (vLLM / Ollama) → hardened app container (non-root, read-only, limits)
+→ auth & audit (Keycloak + LangFuse + Prometheus/Grafana).
+
+```bash
+docker build -t open-ai-red-team:latest .       # hardened image
+docker compose --profile poc up -d               # PoC: app + Ollama
+docker compose --profile serving up -d           # production: app + vLLM
+./scripts/sbom/scan.sh open-ai-red-team:latest   # CVE scan + SBOM
+./scripts/offline/export-images.sh               # air-gap transfer
+```
+
+See [Deployment & Operations Guide](docs/deployment.md).
+
 ## Documentation
 
 - [User Manual](docs/manual.md) — installation, providers, CLI, troubleshooting

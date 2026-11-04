@@ -144,6 +144,23 @@ console.log(reply);
 2. **トリガーマッチング** — ユーザー入力を各スキルの `triggers`（キーワード/正規表現、英・韓）と照合し、上位N件のスキル本文をシステムプロンプトに注入
 3. **モデル呼び出し** — OpenAI互換API経由で選択プロバイダへリクエスト
 
+## デプロイ・運用（エアギャップ / オンプレミス）
+
+金融・公共機関・企業向けデプロイ（망분리・ネットワーク分離対応）は5階層アーキテクチャでサポートします:
+オフライン搬入（skopeo/crane）→ レジストリセキュリティ（Harbor + Trivy + Cosign）
+→ LLMサービング（vLLM/Ollama）→ 強化済みアプリコンテナ（非root・読み取り専用・リソース制限）
+→ 認証・監査（Keycloak + LangFuse + Prometheus/Grafana）。
+
+```bash
+docker build -t open-ai-red-team:latest .       # 強化イメージのビルド
+docker compose --profile poc up -d               # PoC: アプリ + Ollama
+docker compose --profile serving up -d           # 本番: アプリ + vLLM
+./scripts/sbom/scan.sh open-ai-red-team:latest   # CVEスキャン + SBOM
+./scripts/offline/export-images.sh               # エアギャップ搬入
+```
+
+詳細: [デプロイ・運用ガイド](docs/deployment.md)
+
 ## ドキュメント
 
 - [ユーザーマニュアル](docs/manual.md) — インストール、プロバイダ、CLI、トラブルシューティング

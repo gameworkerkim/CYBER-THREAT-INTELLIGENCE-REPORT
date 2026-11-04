@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  # vLLM exposes OpenAI-compatible server metrics on :8000/metrics
+  - job_name: vllm
+    static_configs:
+      - targets: ["vllm:8000"]
+
+  # Ollama (PoC) exposes metrics on :11434/metrics
+  - job_name: ollama
+    static_configs:
+      - targets: ["ollama:11434"]
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]

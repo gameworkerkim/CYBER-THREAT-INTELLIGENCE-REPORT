@@ -1,0 +1,12 @@
+node_modules
+dist
+.git
+.env
+*.log
+deploy
+scripts
+docs/*.md
+docs/ja
+docs/ko
+docs/zh
+artifacts

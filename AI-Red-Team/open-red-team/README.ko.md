@@ -143,6 +143,22 @@ console.log(reply);
 2. **트리거 매칭** — 사용자 입력을 각 스킬의 `triggers`(키워드/정규식, 한·영)와 매칭, 상위 N개 스킬 본문을 시스템 프롬프트에 주입
 3. **모델 호출** — OpenAI 호환 API를 통해 선택된 프로바이더로 요청
 
+## 배포 및 운영 (에어갭 / 온프레미스)
+
+금융·공공기관·기업 배포(망분리 대응)는 5계층 아키텍처로 지원합니다: 오프라인 반입(skopeo/crane)
+→ 레지스트리 보안(Harbor + Trivy + Cosign) → LLM 서빙(vLLM/Ollama) → 강화된 앱 컨테이너
+(비루트·읽기전용·리소스 제한) → 인증·감사(Keycloak + LangFuse + Prometheus/Grafana).
+
+```bash
+docker build -t open-ai-red-team:latest .       # 강화 이미지 빌드
+docker compose --profile poc up -d               # PoC: 앱 + Ollama
+docker compose --profile serving up -d           # 프로덕션: 앱 + vLLM
+./scripts/sbom/scan.sh open-ai-red-team:latest   # CVE 스캔 + SBOM
+./scripts/offline/export-images.sh               # 에어갭 반입
+```
+
+상세: [배포 및 운영 가이드](docs/deployment.md)
+
 ## 문서
 
 - [사용 매뉴얼](docs/manual.md) — 설치, 프로바이더, CLI, 트러블슈팅

@@ -143,6 +143,22 @@ console.log(reply);
 2. **触发器匹配** — 将用户输入与各技能的 `triggers`（关键词/正则，英/韩）匹配，将排名前 N 的技能正文注入系统提示词
 3. **模型调用** — 通过 OpenAI 兼容 API 向所选提供商发送请求
 
+## 部署与运营（物理隔离 / 本地部署）
+
+金融、公共机构和企业部署（망분리·网络隔离）采用 5 层架构支持：离线转入（skopeo/crane）
+→ 镜像仓库安全（Harbor + Trivy + Cosign）→ LLM 推理（vLLM/Ollama）→ 加固后的应用容器
+（非 root·只读·资源限制）→ 认证与审计（Keycloak + LangFuse + Prometheus/Grafana）。
+
+```bash
+docker build -t open-ai-red-team:latest .       # 构建加固镜像
+docker compose --profile poc up -d               # PoC：应用 + Ollama
+docker compose --profile serving up -d           # 生产：应用 + vLLM
+./scripts/sbom/scan.sh open-ai-red-team:latest   # CVE 扫描 + SBOM
+./scripts/offline/export-images.sh               # 物理隔离转入
+```
+
+详见：[部署与运营指南](docs/deployment.md)
+
 ## 文档
 
 - [用户手册](docs/manual.md) — 安装、提供商、CLI、故障排查

@@ -13,7 +13,17 @@
     "typecheck": "tsc --noEmit",
     "dev": "tsx src/cli.ts",
     "fetch:skills": "tsx scripts/fetch-skills.ts",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "docker:build": "docker build -t open-ai-red-team:latest .",
+    "docker:up": "docker compose up -d ort",
+    "docker:up:poc": "docker compose --profile poc up -d",
+    "docker:up:prod": "docker compose --profile serving --profile auth --profile observability --profile monitoring up -d",
+    "docker:down": "docker compose --profile serving --profile poc --profile auth --profile observability --profile monitoring down",
+    "offline:export": "bash scripts/offline/export-images.sh",
+    "offline:import": "bash scripts/offline/import-images.sh",
+    "models:export": "bash scripts/offline/export-models.sh",
+    "sbom:scan": "bash scripts/sbom/scan.sh",
+    "sign:image": "bash scripts/sbom/sign.sh"
   },
   "engines": {
     "node": ">=18.18.0"

@@ -1,0 +1,183 @@
+# Open AI Red Team — layered deployment stack (air-gapped / on-prem)
+#
+# Layer 3 (LLM serving): vllm (production, `serving` profile) / ollama (PoC, `poc` profile)
+# Layer 4 (red-team app):  ort
+# Layer 5 (auth / observability): keycloak (`auth`), langfuse (`observability`),
+#                                  prometheus+grafana (`monitoring`)
+#
+# Basic:      docker compose up -d ort
+# PoC:        docker compose --profile poc up -d
+# Production: docker compose --profile serving --profile auth --profile observability --profile monitoring up -d
+#
+# Registry (Harbor), image scanning (Trivy), signing (Cosign) and offline transfer
+# (skopeo/crane) are covered by scripts/ and docs/deployment.md — see Layer 1 & 2.
+
+services:
+  # ---------------- Layer 4: red-team application ----------------
+  ort:
+    build: .
+    image: ${REGISTRY:-}open-ai-red-team:${ORT_TAG:-latest}
+    environment:
+      ORT_PROVIDER: ${ORT_PROVIDER:-openweight}
+      OPENWEIGHT_BASE_URL: ${ORT_LLM_BASE_URL:-http://vllm:8000/v1}
+      OPENWEIGHT_MODEL: ${ORT_LLM_MODEL:-qwen2.5-32b}
+      OPENWEIGHT_API_KEY: ${OPENWEIGHT_API_KEY:-none}
+      ORT_MAX_SKILLS: ${ORT_MAX_SKILLS:-3}
+      ORT_INCLUDE_INDEX: ${ORT_INCLUDE_INDEX:-on}
+      ORT_SKILLS_DIR: /app/skills
+      ORT_AUTO_LOAD: ${ORT_AUTO_LOAD:-on}
+      NODE_OPTIONS: --max-old-space-size=512
+    networks:
+      - redteam
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 512m
+    cpus: 1.0
+    stdin_open: true
+    tty: true
+
+  # ---------------- Layer 3: LLM serving ----------------
+  vllm:
+    image: vllm/vllm-openai:${VLLM_TAG:-latest}
+    profiles: ["serving"]
+    command: >-
+      --model ${VLLM_MODEL_ID:-/models/Qwen2.5-32B-Instruct}
+      --served-model-name ${ORT_LLM_MODEL:-qwen2.5-32b}
+      --max-model-len ${VLLM_MAX_MODEL_LEN:-32768}
+      --gpu-memory-utilization ${VLLM_GPU_MEM_UTIL:-0.9}
+      --port 8000
+    environment:
+      HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN:-}
+    volumes:
+      - ${MODELS_DIR:-./artifacts/models}:/models:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    expose:
+      - "8000"
+    networks:
+      - redteam
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  ollama:
+    image: ollama/ollama:${OLLAMA_TAG:-latest}
+    profiles: ["poc"]
+    volumes:
+      - ollama-data:/root/.ollama
+    expose:
+      - "11434"
+    networks:
+      - redteam
+    mem_limit: ${OLLAMA_MEM_LIMIT:-16g}
+    # bind local /v1 alias for OpenAI compatibility
+    entrypoint: ["/bin/sh", "-c", "ollama serve"]
+
+  # ---------------- Layer 5: authentication ----------------
+  keycloak:
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_TAG:-26}
+    profiles: ["auth"]
+    command: start --http-enabled=true --proxy-headers=xforwarded
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-change-me}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:-change-me}
+      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME:-localhost}
+    depends_on:
+      - keycloak-db
+    ports:
+      - "${KEYCLOAK_HTTP_PORT:-8080}:8080"
+    networks:
+      - redteam
+
+  keycloak-db:
+    image: postgres:16-alpine
+    profiles: ["auth"]
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD:-change-me}
+    volumes:
+      - keycloak-db-data:/var/lib/postgresql/data
+    networks:
+      - redteam
+
+  # ---------------- Layer 5: LLM observability / audit ----------------
+  langfuse:
+    image: ghcr.io/langfuse/langfuse:${LANGFUSE_TAG:-latest}
+    profiles: ["observability"]
+    environment:
+      DATABASE_URL: postgresql://langfuse:${LANGFUSE_DB_PASSWORD:-change-me}@langfuse-db:5432/langfuse
+      NEXTAUTH_SECRET: ${LANGFUSE_NEXTAUTH_SECRET:-change-me}
+      NEXTAUTH_URL: http://localhost:3000
+      SALT: ${LANGFUSE_SALT:-change-me}
+    depends_on:
+      - langfuse-db
+    ports:
+      - "${LANGFUSE_PORT:-3000}:3000"
+    networks:
+      - redteam
+
+  langfuse-db:
+    image: postgres:16-alpine
+    profiles: ["observability"]
+    environment:
+      POSTGRES_DB: langfuse
+      POSTGRES_USER: langfuse
+      POSTGRES_PASSWORD: ${LANGFUSE_DB_PASSWORD:-change-me}
+    volumes:
+      - langfuse-db-data:/var/lib/postgresql/data
+    networks:
+      - redteam
+
+  # ---------------- Layer 5: infrastructure monitoring ----------------
+  prometheus:
+    image: prom/prometheus:${PROMETHEUS_TAG:-latest}
+    profiles: ["monitoring"]
+    volumes:
+      - ./deploy/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    networks:
+      - redteam
+    read_only: true
+
+  grafana:
+    image: grafana/grafana:${GRAFANA_TAG:-latest}
+    profiles: ["monitoring"]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-change-me}
+    volumes:
+      - ./deploy/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "${GRAFANA_PORT:-3001}:3000"
+    networks:
+      - redteam
+
+networks:
+  redteam:
+    driver: bridge
+    # air-gapped deployments: set internal=true to prevent egress
+    internal: ${NETWORK_INTERNAL:-false}
+
+volumes:
+  ollama-data:
+  keycloak-db-data:
+  langfuse-db-data:
+  prometheus-data:
+  grafana-data:
