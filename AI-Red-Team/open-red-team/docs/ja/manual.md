@@ -206,6 +206,13 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearerトークン保護
 | `GET /api/auth/me` | 現在ユーザー（`username`, `role`, `mustChangePassword`） |
 | `POST /api/auth/change-password` | `{currentPassword, newPassword}`（8文字以上） |
 
+### SQLiteデータ管理
+
+- DBパス: `ORT_DB_PATH`（既定 `./data/ort.db`、Dockerでは `./data` ボリュームの `/data/ort.db`）。
+- **バックアップ**: サーバ停止中に `.db` ファイルをコピー（WALモードの `-wal`/`-shm` サイドカーも一緒に）。
+- DBには scrypt パスワードハッシュ、認証署名シークレット、ランタイム設定が保存されます — 資格情報ストアとして扱ってください。
+- 初回ログインは常に **admin / admin**、パスワード変更までAPIはロックされます（`403 password change required`）。
+
 ### ランタイム設定（Settingsタブ）
 
 管理者はダッシュボードのSettingsタブからスコープ・予算・エンジン設定を変更できます

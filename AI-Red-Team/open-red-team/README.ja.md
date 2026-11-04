@@ -176,12 +176,15 @@ console.log(reply);
 → 認証・監査（Keycloak + LangFuse + Prometheus/Grafana）。
 
 ```bash
-docker build -t open-ai-red-team:latest .       # 強化イメージのビルド
+docker build -t open-ai-red-team:latest .       # 強化イメージのビルド（SQLite同梱）
 docker compose --profile poc up -d               # PoC: アプリ + Ollama
 docker compose --profile serving up -d           # 本番: アプリ + vLLM
 ./scripts/sbom/scan.sh open-ai-red-team:latest   # CVEスキャン + SBOM
 ./scripts/offline/export-images.sh               # エアギャップ搬入
 ```
+
+ダッシュボードはローカルアカウント・設定を SQLite `/data/ort.db`（ボリューム `./data`）に保存します。
+初回ログイン: **admin / admin**（パスワード変更を強制）。
 
 詳細: [デプロイ・運用ガイド](docs/deployment.md)
 
@@ -235,6 +238,17 @@ compliance/アーキテクチャ統制表を4言語で整備 · `index_only` バ
 2. vLLM実起動・Keycloak OIDC往復はコード/構成を検証済み — GPU/Dockerインフラが必要。
 3. イメージ既定 `CMD` は `chat`、compose が `dashboard` に上書き（意図的な二重用途）。
 4. 拒否監査に `flaggedTargets`（ホストのみ、プロンプト原文なし）を記録。
+
+## リリース
+
+| バージョン | 内容 |
+|------------|------|
+| 0.1.0 | ミドルウェア + 最初の27スキル、プロバイダ抽象化、CLI、ドキュメント |
+| 0.2.0 | claude-red全移植（79スキル/23カテゴリ）、多言語ドキュメント、マニュアル |
+| 0.3.0 | Open AI Red Team へ名称変更 |
+| 0.4.0 | トークン予算、テスト、スコープガードレール、LangFuse/OIDC/メトリクス、デプロイツール |
+| 0.5.0 | スコープ拒否（0呼び出し）、セッション分離、履歴予算、fail-closed、PoC compose、シークレット必須化、検索基準線 |
+| 0.6.0 | SQLiteローカルアカウント（admin/admin強制変更）、ダッシュボードSettingsタブ |
 
 ## ライセンス
 

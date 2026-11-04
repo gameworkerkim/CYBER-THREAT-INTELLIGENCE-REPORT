@@ -41,9 +41,30 @@
 - [x] 트리거 엔진 (키워드/정규식, 스코어링; 한·영 키워드)
 - [x] Progressive disclosure (인덱스 상시 주입 + 본문 온디맨드)
 - [x] CLI (`ort chat / ask / skills`)
-- [x] 다국어 문서 (EN 기준 / KO / JA / ZH)
+- [x] 웹 대시보드 (세션, 감사, OIDC, 메트릭)
+- [x] 토큰 예산 엔진 (컨텍스트 한도, 섹션 절단, index_only) + 히스토리 턴 예산
+- [x] 운영자별 세션 분리 (SessionStore, X-Ort-Session, OIDC sub 귀속)
+- [x] 범위 가드레일(호출 전 거절) + fail-closed 기동(exit 1)
+- [x] 로컬 계정(SQLite): admin/admin 비밀번호 변경 강제, HMAC 토큰
+- [x] 대시보드 런타임 설정 (스코프/예산/엔진 즉시 반영, admin 역할)
+- [x] 스트리밍 폴백 + reasoning_content 포착, LangFuse·Prometheus·JSONL 감사(SHA-256)
+- [x] 배포·운영: base/infra compose 분리, ollama-pull·vllm-preflight 게이트, 시크릿 필수화,
+      Keycloak realm, Grafana 대시보드, 오프라인 반입(skopeo/crane), Trivy SBOM + Cosign
+- [x] 테스트 73개 + 검색 품질 기준선 + CI (typecheck/build/test/docker build/스캔)
+- [x] 다국어 문서 (EN 기준 / KO / JA / ZH) + 컴플라이언스 통제표
 - [ ] Ollama num_ctx 자동 확장
 - [ ] 임베딩 기반 의미 매칭 (RAG) — 키워드 매칭 대체 옵션
 - [x] 멀티턴 도구 실행 루프 (칼리 연동) — **blocked**: 이번 릴리스 범위 밖. Open AI Red Team은
   허가된 임무의 방법론을 모델 컨텍스트에 주입하는 미들웨어이며 호스트에서 명령을 실행하지 않습니다.
   P0 통제(범위 거절·세션 분리·히스토리 예산·fail-closed 인증)가 안정된 뒤에만 재검토합니다.
+
+## 릴리스 이력
+
+| 버전 | 내용 |
+|------|------|
+| 0.1.0 | 미들웨어 + 첫 27개 스킬, 프로바이더 추상화, CLI, 문서 |
+| 0.2.0 | claude-red 전체 포팅(79개/23개 카테고리), 다국어 문서, 사용 매뉴얼 |
+| 0.3.0 | Open AI Red Team으로 명칭 변경 |
+| 0.4.0 | 토큰 예산, 테스트 30개, 스코프 가드레일, LangFuse/OIDC/메트릭, 배포 도구 |
+| 0.5.0 | P0 강화: 범위 거절(0호출), 세션 분리, 히스토리 예산, fail-closed, PoC compose, 시크릿 필수화, 테스트 63개, 검색 기준선, 컴플라이언스 문서 |
+| 0.6.0 | SQLite 로컬 계정(admin/admin 강제 변경), 대시보드 Settings 탭, 로드맵/문서 갱신 |

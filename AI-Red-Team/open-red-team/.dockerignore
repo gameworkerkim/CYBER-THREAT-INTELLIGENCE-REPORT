@@ -3,6 +3,7 @@ dist
 .git
 .env
 *.log
+data
 deploy
 scripts
 docs/*.md

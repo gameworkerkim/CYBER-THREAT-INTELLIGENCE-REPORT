@@ -205,6 +205,13 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 토큰 보호
 | `GET /api/auth/me` | 현재 사용자 (`username`, `role`, `mustChangePassword`) |
 | `POST /api/auth/change-password` | `{currentPassword, newPassword}` (최소 8자) |
 
+### SQLite 데이터 관리
+
+- DB 경로: `ORT_DB_PATH` (기본 `./data/ort.db`, Docker에서는 `./data` 볼륨의 `/data/ort.db`).
+- **백업**: 서버 중지 상태에서 `.db` 파일을 복사합니다 (WAL 모드의 `-wal`/`-shm` 사이드카 파일도 함께).
+- DB에는 scrypt 비밀번호 해시, 인증 서명 시크릿, 런타임 설정이 저장됩니다 — 자격증명 저장소로 취급하십시오.
+- 최초 로그인은 항상 **admin / admin**이며, 비밀번호 변경 전까지 API가 잠깁니다(`403 password change required`).
+
 ### 런타임 설정 (Settings 탭)
 
 관리자는 대시보드 Settings 탭에서 스코프·예산·엔진 설정을 변경할 수 있습니다

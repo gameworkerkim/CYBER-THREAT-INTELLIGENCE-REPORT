@@ -41,9 +41,30 @@
 - [x] トリガーエンジン（キーワード/正規表現、スコアリング; 英・韓キーワード）
 - [x] Progressive disclosure（インデックス常時注入 + 本文オンデマンド）
 - [x] CLI（`ort chat / ask / skills`）
-- [x] 多言語ドキュメント（EN基準 / KO / JA / ZH）
+- [x] Webダッシュボード（セッション、監査、OIDC、メトリクス）
+- [x] トークン予算エンジン（コンテキスト上限、セクション切詰め、index_only）+ 履歴ターン予算
+- [x] 運用者別セッション分離（SessionStore、X-Ort-Session、OIDC sub 帰属）
+- [x] スコープガードレール（呼び出し前拒否）+ fail-closed起動（exit 1）
+- [x] ローカルアカウント（SQLite）: admin/admin パスワード変更強制、HMACトークン
+- [x] ダッシュボードランタイム設定（スコープ/予算/エンジン即時反映、adminロール）
+- [x] ストリーミングフォールバック + reasoning_content 捕捉、LangFuse・Prometheus・JSONL監査（SHA-256）
+- [x] デプロイ・運用: base/infra compose分離、ollama-pull・vllm-preflightゲート、シークレット必須化、
+      Keycloak realm、Grafanaダッシュボード、オフライン搬入（skopeo/crane）、Trivy SBOM + Cosign
+- [x] テスト73件 + 検索品質基準線 + CI（typecheck/build/test/docker build/スキャン）
+- [x] 多言語ドキュメント（EN基準 / KO / JA / ZH）+ コンプライアンス統制表
 - [ ] Ollama `num_ctx` 自動拡張
 - [ ] 埋め込みベースの意味マッチング（RAG）— キーワードマッチングの代替オプション
 - [x] マルチターンツール実行ループ（Kali連携）— **blocked**: 本リリースの範囲外。Open AI Red Team は
   許可された任務の方法論をモデルコンテキストへ注入するミドルウェアであり、ホスト上でコマンドを実行しません。
   P0統制（範囲拒否・セッション分離・履歴予算・fail-closed認証）が安定してからのみ再検討します。
+
+## リリース履歴
+
+| バージョン | 内容 |
+|------------|------|
+| 0.1.0 | ミドルウェア + 最初の27スキル、プロバイダ抽象化、CLI、ドキュメント |
+| 0.2.0 | claude-red全移植（79スキル/23カテゴリ）、多言語ドキュメント、ユーザーマニュアル |
+| 0.3.0 | Open AI Red Team へ名称変更 |
+| 0.4.0 | トークン予算、テスト30件、スコープガードレール、LangFuse/OIDC/メトリクス、デプロイツール |
+| 0.5.0 | P0強化: スコープ拒否（0呼び出し）、セッション分離、履歴予算、fail-closed、PoC compose、シークレット必須化、テスト63件、検索基準線、コンプライアンス文書 |
+| 0.6.0 | SQLiteローカルアカウント（admin/admin強制変更）、ダッシュボードSettingsタブ、ロードマップ/文書更新 |

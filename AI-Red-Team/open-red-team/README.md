@@ -186,12 +186,15 @@ Financial, public, and enterprise deployments (망분리 / network separation) a
 → auth & audit (Keycloak + LangFuse + Prometheus/Grafana).
 
 ```bash
-docker build -t open-ai-red-team:latest .       # hardened image
+docker build -t open-ai-red-team:latest .       # hardened image (incl. SQLite)
 docker compose --profile poc up -d               # PoC: app + Ollama
 docker compose --profile serving up -d           # production: app + vLLM
 ./scripts/sbom/scan.sh open-ai-red-team:latest   # CVE scan + SBOM
 ./scripts/offline/export-images.sh               # air-gap transfer
 ```
+
+The dashboard persists local accounts and settings in SQLite at `/data/ort.db`
+(volume `./data`). First login: **admin / admin** with a forced password change.
 
 See [Deployment & Operations Guide](docs/deployment.md).
 
@@ -245,6 +248,17 @@ control tables in 4 languages · `index_only` badge in the Skills tab.
 2. vLLM runtime and Keycloak OIDC round-trip are code/config-validated; live verification needs GPU/Docker infra.
 3. Image default `CMD` is `chat`; compose overrides it to `dashboard` (intentional dual use).
 4. Denied requests record `flaggedTargets` (hosts only — never prompt plaintext) in the audit log.
+
+## Releases
+
+| Version | Contents |
+|---------|----------|
+| 0.1.0 | Middleware + first 27 skills, provider abstraction, CLI, docs |
+| 0.2.0 | Full claude-red port (79 skills / 23 categories), multilingual docs, manual |
+| 0.3.0 | Renamed to Open AI Red Team |
+| 0.4.0 | Token budget, tests, scope guardrails, LangFuse/OIDC/metrics, deployment tooling |
+| 0.5.0 | Scope denial (0 calls), session isolation, history budget, fail-closed, PoC compose, required secrets, retrieval baseline |
+| 0.6.0 | SQLite local accounts (admin/admin forced change), dashboard Settings tab |
 
 ## License
 

@@ -205,6 +205,13 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 令牌保护
 | `GET /api/auth/me` | 当前用户（`username`、`role`、`mustChangePassword`） |
 | `POST /api/auth/change-password` | `{currentPassword, newPassword}`（至少 8 位） |
 
+### SQLite 数据管理
+
+- 数据库路径：`ORT_DB_PATH`（默认 `./data/ort.db`；Docker 中为 `./data` 卷的 `/data/ort.db`）。
+- **备份**：服务器停止时复制 `.db` 文件（WAL 模式的 `-wal`/`-shm` 附属文件一并备份）。
+- 数据库保存 scrypt 密码哈希、认证签名密钥与运行时设置 — 请按凭据存储对待。
+- 首次登录始终为 **admin / admin**，改密前 API 保持锁定（`403 password change required`）。
+
 ### 运行时设置（Settings 页）
 
 管理员可在面板 Settings 页修改范围、预算与引擎设置（`GET/PUT /api/settings`）。

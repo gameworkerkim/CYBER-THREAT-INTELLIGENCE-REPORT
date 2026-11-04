@@ -174,12 +174,15 @@ console.log(reply);
 (비루트·읽기전용·리소스 제한) → 인증·감사(Keycloak + LangFuse + Prometheus/Grafana).
 
 ```bash
-docker build -t open-ai-red-team:latest .       # 강화 이미지 빌드
+docker build -t open-ai-red-team:latest .       # 강화 이미지 빌드 (SQLite 포함)
 docker compose --profile poc up -d               # PoC: 앱 + Ollama
 docker compose --profile serving up -d           # 프로덕션: 앱 + vLLM
 ./scripts/sbom/scan.sh open-ai-red-team:latest   # CVE 스캔 + SBOM
 ./scripts/offline/export-images.sh               # 에어갭 반입
 ```
+
+대시보드는 로컬 계정·설정을 SQLite `/data/ort.db`(볼륨 `./data`)에 저장합니다.
+최초 로그인: **admin / admin** (비밀번호 변경 강제).
 
 상세: [배포 및 운영 가이드](docs/deployment.md)
 
@@ -233,6 +236,17 @@ CLI 버전 `package.json` 동적 로드 · 죽은 메트릭/라우트 라벨 정
 2. vLLM 실기동·Keycloak OIDC 왕복은 코드/구성 검증 완료 — GPU/Docker 인프라 필요.
 3. 이미지 기본 `CMD`는 `chat`, compose가 `dashboard`로 오버라이드(의도된 이중 용도).
 4. 거절 감사에 `flaggedTargets`(호스트만, 프롬프트 원문은 미기록) 기록.
+
+## 릴리스
+
+| 버전 | 내용 |
+|------|------|
+| 0.1.0 | 미들웨어 + 첫 27개 스킬, 프로바이더 추상화, CLI, 문서 |
+| 0.2.0 | claude-red 전체 포팅(79개/23개 카테고리), 다국어 문서, 매뉴얼 |
+| 0.3.0 | Open AI Red Team으로 명칭 변경 |
+| 0.4.0 | 토큰 예산, 테스트, 스코프 가드레일, LangFuse/OIDC/메트릭, 배포 도구 |
+| 0.5.0 | 범위 거절(0호출), 세션 분리, 히스토리 예산, fail-closed, PoC compose, 시크릿 필수화, 검색 기준선 |
+| 0.6.0 | SQLite 로컬 계정(admin/admin 강제 변경), 대시보드 Settings 탭 |
 
 ## 라이선스
 

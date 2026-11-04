@@ -207,6 +207,17 @@ token (12 h TTL) accepted as `Authorization: Bearer <token>`.
 | `GET /api/auth/me` | Current user (`username`, `role`, `mustChangePassword`) |
 | `POST /api/auth/change-password` | `{currentPassword, newPassword}` (min 8 chars) |
 
+### SQLite data management
+
+- Database path: `ORT_DB_PATH` (default `./data/ort.db`; `/data/ort.db` in Docker with the
+  `./data` volume mounted).
+- **Backup**: copy the `.db` file while the server is stopped (WAL mode keeps `-wal`/`-shm`
+  sidecar files next to it — back them up together).
+- The DB stores scrypt password hashes, the auth signing secret and runtime settings —
+  protect it like any credential store.
+- First login is always **admin / admin**; the API stays locked (`403 password change
+  required`) until the password is changed.
+
 ### Runtime settings (Settings tab)
 
 Admins can change scope, budget and engine settings from the dashboard (Settings tab,

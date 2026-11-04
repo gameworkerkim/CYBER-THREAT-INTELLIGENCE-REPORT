@@ -1,6 +1,6 @@
 {
   "name": "open-ai-red-team",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Model-agnostic offensive security skills middleware for DeepSeek, GLM, and open-weight models",
   "type": "module",
   "bin": {

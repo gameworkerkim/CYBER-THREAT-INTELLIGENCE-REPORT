@@ -174,12 +174,15 @@ console.log(reply);
 （非 root·只读·资源限制）→ 认证与审计（Keycloak + LangFuse + Prometheus/Grafana）。
 
 ```bash
-docker build -t open-ai-red-team:latest .       # 构建加固镜像
+docker build -t open-ai-red-team:latest .       # 构建加固镜像（含 SQLite）
 docker compose --profile poc up -d               # PoC：应用 + Ollama
 docker compose --profile serving up -d           # 生产：应用 + vLLM
 ./scripts/sbom/scan.sh open-ai-red-team:latest   # CVE 扫描 + SBOM
 ./scripts/offline/export-images.sh               # 物理隔离转入
 ```
+
+面板将本地账户与设置保存于 SQLite `/data/ort.db`（卷 `./data`）。
+首次登录：**admin / admin**（强制改密）。
 
 详见：[部署与运营指南](docs/deployment.md)
 
@@ -233,6 +236,17 @@ CLI 版本从 `package.json` 动态加载 · 清理失效指标/路由标签 · 
 2. vLLM 实机运行·Keycloak OIDC 往返已通过代码/配置验证 — 需 GPU/Docker 基础设施。
 3. 镜像默认 `CMD` 为 `chat`，compose 覆盖为 `dashboard`（有意保留的双重用途）。
 4. 拒绝审计记录 `flaggedTargets`（仅主机，不含提示词原文）。
+
+## 版本
+
+| 版本 | 内容 |
+|------|------|
+| 0.1.0 | 中间件 + 首批 27 个技能、提供商抽象、CLI、文档 |
+| 0.2.0 | claude-red 全量移植（79 技能/23 类别）、多语言文档、手册 |
+| 0.3.0 | 更名为 Open AI Red Team |
+| 0.4.0 | 令牌预算、测试、范围护栏、LangFuse/OIDC/指标、部署工具 |
+| 0.5.0 | 范围拒绝（0 调用）、会话隔离、历史预算、fail-closed、PoC compose、必需密钥、检索基准 |
+| 0.6.0 | SQLite 本地账户（admin/admin 强制改密）、面板 Settings 页 |
 
 ## 许可证
 

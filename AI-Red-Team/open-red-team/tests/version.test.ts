@@ -8,6 +8,6 @@ describe("CLI version", () => {
       version: string;
     };
     expect(getVersion()).toBe(pkg.version);
-    expect(pkg.version).toBe("0.5.0");
+    expect(pkg.version).toBe("0.6.0");
   });
 });

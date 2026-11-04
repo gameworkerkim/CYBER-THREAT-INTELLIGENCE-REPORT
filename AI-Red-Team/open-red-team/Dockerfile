@@ -13,12 +13,13 @@ RUN npm run build
 FROM node:22-alpine AS runtime
 ENV NODE_ENV=production
 ENV ORT_SKILLS_DIR=/app/skills
+ENV ORT_DB_PATH=/data/ort.db
 WORKDIR /app
 
 # non-root user
 RUN addgroup -S ort && adduser -S ort -G ort
 
-# production deps only
+# production deps only (better-sqlite3 installs its musl prebuild)
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
 
@@ -28,6 +29,9 @@ COPY docs ./docs
 COPY README* ./
 COPY CHANGELOG.md ./
 COPY package.json ./
+
+# writable data volume for the SQLite DB / audit log
+RUN mkdir -p /data && chown ort:ort /data
 
 # read-only rootfs support: everything writable lives in /tmp
 ENV HOME=/tmp

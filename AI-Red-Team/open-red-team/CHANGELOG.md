@@ -2,6 +2,16 @@
 
 All notable changes to Open AI Red Team are recorded here.
 
+## [Unreleased]
+
+## [0.6.0] — 2026-11-04
+
+### Added
+- Docker image ships SQLite: `/data/ort.db` writable volume for the non-root `ort` user,
+  `ORT_DB_PATH` default in the image; roadmap release-history tables (0.1.0–0.6.0) and
+  manual SQLite data-management sections in 4 languages
+- Local accounts, dashboard runtime settings and the login UI (see the items below)
+
 ## [0.5.0] — 2026-11-04
 
 ### Added
@@ -47,8 +57,7 @@ All notable changes to Open AI Red Team are recorded here.
 ## [Unreleased]
 
 ### Added
-- **Local accounts (SQLite)** — `ORT_DB_PATH` database with users/settings tables
-  (`better-sqlite3`); default **admin/admin** seeded on first start with a forced password
+- **Local accounts (SQLite)** — `ORT_DB_PATH` database with users/settings tables  (`better-sqlite3`); default **admin/admin** seeded on first start with a forced password
   change (`403 password change required` gate); HMAC-signed login tokens (12 h TTL,
   `ORT_AUTH_SECRET` env or persisted secret); `POST /api/auth/login`, `GET /api/auth/me`,
   `POST /api/auth/change-password`; auth priority OIDC > local > static token > anonymous
