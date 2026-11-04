@@ -4,6 +4,12 @@ All notable changes to Open AI Red Team are recorded here.
 
 ## [Unreleased]
 
+### Changed
+- Roadmap: evaluated extension proposals added as a prioritized table (approval-based
+  propose-execute bridge, skill-to-tool mapping registry, methodology quality benchmark,
+  CI/CD suggestion gate, community skill marketplace) plus a pending live-verification
+  checklist (hosted CI gate, vLLM serving, Keycloak OIDC round-trip, SQLite backup drill)
+
 ## [0.6.0] — 2026-11-04
 
 ### Added

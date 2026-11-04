@@ -62,6 +62,26 @@ followed by the remaining claude-red categories. All 79 skills across 23 categor
   it does not execute commands on the host. Revisit only after the P0 controls (scope denial,
   session isolation, history budget, fail-closed auth) remain stable.
 
+## Planned extensions (evaluated proposals)
+
+All items respect the product boundary: methodology injection, operator-controlled, no
+autonomous execution.
+
+| Priority | Item | Notes |
+|----------|------|-------|
+| High | Approval-based propose-execute bridge | The operator reviews and approves LLM-suggested commands; approved commands run in an **isolated sandbox** and results feed back to the model. Semi-automated, never autonomous |
+| High | Skill-to-tool mapping registry | Per-skill metadata mapping to the tooling each skill requires (sqlmap, nmap, Burp Suite, …) — connects skills to real workflows |
+| Medium | Methodology quality benchmark | LLM-as-a-Judge scoring of specificity, actionability, and context fit — a regression gate for middleware output quality |
+| Medium | CI/CD red-team suggestion gate | GitHub Actions integration posting skill-based review suggestions as PR comments (suggestion only, no execution) |
+| Low | Community skill marketplace | Reviewed community-contributed `SKILL.md` catalog for new attack methodologies |
+
+## Pending live verification
+
+- [ ] First hosted CI gate run (workflow exists at the repo root with path filters; local runs verified)
+- [ ] Live vLLM serving verification (requires GPU infrastructure)
+- [ ] Keycloak OIDC round-trip verification (realm import + dashboard token exchange)
+- [ ] SQLite backup/restore drill (documented procedure, not yet exercised)
+
 ## Release history
 
 | Version | Contents |
