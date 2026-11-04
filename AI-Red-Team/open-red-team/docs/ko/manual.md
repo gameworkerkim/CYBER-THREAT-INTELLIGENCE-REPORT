@@ -226,3 +226,47 @@ docker compose up -d ort    # http://localhost:8081
 - 스킬은 **허가된 테스트 전용** 공격 방법론입니다.
 - 서면 허가 없이 실제 시스템에 절대 사용하지 마십시오.
 - 연습용: PortSwigger Web Security Academy, DVWA, HackTheBox, TryHackMe.
+
+## 12. 검토 지적 및 검증 현황
+
+누적 검토 지적(4라운드)과 현재 상태입니다.
+
+### P0 — 치명 지적, 전부 해결·실측 확인
+
+| # | 지적사항 | 상태 |
+|---|----------|------|
+| 1 | 스킬 본문 전량 주입 → 컨텍스트 오버플로 (단일 스킬 ~138K 토큰) | 토큰 예산제 + 대형 스킬 6종 `index_only`, 실행 시 프롬프트 ~6-8K 토큰 실측 |
+| 2 | 테스트 전무 | vitest 63건/12파일 |
+| 3 | CLI뿐인 앱 → `docker compose up -d` 미동작 | Express 대시보드 + compose `command: ["dashboard"]` |
+| 4 | 범위 강제 없음 → 전부 모델에 전달 | `decision: deny` 시 프로바이더 호출 전 반환 — 호출 카운터로 0회 확증 |
+| 5 | fail-open 기동 (무인증/무스코프) | 둘 다 exit 1 거부 |
+
+### P1 — 신뢰성·운영 지적, 해결
+
+| # | 지적사항 | 상태 |
+|---|----------|------|
+| 6 | LangFuse 감사 코드 미연동 | `recordChat` 트레이싱 + JSONL 감사 `promptSha256`(원문 미기록) |
+| 7 | Keycloak(OIDC) 코드 미연동 | OIDC 미들웨어: discovery + JWKS + RS256 |
+| 8 | npm bin 경로 깨짐 (`npx ort` 불가) | `dist/src/cli.js`로 교정 |
+| 9 | LICENSE 없음 | 추가 (MIT + claude-red 고지) |
+| 10 | `reasoning_content` 유실·스트리밍 고정 | 추론 포착 + non-stream 폴백 |
+| 11 | 시크릿 전부 `change-me` | `docker-compose.infra.yml` 분리 + 필수 치환 `${VAR:?}` |
+| 12 | PoC 프로파일 LLM 기본값 불일치 | Ollama 정합 + `depends_on: ollama-pull` |
+| 13 | 운영자 간 히스토리 공유 | `SessionStore`(LRU·유휴 축출) + OIDC `sub` 귀속 |
+| 14 | 히스토리 무한 누적 | 턴 예산 + `[earlier turns omitted]` 표식 |
+| 15 | 검색 품질 기준선 없음 | 30개 fixture + 임계값(top-1 ≥ 0.85, top-3 ≥ 0.95) |
+
+### P2 — 마감·경계, 해결
+
+- CLI 버전 하드코딩(0.1.0) → `package.json` 동적 로드
+- 죽은 메트릭·라우트 라벨 → 정리
+- `compliance.md`/아키텍처 통제표 4개 국어
+- `index_only` 스킬 Skills 탭에 "본문 미주입" 배지
+
+### 알려진 한계 (경미)
+
+1. **CI 워크플로**: 레포 루트 `.github/workflows/open-red-team.yml`에 존재(GitHub는 루트에서만 실행),
+   경로 필터 적용. 로컬 실행은 검증, 호스팅 게이트 실동작은 미확인.
+2. **vLLM 실기동 / Keycloak OIDC 왕복**: 코드·compose·realm 구성 검증 완료, GPU/Docker 인프라 부재로 실기동 미확인.
+3. **이미지 기본 `CMD`는 `chat`** (대화형) — compose가 `dashboard`로 오버라이드. 의도된 이중 용도.
+4. **거절 감사에 `flaggedTargets`(호스트만, 프롬프트 원문은 미기록)** 기록 — 설계상 정보 제공용.

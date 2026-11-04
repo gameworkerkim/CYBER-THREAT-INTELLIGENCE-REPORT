@@ -227,3 +227,47 @@ docker compose up -d ort    # http://localhost:8081
 - スキルは**許可されたテスト専用**の攻撃手法です。
 - 書面許可のない実システムに対しては絶対に使用しないでください。
 - 練習環境: PortSwigger Web Security Academy、DVWA、HackTheBox、TryHackMe。
+
+## 12. レビュー指摘と検証状況
+
+累積レビュー指摘（4ラウンド）と現状です。
+
+### P0 — 致命的指摘、すべて解決・実測確認
+
+| # | 指摘 | 状態 |
+|---|------|------|
+| 1 | スキル本文の全量注入 → コンテキストオーバーフロー（単一スキル ~138Kトークン） | トークン予算エンジン + 巨大スキル6種 `index_only`、実行時プロンプト ~6-8Kトークン実測 |
+| 2 | テスト皆無 | vitest 63件/12ファイル |
+| 3 | CLIのみ → `docker compose up -d` が動作せず | Expressダッシュボード + compose `command: ["dashboard"]` |
+| 4 | 範囲強制なし → 全入力をモデルへ送信 | `decision: deny` でプロバイダ呼び出し前に返却 — 呼び出しカウンタで0回を確認 |
+| 5 | fail-open起動（無認証/無スコープ） | どちらも exit 1 で拒否 |
+
+### P1 — 信頼性・運用の指摘、解決
+
+| # | 指摘 | 状態 |
+|---|------|------|
+| 6 | LangFuse監査がコード未連携 | `recordChat` トレーシング + JSONL監査 `promptSha256`（原文なし） |
+| 7 | Keycloak（OIDC）未連携 | OIDCミドルウェア: discovery + JWKS + RS256 |
+| 8 | npm binパス破損（`npx ort` 不可） | `dist/src/cli.js` に修正 |
+| 9 | LICENSEなし | 追加（MIT + claude-red 出典表示） |
+| 10 | `reasoning_content` 破棄・ストリーミング固定 | 推論の捕捉 + non-stream フォールバック |
+| 11 | シークレットが全て `change-me` | `docker-compose.infra.yml` 分離 + 必須置換 `${VAR:?}` |
+| 12 | PoCプロファイルのLLM既定値不一致 | Ollama に整合 + `depends_on: ollama-pull` |
+| 13 | 運用者間の履歴共有 | `SessionStore`（LRU・アイドル追い出し）+ OIDC `sub` 帰属 |
+| 14 | 履歴の無限増加 | ターン予算 + `[earlier turns omitted]` マーカー |
+| 15 | 検索品質の基準線なし | 30クエリfixture + 閾値（top-1 ≥ 0.85、top-3 ≥ 0.95） |
+
+### P2 — 仕上げ・境界、解決
+
+- CLIバージョンのハードコード（0.1.0）→ `package.json` から動的ロード
+- 死んだメトリクス・ルートラベル → 整理
+- `compliance.md`/アーキテクチャ統制表を4言語で整備
+- `index_only` スキルはSkillsタブに「본문 미주입」バッジ
+
+### 既知の制限（軽微）
+
+1. **CIワークフロー**: リポジトリルート `.github/workflows/open-red-team.yml` に配置（GitHubはルートでのみ実行）、
+   パスフィルタ適用済み。ローカル実行は検証済み、ホストされたゲートの実動作は未確認。
+2. **vLLM実起動 / Keycloak OIDC往復**: コード・compose・realm構成は検証済み。GPU/Dockerインフラ不在のため実起動は未確認。
+3. **イメージ既定 `CMD` は `chat`**（対話型）— compose が `dashboard` に上書き。意図的な二重用途。
+4. **拒否監査に `flaggedTargets`（ホストのみ、プロンプト原文なし）を記録** — 設計上の情報提供。

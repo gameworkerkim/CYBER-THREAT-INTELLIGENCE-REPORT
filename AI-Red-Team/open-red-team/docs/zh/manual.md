@@ -226,3 +226,48 @@ docker compose up -d ort    # http://localhost:8081
 - 技能仅用于**授权测试**的攻击方法论。
 - 未经书面许可，绝不用于真实系统。
 - 练习环境：PortSwigger Web Security Academy、DVWA、HackTheBox、TryHackMe。
+
+## 12. 评审意见与验证状态
+
+累积评审意见（4 轮）与当前状态。
+
+### P0 — 致命问题，全部解决并经实测确认
+
+| # | 问题 | 状态 |
+|---|------|------|
+| 1 | 技能正文全量注入 → 上下文溢出（单技能约 138K token） | 令牌预算引擎 + 6 个超大技能 `index_only`，运行时提示词实测约 6-8K token |
+| 2 | 完全没有测试 | vitest 63 项/12 个文件 |
+| 3 | 只有 CLI → `docker compose up -d` 无法运行 | Express 面板 + compose `command: ["dashboard"]` |
+| 4 | 无范围强制 → 全部送往模型 | `decision: deny` 在提供商调用前返回 — 以调用计数器确认 0 次 |
+| 5 | fail-open 启动（无认证/无范围） | 两者均以 exit 1 拒绝 |
+
+### P1 — 可靠性与运营问题，已解决
+
+| # | 问题 | 状态 |
+|---|------|------|
+| 6 | LangFuse 审计未接入代码 | `recordChat` 追踪 + JSONL 审计 `promptSha256`（不存原文） |
+| 7 | Keycloak（OIDC）未接入代码 | OIDC 中间件：discovery + JWKS + RS256 |
+| 8 | npm bin 路径损坏（`npx ort` 不可用） | 修正为 `dist/src/cli.js` |
+| 9 | 无 LICENSE 文件 | 已添加（MIT + claude-red 署名） |
+| 10 | `reasoning_content` 丢弃·仅流式 | 捕获推理 + 非流式回退 |
+| 11 | 所有密钥默认 `change-me` | 拆分 `docker-compose.infra.yml` + 必需替换 `${VAR:?}` |
+| 12 | PoC 配置 LLM 默认值不匹配 | 对齐 Ollama + `depends_on: ollama-pull` |
+| 13 | 操作员之间共享历史 | `SessionStore`（LRU·空闲淘汰）+ OIDC `sub` 归属 |
+| 14 | 历史无限增长 | 轮次预算 + `[earlier turns omitted]` 标记 |
+| 15 | 无检索质量基准 | 30 条 fixture + 阈值（top-1 ≥ 0.85、top-3 ≥ 0.95） |
+
+### P2 — 收尾与边界，已解决
+
+- CLI 版本硬编码（0.1.0）→ 从 `package.json` 动态加载
+- 失效指标与路由标签 → 清理
+- `compliance.md`/架构控制表 4 种语言
+- `index_only` 技能在 Skills 页显示"본문 미주입"徽章
+
+### 已知限制（轻微）
+
+1. **CI 工作流**：位于仓库根目录 `.github/workflows/open-red-team.yml`（GitHub 仅在根目录执行），
+   已配置路径过滤。本地运行已验证，托管门禁的实机运行未验证。
+2. **vLLM 实机运行 / Keycloak OIDC 往返**：代码、compose、realm 配置已验证；因缺乏 GPU/Docker
+   基础设施，实机运行未验证。
+3. **镜像默认 `CMD` 为 `chat`**（交互式）— compose 覆盖为 `dashboard`。有意保留的双重用途。
+4. **拒绝审计记录 `flaggedTargets`**（仅主机，不含提示词原文）— 设计上的信息性记录。

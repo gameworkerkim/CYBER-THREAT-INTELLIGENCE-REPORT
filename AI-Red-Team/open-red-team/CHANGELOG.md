@@ -47,6 +47,10 @@ All notable changes to Open AI Red Team are recorded here.
 ## [Unreleased]
 
 ### Added
+- Manual section "Review Findings & Verification Status" (EN/KO/JA/ZH):
+  accumulated 4-round review findings with resolved status (P0/P1/P2) and the
+  remaining known limitations (CI hosted-gate unexercised, vLLM/Keycloak live
+  round-trip pending infra, dual-use image CMD, flaggedTargets in denial audit)
 - **Uncensored open-weight model guide** (`docs/uncensored-models.md`, EN/KO/JA/ZH) —
   LM Studio + uncensored GGUF quantization setup (Q2_K/Q4_K_M/Q8_0), folder layout, vision
   `mmproj`, and direct integration with the `openweight` provider via

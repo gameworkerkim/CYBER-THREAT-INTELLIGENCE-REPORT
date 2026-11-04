@@ -247,3 +247,52 @@ injected as a body — read them with `ort skills show <name>`.
 - Skills describe offensive methodology for **authorized testing only**.
 - Never run against systems without written permission.
 - For practice, use labs: PortSwigger Web Security Academy, DVWA, HackTheBox, TryHackMe.
+
+## 12. Review Findings & Verification Status
+
+Accumulated review findings (4 rounds) and their current status.
+
+### P0 — critical findings, resolved and measured
+
+| # | Finding | Status |
+|---|---------|--------|
+| 1 | Full skill-body injection caused context overflow (single skill ~138K tokens) | Token budget engine + 6 oversized skills marked `index_only`; runtime prompt measured in the ~6-8K token range |
+| 2 | No tests at all | vitest suite: 63 tests across 12 files |
+| 3 | App was CLI-only; `docker compose up -d` did not work | Express dashboard + `command: ["dashboard"]` in compose |
+| 4 | No scope enforcement; everything reached the model | `decision: deny` returns before the provider call — verified with a call counter (0 calls) |
+| 5 | Fail-open startup (no auth / no scope) | Both refuse to start with exit code 1 |
+
+### P1 — reliability & operations, resolved
+
+| # | Finding | Status |
+|---|---------|--------|
+| 6 | LangFuse audit not wired to code | `recordChat` tracing + JSONL audit with `promptSha256` (no prompt plaintext) |
+| 7 | Keycloak (OIDC) not wired to code | OIDC middleware: discovery + JWKS + RS256 verification |
+| 8 | Broken npm bin path (`npx ort` impossible) | Fixed to `dist/src/cli.js` |
+| 9 | No LICENSE file | Added (MIT + claude-red attribution) |
+| 10 | `reasoning_content` discarded; streaming hardcoded | Reasoning captured + non-streaming fallback |
+| 11 | All secrets defaulted to `change-me` | Infra split into `docker-compose.infra.yml` with required `${VAR:?}` substitutions |
+| 12 | PoC profile LLM defaults mismatched | Ollama defaults + `depends_on: ollama-pull` gating |
+| 13 | Shared conversation history across operators | `SessionStore` (LRU + idle eviction) + OIDC `sub` ownership |
+| 14 | Unbounded history growth | Per-turn token budget + `[earlier turns omitted]` marker |
+| 15 | No retrieval-quality baseline | 30-query fixture suite with committed thresholds (top-1 ≥ 0.85, top-3 ≥ 0.95) |
+
+### P2 — polish & boundaries, resolved
+
+- CLI version hardcoded (0.1.0) → loaded from `package.json`
+- Dead metrics/route labels → counters and route labels cleaned up
+- `compliance.md` / architecture control tables in 4 languages
+- `index_only` skills show a "본문 미주입" badge in the Skills tab
+
+### Known limitations (non-critical)
+
+1. **CI workflow**: lives at the repository root `.github/workflows/open-red-team.yml`
+   (GitHub only executes workflows there) with path filters for this subproject. Local runs are
+   verified; the hosted gate itself has not been exercised.
+2. **vLLM runtime / Keycloak OIDC round-trip**: code, compose and realm configuration are
+   validated; live verification requires GPU/Docker infrastructure (not available in the
+   review environment).
+3. **Image default `CMD` is `chat`** (interactive); compose overrides it to `dashboard`.
+   Intentional dual use.
+4. **Denied requests record `flaggedTargets`** (hosts only, never prompt plaintext) in the
+   audit log — informational by design.
