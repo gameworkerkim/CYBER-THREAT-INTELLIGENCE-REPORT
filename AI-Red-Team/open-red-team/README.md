@@ -28,6 +28,8 @@ Claude lock-in: the same red-team skills now run on DeepSeek, GLM (Zhipu), and o
 - **Trigger engine** — keyword + regex matching with scoring, English and Korean trigger keywords
 - **Explicit control** — `/use <skill>`, `--skills` flag, auto-load on/off, skill index on/off
 - **CLI + library** — interactive `ort chat`, one-shot `ort ask`, skill inspection, TypeScript API
+- **Web dashboard** — browser-based management console (streaming chat, skill browser, JSONL audit
+  trail, masked config) for multi-operator, audited operations; CDN-free for air-gapped networks
 - **Multilingual documentation** — English (base), Korean, Japanese, Chinese
 - **On-prem ready** — local models keep sensitive target data inside your environment
 
@@ -84,6 +86,7 @@ npx ort chat --skills offensive-sqli --provider glm      # force-load skills
 npx ort skills list                                      # list all skills
 npx ort skills show offensive-sqli                       # print a skill body
 npx ort ask "How do I test SQLi on this login form?"     # single-turn query
+npx ort dashboard                                        # web dashboard (http://localhost:8081)
 ```
 
 ### Library

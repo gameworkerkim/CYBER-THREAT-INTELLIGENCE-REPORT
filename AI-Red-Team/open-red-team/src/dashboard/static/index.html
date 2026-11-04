@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open AI Red Team — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo">▲</span>
+      <h1>Open AI Red Team</h1>
+      <span class="badge" id="provider-badge">—</span>
+    </div>
+    <div class="status">
+      <span class="dot" id="backend-dot" title="LLM backend status"></span>
+      <span id="backend-text">checking…</span>
+    </div>
+  </header>
+
+  <nav>
+    <button class="tab active" data-tab="chat">Chat</button>
+    <button class="tab" data-tab="skills">Skills <span id="skills-count"></span></button>
+    <button class="tab" data-tab="audit">Audit</button>
+    <button class="tab" data-tab="config">Config</button>
+  </nav>
+
+  <main>
+    <!-- Chat -->
+    <section id="panel-chat" class="panel active">
+      <div class="chat-layout">
+        <div class="chat-box" id="chat-box"></div>
+        <div class="chat-input-row">
+          <textarea id="chat-input" rows="3" placeholder="Message the operator… (skills auto-load by trigger, or type /use &lt;skill&gt;)"></textarea>
+          <div class="chat-actions">
+            <button id="btn-send">Send</button>
+            <button id="btn-reset" class="ghost">Reset</button>
+            <span class="hint" id="chat-status">idle</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="panel-skills" class="panel">
+      <div class="toolbar">
+        <input id="skill-search" type="search" placeholder="Search skills, triggers…" />
+        <select id="skill-category"><option value="">All categories</option></select>
+      </div>
+      <table id="skills-table">
+        <thead><tr><th>Name</th><th>Category</th><th>Description</th><th>Triggers</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div id="skill-detail" class="detail hidden">
+        <div class="detail-head">
+          <h2 id="detail-name"></h2>
+          <button id="detail-close" class="ghost">✕</button>
+        </div>
+        <pre id="detail-body"></pre>
+      </div>
+    </section>
+
+    <!-- Audit -->
+    <section id="panel-audit" class="panel">
+      <p class="hint" id="audit-note"></p>
+      <table id="audit-table">
+        <thead><tr><th>Time</th><th>Provider / Model</th><th>Skills</th><th>Prompt → Response (chars)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Config -->
+    <section id="panel-config" class="panel">
+      <table id="config-table">
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

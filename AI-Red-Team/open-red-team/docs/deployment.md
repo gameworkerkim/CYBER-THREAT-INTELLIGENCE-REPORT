@@ -142,6 +142,18 @@ Hardening already applied:
 - **Capability drop** (`cap_drop: ALL`) and `no-new-privileges`
 - `skills/` shipped inside the image — fully offline after deployment
 
+### Web dashboard (multi-operator / audited)
+
+A browser-based management dashboard (`ort dashboard`) is included: streaming chat with matched
+skills, skill search/browse, JSONL audit trail, and masked configuration. No external assets
+(CDN-free) — fully offline. Protect it with `ORT_DASHBOARD_TOKEN` or put Keycloak (OIDC) in front.
+
+```bash
+docker compose --profile dashboard up -d   # http://localhost:8081 (auth via ORT_DASHBOARD_TOKEN)
+```
+
+### Manual run
+
 ```bash
 docker build -t open-ai-red-team:latest .
 docker run --rm -it --read-only --tmpfs /tmp \

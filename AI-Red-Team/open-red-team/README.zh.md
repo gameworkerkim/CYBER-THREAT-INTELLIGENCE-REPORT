@@ -27,6 +27,8 @@
 - **触发器引擎** — 关键词 + 正则匹配与打分，韩文、英文触发器关键词
 - **显式控制** — `/use <skill>`、`--skills` 参数、自动加载开关、技能索引开关
 - **CLI + 库** — 交互式 `ort chat`、单次 `ort ask`、技能查看、TypeScript API
+- **Web 管理面板** — 浏览器管理控制台（流式对话、技能浏览器、JSONL 审计追踪、
+  脱敏配置）— 多操作员·审计运营，无 CDN，适配物理隔离网络
 - **多语言文档** — 英语（基准）、韩语、日语、中文
 - **本地部署就绪** — 本地模型确保敏感目标信息留在内部环境
 
@@ -83,6 +85,7 @@ npx ort chat --skills offensive-sqli --provider glm      # 强制加载技能
 npx ort skills list                                      # 技能列表
 npx ort skills show offensive-sqli                       # 输出技能正文
 npx ort ask "如何测试这个登录表单的 SQLi" --provider deepseek  # 单次查询
+npx ort dashboard                                        # Web 管理面板（http://localhost:8081）
 ```
 
 ### 库

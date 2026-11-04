@@ -151,7 +151,40 @@ source: "https://github.com/SnailSploit/Claude-Red (MIT)"
 | 小型本地模型忽略技能 | `ORT_MAX_SKILLS=1`、`ORT_INCLUDE_INDEX=off`，建议 32B 以上模型 |
 | Ollama 上下文溢出 | 在 Ollama 设置中增大 `num_ctx` |
 
-## 8. 安全与伦理
+## 9. Web 管理面板
+
+支持多操作员与审计的浏览器管理面板。
+
+```bash
+npx ort dashboard                          # http://localhost:8081
+ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 令牌保护
+```
+
+| 标签页 | 功能 |
+|--------|------|
+| Chat | 流式对话，自动加载的技能以徽章显示 |
+| Skills | 按名称、类别、触发器搜索/筛选全部 79 个技能，查看完整正文 |
+| Audit | 查看 JSONL 审计日志中的近期交互 |
+| Config | 密钥脱敏后的只读配置 |
+
+环境变量：
+
+| 变量 | 默认值 | 说明 |
+|------|--------|------|
+| `ORT_DASHBOARD_PORT` | `8081` | 监听端口 |
+| `ORT_DASHBOARD_TOKEN` | *(空)* | `/api/*` 的 Bearer 令牌。为空则不鉴权（仅开发） |
+| `ORT_AUDIT_LOG` | *(空)* | JSONL 审计日志路径（记录完成时间、提供商、模型、命中技能、长度） |
+
+Docker：
+
+```bash
+docker compose --profile dashboard up -d   # http://localhost:8081
+```
+
+前端不含外部资源（无 CDN），可完全离线运行 — 适合物理隔离网络。
+企业 SSO 可在反向代理前放置 Keycloak（OIDC），并停用 `ORT_DASHBOARD_TOKEN`。
+
+## 10. 安全与伦理
 
 - 技能仅用于**授权测试**的攻击方法论。
 - 未经书面许可，绝不用于真实系统。

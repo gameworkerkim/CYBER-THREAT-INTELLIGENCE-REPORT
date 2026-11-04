@@ -142,6 +142,18 @@ OPENWEIGHT_BASE_URL=http://vllm:8000/v1
 - **capability 削除**（`cap_drop: ALL`）と `no-new-privileges`
 - `skills/` をイメージに同梱 — デプロイ後は完全オフラインで動作
 
+### Webダッシュボード（複数オペレータ・監査）
+
+ブラウザベースの管理ダッシュボード（`ort dashboard`）を同梱: 一致スキル表示付きストリーミングチャット、
+スキル検索/閲覧、JSONL監査証跡、マスク済み設定表示。外部アセット（CDN）なしで完全オフライン動作。
+`ORT_DASHBOARD_TOKEN` で保護するか、手前に Keycloak（OIDC）を配置してください。
+
+```bash
+docker compose --profile dashboard up -d   # http://localhost:8081（ORT_DASHBOARD_TOKEN認証）
+```
+
+### 手動実行
+
 ```bash
 docker build -t open-ai-red-team:latest .
 docker run --rm -it --read-only --tmpfs /tmp \

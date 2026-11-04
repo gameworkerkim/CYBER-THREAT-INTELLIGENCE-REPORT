@@ -77,6 +77,27 @@ program
     console.log(result.content);
   });
 
+program
+  .command("dashboard")
+  .description("Start the web management dashboard (chat, skills, audit, config)")
+  .option("-p, --port <n>", "listen port (default: ORT_DASHBOARD_PORT or 8081)")
+  .option("--no-auth", "disable bearer token auth (dev only)")
+  .action(async (options: { port?: string; auth?: boolean }) => {
+    const ort = new OpenRedTeam();
+    await ort.init();
+    const { startDashboard } = await import("./dashboard/server.js");
+    const port = options.port ? Number(options.port) : Number(process.env.ORT_DASHBOARD_PORT ?? 8081);
+    const server = await startDashboard(ort, {
+      port,
+      token: options.auth === false ? "" : undefined,
+    });
+    const shutdown = () => {
+      server.close(() => process.exit(0));
+    };
+    process.on("SIGINT", shutdown);
+    process.on("SIGTERM", shutdown);
+  });
+
 const skillsCmd = program
   .command("skills")
   .description("List or show skills");

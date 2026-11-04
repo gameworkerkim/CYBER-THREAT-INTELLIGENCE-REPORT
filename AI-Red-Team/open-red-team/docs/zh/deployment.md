@@ -141,6 +141,18 @@ OPENWEIGHT_BASE_URL=http://vllm:8000/v1
 - **能力移除**（`cap_drop: ALL`）与 `no-new-privileges`
 - `skills/` 随镜像分发 — 部署后完全离线运行
 
+### Web 管理面板（多操作员·审计）
+
+内置浏览器管理面板（`ort dashboard`）：带技能匹配徽章的流式对话、技能搜索/浏览、
+JSONL 审计追踪、脱敏配置查看。无外部资源（无 CDN），完全离线运行。
+使用 `ORT_DASHBOARD_TOKEN` 保护，或在前端放置 Keycloak（OIDC）。
+
+```bash
+docker compose --profile dashboard up -d   # http://localhost:8081（ORT_DASHBOARD_TOKEN 认证）
+```
+
+### 手动运行
+
 ```bash
 docker build -t open-ai-red-team:latest .
 docker run --rm -it --read-only --tmpfs /tmp \

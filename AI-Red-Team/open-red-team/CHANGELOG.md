@@ -5,6 +5,13 @@ All notable changes to Open AI Red Team are recorded here.
 ## [Unreleased]
 
 ### Added
+- **Web management dashboard** (`ort dashboard`) for multi-operator, audited operations
+  - Express API: `/api/health` (backend reachability), `/api/config` (masked keys),
+    `/api/skills`, `/api/skills/:name`, `/api/chat` (SSE streaming), `/api/audit` (JSONL), `/api/reset`
+  - Bearer-token auth (`ORT_DASHBOARD_TOKEN`) on `/api/*`
+  - JSONL audit log (`ORT_AUDIT_LOG`) — compliance-friendly interaction records
+  - Zero-build vanilla-JS frontend (Chat / Skills / Audit / Config tabs), no CDN — air-gap ready
+  - Docker Compose `dashboard` profile (port 8081, read-only, audit volume)
 - Deployment & operations tooling for air-gapped / on-premises environments
   - `Dockerfile` — multi-stage, non-root user, read-only rootfs support, healthcheck
   - `docker-compose.yml` — 5-layer stack with profiles: `ort` (app), `serving` (vLLM),

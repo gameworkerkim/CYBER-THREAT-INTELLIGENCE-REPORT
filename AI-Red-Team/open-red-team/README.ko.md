@@ -27,6 +27,8 @@
 - **트리거 엔진** — 키워드·정규식 매칭 + 스코어링, 한글·영문 트리거 키워드
 - **명시적 제어** — `/use <skill>`, `--skills` 플래그, 자동 로딩 on/off, 스킬 인덱스 on/off
 - **CLI + 라이브러리** — 대화형 `ort chat`, 1회성 `ort ask`, 스킬 조회, TypeScript API
+- **웹 대시보드** — 브라우저 기반 관리 콘솔 (스트리밍 채팅, 스킬 브라우저, JSONL 감사 추적,
+  마스킹된 설정) — 다중 운영자·감사 운영, CDN 없이 에어갭 네트워크 동작
 - **다국어 문서** — 영어(기준), 한국어, 일본어, 중국어
 - **온프레미스 지원** — 로컬 모델로 민감한 대상 정보를 내부 환경에 유지
 
@@ -83,6 +85,7 @@ npx ort chat --skills offensive-sqli --provider glm      # 스킬 강제 로딩
 npx ort skills list                                      # 스킬 목록
 npx ort skills show offensive-sqli                       # 스킬 본문 출력
 npx ort ask "이 로그인 폼에서 SQLi 테스트 방법" --provider deepseek  # 1회성 질의
+npx ort dashboard                                        # 웹 대시보드 (http://localhost:8081)
 ```
 
 ### 라이브러리

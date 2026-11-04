@@ -27,6 +27,8 @@
 - **トリガーエンジン** — キーワード・正規表現マッチング＋スコアリング、韓国語・英語トリガー
 - **明示的制御** — `/use <skill>`、`--skills` フラグ、自動ロード on/off、スキルインデックス on/off
 - **CLI + ライブラリ** — 対話型 `ort chat`、単発 `ort ask`、スキル確認、TypeScript API
+- **Webダッシュボード** — ブラウザベース管理コンソール（ストリーミングチャット、スキルブラウザ、
+  JSONL監査証跡、マスク済み設定）— 複数オペレータ・監査運用、CDNなしでエアギャップ対応
 - **多言語ドキュメント** — 英語（基準）、韓国語、日本語、中国語
 - **オンプレミス対応** — ローカルモデルで機微な対象情報を社内環境に保持
 
@@ -83,6 +85,7 @@ npx ort chat --skills offensive-sqli --provider glm      # スキル強制ロー
 npx ort skills list                                      # スキル一覧
 npx ort skills show offensive-sqli                       # スキル本文表示
 npx ort ask "このログインフォームでSQLiをテストする方法" --provider deepseek  # 単発クエリ
+npx ort dashboard                                        # Webダッシュボード（http://localhost:8081）
 ```
 
 ### ライブラリ

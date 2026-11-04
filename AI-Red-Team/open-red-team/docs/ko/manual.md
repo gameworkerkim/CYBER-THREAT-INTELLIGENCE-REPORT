@@ -151,7 +151,40 @@ source: "https://github.com/SnailSploit/Claude-Red (MIT)"
 | 소형 로컬 모델이 스킬을 무시함 | `ORT_MAX_SKILLS=1`, `ORT_INCLUDE_INDEX=off`, 32B 이상 모델 사용 권장 |
 | Ollama 컨텍스트 초과 | Ollama 설정에서 `num_ctx` 확장 |
 
-## 8. 보안 및 윤리
+## 9. 웹 대시보드
+
+다중 운영자·감사가 가능한 브라우저 기반 관리 대시보드입니다.
+
+```bash
+npx ort dashboard                          # http://localhost:8081
+ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 토큰 보호
+```
+
+| 탭 | 기능 |
+|----|------|
+| Chat | 스트리밍 채팅 + 자동 로딩된 스킬이 칩으로 표시 |
+| Skills | 79개 스킬을 이름·카테고리·트리거로 검색/필터, 본문 열람 |
+| Audit | JSONL 감사 로그의 최근 상호작용 조회 |
+| Config | 키 마스킹된 읽기 전용 설정 |
+
+환경변수:
+
+| 변수 | 기본값 | 설명 |
+|------|--------|------|
+| `ORT_DASHBOARD_PORT` | `8081` | 리슨 포트 |
+| `ORT_DASHBOARD_TOKEN` | *(없음)* | `/api/*`용 Bearer 토큰. 비어 있으면 인증 없음(개발 전용) |
+| `ORT_AUDIT_LOG` | *(없음)* | JSONL 감사 로그 경로 (채팅 완료 시각·프로바이더·모델·매칭 스킬·길이 기록) |
+
+Docker:
+
+```bash
+docker compose --profile dashboard up -d   # http://localhost:8081
+```
+
+프론트엔드는 외부 자산(CDN)이 없어 완전 오프라인 동작 — 에어갭 환경에 적합합니다.
+기업 SSO는 리버스 프록시 앞단에 Keycloak(OIDC)을 두고 `ORT_DASHBOARD_TOKEN`을 비활성화하십시오.
+
+## 10. 보안 및 윤리
 
 - 스킬은 **허가된 테스트 전용** 공격 방법론입니다.
 - 서면 허가 없이 실제 시스템에 절대 사용하지 마십시오.

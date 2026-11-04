@@ -151,7 +151,40 @@ source: "https://github.com/SnailSploit/Claude-Red (MIT)"
 | 小型ローカルモデルがスキルを無視 | `ORT_MAX_SKILLS=1`、`ORT_INCLUDE_INDEX=off`、32B以上を推奨 |
 | Ollamaコンテキスト超過 | Ollama設定の `num_ctx` を拡張 |
 
-## 8. セキュリティと倫理
+## 9. Web ダッシュボード
+
+複数オペレータ・監査対応のブラウザベース管理ダッシュボードです。
+
+```bash
+npx ort dashboard                          # http://localhost:8081
+ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearerトークン保護
+```
+
+| タブ | 機能 |
+|------|------|
+| Chat | ストリーミングチャット + 自動ロードされたスキルをチップ表示 |
+| Skills | 79スキルを名前・カテゴリ・トリガーで検索/絞り込み、本文表示 |
+| Audit | JSONL監査ログの直近のやり取りを表示 |
+| Config | キーをマスクした読み取り専用設定 |
+
+環境変数:
+
+| 変数 | デフォルト | 説明 |
+|------|-----------|------|
+| `ORT_DASHBOARD_PORT` | `8081` | リッスンポート |
+| `ORT_DASHBOARD_TOKEN` | *(なし)* | `/api/*` 用 Bearerトークン。空の場合は認証なし（開発専用） |
+| `ORT_AUDIT_LOG` | *(なし)* | JSONL監査ログパス（完了時刻・プロバイダ・モデル・一致スキル・文字数を記録） |
+
+Docker:
+
+```bash
+docker compose --profile dashboard up -d   # http://localhost:8081
+```
+
+フロントエンドは外部アセット（CDN）なしで完全オフライン動作 — エアギャップ環境に適します。
+企業SSOはリバースプロキシの手前に Keycloak（OIDC）を置き、`ORT_DASHBOARD_TOKEN` を無効化してください。
+
+## 10. セキュリティと倫理
 
 - スキルは**許可されたテスト専用**の攻撃手法です。
 - 書面許可のない実システムに対しては絶対に使用しないでください。

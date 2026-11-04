@@ -152,7 +152,41 @@ source: "https://github.com/SnailSploit/Claude-Red (MIT)"
 | Small local model ignores skills | `ORT_MAX_SKILLS=1`, `ORT_INCLUDE_INDEX=off`, use ≥ 32B models |
 | Ollama context overflow | Increase `num_ctx` in Ollama settings |
 
-## 8. Security & Ethics
+## 9. Web Dashboard
+
+A browser-based management dashboard for multi-operator, audited operations.
+
+```bash
+npx ort dashboard                          # http://localhost:8081
+ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # bearer-token protected
+```
+
+| Tab | Function |
+|-----|----------|
+| Chat | Streaming chat with auto-loaded skills shown as chips |
+| Skills | Search/filter all 79 skills by name, category, or trigger; view full bodies |
+| Audit | Recent interactions from the JSONL audit log |
+| Config | Read-only configuration with masked keys |
+
+Environment variables:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `ORT_DASHBOARD_PORT` | `8081` | Listen port |
+| `ORT_DASHBOARD_TOKEN` | *(empty)* | Bearer token for `/api/*`. Empty = unauthenticated (dev only) |
+| `ORT_AUDIT_LOG` | *(empty)* | JSONL audit log path (each chat completion appended: time, provider, model, matched skills, lengths) |
+
+Docker:
+
+```bash
+docker compose --profile dashboard up -d   # http://localhost:8081
+```
+
+The frontend has no external assets (no CDN) and works fully offline — suitable for air-gapped
+networks. For enterprise SSO, put Keycloak (OIDC) in front of the dashboard via a reverse proxy
+and disable `ORT_DASHBOARD_TOKEN`.
+
+## 10. Security & Ethics
 
 - Skills describe offensive methodology for **authorized testing only**.
 - Never run against systems without written permission.

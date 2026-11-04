@@ -1,7 +1,7 @@
 # Open AI Red Team — layered deployment stack (air-gapped / on-prem)
 #
 # Layer 3 (LLM serving): vllm (production, `serving` profile) / ollama (PoC, `poc` profile)
-# Layer 4 (red-team app):  ort
+# Layer 4 (red-team app):  ort (CLI) / dashboard (web, `dashboard` profile)
 # Layer 5 (auth / observability): keycloak (`auth`), langfuse (`observability`),
 #                                  prometheus+grafana (`monitoring`)
 #
@@ -40,6 +40,37 @@ services:
     cpus: 1.0
     stdin_open: true
     tty: true
+
+  # ---------------- Layer 4: red-team web dashboard ----------------
+  dashboard:
+    build: .
+    image: ${REGISTRY:-}open-ai-red-team:${ORT_TAG:-latest}
+    profiles: ["dashboard"]
+    command: ["dashboard"]
+    environment:
+      ORT_PROVIDER: ${ORT_PROVIDER:-openweight}
+      OPENWEIGHT_BASE_URL: ${ORT_LLM_BASE_URL:-http://vllm:8000/v1}
+      OPENWEIGHT_MODEL: ${ORT_LLM_MODEL:-qwen2.5-32b}
+      OPENWEIGHT_API_KEY: ${OPENWEIGHT_API_KEY:-none}
+      ORT_SKILLS_DIR: /app/skills
+      ORT_DASHBOARD_PORT: "8081"
+      ORT_DASHBOARD_TOKEN: ${ORT_DASHBOARD_TOKEN:-}
+      ORT_AUDIT_LOG: /data/audit.jsonl
+    volumes:
+      - ./data:/data
+    ports:
+      - "${ORT_DASHBOARD_PORT:-8081}:8081"
+    networks:
+      - redteam
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 512m
+    cpus: 1.0
 
   # ---------------- Layer 3: LLM serving ----------------
   vllm:
