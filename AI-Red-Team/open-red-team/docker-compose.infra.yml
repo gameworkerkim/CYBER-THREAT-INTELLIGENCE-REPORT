@@ -1,0 +1,121 @@
+# Open AI Red Team — Layer 5 infrastructure (auth / observability)
+#
+# Every secret here is REQUIRED — the file fails to start without real values
+# (no change-me defaults). Start together with the base stack:
+#
+#   export KEYCLOAK_ADMIN_PASSWORD=... KEYCLOAK_DB_PASSWORD=... \
+#          LANGFUSE_DB_PASSWORD=... LANGFUSE_NEXTAUTH_SECRET=... LANGFUSE_SALT=... \
+#          GRAFANA_ADMIN_PASSWORD=... ORT_DASHBOARD_TOKEN=... ORT_METRICS_TOKEN=...
+#   docker compose -f docker-compose.yml -f docker-compose.infra.yml \
+#     --profile auth --profile observability --profile monitoring up -d
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_TAG:-26}
+    profiles: ["auth"]
+    command: start --http-enabled=true --proxy-headers=xforwarded --import-realm
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?set KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?set KEYCLOAK_DB_PASSWORD}
+      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME:-localhost}
+    volumes:
+      - ./deploy/keycloak/realm.json:/opt/keycloak/data/import/realm.json:ro
+    depends_on:
+      keycloak-db:
+        condition: service_healthy
+    ports:
+      - "${KEYCLOAK_HTTP_PORT:-8080}:8080"
+    networks:
+      - redteam
+
+  keycloak-db:
+    image: postgres:16-alpine
+    profiles: ["auth"]
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?set KEYCLOAK_DB_PASSWORD}
+    volumes:
+      - keycloak-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - redteam
+
+  langfuse:
+    image: ghcr.io/langfuse/langfuse:${LANGFUSE_TAG:-latest}
+    profiles: ["observability"]
+    environment:
+      DATABASE_URL: postgresql://langfuse:${LANGFUSE_DB_PASSWORD:?set LANGFUSE_DB_PASSWORD}@langfuse-db:5432/langfuse
+      NEXTAUTH_SECRET: ${LANGFUSE_NEXTAUTH_SECRET:?set LANGFUSE_NEXTAUTH_SECRET}
+      NEXTAUTH_URL: http://localhost:3000
+      SALT: ${LANGFUSE_SALT:?set LANGFUSE_SALT}
+    depends_on:
+      langfuse-db:
+        condition: service_healthy
+    ports:
+      - "${LANGFUSE_PORT:-3000}:3000"
+    networks:
+      - redteam
+
+  langfuse-db:
+    image: postgres:16-alpine
+    profiles: ["observability"]
+    environment:
+      POSTGRES_DB: langfuse
+      POSTGRES_USER: langfuse
+      POSTGRES_PASSWORD: ${LANGFUSE_DB_PASSWORD:?set LANGFUSE_DB_PASSWORD}
+    volumes:
+      - langfuse-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U langfuse"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - redteam
+
+  prometheus:
+    image: prom/prometheus:${PROMETHEUS_TAG:-latest}
+    profiles: ["monitoring"]
+    environment:
+      ORT_METRICS_TOKEN: ${ORT_METRICS_TOKEN:?set ORT_METRICS_TOKEN}
+    volumes:
+      - ./deploy/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    networks:
+      - redteam
+    read_only: true
+
+  grafana:
+    image: grafana/grafana:${GRAFANA_TAG:-latest}
+    profiles: ["monitoring"]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?set GRAFANA_ADMIN_PASSWORD}
+    volumes:
+      - ./deploy/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "${GRAFANA_PORT:-3001}:3000"
+    networks:
+      - redteam
+
+networks:
+  redteam:
+    driver: bridge
+    internal: ${NETWORK_INTERNAL:-false}
+
+volumes:
+  keycloak-db-data:
+  langfuse-db-data:
+  prometheus-data:
+  grafana-data:

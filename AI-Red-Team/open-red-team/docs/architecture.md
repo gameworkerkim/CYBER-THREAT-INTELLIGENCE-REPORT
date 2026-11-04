@@ -104,6 +104,14 @@ All targets expose OpenAI-compatible APIs, so a single `BaseProvider` (openai SD
 | GLM | `https://open.bigmodel.cn/api/paas/v4` | Bearer API key | Some models return a `reasoning_content` field |
 | Open-weight | Ollama `http://localhost:11434/v1`, vLLM, … | any/dummy | Context length and format vary per model |
 
+## Common constraints
+
+| Item | Claude (original) | OpenAI-compatible models (this project) |
+|------|-------------------|------------------------------------------|
+| Native skill system | Yes | No → reproduced by middleware |
+| Tool execution (Bash, …) | Yes | No — this release injects methodology only and does not execute commands on the host |
+| Multi-turn agent loop | Yes | Limited → CLI/dashboard sessions |
+
 ## Context budget
 
 - Average skill body is 8–15K tokens → full index + up to 3 bodies ≈ 50K tokens.

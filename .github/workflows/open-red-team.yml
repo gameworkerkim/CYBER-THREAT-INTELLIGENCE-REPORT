@@ -25,3 +25,11 @@ jobs:
       - run: npm run typecheck
       - run: npm run build
       - run: npm test
+      - name: Build container image
+        run: docker build -t open-ai-red-team:test .
+      - name: Scan image (SBOM + CVE gate)
+        run: |
+          bash scripts/sbom/scan.sh open-ai-red-team:test artifacts/sbom \
+            || { echo "::error::Trivy scan failed"; exit 1; }
+        env:
+          EXIT_ON: HIGH,CRITICAL

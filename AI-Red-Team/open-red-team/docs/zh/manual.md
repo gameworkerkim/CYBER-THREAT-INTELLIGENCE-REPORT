@@ -209,9 +209,12 @@ docker compose up -d ort    # http://localhost:8081
 
 | 变量 | 效果 |
 |------|------|
-| `ORT_SCOPE` | 已申报任务说明 — 注入系统提示词并记录到审计/追踪 |
-| `ORT_SCOPE_DOMAINS` | 范围内的主机/域名（逗号分隔）。范围外目标将被标记并建议确认范围 |
+| `ORT_SCOPE` | 已申报任务说明 — 注入系统提示词并记录到审计/追踪。面板启动必需（`ORT_SCOPE_MODE=open` 例外） |
+| `ORT_SCOPE_DOMAINS` | 范围内的主机/域名（逗号分隔）。范围外目标在**任何模型调用之前被拒绝**（SSE `denied`、CLI `decision: DENIED`） |
+| `ORT_SCOPE_MODE` | `open` 禁用域名检查（仅本地实验室） |
 | `ORT_OPERATOR` | 记录到审计条目和 LangFuse 追踪的操作员标识 |
+
+会话为内存存储（LRU 上限、空闲淘汰），**服务器重启后清空** — 磁盘持久化不在本版本范围内。
 
 ### 可观测性
 

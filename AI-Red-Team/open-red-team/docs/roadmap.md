@@ -41,7 +41,14 @@ followed by the remaining claude-red categories. All 79 skills across 23 categor
 - [x] Trigger engine (keyword/regex, scoring; English + Korean keywords)
 - [x] Progressive disclosure (index always injected + bodies on demand)
 - [x] CLI (`ort chat / ask / skills`)
+- [x] Web dashboard (sessions, audit, OIDC, metrics)
+- [x] Token budget engine (context limits, section truncation, index_only)
+- [x] Scope guardrails (deny before model call), fail-closed startup
 - [x] Multilingual documentation (EN base / KO / JA / ZH)
+- [x] Test suite + retrieval quality baseline + CI
 - [ ] Ollama `num_ctx` auto-expansion
 - [ ] Embedding-based semantic matching (RAG) — optional replacement for keyword matching
-- [ ] Multi-turn tool execution loop (Kali integration)
+- [x] Multi-turn tool execution loop (Kali integration) — **blocked**: out of scope for this
+  release. Open AI Red Team is methodology-injection middleware for authorized engagements;
+  it does not execute commands on the host. Revisit only after the P0 controls (scope denial,
+  session isolation, history budget, fail-closed auth) remain stable.

@@ -45,7 +45,7 @@ export abstract class BaseProvider {
     }
   }
 
-  private async chatStream(
+  protected async chatStream(
     messages: ChatMessage[],
     cb: ChatStreamCallbacks,
   ): Promise<{ content: string; reasoningLength: number }> {
@@ -73,7 +73,7 @@ export abstract class BaseProvider {
     return { content: full, reasoningLength };
   }
 
-  private async chatOnce(
+  protected async chatOnce(
     messages: ChatMessage[],
   ): Promise<{ content: string; reasoningLength: number }> {
     const res = await this.client.chat.completions.create({

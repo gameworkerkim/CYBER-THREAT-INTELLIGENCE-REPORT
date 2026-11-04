@@ -70,7 +70,7 @@ Claude lock-in: the same red-team skills now run on DeepSeek, GLM (Zhipu), and o
 | Mobile | 1 | Supply Chain | 2 |
 | IoT & Embedded | 1 | Social Engineering | 2 |
 | Exploit Development | 6 | Network Attacks | 1 |
-| Utility | 2 | **Total** | **79** |
+| Utility | 2 | Total | 79 |
 
 ## Quickstart
 
@@ -131,6 +131,9 @@ console.log(reply);
   **internal system information to foreign cloud APIs**
 - Security review of e-government / financial services under strict data-governance rules
 
+> See [Compliance Controls](docs/compliance.md) for exactly which controls the code enforces and
+> which remain operator/organization responsibilities.
+
 ### Enterprises — internal security operations
 
 - Security team training, CTF prep, authorized pentest planning, and day-to-day
@@ -168,6 +171,11 @@ console.log(reply);
    and the top N skill bodies are injected into the system prompt.
 3. **Model call** — the request is sent to the selected provider via its OpenAI-compatible API.
 
+**Product boundary**: this release is methodology-injection middleware for authorized engagements.
+It does not execute commands on the host and ships no tool-execution agent loop (see
+[Roadmap](docs/roadmap.md)). Compliance-relevant controls and the split between what the code
+enforces and what the operator must do are documented in [Compliance Controls](docs/compliance.md).
+
 ## Deployment & Operations (air-gapped / on-premises)
 
 Financial, public, and enterprise deployments (망분리 / network separation) are covered by a
@@ -191,7 +199,8 @@ See [Deployment & Operations Guide](docs/deployment.md).
 - [Architecture](docs/architecture.md) — middleware design and data flow
 - [Porting Guide](docs/porting-guide.md) — Claude skill → model-agnostic conversion rules
 - [Model Matrix](docs/model-matrix.md) — DeepSeek/GLM/open-weight characteristics and constraints
-- [Uncensored Open-Weight Models](docs/uncensored-models.md) — LM Studio + uncensored GGUF lab guide 
+- [Uncensored Open-Weight Models](docs/uncensored-models.md) — LM Studio + uncensored GGUF lab guide
+- [Compliance Controls](docs/compliance.md) — what the code enforces vs. operator responsibilities
 - [Roadmap](docs/roadmap.md) — porting phases and middleware plans
 
 ## License

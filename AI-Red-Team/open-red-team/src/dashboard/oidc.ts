@@ -38,7 +38,7 @@ async function jwks(config: OidcConfig): Promise<Jwk[]> {
   return cachedJwks;
 }
 
-function verifyJwt(token: string, config: OidcConfig, keys: Jwk[]): boolean {
+export function verifyJwt(token: string, config: OidcConfig, keys: Jwk[]): boolean {
   const [headerB64, payloadB64, sigB64] = token.split(".");
   if (!headerB64 || !payloadB64 || !sigB64) return false;
 
@@ -87,8 +87,20 @@ export async function oidcMiddleware(req: Request, res: Response, next: NextFunc
       res.status(401).json({ error: "unauthorized (valid OIDC access token required)" });
       return;
     }
+    const payload = jwtPayload(token);
+    res.locals.ortUser = { sub: payload.sub ?? "" };
     next();
   } catch {
     res.status(502).json({ error: "OIDC verification unavailable" });
+  }
+}
+
+function jwtPayload(token: string): { sub?: string } {
+  const parts = token.split(".");
+  if (parts.length !== 3) return {};
+  try {
+    return JSON.parse(Buffer.from(parts[1], "base64url").toString("utf-8"));
+  } catch {
+    return {};
   }
 }

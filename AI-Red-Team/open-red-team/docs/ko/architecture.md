@@ -104,6 +104,14 @@ Claude Skills의 핵심 원리 — **스킬 본문은 필요할 때만 컨텍스
 | GLM | `https://open.bigmodel.cn/api/paas/v4` | Bearer API key | 일부 모델은 `reasoning_content` 필드 반환 |
 | Open-weight | Ollama `http://localhost:11434/v1`, vLLM 등 | any/dummy | 컨텍스트 길이·포맷 편차 큼 |
 
+## 공통 제약
+
+| 항목 | Claude (원본) | OpenAI 호환 모델 (본 프로젝트) |
+|------|--------------|-------------------------------|
+| 네이티브 스킬 시스템 | O | X → 미들웨어가 재현 |
+| 도구 실행 (Bash 등) | O | X — 이번 릴리스는 방법론 주입만 하며 호스트에서 명령을 실행하지 않음 |
+| 멀티턴 에이전트 루프 | O | 제한적 → CLI/대시보드 세션 |
+
 ## 컨텍스트 예산 관리
 
 - 스킬 본문 평균 8–15K 토큰 → 전체 인덱스 + 최대 3개 본문 ≈ 50K 토큰.

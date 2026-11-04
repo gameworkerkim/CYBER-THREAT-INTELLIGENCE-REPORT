@@ -6,6 +6,9 @@ scrape_configs:
   - job_name: ort
     static_configs:
       - targets: ["ort:8081"]
+    authorization:
+      type: Bearer
+      credentials: ${ORT_METRICS_TOKEN}
 
   # vLLM exposes OpenAI-compatible server metrics on :8000/metrics
   - job_name: vllm

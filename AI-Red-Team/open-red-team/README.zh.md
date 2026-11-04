@@ -129,6 +129,8 @@ console.log(reply);
   **不将内部系统信息发送至境外云 API**
 - 在严格数据治理要求下对电子政务、金融服务进行安全审查
 
+> 代码强制实施的控制与操作员/组织责任的划分，参见[合规控制](docs/compliance.md)。
+
 ### 企业 — 内部安全运营
 
 - 为安全团队培训、CTF 备战、授权渗透测试规划、日常漏洞分级提供操作员级方法学库
@@ -185,7 +187,8 @@ docker compose --profile serving up -d           # 生产：应用 + vLLM
 - [架构](docs/architecture.md) — 中间件设计与数据流
 - [移植指南](docs/porting-guide.md) — Claude 技能 → 模型无关的转换规则
 - [模型矩阵](docs/model-matrix.md) — DeepSeek/GLM/开源权重的特性与限制
-- [无审查开源权重模型](docs/uncensored-models.md) — LM Studio + 无审查 GGUF 实验室指南 
+- [无审查开源权重模型](docs/uncensored-models.md) — LM Studio + 无审查 GGUF 实验室指南
+- [合规控制](docs/compliance.md) — 代码强制实施的内容 vs 操作员责任
 - [路线图](docs/roadmap.md) — 移植阶段与中间件规划
 
 ## 许可证

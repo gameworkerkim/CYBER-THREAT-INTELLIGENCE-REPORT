@@ -129,6 +129,8 @@ console.log(reply);
   **내부 시스템 정보를 해외 클라우드 API로 전송하지 않고** 수행
 - 엄격한 데이터 거버넌스 하의 전자정부·금융 서비스 보안 검토
 
+> 코드가 강제하는 통제와 운영자/조직 책임의 구분은 [컴플라이언스 통제](docs/compliance.md)를 참고하십시오.
+
 ### 기업 — 사내 보안 운영
 
 - 보안팀 교육, CTF 대비, 허가된 침투 테스트 계획 수립, 일상적 취약점 트리아지에 운영자급 방법론 제공
@@ -185,7 +187,8 @@ docker compose --profile serving up -d           # 프로덕션: 앱 + vLLM
 - [아키텍처](docs/architecture.md) — 미들웨어 설계 및 데이터 흐름
 - [포팅 가이드](docs/porting-guide.md) — Claude 스킬 → 모델 비종속 변환 규칙
 - [모델 매트릭스](docs/model-matrix.md) — DeepSeek/GLM/오픈웨이트 특성과 제약
-- [무검열 오픈웨이트 모델](docs/uncensored-models.md) — LM Studio + 무검열 GGUF 랩 가이드 
+- [무검열 오픈웨이트 모델](docs/uncensored-models.md) — LM Studio + 무검열 GGUF 랩 가이드
+- [컴플라이언스 통제](docs/compliance.md) — 코드가 강제하는 것 vs 운영자 책임
 - [로드맵](docs/roadmap.md) — 포팅 단계와 미들웨어 계획
 
 ## 라이선스

@@ -129,6 +129,8 @@ console.log(reply);
   **内部システム情報を海外クラウドAPIへ送信せずに**実施
 - 厳格なデータガバナンス下での電子政府・金融サービスのセキュリティレビュー
 
+> コードが強制する統制と運用者/組織の責任の区分は [コンプライアンス統制](docs/compliance.md) を参照してください。
+
 ### 企業 — 社内セキュリティ運用
 
 - セキュリティチームの教育、CTF対策、許可されたペネトレーションテストの計画、日常の脆弱性トリアージに
@@ -187,7 +189,8 @@ docker compose --profile serving up -d           # 本番: アプリ + vLLM
 - [アーキテクチャ](docs/architecture.md) — ミドルウェア設計とデータフロー
 - [移植ガイド](docs/porting-guide.md) — Claudeスキル → モデル非依存への変換規則
 - [モデルマトリクス](docs/model-matrix.md) — DeepSeek/GLM/オープンウェイトの特性と制約
-- [無検閲オープンウェイトモデル](docs/uncensored-models.md) — LM Studio + 無検閲GGUFラボガイド 
+- [無検閲オープンウェイトモデル](docs/uncensored-models.md) — LM Studio + 無検閲GGUFラボガイド
+- [コンプライアンス統制](docs/compliance.md) — コードが強制するもの vs 運用者の責任
 - [ロードマップ](docs/roadmap.md) — 移植フェーズとミドルウェア計画
 
 ## ライセンス

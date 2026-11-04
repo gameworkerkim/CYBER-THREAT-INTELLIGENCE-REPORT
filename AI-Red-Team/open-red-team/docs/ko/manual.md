@@ -209,9 +209,12 @@ docker compose up -d ort    # http://localhost:8081
 
 | 변수 | 효과 |
 |------|------|
-| `ORT_SCOPE` | 신고된 임무 설명 — 시스템 프롬프트에 주입되고 감사·트레이스에 기록 |
-| `ORT_SCOPE_DOMAINS` | 범위 내 호스트/도메인(쉼표 구분). 범위 밖 대상은 플래그 후 스코프 확인 권고 |
+| `ORT_SCOPE` | 신고된 임무 설명 — 시스템 프롬프트에 주입되고 감사·트레이스에 기록. 대시보드 기동 필수(`ORT_SCOPE_MODE=open` 예외) |
+| `ORT_SCOPE_DOMAINS` | 범위 내 호스트/도메인(쉼표 구분). 범위 밖 대상은 **모델 호출 전에 거절**(SSE `denied`, CLI `decision: DENIED`) |
+| `ORT_SCOPE_MODE` | `open`이면 도메인 검사 해제(로컬 랩 전용) |
 | `ORT_OPERATOR` | 감사 항목·LangFuse 트레이스에 기록되는 운영자 식별자 |
+
+세션은 인메모리(LRU 상한, 유휴 축출)이며 **서버 재시작 후 초기화**됩니다 — 디스크 영속은 이번 릴리스 범위 밖입니다.
 
 ### 관측
 

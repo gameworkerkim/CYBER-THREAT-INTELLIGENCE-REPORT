@@ -2,13 +2,14 @@
 import { Command } from "commander";
 import { createInterface } from "node:readline/promises";
 import { OpenRedTeam } from "./index.js";
+import { getVersion } from "./version.js";
 
 const program = new Command();
 
 program
   .name("ort")
   .description("Open AI Red Team — model-agnostic offensive security skills middleware")
-  .version("0.1.0");
+  .version(getVersion());
 
 program
   .command("chat")
@@ -52,7 +53,13 @@ program
           onDelta: (d) => process.stdout.write(d),
         });
         process.stdout.write("\n");
-        console.log(`\n[ort] skills: ${result.matchedSkills.join(", ") || "none"}\n`);
+        const extras: string[] = [`skills: ${result.matchedSkills.join(", ") || "none"}`];
+        if (result.decision === "deny") {
+          extras.push(`decision: DENIED (${result.flaggedTargets.join(", ")})`);
+        }
+        if (result.promptTokens) extras.push(`promptTokens: ${result.promptTokens}/${result.maxContextTokens ?? "?"}`);
+        if (result.droppedTurns) extras.push(`droppedTurns: ${result.droppedTurns}`);
+        console.log(`\n[ort] ${extras.join(" | ")}\n`);
       } catch (err) {
         process.stdout.write("\n");
         console.error(`[ort] error: ${err instanceof Error ? err.message : String(err)}\n`);
@@ -87,10 +94,16 @@ program
     await ort.init();
     const { startDashboard } = await import("./dashboard/server.js");
     const port = options.port ? Number(options.port) : Number(process.env.ORT_DASHBOARD_PORT ?? 8081);
-    const server = await startDashboard(ort, {
-      port,
-      token: options.auth === false ? "" : undefined,
-    });
+    let server;
+    try {
+      server = await startDashboard(ort, {
+        port,
+        token: options.auth === false ? "" : undefined,
+      });
+    } catch (err) {
+      console.error(`[ort] ${err instanceof Error ? err.message : String(err)}`);
+      process.exit(1);
+    }
     const shutdown = () => {
       server.close(() => process.exit(0));
     };

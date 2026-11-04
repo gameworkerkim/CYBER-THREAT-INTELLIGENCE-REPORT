@@ -185,10 +185,16 @@ Environment variables:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `ORT_DASHBOARD_PORT` | `8081` | Listen port |
-| `ORT_DASHBOARD_TOKEN` | *(empty)* | Bearer token for `/api/*`. Empty = unauthenticated (dev only) |
+| `ORT_DASHBOARD_TOKEN` | *(empty)* | Bearer token for `/api/*`. The dashboard refuses to start without a token or OIDC (`ORT_ALLOW_ANONYMOUS=1` for local labs) |
 | `ORT_OIDC_ISSUER` | *(empty)* | Keycloak/OIDC issuer — when set, API requires a valid OIDC access token (takes precedence over the static token) |
 | `ORT_OIDC_AUDIENCE` | *(empty)* | Expected `aud` claim |
-| `ORT_AUDIT_LOG` | *(empty)* | JSONL audit log path (each chat completion appended: time, provider, model, matched skills, lengths, operator, scope) |
+| `ORT_METRICS_TOKEN` | *(empty)* | Token for `/metrics` (falls back to dashboard auth when empty) |
+| `ORT_AUDIT_LOG` | *(empty)* | JSONL audit log path (sessionId, operator, decision, matched skills, prompt SHA-256 — no prompt plaintext) |
+| `ORT_AUDIT_REQUIRED` | `0` | `1` fails requests when the audit write fails |
+
+Sessions: the client sends `X-Ort-Session`; the server issues a session id in the first `session`
+SSE event and returns it again in `done`/`denied`. Sessions are in-memory (LRU cap, idle eviction) —
+**they do not survive a server restart** (disk persistence is out of scope for this release).
 
 Docker:
 
@@ -223,8 +229,9 @@ injected as a body — read them with `ort skills show <name>`.
 
 | Variable | Effect |
 |----------|--------|
-| `ORT_SCOPE` | Declared engagement description — injected into the system prompt and recorded in audit/traces |
-| `ORT_SCOPE_DOMAINS` | Comma-separated in-scope hosts/domains. Hosts outside this list are flagged and the operator is advised to confirm scope |
+| `ORT_SCOPE` | Declared engagement description — injected into the system prompt and recorded in audit/traces. Required for the dashboard (unless `ORT_SCOPE_MODE=open`) |
+| `ORT_SCOPE_DOMAINS` | Comma-separated in-scope hosts/domains. Hosts outside this list are **refused before any model call** (SSE `denied`, CLI `decision: DENIED`) |
+| `ORT_SCOPE_MODE` | `open` disables the domain check (local lab only) |
 | `ORT_OPERATOR` | Identity recorded in audit entries and LangFuse traces |
 
 ### Observability

@@ -103,6 +103,14 @@ Claude Skills 的核心原理 — **技能正文仅在需要时进入上下文**
 | GLM | `https://open.bigmodel.cn/api/paas/v4` | Bearer API key | 部分模型返回 `reasoning_content` 字段 |
 | Open-weight | Ollama `http://localhost:11434/v1`、vLLM 等 | any/dummy | 上下文长度与格式因模型而异 |
 
+## 共同限制
+
+| 项目 | Claude（原始） | OpenAI 兼容模型（本项目） |
+|------|----------------|---------------------------|
+| 原生技能系统 | 有 | 无 → 由中间件复现 |
+| 工具执行（Bash 等） | 有 | 无 — 本版本仅注入方法论，不在主机上执行命令 |
+| 多轮代理循环 | 有 | 有限 → 以 CLI/面板会话替代 |
+
 ## 上下文预算管理
 
 - 技能正文平均 8–15K token → 完整索引 + 最多 3 个正文 ≈ 50K token。

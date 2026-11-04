@@ -1,6 +1,6 @@
 {
   "name": "open-ai-red-team",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Model-agnostic offensive security skills middleware for DeepSeek, GLM, and open-weight models",
   "type": "module",
   "bin": {
@@ -29,8 +29,8 @@
     "docker:build": "docker build -t open-ai-red-team:latest .",
     "docker:up": "docker compose up -d ort",
     "docker:up:poc": "docker compose --profile poc up -d",
-    "docker:up:prod": "docker compose --profile serving --profile auth --profile observability --profile monitoring up -d",
-    "docker:down": "docker compose --profile serving --profile poc --profile cli --profile auth --profile observability --profile monitoring down",
+    "docker:up:prod": "docker compose -f docker-compose.yml -f docker-compose.infra.yml --profile serving --profile auth --profile observability --profile monitoring up -d",
+    "docker:down": "docker compose -f docker-compose.yml -f docker-compose.infra.yml --profile serving --profile poc --profile cli --profile auth --profile observability --profile monitoring down",
     "offline:export": "bash scripts/offline/export-images.sh",
     "offline:import": "bash scripts/offline/import-images.sh",
     "models:export": "bash scripts/offline/export-models.sh",

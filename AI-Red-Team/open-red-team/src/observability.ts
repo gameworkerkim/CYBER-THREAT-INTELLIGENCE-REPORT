@@ -28,9 +28,11 @@ export async function recordChat(entry: {
   matchedSkills: string[];
   scope?: string;
   flaggedTargets?: string[];
+  decision?: string;
+  operator: string;
+  sessionId?: string;
   promptTokens?: number;
   reasoningTokens?: number;
-  operator: string;
 }): Promise<void> {
   const client = await (clientPromise ?? null);
   if (!client) return;
@@ -45,9 +47,11 @@ export async function recordChat(entry: {
         matchedSkills: entry.matchedSkills,
         scope: entry.scope ?? "",
         flaggedTargets: entry.flaggedTargets ?? [],
+        decision: entry.decision ?? "allow",
+        operator: entry.operator,
+        sessionId: entry.sessionId ?? "",
         promptTokens: entry.promptTokens ?? 0,
         reasoningTokens: entry.reasoningTokens ?? 0,
-        operator: entry.operator,
       },
     });
     await client.flushAsync();

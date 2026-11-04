@@ -1,3 +1,5 @@
+import type { BaseProvider } from "./providers/base.js";
+
 export type ProviderName = "deepseek" | "glm" | "openweight";
 
 export interface SkillFrontmatter {
@@ -50,6 +52,7 @@ export interface OrtOptions {
   systemPrompt?: string;
   temperature?: number;
   maxTokens?: number;
+  providerOverride?: BaseProvider;
 }
 
 export interface ChatResult {
@@ -57,7 +60,13 @@ export interface ChatResult {
   matchedSkills: string[];
   provider: ProviderName;
   model: string;
+  decision: ScopeDecision;
+  flaggedTargets: string[];
   promptTokens?: number;
   maxContextTokens?: number;
   reasoningTokens?: number;
+  droppedTurns?: number;
+  sessionId?: string;
 }
+
+export type ScopeDecision = "allow" | "deny";

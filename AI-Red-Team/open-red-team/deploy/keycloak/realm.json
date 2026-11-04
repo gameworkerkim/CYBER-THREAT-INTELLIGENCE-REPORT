@@ -1,0 +1,33 @@
+{
+  "realm": "open-red-team",
+  "enabled": true,
+  "sslRequired": "external",
+  "clients": [
+    {
+      "clientId": "ort-dashboard",
+      "enabled": true,
+      "publicClient": true,
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "redirectUris": ["http://localhost:8081/*", "http://localhost/*"],
+      "webOrigins": ["http://localhost:8081"],
+      "attributes": {
+        "post.logout.redirect.uris": "http://localhost:8081/*"
+      },
+      "defaultClientScopes": ["web-origins", "role_list", "profile", "email"],
+      "protocolMappers": [
+        {
+          "name": "ort-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "ort-dashboard",
+            "id.token.claim": "false",
+            "access.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ]
+}

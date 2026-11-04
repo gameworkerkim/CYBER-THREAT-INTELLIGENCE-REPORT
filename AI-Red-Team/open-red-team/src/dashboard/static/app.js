@@ -4,9 +4,13 @@ const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
 const TOKEN_KEY = "ort_dashboard_token";
+const SESSION_KEY = "ort_session_id";
 const authHeaders = () => {
   const token = localStorage.getItem(TOKEN_KEY) ?? "";
-  return token ? { Authorization: `Bearer ${token}` } : {};
+  const session = sessionStorage.getItem(SESSION_KEY) ?? "";
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  if (session) headers["X-Ort-Session"] = session;
+  return headers;
 };
 
 const esc = (s) =>
@@ -118,11 +122,20 @@ async function sendChat() {
   const handleEvent = (event, data) => {
     let payload = {};
     try { payload = JSON.parse(data); } catch { payload = {}; }
-    if (event === "delta") {
+    if (event === "session") {
+      if (payload.sessionId) sessionStorage.setItem(SESSION_KEY, payload.sessionId);
+    } else if (event === "delta") {
       buf += payload.text ?? "";
       assistant.textContent = buf;
       $("#chat-box").scrollTop = $("#chat-box").scrollHeight;
     } else if (event === "done") {
+      if (payload.sessionId) sessionStorage.setItem(SESSION_KEY, payload.sessionId);
+      if (payload.droppedTurns) {
+        const note = document.createElement("div");
+        note.className = "chip dim";
+        note.textContent = `earlier turns omitted: ${payload.droppedTurns}`;
+        assistant.parentElement.insertBefore(note, assistant);
+      }
       if (payload.matchedSkills?.length) {
         const chips = assistant.parentElement.querySelector(".chips") ?? document.createElement("div");
         if (!chips.className) chips.className = "chips";
@@ -133,6 +146,21 @@ async function sendChat() {
             c.textContent = s;
             chips.appendChild(c);
           }
+        });
+        assistant.parentElement.insertBefore(chips, assistant);
+      }
+    } else if (event === "denied") {
+      if (payload.sessionId) sessionStorage.setItem(SESSION_KEY, payload.sessionId);
+      buf = payload.content ?? "Request refused by the scope guard.";
+      assistant.textContent = buf;
+      if (payload.flaggedTargets?.length) {
+        const chips = document.createElement("div");
+        chips.className = "chips";
+        payload.flaggedTargets.forEach((t) => {
+          const c = document.createElement("span");
+          c.className = "chip";
+          c.textContent = `out-of-scope: ${t}`;
+          chips.appendChild(c);
         });
         assistant.parentElement.insertBefore(chips, assistant);
       }
@@ -174,7 +202,12 @@ $("#chat-input").addEventListener("keydown", (e) => {
   }
 });
 $("#btn-reset").addEventListener("click", async () => {
-  await fetch("/api/reset", { method: "POST", headers: authHeaders() });
+  const session = sessionStorage.getItem(SESSION_KEY);
+  await fetch("/api/reset", {
+    method: "POST",
+    headers: authHeaders(),
+    body: session ? undefined : null,
+  });
   $("#chat-box").innerHTML = "";
 });
 
@@ -207,7 +240,7 @@ function renderSkills() {
     })
     .map(
       (s) => `<tr data-name="${esc(s.name)}">
-        <td><a href="#" class="skill-link">${esc(s.name)}</a></td>
+        <td><a href="#" class="skill-link">${esc(s.name)}</a>${s.indexOnly ? ' <span class="chip">본문 미주입</span>' : ""}</td>
         <td><span class="chip">${esc(s.category)}</span></td>
         <td>${esc(s.description)}</td>
         <td>${s.triggers.slice(0, 5).map((t) => `<span class="chip dim">${esc(t)}</span>`).join(" ")}${s.triggers.length > 5 ? " …" : ""}</td>

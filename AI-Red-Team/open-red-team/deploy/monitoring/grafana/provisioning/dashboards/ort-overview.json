@@ -1,0 +1,76 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Chat requests",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "targets": [
+        { "expr": "sum(ort_chat_requests_total)", "refId": "A", "datasource": { "type": "prometheus" } }
+      ],
+      "datasource": { "type": "prometheus" }
+    },
+    {
+      "type": "stat",
+      "title": "Chat errors",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "targets": [
+        { "expr": "sum(ort_chat_errors_total)", "refId": "A", "datasource": { "type": "prometheus" } }
+      ],
+      "datasource": { "type": "prometheus" }
+    },
+    {
+      "type": "stat",
+      "title": "Response tokens",
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+      "targets": [
+        { "expr": "sum(ort_chat_tokens_total)", "refId": "A", "datasource": { "type": "prometheus" } }
+      ],
+      "datasource": { "type": "prometheus" }
+    },
+    {
+      "type": "stat",
+      "title": "RSS",
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
+      "fieldConfig": { "defaults": { "unit": "bytes" } },
+      "targets": [
+        { "expr": "ort_process_resident_memory_bytes", "refId": "A", "datasource": { "type": "prometheus" } }
+      ],
+      "datasource": { "type": "prometheus" }
+    },
+    {
+      "type": "timeseries",
+      "title": "Chat latency (seconds, cumulative)",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "targets": [
+        {
+          "expr": "rate(ort_chat_duration_seconds_total[5m])",
+          "refId": "A",
+          "datasource": { "type": "prometheus" }
+        }
+      ],
+      "datasource": { "type": "prometheus" }
+    },
+    {
+      "type": "timeseries",
+      "title": "Denials & errors (rate 5m)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "targets": [
+        { "expr": "rate(ort_chat_errors_total[5m])", "refId": "A", "datasource": { "type": "prometheus" } },
+        {
+          "expr": "sum(rate(ort_chat_requests_total[5m]))",
+          "refId": "B",
+          "datasource": { "type": "prometheus" }
+        }
+      ],
+      "datasource": { "type": "prometheus" }
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "tags": ["ort"],
+  "title": "Open AI Red Team — Overview",
+  "uid": "ort-overview",
+  "version": 1
+}

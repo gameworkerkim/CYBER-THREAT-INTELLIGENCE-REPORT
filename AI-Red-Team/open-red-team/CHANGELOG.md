@@ -2,6 +2,48 @@
 
 All notable changes to Open AI Red Team are recorded here.
 
+## [0.5.0] — 2026-11-04
+
+### Added
+- **Scope enforcement (deny before call)** — out-of-scope hosts/IPs are refused in `chat()`
+  with zero provider calls (`decision: deny`, fixed reply, SSE `denied` event); validated IP
+  octet regex, version-string and filename false-positive filters; dashboard refuses to start
+  without a declared scope unless `ORT_SCOPE_MODE=open`
+- **Per-operator session isolation** — `SessionStore` (LRU cap, idle eviction), `X-Ort-Session`
+  header, session-scoped reset, OIDC `sub` ownership (foreign session → 404), frontend
+  `sessionStorage` support, `/api/session` introspection
+- **History token budget** — conversation history trimmed oldest-first against
+  `maxContext - reserve` with `[earlier turns omitted]` marker and `droppedTurns` reporting
+  (CLI + SSE `done`)
+- **Fail-closed auth & audit** — dashboard exits 1 without token/OIDC (`ORT_ALLOW_ANONYMOUS=1`
+  for labs); `/metrics` requires `ORT_METRICS_TOKEN` or dashboard auth; `ORT_AUDIT_REQUIRED=1`
+  fails requests when the audit write fails; audit fields now include sessionId, operator,
+  decision, flaggedTargets and prompt SHA-256 (no prompt plaintext); LangFuse disclosure in
+  Config tab and docs
+- **PoC compose prepares the model** — `ollama-pull` one-shot (ort waits for it),
+  healthcheck requires LLM backend `ok`, `vllm-preflight` fails fast with a clear message when
+  weights are missing
+- **Secrets & observability stack** — infra moved to `docker-compose.infra.yml` with required
+  secrets (`${VAR:?}`), Keycloak realm import (`ort-dashboard` client + audience), Prometheus
+  bearer-token scrape of `ort:8081/metrics`, Grafana dashboard provisioning; Loki removed
+  (no collector shipped)
+- **Tests: 63 across 12 files** — scope deny (provider call count = 0), session isolation,
+  history trimming, provider streaming fallback + reasoning_content, OIDC verification
+  (expiry/audience/signature), dashboard fail-closed startup / 401 / denied / audit-required,
+  retrieval quality baseline (top-1 ≥ 0.85, top-3 ≥ 0.95 on 30 fixtures), README catalog
+  consistency, CLI version match
+- **CI** — docker build + Trivy scan gate added to the workflow
+
+### Changed
+- CLI version now reads `package.json` (was hardcoded 0.1.0)
+- `compliance.md` (EN/KO/JA/ZH) separates code-enforced controls from operator responsibilities;
+  README use-case sections link to it
+- Product boundary documented: methodology-injection middleware, no host tool execution;
+  roadmap marks the tool-execution loop `blocked`
+
+### Removed
+- Loki service/config (no log collector shipped with the stack)
+
 ## [Unreleased]
 
 ### Added
