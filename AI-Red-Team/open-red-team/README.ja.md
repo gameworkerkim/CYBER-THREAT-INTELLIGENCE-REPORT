@@ -1,4 +1,4 @@
-# Open Red Team
+# Open AI Red Team
 
 **モデル非依存の攻撃的セキュリティスキルセット + ミドルウェア — Claude Red の代替・拡張、DeepSeek・GLM・オープンウェイトモデル向け**
 
@@ -10,7 +10,7 @@
 
 ## 目的 — Claude Red の代替・拡張
 
-| Claude Red（オリジナル） | Open Red Team（本プロジェクト） |
+| Claude Red（オリジナル） | Open AI Red Team（本プロジェクト） |
 |--------------------------|--------------------------------|
 | Claude 専用スキル（Claudeスキルシステム用 `SKILL.md`） | モデル非依存スキル: **DeepSeek、GLM、オープンウェイト**で同一手法を使用 |
 | Anthropic API 依存（データが外部へ流出） | **オンプレミス／エアギャップ運用** — 内部データが組織外に出ない |

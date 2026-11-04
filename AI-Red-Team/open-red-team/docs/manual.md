@@ -1,4 +1,4 @@
-# Open Red Team — User Manual
+# Open AI Red Team — User Manual
 
 **Languages:** English (base) · [한국어](ko/manual.md) · [日本語](ja/manual.md) · [中文](zh/manual.md)
 

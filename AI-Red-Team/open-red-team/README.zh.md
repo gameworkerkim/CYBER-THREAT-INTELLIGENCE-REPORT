@@ -1,4 +1,4 @@
-# Open Red Team
+# Open AI Red Team
 
 **模型无关的进攻性安全技能集 + 中间件 — Claude Red 的替代与扩展，面向 DeepSeek、GLM 和开源权重模型**
 
@@ -10,7 +10,7 @@
 
 ## 目的 — Claude Red 的替代与扩展
 
-| Claude Red（原始） | Open Red Team（本项目） |
+| Claude Red（原始） | Open AI Red Team（本项目） |
 |--------------------|-------------------------|
 | 仅 Claude 可用（Claude 技能系统的 `SKILL.md`） | 模型无关技能：同一方法学可在 **DeepSeek、GLM、开源权重**上运行 |
 | 绑定 Anthropic API（数据流出网络） | **本地/物理隔离部署** — 内部数据不离开组织 |

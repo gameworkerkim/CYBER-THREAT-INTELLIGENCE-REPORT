@@ -4,7 +4,7 @@
 
 ## 概要
 
-Open Red Team ミドルウェアは **Claude Skills システム**（progressive disclosure + トリガーベースのオンデマンドロード）を
+Open AI Red Team ミドルウェアは **Claude Skills システム**（progressive disclosure + トリガーベースのオンデマンドロード）を
 OpenAI 互換 API しか持たないモデル（DeepSeek、GLM、オープンウェイト）上に再現するレイヤーです。
 
 ## コンポーネント

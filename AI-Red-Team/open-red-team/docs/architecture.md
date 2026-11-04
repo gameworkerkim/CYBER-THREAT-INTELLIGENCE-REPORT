@@ -4,7 +4,7 @@
 
 ## Overview
 
-The Open Red Team middleware reproduces the Claude Skills system (progressive disclosure + trigger-based
+The Open AI Red Team middleware reproduces the Claude Skills system (progressive disclosure + trigger-based
 on-demand loading) for models that only expose OpenAI-compatible APIs (DeepSeek, GLM, open-weight).
 
 ## Components

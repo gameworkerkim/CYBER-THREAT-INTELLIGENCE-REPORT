@@ -1,4 +1,4 @@
-# Open Red Team
+# Open AI Red Team
 
 **Model-agnostic offensive security skillset + middleware — the replacement and extension of Claude Red for DeepSeek, GLM, and open-weight models**
 
@@ -10,7 +10,7 @@ Claude lock-in: the same red-team skills now run on DeepSeek, GLM (Zhipu), and o
 
 ## Purpose — replacing and extending Claude Red
 
-| Claude Red (original) | Open Red Team (this project) |
+| Claude Red (original) | Open AI Red Team (this project) |
 |-----------------------|------------------------------|
 | Claude-only skills (`SKILL.md` for the Claude skills system) | Model-agnostic skills: same methodology on **DeepSeek, GLM, open-weight** |
 | Bound to Anthropic API (data leaves your network) | **On-prem / air-gapped operation** — internal data never leaves the organization |

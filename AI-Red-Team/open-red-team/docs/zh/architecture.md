@@ -4,7 +4,7 @@
 
 ## 概述
 
-Open Red Team 中间件在仅提供 OpenAI 兼容 API 的模型（DeepSeek、GLM、开源权重）上
+Open AI Red Team 中间件在仅提供 OpenAI 兼容 API 的模型（DeepSeek、GLM、开源权重）上
 复现 **Claude Skills 系统**（渐进式披露 + 基于触发器的按需加载）。
 
 ## 组件

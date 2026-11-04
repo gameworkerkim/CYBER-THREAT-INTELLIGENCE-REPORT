@@ -4,7 +4,7 @@
 
 ## 개요
 
-Open Red Team 미들웨어는 **Claude Skills 시스템**(progressive disclosure + 트리거 기반 온디맨드 로딩)을
+Open AI Red Team 미들웨어는 **Claude Skills 시스템**(progressive disclosure + 트리거 기반 온디맨드 로딩)을
 OpenAI 호환 API만 제공하는 모델들(DeepSeek, GLM, 오픈웨이트)에 재현하는 레이어입니다.
 
 ## 컴포넌트

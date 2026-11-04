@@ -7,7 +7,7 @@ const program = new Command();
 
 program
   .name("ort")
-  .description("Open Red Team — model-agnostic offensive security skills middleware")
+  .description("Open AI Red Team — model-agnostic offensive security skills middleware")
   .version("0.1.0");
 
 program

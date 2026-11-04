@@ -1,6 +1,6 @@
-# Open Red Team
+# Open AI Red Team
 
-**Open Red Team** is a model-agnostic offensive security skillset and middleware — the replacement and extension of
+**Open AI Red Team** is a model-agnostic offensive security skillset and middleware — the replacement and extension of
 [claude-red](https://github.com/SnailSploit/Claude-Red) (MIT) for **DeepSeek, GLM, and open-weight models**.
 
 - Implementation: [`open-red-team/`](open-red-team/)

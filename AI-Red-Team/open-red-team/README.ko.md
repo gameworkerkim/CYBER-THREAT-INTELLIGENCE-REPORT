@@ -1,4 +1,4 @@
-# Open Red Team
+# Open AI Red Team
 
 **모델 비종속 공격적 보안 스킬셋 + 미들웨어 — Claude Red의 대체 및 확장, DeepSeek·GLM·오픈웨이트 모델용**
 
@@ -10,7 +10,7 @@
 
 ## 목적 — Claude Red의 대체 및 확장
 
-| Claude Red (원본) | Open Red Team (본 프로젝트) |
+| Claude Red (원본) | Open AI Red Team (본 프로젝트) |
 |-------------------|------------------------------|
 | Claude 전용 스킬 (Claude 스킬 시스템용 `SKILL.md`) | 모델 비종속 스킬: **DeepSeek, GLM, 오픈웨이트**에서 동일 방법론 사용 |
 | Anthropic API 종속 (데이터가 외부로 유출) | **온프레미스/에어갭 운영** — 내부 데이터가 조직 밖으로 나가지 않음 |
