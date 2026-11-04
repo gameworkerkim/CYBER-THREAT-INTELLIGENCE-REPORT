@@ -1,71 +1,92 @@
 # Open Red Team
 
-**모델 비종속(Model-Agnostic) 공격적 보안 스킬셋 + 미들웨어 — DeepSeek, GLM, 오픈웨이트 모델용**
+**Model-agnostic offensive security skillset + middleware — the replacement and extension of Claude Red for DeepSeek, GLM, and open-weight models**
 
-Claude 전용 스킬 라이브러리 [claude-red](https://github.com/SnailSploit/Claude-Red) (MIT)를 포팅하여
-DeepSeek, GLM(Zhipu), 오픈웨이트 모델(Ollama/vLLM/LM Studio)에서 동일한 레드팀 스킬을 사용할 수 있게 하는 프로젝트입니다.
+A full port of the [claude-red](https://github.com/SnailSploit/Claude-Red) skill library (MIT) that breaks the
+Claude lock-in: the same red-team skills now run on DeepSeek, GLM (Zhipu), and open-weight models
+(Ollama / vLLM / LM Studio) — in the cloud, on-premises, or fully air-gapped.
 
-## 구성 요소
+**Documentation languages:** English (base) · [한국어](README.ko.md) · [日本語](README.ja.md) · [中文](README.zh.md)
 
-| 디렉토리 | 내용 |
-|----------|------|
-| `skills/` | 포팅된 스킬 (모델 비종속 `SKILL.md`) — 트리거 기반 온디맨드 로딩 |
-| `src/` | 미들웨어 — Provider 추상화(OpenAI 호환), 스킬 로더, 트리거 엔진, CLI |
-| `docs/` | 아키텍처, 포팅 가이드, 모델 호환 매트릭스, 로드맵 |
-| `scripts/` | 스킬 동기화/변환 도구 |
+## Purpose — replacing and extending Claude Red
 
-## 포팅 현황
+| Claude Red (original) | Open Red Team (this project) |
+|-----------------------|------------------------------|
+| Claude-only skills (`SKILL.md` for the Claude skills system) | Model-agnostic skills: same methodology on **DeepSeek, GLM, open-weight** |
+| Bound to Anthropic API (data leaves your network) | **On-prem / air-gapped operation** — internal data never leaves the organization |
+| Vendor pricing & retention | **Cost reduction** via open-weight models (zero per-token cost) and lower-cost APIs |
+| Skills fixed to Claude's native skill system | **Extended**: trigger engine, bilingual triggers (EN/KO), explicit loading, full CLI |
 
-포팅 순서: Web Application → Infrastructure & Red Team → API Security → Cloud → AI Security
+## Key Features
 
-| 카테고리 | 스킬 수 | 상태 |
-|----------|---------|------|
-| Web Application | 16 | 완료 |
-| Infrastructure & Red Team | 7 | 완료 |
-| API Security | 2 | 완료 |
-| Cloud | 1 | 완료 |
-| AI Security | 1 | 완료 |
-| **합계** | **27** | — |
+- **79 ported skills, 23 categories** — complete claude-red library: Web, Infrastructure & Red Team,
+  API Security, Cloud, AI Security, Active Directory, Wireless, Exploit Development, Fuzzing, and more
+- **LLM extension for Red Team** — reproduces Claude Skills' progressive disclosure and trigger-based
+  on-demand loading for any OpenAI-compatible model
+- **Provider abstraction** — one interface for DeepSeek, GLM (Zhipu), and open-weight
+  (Ollama / vLLM / LM Studio / llama.cpp)
+- **Trigger engine** — keyword + regex matching with scoring, English and Korean trigger keywords
+- **Explicit control** — `/use <skill>`, `--skills` flag, auto-load on/off, skill index on/off
+- **CLI + library** — interactive `ort chat`, one-shot `ort ask`, skill inspection, TypeScript API
+- **Multilingual documentation** — English (base), Korean, Japanese, Chinese
+- **On-prem ready** — local models keep sensitive target data inside your environment
 
-## 빠른 시작
+## Components
+
+| Directory | Contents |
+|-----------|----------|
+| `skills/` | Ported skills (model-agnostic `SKILL.md`) — trigger-based on-demand loading |
+| `src/` | Middleware — provider abstraction (OpenAI-compatible), skill loader, trigger engine, CLI |
+| `docs/` | Architecture, user manual, porting guide, model matrix, roadmap |
+| `scripts/` | Skill sync/conversion tooling |
+
+## Port Status — full claude-red library (79 skills, 23 categories)
+
+| Category | Skills | Category | Skills |
+|----------|-------:|----------|-------:|
+| Web Application | 16 | Fuzzing & Vuln Research | 4 |
+| Infrastructure & Red Team | 7 | Reconnaissance | 2 |
+| API Security | 2 | Container & Kubernetes | 2 |
+| Cloud | 1 | CI/CD & Pipeline | 2 |
+| AI Security | 1 | Cryptography | 2 |
+| Active Directory | 2 | Privilege Escalation | 2 |
+| Auth & Identity | 2 | Post-Exploitation | 3 |
+| Wireless | 14 | Forensics & C2 | 2 |
+| Mobile | 1 | Supply Chain | 2 |
+| IoT & Embedded | 1 | Social Engineering | 2 |
+| Exploit Development | 6 | Network Attacks | 1 |
+| Utility | 2 | **Total** | **79** |
+
+## Quickstart
 
 ```bash
 npm install
 npm run build
-cp .env.example .env   # API 키 설정
-npx ort chat            # 대화형 세션
+cp .env.example .env   # set provider API keys
+npx ort chat            # interactive session
 ```
 
-### 지원 프로바이더
+### Supported providers
 
-| 프로바이더 | 엔드포인트 | 모델 예시 |
-|-----------|-----------|----------|
-| `deepseek` | `https://api.deepseek.com/v1` (OpenAI 호환) | `deepseek-chat`, `deepseek-reasoner` |
-| `glm` | `https://open.bigmodel.cn/api/paas/v4` (OpenAI 호환) | `glm-4-plus`, `glm-4-flash` |
-| `openweight` | Ollama/vLLM/LM Studio 등 (OpenAI 호환 `/v1`) | `qwen2.5:32b`, `deepseek-r1:32b` 등 |
+| Provider | Endpoint | Example models |
+|----------|----------|----------------|
+| `deepseek` | `https://api.deepseek.com/v1` (OpenAI-compatible) | `deepseek-chat`, `deepseek-reasoner` |
+| `glm` | `https://open.bigmodel.cn/api/paas/v4` (OpenAI-compatible) | `glm-4-plus`, `glm-4-flash` |
+| `openweight` | Ollama / vLLM / LM Studio (OpenAI-compatible `/v1`) | `qwen2.5:32b`, `deepseek-r1:32b` |
 
-## 사용법
+## Usage
 
 ### CLI
 
 ```bash
-# 대화형 세션 (트리거 기반 스킬 자동 로딩)
-npx ort chat --provider deepseek --model deepseek-chat
-
-# 특정 스킬 강제 로딩
-npx ort chat --skills offensive-sqli --provider glm
-
-# 스킬 목록 출력
-npx ort skills list
-
-# 스킬 본문 출력
-npx ort skills show offensive-sqli
-
-# 1회성 질의
-npx ort ask "이 로그인 폼에서 SQLi 테스트 방법" --provider deepseek
+npx ort chat --provider deepseek --model deepseek-chat   # interactive, auto skill loading
+npx ort chat --skills offensive-sqli --provider glm      # force-load skills
+npx ort skills list                                      # list all skills
+npx ort skills show offensive-sqli                       # print a skill body
+npx ort ask "How do I test SQLi on this login form?"     # single-turn query
 ```
 
-### 라이브러리
+### Library
 
 ```typescript
 import { OpenRedTeam } from "open-red-team";
@@ -77,25 +98,67 @@ const ort = new OpenRedTeam({
   skillsDir: "./skills",
 });
 
-const reply = await ort.chat("SQL 인젝션 테스트 방법을 알려줘");
+const reply = await ort.chat("How do I test SQL injection?");
 console.log(reply);
 ```
 
-## 동작 원리
+## Use Cases
 
-1. **스킬 인덱스 주입** — 모든 스킬의 `name` + `description`을 시스템 프롬프트에 주입 (Claude Skills의 progressive disclosure 재현, 컨텍스트 비용 최소화)
-2. **트리거 매칭** — 사용자 입력을 각 스킬의 `triggers`(키워드/정규식)와 매칭, 상위 N개 스킬 본문을 시스템 프롬프트에 주입
-3. **모델 호출** — OpenAI 호환 API를 통해 선택된 프로바이더로 요청
+### Public institutions & financial institutions — compliance-driven
 
-## 문서
+- Internal red-team exercises and self-assessments mapped to regulatory frameworks
+  (e.g., ISMS-P, financial security regulations, PCI-DSS, NIST) without sending
+  **internal system information to foreign cloud APIs**
+- Security review of e-government / financial services under strict data-governance rules
 
-- [아키텍처](docs/architecture.md) — 미들웨어 설계 및 데이터 흐름
-- [포팅 가이드](docs/porting-guide.md) — Claude 스킬 → 모델 비종속 스킬 변환 규칙
-- [모델 호환 매트릭스](docs/model-matrix.md) — DeepSeek/GLM/오픈웨이트별 특성과 제약
-- [로드맵](docs/roadmap.md) — 카테고리별 포팅 진행 계획
+### Enterprises — internal security operations
 
-## 라이선스
+- Security team training, CTF prep, authorized pentest planning, and day-to-day
+  vulnerability triage with an operator-grade methodology library
+- On-prem operation so proprietary architecture, source code, and target details stay inside the company
 
-MIT. 원본 스킬: [SnailSploit/claude-red](https://github.com/SnailSploit/Claude-Red) (MIT) — 각 스킬 frontmatter의 `source` 필드에 출처 명시.
+### LLM extension for Red Team
 
-> 허가된 환경(authorized penetration testing, 버그바운티, 보안 연구, CTF)에서만 사용하십시오.
+- Turn any OpenAI-compatible model into a context-aware red-team operator:
+  skill index + on-demand methodology injection + conversation history
+- Mix and match: sensitive engagements on local models, high-volume work on cloud APIs
+
+## Cost & Data Protection
+
+### Cost reduction
+
+| Option | Per-token cost | Notes |
+|--------|----------------|-------|
+| Claude (original) | Highest tier | Skills were Claude-only |
+| DeepSeek / GLM APIs | Low-cost APIs | Same skill content, fraction of the cost |
+| Open-weight (Ollama/vLLM) | **Zero marginal cost** | Run on existing GPU/hardware |
+
+### Internal information protection (공공기관 · 금융기관 · 기업)
+
+- **No data leaves the organization** when using the `openweight` provider — target details,
+  findings, and methodology stay on-premises or air-gapped
+- No third-party retention of prompts or security findings
+- Enterprise-friendly: works behind proxies, in isolated networks, and in offline labs
+
+## How it works
+
+1. **Skill index injection** — every skill's `name` + `description` is injected into the system prompt
+   (reproduces Claude Skills progressive disclosure; minimal context cost).
+2. **Trigger matching** — user input is matched against each skill's `triggers` (keywords/regex, English + Korean),
+   and the top N skill bodies are injected into the system prompt.
+3. **Model call** — the request is sent to the selected provider via its OpenAI-compatible API.
+
+## Documentation
+
+- [User Manual](docs/manual.md) — installation, providers, CLI, troubleshooting
+- [Architecture](docs/architecture.md) — middleware design and data flow
+- [Porting Guide](docs/porting-guide.md) — Claude skill → model-agnostic conversion rules
+- [Model Matrix](docs/model-matrix.md) — DeepSeek/GLM/open-weight characteristics and constraints
+- [Roadmap](docs/roadmap.md) — porting phases and middleware plans
+
+## License
+
+MIT. Original skills: [SnailSploit/claude-red](https://github.com/SnailSploit/Claude-Red) (MIT) — each skill's
+frontmatter carries a `source` attribution field.
+
+> Use only in authorized environments (penetration testing, bug bounty in scope, security research, CTF).

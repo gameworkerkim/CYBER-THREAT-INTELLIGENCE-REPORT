@@ -44,6 +44,76 @@ const SPECS: SkillSpec[] = [
   { dir: "cloud", name: "offensive-cloud", category: "cloud", triggers: ["aws pentest", "azure attack", "gcp security", "cloud privilege escalation", "privilege escalation", "imds", "cross-account pivot", "cloudspm", "s3 bucket", "iam abuse", "aws", "azure", "gcp", "iam", "클라우드 보안", "aws 해킹", "클라우드 침투", "권한 상승"] },
   // ---- Phase 5: AI Security ----
   { dir: "ai", name: "offensive-ai-security", category: "ai", triggers: ["prompt injection", "jailbreak", "rag poisoning", "model extraction", "llm security", "ai red team", "prompt leaking", "gpt vulnerability", "프롬프트 인젝션", "프롬프트 주입", "llm 보안", "ai 보안", "탈옥"] },
+  // ---- Phase 6: Active Directory ----
+  { dir: "active-directory", name: "offensive-active-directory", category: "active-directory", triggers: ["active directory", "kerberoast", "asreproast", "adcs", "esc1", "esc8", "acl abuse", "bloodhound", "golden ticket", "delegation", "hybrid aad", "액티브 디렉토리", "ad 공격", "도메인 컨트롤러"] },
+  { dir: "active-directory", name: "offensive-netexec", category: "active-directory", triggers: ["netexec", "crackmapexec", "nxc", "smb exec", "winrm exec", "ldap enum", "네트엑섹"] },
+  // ---- Phase 7: Auth & Identity ----
+  { dir: "auth", name: "offensive-jwt", category: "auth", triggers: ["jwt", "json web token", "alg none", "key confusion", "jwt cracking", "claim tampering", "jku", "kid injection", "jwt 공격"] },
+  { dir: "auth", name: "offensive-oauth", category: "auth", triggers: ["oauth", "oidc", "openid connect", "redirect uri", "pkce bypass", "token leakage", "authorization code", "oauth 공격"] },
+  // ---- Phase 8: Wireless ----
+  { dir: "wireless", name: "offensive-wifi", category: "wireless", triggers: ["802.11", "wifi", "wireless assessment", "와이파이", "무선랜"] },
+  { dir: "wireless", name: "offensive-wifi-recon", category: "wireless", triggers: ["wifi recon", "monitor mode", "aircrack-ng", "airodump", "wireless survey", "무선 정찰", "모니터 모드"] },
+  { dir: "wireless", name: "offensive-wpa2-psk", category: "wireless", triggers: ["wpa2", "psk", "handshake capture", "pmkid", "hashcat wpa", "4-way handshake", "wpa2 크래킹", "핸드셰이크", "와이파이 해킹", "와이파이 크래킹"] },
+  { dir: "wireless", name: "offensive-wpa3-sae", category: "wireless", triggers: ["wpa3", "sae", "dragonblood", "transition mode", "wpa3 downgrade", "side-channel"] },
+  { dir: "wireless", name: "offensive-wpa-enterprise", category: "wireless", triggers: ["802.1x", "eap", "wpa enterprise", "radius", "evil twin radius", "certificate abuse", "eap-tls"] },
+  { dir: "wireless", name: "offensive-wps", category: "wireless", triggers: ["wps", "pixie dust", "pin brute force", "reaver", "wps 공격"] },
+  { dir: "wireless", name: "offensive-evil-twin", category: "wireless", triggers: ["evil twin", "karma", "mana", "captive portal", "rogue ap", "가짜 ap", "이블 트윈"] },
+  { dir: "wireless", name: "offensive-krack-fragattacks", category: "wireless", triggers: ["krack", "fragattacks", "supplicant", "frame injection", "패킷 재전송"] },
+  { dir: "wireless", name: "offensive-deauth-disassoc", category: "wireless", triggers: ["deauthentication", "deauth", "disassoc", "pmf", "mdk4", "aireplay", "디오스", "와이파이 재밍"] },
+  { dir: "wireless", name: "offensive-bluetooth-ble", category: "wireless", triggers: ["bluetooth", "ble", "gatt", "pairing downgrade", "btlejack", "bluetooth low energy", "블루투스", "저전력 블루투스"] },
+  { dir: "wireless", name: "offensive-bluetooth-classic", category: "wireless", triggers: ["bluetooth classic", "br/edr", "sdp", "knob attack", "blueborne", "hid spoofing", "클래식 블루투스"] },
+  { dir: "wireless", name: "offensive-zigbee-thread-matter", category: "wireless", triggers: ["zigbee", "thread", "matter", "killerbee", "touchlink", "zcl", "802.15.4", "지그비"] },
+  { dir: "wireless", name: "offensive-z-wave", category: "wireless", triggers: ["z-wave", "s0 key", "s2 commissioning", "hub pivot", "zwave", "지웨이브"] },
+  { dir: "wireless", name: "offensive-lorawan-sub-ghz", category: "wireless", triggers: ["lorawan", "sub-ghz", "abp", "otaa", "keeloq", "fixed-code", "tpms", "lora", "로라완"] },
+  // ---- Phase 9: Mobile ----
+  { dir: "mobile", name: "offensive-mobile", category: "mobile", triggers: ["mobile pentest", "android", "ios", "frida", "certificate pinning", "biometric", "모바일 보안", "안드로이드", "ios 테스트"] },
+  // ---- Phase 10: IoT & Embedded ----
+  { dir: "iot", name: "offensive-iot", category: "iot", triggers: ["iot", "firmware", "uart", "jtag", "rtos", "ics", "mqtt", "coap", "embedded", "펌웨어", "iot 보안", "임베디드"] },
+  // ---- Phase 11: Exploit Development ----
+  { dir: "exploit-dev", name: "offensive-exploit-development", category: "exploit-dev", triggers: ["exploit development", "stack overflow", "heap corruption", "rop chain", "mitigation bypass", "익스플로잇 개발", "버퍼 오버플로우"] },
+  { dir: "exploit-dev", name: "offensive-exploit-dev-course", category: "exploit-dev", triggers: ["exploit dev course", "exploit curriculum", "pwntools course", "바이너리 공격 학습"] },
+  { dir: "exploit-dev", name: "offensive-basic-exploitation", category: "exploit-dev", triggers: ["linux binary exploitation", "buffer overflow", "ret2libc", "shellcode basics", "리눅스 바이너리", "bof"] },
+  { dir: "exploit-dev", name: "offensive-crash-analysis", category: "exploit-dev", triggers: ["crash triage", "exploitability", "root-cause analysis", "segfault", "크래시 분석", "코어 덤프"] },
+  { dir: "exploit-dev", name: "offensive-mitigations", category: "exploit-dev", triggers: ["aslr", "cfg", "cet", "pac", "mitigation bypass", "stack canary", "보호기법 우회"] },
+  { dir: "exploit-dev", name: "offensive-toctou", category: "exploit-dev", triggers: ["toctou", "time-of-check", "symlink race", "file race", "경쟁조건"] },
+  // ---- Phase 12: Fuzzing & Vulnerability Research ----
+  { dir: "fuzzing", name: "offensive-fuzzing", category: "fuzzing", triggers: ["fuzzing", "libfuzzer", "afl++", "coverage-guided", "mutation engine", "퍼징", "afl"] },
+  { dir: "fuzzing", name: "offensive-fuzzing-course", category: "fuzzing", triggers: ["fuzzing course", "fuzz curriculum", "퍼징 학습"] },
+  { dir: "fuzzing", name: "offensive-bug-identification", category: "fuzzing", triggers: ["bug identification", "code review", "static analysis", "bug hunting", "코드 리뷰", "취약점 탐색"] },
+  { dir: "fuzzing", name: "offensive-vuln-classes", category: "fuzzing", triggers: ["vulnerability taxonomy", "vuln classes", "cwe", "classification", "취약점 분류"] },
+  // ---- Phase 13: Reconnaissance ----
+  { dir: "recon", name: "offensive-osint", category: "recon", triggers: ["osint", "recon-ng", "theharvester", "maltego", "spiderfoot", "오신트", "정보 수집"] },
+  { dir: "recon", name: "offensive-osint-methodology", category: "recon", triggers: ["osint methodology", "intelligence collection", "intel analysis", "정찰 방법론"] },
+  // ---- Phase 14: Container & Kubernetes ----
+  { dir: "container", name: "offensive-container-escape", category: "container", triggers: ["container escape", "docker", "privileged mode", "docker socket", "capabilities", "runc", "컨테이너 탈출", "도커"] },
+  { dir: "container", name: "offensive-k8s-attacks", category: "container", triggers: ["kubernetes", "k8s", "rbac abuse", "etcd", "kubelet", "pod escape", "crd", "쿠버네티스", "k8s 공격"] },
+  // ---- Phase 15: CI/CD & Pipeline ----
+  { dir: "cicd", name: "offensive-cicd-pipeline", category: "cicd", triggers: ["cicd", "github actions", "jenkins", "gitlab ci", "pipeline injection", "ci/cd", "파이프라인 공격"] },
+  { dir: "cicd", name: "offensive-cicd-secrets", category: "cicd", triggers: ["ci secrets", "environment variable", "vault", "runner token", "secret extraction", "ci/cd 시크릿"] },
+  // ---- Phase 16: Cryptography ----
+  { dir: "crypto", name: "offensive-crypto-attacks", category: "crypto", triggers: ["padding oracle", "ecb manipulation", "hash extension", "weak prng", "crypto attack", "암호 공격", "패딩 오라클"] },
+  { dir: "crypto", name: "offensive-tls-attacks", category: "crypto", triggers: ["tls", "ssl", "poodle", "drown", "heartbleed", "pinning bypass", "0-rtt", "tls 공격", "ssl 취약점"] },
+  // ---- Phase 17: Privilege Escalation ----
+  { dir: "privesc", name: "offensive-linux-privesc", category: "privesc", triggers: ["linux privilege escalation", "suid", "capabilities", "sudo", "cron", "kernel exploit", "리눅스 권한 상승"] },
+  { dir: "privesc", name: "offensive-windows-privesc", category: "privesc", triggers: ["windows privilege escalation", "potato", "service misconfiguration", "dll hijacking", "uac bypass", "윈도우 권한 상승"] },
+  // ---- Phase 18: Post-Exploitation ----
+  { dir: "post-exploitation", name: "offensive-lateral-movement", category: "post-exploitation", triggers: ["lateral movement", "pass the hash", "pass the ticket", "ntlm relay", "wmi", "winrm", "dcom", "측면 이동"] },
+  { dir: "post-exploitation", name: "offensive-persistence", category: "post-exploitation", triggers: ["persistence", "registry", "scheduled task", "wmi subscription", "ticket forgery", "pam backdoor", "영속성", "지속성"] },
+  { dir: "post-exploitation", name: "offensive-data-exfiltration", category: "post-exploitation", triggers: ["data exfiltration", "dns tunneling", "https tunneling", "icmp tunneling", "steganography", "데이터 유출", "터널링"] },
+  // ---- Phase 19: Forensics & C2 ----
+  { dir: "forensics", name: "offensive-anti-forensics", category: "forensics", triggers: ["anti-forensics", "log manipulation", "timestomping", "ads", "memory cleanup", "안티 포렌식", "로그 조작"] },
+  { dir: "forensics", name: "offensive-c2-frameworks", category: "forensics", triggers: ["c2", "cobalt strike", "sliver", "mythic", "havoc", "redirector", "domain fronting", "c2 프레임워크", "커맨드 앤 컨트롤"] },
+  // ---- Phase 20: Supply Chain ----
+  { dir: "supply-chain", name: "offensive-supply-chain", category: "supply-chain", triggers: ["supply chain attack", "dependency confusion", "typosquatting", "build system compromise", "서플라이 체인", "공급망 공격"] },
+  { dir: "supply-chain", name: "offensive-dependency-confusion", category: "supply-chain", triggers: ["dependency confusion", "npm", "pypi", "nuget", "maven", "namespace attack", "디펜던시 컨퓨전"] },
+  // ---- Phase 21: Social Engineering ----
+  { dir: "social-engineering", name: "offensive-phishing", category: "social-engineering", triggers: ["phishing", "gophish", "evilginx", "email spoofing", "dmarc bypass", "피싱", "이메일 스푸핑"] },
+  { dir: "social-engineering", name: "offensive-social-engineering", category: "social-engineering", triggers: ["social engineering", "pretexting", "vishing", "smishing", "usb drop", "소셜 엔지니어링", "보이스피싱"] },
+  // ---- Phase 22: Network Attacks ----
+  { dir: "network", name: "offensive-network-attacks", category: "network", triggers: ["arp spoofing", "llmnr", "nbt-ns", "vlan hopping", "mitm", "network attack", "네트워크 공격", "중간자 공격", "arp 스푸핑", "스푸핑"] },
+  // ---- Phase 23: Utility ----
+  { dir: "utility", name: "offensive-fast-checking", category: "utility", triggers: ["fast triage", "quick win", "checklist", "빠른 진단", "체크리스트"] },
+  { dir: "utility", name: "offensive-reporting", category: "utility", triggers: ["reporting", "cvss", "evidence standard", "executive summary", "보고서 작성", "리포팅"] },
 ];
 
 const CLAUDE_REPLACEMENTS: Array<[RegExp, string]> = [
