@@ -1,0 +1,32 @@
+{
+  "name": "open-red-team",
+  "version": "0.1.0",
+  "description": "Model-agnostic offensive security skills middleware for DeepSeek, GLM, and open-weight models",
+  "type": "module",
+  "bin": {
+    "ort": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx src/cli.ts",
+    "fetch:skills": "tsx scripts/fetch-skills.ts",
+    "lint": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "openai": "^4.68.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "license": "MIT"
+}
