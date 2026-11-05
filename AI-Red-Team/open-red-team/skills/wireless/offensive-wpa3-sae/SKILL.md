@@ -8,6 +8,8 @@ triggers:
   - "transition mode"
   - "wpa3 downgrade"
   - "side-channel"
+  - "사이드 채널"
+  - "드래곤블러드"
 category: wireless
 model_note: "모델 비종속 — OpenAI 호환 API(DeepSeek/GLM/Ollama 등)에서 동작"
 source: "https://github.com/SnailSploit/Claude-Red (MIT)"

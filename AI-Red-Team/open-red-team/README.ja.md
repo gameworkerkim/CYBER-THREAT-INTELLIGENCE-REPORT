@@ -35,7 +35,9 @@ OpenAI 互換 API をサポートし、`openweight` プロバイダーを通じ�
 |-----------------------|-------------------------|
 | ![Chat タブ](assets/screenshots/dashboard-chat.png) | ![Skills タブ](assets/screenshots/dashboard-skills.png) |
 | **ダッシュボード — Audit** | **ダッシュボード — Settings** |
-| ![Audit タブ](assets/screenshots/dashboard-audit.png) | ![Config タブ](assets/screenshots/dashboard-config.png) |
+| ![Audit タブ](assets/screenshots/dashboard-audit.png) | ![Settings タブ](assets/screenshots/dashboard-settings.png) |
+| **ダッシュボード — Login** | **ダッシュボード — Config** |
+| ![Login 画面](assets/screenshots/dashboard-login.png) | ![Config タブ](assets/screenshots/dashboard-config.png) |
 
 ## 製品ポジショニングと境界
 

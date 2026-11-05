@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import express from "express";
 import type { Server } from "node:http";
-import { appendFile, mkdir, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { OpenRedTeam } from "../index.js";
@@ -9,11 +9,14 @@ import { SessionStore } from "../sessions.js";
 import type { OrtConfig, ScopeDecision } from "../types.js";
 import { loadScopeGuard } from "../safety.js";
 import { attachRuntimeStore, runtimeEnv } from "../runtime.js";
+import { appendAudit } from "../auditlog.js";
+import type { AuditRecord } from "../auditlog.js";
 import { metricsText, trackChatEnd, trackChatStart, trackHttp } from "./metrics.js";
 import { oidcConfigured, oidcMiddleware } from "./oidc.js";
 import { openDb } from "./db.js";
 import { issueToken, verifyToken } from "./auth.js";
 import type { AuthContext } from "./auth.js";
+import { checkLoginRateLimit, clearLoginFailures, recordLoginFailure } from "./ratelimit.js";
 
 export interface DashboardOptions {
   port?: number;
@@ -21,19 +24,6 @@ export interface DashboardOptions {
   auditLog?: string;
   sessions?: SessionStore;
   dbPath?: string;
-}
-
-interface AuditEntry {
-  ts: string;
-  sessionId: string;
-  operator: string;
-  decision: ScopeDecision;
-  flaggedTargets: string[];
-  matchedSkills: string[];
-  promptSha256: string;
-  responseChars: number;
-  provider: string;
-  model: string;
 }
 
 const MUTABLE_SETTINGS = [
@@ -184,11 +174,10 @@ export async function startDashboard(
   const staticDir = join(dirname(fileURLToPath(import.meta.url)), "static");
   app.use(express.static(staticDir));
 
-  const audit = async (entry: AuditEntry): Promise<void> => {
+  const audit = async (entry: AuditRecord): Promise<void> => {
     if (!auditLog) return;
     try {
-      await mkdir(dirname(auditLog), { recursive: true });
-      await appendFile(auditLog, `${JSON.stringify(entry)}\n`, "utf-8");
+      await appendAudit(auditLog, entry);
     } catch (err) {
       if (auditRequired) {
         throw new Error(`audit write failed (ORT_AUDIT_REQUIRED=1): ${err instanceof Error ? err.message : String(err)}`);
@@ -207,16 +196,47 @@ export async function startDashboard(
       res.status(400).json({ error: "username and password required" });
       return;
     }
-    if (!db.verifyPassword(username, password)) {
-      res.status(401).json({ error: "invalid credentials" });
+    const ip = req.ip ?? "unknown";
+    const key = `${ip}:${username}`;
+    const rate = checkLoginRateLimit(key);
+    if (!rate.allowed) {
+      res.setHeader("Retry-After", String(rate.retryAfterSeconds));
+      res.status(429).json({ error: "too many attempts", retryAfterSeconds: rate.retryAfterSeconds });
       return;
     }
+    if (!db.verifyPassword(username, password)) {
+      const after = recordLoginFailure(key);
+      void audit({
+        ts: new Date().toISOString(),
+        event: "auth",
+        action: "login",
+        username,
+        outcome: "failure",
+        ip,
+      }).catch(() => {});
+      res.setHeader("Retry-After", String(after.retryAfterSeconds));
+      if (!after.allowed) {
+        res.status(429).json({ error: "too many attempts", retryAfterSeconds: after.retryAfterSeconds });
+        return;
+      }
+      res.status(401).json({ error: "invalid credentials", retryAfterSeconds: after.retryAfterSeconds });
+      return;
+    }
+    clearLoginFailures(key);
     const user = db.getUser(username)!;
     const tokenValue = issueToken(db, {
       username: user.username,
       role: user.role as AuthContext["role"],
       mustChangePassword: user.must_change_password === 1,
     });
+    void audit({
+      ts: new Date().toISOString(),
+      event: "auth",
+      action: "login",
+      username,
+      outcome: "success",
+      ip,
+    }).catch(() => {});
     res.json({
       token: tokenValue,
       username: user.username,
@@ -250,6 +270,123 @@ export async function startDashboard(
       return;
     }
     db.setPassword(user.username, newPassword, false);
+    void audit({
+      ts: new Date().toISOString(),
+      event: "auth",
+      action: "change-password",
+      username: user.username,
+      outcome: "success",
+    }).catch(() => {});
+    res.json({ ok: true });
+  });
+
+  // ---------- user management (admin) ----------
+  app.get("/api/users", (req, res) => {
+    const user = res.locals.ortUser as AuthContext | undefined;
+    if (!db) {
+      res.status(404).json({ error: "local auth disabled" });
+      return;
+    }
+    if (user?.role !== "admin") {
+      res.status(403).json({ error: "admin role required" });
+      return;
+    }
+    res.json(db.listUsers());
+  });
+
+  app.post("/api/users", (req, res) => {
+    const user = res.locals.ortUser as AuthContext | undefined;
+    if (user?.role !== "admin") {
+      res.status(403).json({ error: "admin role required" });
+      return;
+    }
+    if (!db) {
+      res.status(404).json({ error: "local auth disabled" });
+      return;
+    }
+    const { username, password, role } = (req.body ?? {}) as { username?: unknown; password?: unknown; role?: unknown };
+    if (typeof username !== "string" || username.length < 3 || typeof password !== "string" || password.length < 8) {
+      res.status(400).json({ error: "username (min 3 chars) and password (min 8 chars) required" });
+      return;
+    }
+    if (role !== "admin" && role !== "operator") {
+      res.status(400).json({ error: "role must be admin or operator" });
+      return;
+    }
+    if (db.getUser(username)) {
+      res.status(409).json({ error: "username already exists" });
+      return;
+    }
+    db.createUser(username, password, role, true);
+    void audit({
+      ts: new Date().toISOString(),
+      event: "auth",
+      action: "user-create",
+      username,
+      role,
+      by: user.username,
+      outcome: "success",
+    }).catch(() => {});
+    res.status(201).json({ ok: true, username, role });
+  });
+
+  app.put("/api/users/:username/reset-password", (req, res) => {
+    const actor = res.locals.ortUser as AuthContext | undefined;
+    if (actor?.role !== "admin") {
+      res.status(403).json({ error: "admin role required" });
+      return;
+    }
+    if (!db) {
+      res.status(404).json({ error: "local auth disabled" });
+      return;
+    }
+    const { newPassword } = (req.body ?? {}) as { newPassword?: unknown };
+    if (typeof newPassword !== "string" || newPassword.length < 8) {
+      res.status(400).json({ error: "newPassword must be at least 8 characters" });
+      return;
+    }
+    if (!db.getUser(req.params.username)) {
+      res.status(404).json({ error: "user not found" });
+      return;
+    }
+    db.setPassword(req.params.username, newPassword, true);
+    void audit({
+      ts: new Date().toISOString(),
+      event: "auth",
+      action: "reset-password",
+      username: req.params.username,
+      by: actor.username,
+      outcome: "success",
+    }).catch(() => {});
+    res.json({ ok: true });
+  });
+
+  app.delete("/api/users/:username", (req, res) => {
+    const actor = res.locals.ortUser as AuthContext | undefined;
+    if (actor?.role !== "admin") {
+      res.status(403).json({ error: "admin role required" });
+      return;
+    }
+    if (!db) {
+      res.status(404).json({ error: "local auth disabled" });
+      return;
+    }
+    if (req.params.username === actor.username) {
+      res.status(400).json({ error: "cannot delete your own account" });
+      return;
+    }
+    if (!db.deleteUser(req.params.username)) {
+      res.status(404).json({ error: "user not found" });
+      return;
+    }
+    void audit({
+      ts: new Date().toISOString(),
+      event: "auth",
+      action: "user-delete",
+      username: req.params.username,
+      by: actor.username,
+      outcome: "success",
+    }).catch(() => {});
     res.json({ ok: true });
   });
 
@@ -466,6 +603,7 @@ export async function startDashboard(
       try {
         await audit({
           ts: new Date().toISOString(),
+          event: "chat",
           sessionId: session.id,
           operator,
           decision: result.decision,

@@ -54,7 +54,7 @@ const SPECS: SkillSpec[] = [
   { dir: "wireless", name: "offensive-wifi", category: "wireless", triggers: ["802.11", "wifi", "wireless assessment", "와이파이", "무선랜"] },
   { dir: "wireless", name: "offensive-wifi-recon", category: "wireless", triggers: ["wifi recon", "monitor mode", "aircrack-ng", "airodump", "wireless survey", "무선 정찰", "모니터 모드"] },
   { dir: "wireless", name: "offensive-wpa2-psk", category: "wireless", triggers: ["wpa2", "psk", "handshake capture", "pmkid", "hashcat wpa", "4-way handshake", "wpa2 크래킹", "핸드셰이크", "와이파이 해킹", "와이파이 크래킹"] },
-  { dir: "wireless", name: "offensive-wpa3-sae", category: "wireless", triggers: ["wpa3", "sae", "dragonblood", "transition mode", "wpa3 downgrade", "side-channel"] },
+  { dir: "wireless", name: "offensive-wpa3-sae", category: "wireless", triggers: ["wpa3", "sae", "dragonblood", "transition mode", "wpa3 downgrade", "side-channel", "사이드 채널", "드래곤블러드"] },
   { dir: "wireless", name: "offensive-wpa-enterprise", category: "wireless", triggers: ["802.1x", "eap", "wpa enterprise", "radius", "evil twin radius", "certificate abuse", "eap-tls"] },
   { dir: "wireless", name: "offensive-wps", category: "wireless", triggers: ["wps", "pixie dust", "pin brute force", "reaver", "wps 공격"] },
   { dir: "wireless", name: "offensive-evil-twin", category: "wireless", triggers: ["evil twin", "karma", "mana", "captive portal", "rogue ap", "가짜 ap", "이블 트윈"] },

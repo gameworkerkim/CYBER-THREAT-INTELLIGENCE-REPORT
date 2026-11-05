@@ -205,6 +205,23 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 토큰 보호
 | `GET /api/auth/me` | 현재 사용자 (`username`, `role`, `mustChangePassword`) |
 | `POST /api/auth/change-password` | `{currentPassword, newPassword}` (최소 8자) |
 
+로그인 보호: 사용자명+IP별 실패를 제한(`ORT_LOGIN_MAX_ATTEMPTS` 기본 5회, `ORT_LOGIN_LOCK_MS` 기본 5분,
+초과 시 429). 로그인 성공/실패·비밀번호 변경·계정 관리가 `event: "auth"`로 감사 로그에 기록됩니다.
+
+### 계정 관리 (admin 역할)
+
+| 엔드포인트 | 용도 |
+|-----------|------|
+| `GET /api/users` | 사용자 목록 (admin 전용) |
+| `POST /api/users` | 사용자 생성 `{username, password, role}` — 신규 사용자는 최초 로그인 시 비밀번호 변경 필수 |
+| `PUT /api/users/:username/reset-password` | 임시 비밀번호로 초기화 (다음 로그인 시 변경 강제) |
+| `DELETE /api/users/:username` | 사용자 삭제 (본인 삭제 거부) |
+
+### 감사 로그 로테이션
+
+JSONL 감사 로그가 `ORT_AUDIT_MAX_BYTES`(기본 10MiB)를 초과하면 `<file>.1`로 자동 로테이트됩니다.
+`ORT_AUDIT_LOG` 설정 시 CLI 채팅도 함께 감사됩니다.
+
 ### SQLite 데이터 관리
 
 - DB 경로: `ORT_DB_PATH` (기본 `./data/ort.db`, Docker에서는 `./data` 볼륨의 `/data/ort.db`).

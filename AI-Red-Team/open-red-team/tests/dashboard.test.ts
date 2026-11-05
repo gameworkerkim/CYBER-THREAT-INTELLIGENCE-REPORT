@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { BaseProvider } from "../src/providers/base.js";
 import { OpenRedTeam } from "../src/index.js";
 import { startDashboard } from "../src/dashboard/server.js";
+import { clearAllLoginFailures } from "../src/dashboard/ratelimit.js";
 
 class MockProvider extends BaseProvider {
   constructor() {
@@ -34,6 +35,7 @@ function clearEnv() {
 
 async function startTestServer(extra: Record<string, string> = {}, anonymous = true) {
   clearEnv();
+  clearAllLoginFailures();
   setEnv("ORT_DB_PATH", ":memory:");
   if (anonymous) setEnv("ORT_ALLOW_ANONYMOUS", "1");
   setEnv("ORT_SCOPE", "test engagement");
@@ -198,6 +200,84 @@ describe("dashboard HTTP", () => {
         body: { message: "scan https://demo.example.com" },
       });
       expect(events.some((e) => e.event === "denied")).toBe(true);
+    } finally {
+      await new Promise<void>((r) => server.close(() => r()));
+    }
+  });
+
+  it("rate-limits failed logins", async () => {
+    const { server, base } = await startTestServer({}, false);
+    try {
+      const attempt = () =>
+        fetch(`${base}/api/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: "admin", password: "wrong" }),
+        });
+      for (let i = 0; i < 4; i++) {
+        expect((await attempt()).status).toBe(401);
+      }
+      const locked = await attempt();
+      expect(locked.status).toBe(429);
+    } finally {
+      await new Promise<void>((r) => server.close(() => r()));
+    }
+  });
+
+  it("manages users as admin", async () => {
+    const { server, base } = await startTestServer({}, false);
+    try {
+      const login = await fetch(`${base}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "admin", password: "admin" }),
+      });
+      const { token } = (await login.json()) as { token: string };
+      const auth = { Authorization: `Bearer ${token}` };
+      await fetch(`${base}/api/auth/change-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...auth },
+        body: JSON.stringify({ currentPassword: "admin", newPassword: "new-password-123" }),
+      });
+
+      const create = await fetch(`${base}/api/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...auth },
+        body: JSON.stringify({ username: "alice", password: "alice-pass-123", role: "operator" }),
+      });
+      expect(create.status).toBe(201);
+
+      const list = (await (await fetch(`${base}/api/users`, { headers: auth })).json()) as Array<{ username: string }>;
+      expect(list.map((u) => u.username)).toContain("alice");
+
+      const dup = await fetch(`${base}/api/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...auth },
+        body: JSON.stringify({ username: "alice", password: "alice-pass-123", role: "operator" }),
+      });
+      expect(dup.status).toBe(409);
+
+      const reset = await fetch(`${base}/api/users/alice/reset-password`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", ...auth },
+        body: JSON.stringify({ newPassword: "temp-pass-456" }),
+      });
+      expect(reset.status).toBe(200);
+
+      const aliceLogin = await fetch(`${base}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "alice", password: "temp-pass-456" }),
+      });
+      expect(((await aliceLogin.json()) as { mustChangePassword: boolean }).mustChangePassword).toBe(true);
+
+      const del = await fetch(`${base}/api/users/alice`, { method: "DELETE", headers: auth });
+      expect(del.status).toBe(200);
+      const self = await fetch(`${base}/api/users/admin`, { method: "DELETE", headers: auth });
+      expect(self.status).toBe(400);
+
+      const anonList = await fetch(`${base}/api/users`);
+      expect(anonList.status).toBe(401);
     } finally {
       await new Promise<void>((r) => server.close(() => r()));
     }

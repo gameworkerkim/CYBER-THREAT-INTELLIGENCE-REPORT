@@ -54,7 +54,9 @@ environment.
 |------------------|--------------------|
 | ![Chat tab](assets/screenshots/dashboard-chat.png) | ![Skills tab](assets/screenshots/dashboard-skills.png) |
 | **Dashboard — Audit** | **Dashboard — Settings** |
-| ![Audit tab](assets/screenshots/dashboard-audit.png) | ![Config tab](assets/screenshots/dashboard-config.png) |
+| ![Audit tab](assets/screenshots/dashboard-audit.png) | ![Settings tab](assets/screenshots/dashboard-settings.png) |
+| **Dashboard — Login** | **Dashboard — Config** |
+| ![Login screen](assets/screenshots/dashboard-login.png) | ![Config tab](assets/screenshots/dashboard-config.png) |
 
 ## Product Positioning and Boundaries
 

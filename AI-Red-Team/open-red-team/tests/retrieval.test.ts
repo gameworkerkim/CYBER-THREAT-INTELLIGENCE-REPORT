@@ -14,10 +14,16 @@ const fixtures = JSON.parse(
   readFileSync(new URL("./fixtures/retrieval.json", import.meta.url), "utf-8"),
 ) as FixtureEntry[];
 
+const koFixtures = JSON.parse(
+  readFileSync(new URL("./fixtures/retrieval.ko.json", import.meta.url), "utf-8"),
+) as FixtureEntry[];
+
 // Committed baseline: thresholds measured on the keyword engine at v0.5.0.
 // A lower hit rate means the trigger engine regressed.
 const TOP1_MIN = 0.85;
 const TOP3_MIN = 0.95;
+const KO_TOP1_MIN = 0.85;
+const KO_TOP3_MIN = 0.95;
 
 describe("retrieval quality baseline", () => {
   it(`top-1 >= ${TOP1_MIN} and top-3 >= ${TOP3_MIN} on ${fixtures.length} representative queries`, async () => {
@@ -36,6 +42,24 @@ describe("retrieval quality baseline", () => {
     console.log(`top-1: ${top1Rate.toFixed(2)}, top-3: ${top3Rate.toFixed(2)}${misses.length ? `\nmisses:\n${misses.join("\n")}` : ""}`);
     expect(top1Rate).toBeGreaterThanOrEqual(TOP1_MIN);
     expect(top3Rate).toBeGreaterThanOrEqual(TOP3_MIN);
+  });
+
+  it(`Korean top-1 >= ${KO_TOP1_MIN} and top-3 >= ${KO_TOP3_MIN} on ${koFixtures.length} representative queries`, async () => {
+    const skills = await loadSkills("./skills");
+    let top1 = 0;
+    let top3 = 0;
+    const misses: string[] = [];
+    for (const f of koFixtures) {
+      const results = matchSkills(skills, f.query, f.k).map((m) => m.skill.frontmatter.name);
+      if (results[0] === f.skill) top1 += 1;
+      if (results.slice(0, 3).includes(f.skill)) top3 += 1;
+      else misses.push(`"${f.query}" -> ${results.join(", ") || "none"} (expected ${f.skill})`);
+    }
+    const top1Rate = top1 / koFixtures.length;
+    const top3Rate = top3 / koFixtures.length;
+    console.log(`KO top-1: ${top1Rate.toFixed(2)}, top-3: ${top3Rate.toFixed(2)}${misses.length ? `\nmisses:\n${misses.join("\n")}` : ""}`);
+    expect(top1Rate).toBeGreaterThanOrEqual(KO_TOP1_MIN);
+    expect(top3Rate).toBeGreaterThanOrEqual(KO_TOP3_MIN);
   });
 });
 

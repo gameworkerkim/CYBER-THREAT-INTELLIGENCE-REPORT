@@ -1,4 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { BaseProvider } from "../src/providers/base.js";
 import type { ChatMessage } from "../src/types.js";
 import { OpenRedTeam, trimHistory } from "../src/index.js";
@@ -50,6 +53,31 @@ describe("OpenRedTeam scope enforcement", () => {
     const result = await ort.chat("scan https://demo.example.com/login");
     expect(result.decision).toBe("allow");
     expect(mock.calls).toBe(1);
+  });
+
+  it("writes CLI audit entries when ORT_AUDIT_LOG is set", async () => {
+    const tmp = await mkdtemp(join(tmpdir(), "ort-cli-audit-"));
+    try {
+      process.env.ORT_SCOPE = "pentest of demo.example.com";
+      process.env.ORT_SCOPE_DOMAINS = "demo.example.com";
+      process.env.ORT_AUDIT_LOG = join(tmp, "audit.jsonl");
+      const mock = new MockProvider();
+      const ort = new OpenRedTeam({ provider: "deepseek", providerOverride: mock as never });
+      await ort.init();
+
+      await ort.chat("scan https://demo.example.com/login");
+      await ort.chat("scan https://attacker.example.org now");
+
+      const raw = await readFile(join(tmp, "audit.jsonl"), "utf-8");
+      const entries = raw.split("\n").filter(Boolean).map((l) => JSON.parse(l) as { event: string; decision: string });
+      expect(entries).toHaveLength(2);
+      expect(entries[0].event).toBe("chat");
+      expect(entries[0].decision).toBe("allow");
+      expect(entries[1].decision).toBe("deny");
+    } finally {
+      delete process.env.ORT_AUDIT_LOG;
+      await rm(tmp, { recursive: true, force: true });
+    }
   });
 });
 

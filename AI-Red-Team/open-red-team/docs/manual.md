@@ -207,6 +207,25 @@ token (12 h TTL) accepted as `Authorization: Bearer <token>`.
 | `GET /api/auth/me` | Current user (`username`, `role`, `mustChangePassword`) |
 | `POST /api/auth/change-password` | `{currentPassword, newPassword}` (min 8 chars) |
 
+Login protection: failed attempts per username+IP are rate-limited
+(`ORT_LOGIN_MAX_ATTEMPTS` default 5, `ORT_LOGIN_LOCK_MS` default 5 min) with HTTP 429.
+Login success/failure, password changes, and user management actions are written to the
+audit log as `event: "auth"` records.
+
+### User management (admin role)
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /api/users` | List users (admin only) |
+| `POST /api/users` | Create a user `{username, password, role}` — new users must change their password on first login |
+| `PUT /api/users/:username/reset-password` | Reset to a temporary password (forces change on next login) |
+| `DELETE /api/users/:username` | Delete a user (self-deletion is refused) |
+
+### Audit log rotation
+
+The JSONL audit log rotates automatically (single rotation to `<file>.1`) when it exceeds
+`ORT_AUDIT_MAX_BYTES` (default 10 MiB). CLI chats are audited too when `ORT_AUDIT_LOG` is set.
+
 ### SQLite data management
 
 - Database path: `ORT_DB_PATH` (default `./data/ort.db`; `/data/ort.db` in Docker with the

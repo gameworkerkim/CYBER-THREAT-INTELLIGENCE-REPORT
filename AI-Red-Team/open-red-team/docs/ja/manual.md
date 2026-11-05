@@ -206,6 +206,23 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearerトークン保護
 | `GET /api/auth/me` | 現在ユーザー（`username`, `role`, `mustChangePassword`） |
 | `POST /api/auth/change-password` | `{currentPassword, newPassword}`（8文字以上） |
 
+ログイン保護: ユーザー名+IPごとの失敗を制限（`ORT_LOGIN_MAX_ATTEMPTS` 既定5回、`ORT_LOGIN_LOCK_MS` 既定5分、
+超過は429）。ログイン成功/失敗・パスワード変更・アカウント管理は `event: "auth"` として監査ログに記録されます。
+
+### アカウント管理（adminロール）
+
+| エンドポイント | 用途 |
+|----------------|------|
+| `GET /api/users` | ユーザー一覧（admin専用） |
+| `POST /api/users` | ユーザー作成 `{username, password, role}` — 新規ユーザーは初回ログインでパスワード変更必須 |
+| `PUT /api/users/:username/reset-password` | 仮パスワードへリセット（次回ログインで変更強制） |
+| `DELETE /api/users/:username` | ユーザー削除（自分自身の削除は拒否） |
+
+### 監査ログローテーション
+
+JSONL監査ログが `ORT_AUDIT_MAX_BYTES`（既定10MiB）を超えると `<file>.1` へ自動ローテートします。
+`ORT_AUDIT_LOG` 設定時はCLIチャットも監査されます。
+
 ### SQLiteデータ管理
 
 - DBパス: `ORT_DB_PATH`（既定 `./data/ort.db`、Dockerでは `./data` ボリュームの `/data/ort.db`）。

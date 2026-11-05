@@ -31,7 +31,9 @@ Open AI Red Team 是一个**模型无关的红队方法论中间件**，旨在�
 |-----------------|-------------------|
 | ![Chat 页](assets/screenshots/dashboard-chat.png) | ![Skills 页](assets/screenshots/dashboard-skills.png) |
 | **管理面板 — Audit** | **管理面板 — Settings** |
-| ![Audit 页](assets/screenshots/dashboard-audit.png) | ![Config 页](assets/screenshots/dashboard-config.png) |
+| ![Audit 页](assets/screenshots/dashboard-audit.png) | ![Settings 页](assets/screenshots/dashboard-settings.png) |
+| **管理面板 — Login** | **管理面板 — Config** |
+| ![Login 页](assets/screenshots/dashboard-login.png) | ![Config 页](assets/screenshots/dashboard-config.png) |
 
 ## 产品定位与边界
 

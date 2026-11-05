@@ -4,11 +4,28 @@ All notable changes to Open AI Red Team are recorded here.
 
 ## [Unreleased]
 
+### Added
+- **Login rate limiting** — per username+IP failure lockout (`ORT_LOGIN_MAX_ATTEMPTS`,
+  `ORT_LOGIN_LOCK_MS`, HTTP 429 + Retry-After); auth events (login success/failure,
+  password change, user create/delete/reset) audited as `event: "auth"`
+- **User management** — `GET/POST /api/users`, `PUT /api/users/:username/reset-password`,
+  `DELETE /api/users/:username` (admin role; self-deletion refused) + Users section in the
+  dashboard Settings tab
+- **Audit log rotation** — single rotation to `<file>.1` at `ORT_AUDIT_MAX_BYTES` (10 MiB)
+- **SQLite schema versioning** — `user_version` migration runner
+- **CLI audit** — `ort chat`/`ask` write JSONL audit entries when `ORT_AUDIT_LOG` is set
+- **Korean retrieval baseline** — 30-query fixture suite (top-1 ≥ 0.85, top-3 ≥ 0.95);
+  wpa3-sae Korean triggers added
+- **Fresh screenshots** — chat/skills/audit/settings/config + login screen; README tables
+  updated in 4 languages
+
 ### Changed
 - Roadmap: evaluated extension proposals added as a prioritized table (approval-based
   propose-execute bridge, skill-to-tool mapping registry, methodology quality benchmark,
   CI/CD suggestion gate, community skill marketplace) plus a pending live-verification
   checklist (hosted CI gate, vLLM serving, Keycloak OIDC round-trip, SQLite backup drill)
+- UI cleanup: dead `promptToken` fallback removed, `index-only` badge standardized,
+  `#settings` deep link added
 
 ## [0.6.0] — 2026-11-04
 

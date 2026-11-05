@@ -85,6 +85,21 @@
         <button id="btn-pw-change">Change password</button>
         <span class="hint" id="pw-status"></span>
       </div>
+      <h3>Users</h3>
+      <table id="users-table">
+        <thead><tr><th>Username</th><th>Role</th><th>Must change</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="pw-row" id="user-create-row">
+        <input type="text" id="user-username" placeholder="Username (min 3)" />
+        <input type="password" id="user-password" placeholder="Password (min 8)" />
+        <select id="user-role">
+          <option value="operator">operator</option>
+          <option value="admin">admin</option>
+        </select>
+        <button id="btn-user-create">Create user</button>
+        <span class="hint" id="user-status"></span>
+      </div>
       <p class="hint">Provider/model/API-key changes require a restart. DB values override environment variables; leave empty to fall back to env.</p>
     </section>
 

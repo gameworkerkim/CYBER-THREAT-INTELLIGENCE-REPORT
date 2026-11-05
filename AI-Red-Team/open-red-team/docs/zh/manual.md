@@ -205,6 +205,23 @@ ORT_DASHBOARD_TOKEN=secret npx ort dashboard   # Bearer 令牌保护
 | `GET /api/auth/me` | 当前用户（`username`、`role`、`mustChangePassword`） |
 | `POST /api/auth/change-password` | `{currentPassword, newPassword}`（至少 8 位） |
 
+登录保护：按用户名+IP 限制失败次数（`ORT_LOGIN_MAX_ATTEMPTS` 默认 5 次，`ORT_LOGIN_LOCK_MS` 默认 5 分钟，
+超出返回 429）。登录成功/失败、改密、账户管理均以 `event: "auth"` 写入审计日志。
+
+### 账户管理（admin 角色）
+
+| 端点 | 用途 |
+|------|------|
+| `GET /api/users` | 用户列表（仅 admin） |
+| `POST /api/users` | 创建用户 `{username, password, role}` — 新用户首次登录必须改密 |
+| `PUT /api/users/:username/reset-password` | 重置为临时密码（下次登录强制改密） |
+| `DELETE /api/users/:username` | 删除用户（拒绝删除自己） |
+
+### 审计日志轮转
+
+JSONL 审计日志超过 `ORT_AUDIT_MAX_BYTES`（默认 10MiB）时自动轮转为 `<file>.1`。
+设置 `ORT_AUDIT_LOG` 后 CLI 对话也会被审计。
+
 ### SQLite 数据管理
 
 - 数据库路径：`ORT_DB_PATH`（默认 `./data/ort.db`；Docker 中为 `./data` 卷的 `/data/ort.db`）。

@@ -35,7 +35,9 @@ OpenAI 호환 API를 지원하며, `openweight` 제공자를 통해 모델을 �
 |-----------------|-------------------|
 | ![Chat 탭](assets/screenshots/dashboard-chat.png) | ![Skills 탭](assets/screenshots/dashboard-skills.png) |
 | **대시보드 — Audit** | **대시보드 — Settings** |
-| ![Audit 탭](assets/screenshots/dashboard-audit.png) | ![Config 탭](assets/screenshots/dashboard-config.png) |
+| ![Audit 탭](assets/screenshots/dashboard-audit.png) | ![Settings 탭](assets/screenshots/dashboard-settings.png) |
+| **대시보드 — Login** | **대시보드 — Config** |
+| ![Login 화면](assets/screenshots/dashboard-login.png) | ![Config 탭](assets/screenshots/dashboard-config.png) |
 
 ## 제품 포지셔닝과 경계
 

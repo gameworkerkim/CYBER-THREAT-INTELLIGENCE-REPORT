@@ -51,17 +51,6 @@ async function loadHealth() {
   }
 }
 
-function promptToken() {
-  const token = localStorage.getItem(TOKEN_KEY);
-  const next = prompt("Dashboard API token (ORT_DASHBOARD_TOKEN):", token ?? "");
-  if (next !== null) {
-    if (next === "") localStorage.removeItem(TOKEN_KEY);
-    else localStorage.setItem(TOKEN_KEY, next);
-    loadHealth();
-    loadSkills();
-  }
-}
-
 /* ---------- login / auth ---------- */
 function showLogin() {
   $("#login-overlay").classList.remove("hidden");
@@ -192,6 +181,7 @@ async function loadSettings() {
       )
       .join("");
     $("#settings-table tbody").innerHTML = rows;
+    loadUsers();
     $$(".btn-save-setting").forEach((btn) =>
       btn.addEventListener("click", async () => {
         const key = btn.dataset.key;
@@ -264,8 +254,8 @@ async function sendChat() {
     body: JSON.stringify({ message }),
   });
   if (res.status === 401) {
-    assistant.textContent = "unauthorized — set the dashboard token";
-    promptToken();
+    assistant.textContent = "unauthorized — sign in";
+    showLogin();
     finishSend();
     return;
   }
@@ -398,7 +388,7 @@ function renderSkills() {
     })
     .map(
       (s) => `<tr data-name="${esc(s.name)}">
-        <td><a href="#" class="skill-link">${esc(s.name)}</a>${s.indexOnly ? ' <span class="chip">본문 미주입</span>' : ""}</td>
+        <td><a href="#" class="skill-link">${esc(s.name)}</a>${s.indexOnly ? ' <span class="chip">index-only</span>' : ""}</td>
         <td><span class="chip">${esc(s.category)}</span></td>
         <td>${esc(s.description)}</td>
         <td>${s.triggers.slice(0, 5).map((t) => `<span class="chip dim">${esc(t)}</span>`).join(" ")}${s.triggers.length > 5 ? " …" : ""}</td>
@@ -464,10 +454,87 @@ loadHealth();
 loadSkills();
 authCheck();
 
-/* ---------- deep links: #skills | #audit | #config | #demo ---------- */
+/* ---------- users (admin) ---------- */
+async function loadUsers() {
+  try {
+    const res = await fetch("/api/users", { headers: authHeaders() });
+    if (res.status === 403) {
+      $("#user-create-row").classList.add("hidden");
+      $("#users-table tbody").innerHTML = '<tr><td colspan="4" class="hint">admin role required</td></tr>';
+      return;
+    }
+    if (!res.ok) return;
+    const users = await res.json();
+    $("#user-create-row").classList.remove("hidden");
+    $("#users-table tbody").innerHTML = users
+      .map(
+        (u) => `<tr>
+        <td>${esc(u.username)}</td>
+        <td><span class="chip">${esc(u.role)}</span></td>
+        <td>${u.must_change_password ? "yes" : "no"}</td>
+        <td>
+          <button class="ghost btn-user-reset" data-username="${esc(u.username)}">Reset password</button>
+          <button class="ghost btn-user-delete" data-username="${esc(u.username)}">Delete</button>
+        </td>
+      </tr>`,
+      )
+      .join("");
+    $$(".btn-user-delete").forEach((btn) =>
+      btn.addEventListener("click", async () => {
+        const username = btn.dataset.username;
+        if (!confirm(`Delete user "${username}"?`)) return;
+        await fetch(`/api/users/${encodeURIComponent(username)}`, { method: "DELETE", headers: authHeaders() });
+        loadUsers();
+      }),
+    );
+    $$(".btn-user-reset").forEach((btn) =>
+      btn.addEventListener("click", async () => {
+        const username = btn.dataset.username;
+        const next = prompt(`New temporary password for "${username}" (min 8 chars):`, "");
+        if (!next) return;
+        const res = await fetch(`/api/users/${encodeURIComponent(username)}/reset-password`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json", ...authHeaders() },
+          body: JSON.stringify({ newPassword: next }),
+        });
+        if (res.ok) {
+          $("#user-status").textContent = "password reset (user must change on next login)";
+        }
+        loadUsers();
+      }),
+    );
+  } catch {
+    /* offline */
+  }
+}
+
+$("#btn-user-create").addEventListener("click", async () => {
+  const username = $("#user-username").value.trim();
+  const password = $("#user-password").value;
+  const role = $("#user-role").value;
+  $("#user-status").textContent = "";
+  const res = await fetch("/api/users", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...authHeaders() },
+    body: JSON.stringify({ username, password, role }),
+  });
+  if (res.ok) {
+    $("#user-status").textContent = `created ${username}`;
+    $("#user-username").value = "";
+    $("#user-password").value = "";
+    loadUsers();
+  } else {
+    const err = await res.json().catch(() => ({}));
+    $("#user-status").textContent = err.error ?? "failed";
+  }
+});
+
+/* ---------- users (admin) end ---------- */
+
+/* ---------- deep links: #skills | #audit | #config | #settings | #demo ---------- */
 function applyHash() {
   const h = location.hash.replace("#", "").toLowerCase();
-  if (["skills", "audit", "config"].includes(h)) {
+  if (["skills", "audit", "config", "settings"].includes(h)) {
     document.querySelector(`.tab[data-tab="${h}"]`)?.click();
   }
   if (h === "demo") {

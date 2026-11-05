@@ -52,4 +52,19 @@ describe("OrtDb", () => {
       ort.close();
     }
   });
+
+  it("lists and deletes users", () => {
+    const ort = openDb(":memory:");
+    try {
+      ort.createUser("alice", "alice-pass-123", "operator", true);
+      const users = ort.listUsers();
+      expect(users.map((u) => u.username)).toContain("admin");
+      expect(users.map((u) => u.username)).toContain("alice");
+      expect(ort.deleteUser("alice")).toBe(true);
+      expect(ort.deleteUser("alice")).toBe(false);
+      expect(ort.getUser("alice")).toBeUndefined();
+    } finally {
+      ort.close();
+    }
+  });
 });

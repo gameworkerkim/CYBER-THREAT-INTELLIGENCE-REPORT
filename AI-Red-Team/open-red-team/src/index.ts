@@ -9,6 +9,9 @@ import { OpenWeightProvider } from "./providers/openweight.js";
 import { loadScopeGuard, scopePromptBlock, checkScope, scopeWarningLine, SCOPE_DENIED_REPLY } from "./safety.js";
 import { runtimeBoolean, runtimeNumber } from "./runtime.js";
 import { initObservability, recordChat } from "./observability.js";
+import { appendAudit } from "./auditlog.js";
+import type { AuditRecord } from "./auditlog.js";
+import { createHash } from "node:crypto";
 import type { ChatSession } from "./sessions.js";
 import type {
   ChatMessage,
@@ -108,6 +111,18 @@ export class OpenRedTeam {
         operator: guard?.operator ?? opts?.session?.operator ?? process.env.ORT_OPERATOR ?? "unknown",
         sessionId: opts?.session?.id,
       });
+      await cliAudit({
+        event: "chat",
+        sessionId: opts?.session?.id ?? "cli",
+        operator: guard?.operator ?? process.env.ORT_OPERATOR ?? "unknown",
+        decision: "deny",
+        flaggedTargets: scopeCheck.flaggedTargets,
+        matchedSkills: [],
+        promptSha256: createHash("sha256").update(stripped, "utf-8").digest("hex"),
+        responseChars: SCOPE_DENIED_REPLY.length,
+        provider: providerName,
+        model: modelName,
+      });
       return {
         content: SCOPE_DENIED_REPLY,
         matchedSkills: [],
@@ -166,6 +181,18 @@ export class OpenRedTeam {
       promptTokens: stats.totalTokens,
       reasoningTokens: reasoningLength,
     });
+    await cliAudit({
+      event: "chat",
+      sessionId: opts?.session?.id ?? "cli",
+      operator: guard?.operator ?? opts?.session?.operator ?? process.env.ORT_OPERATOR ?? "unknown",
+      decision: "allow",
+      flaggedTargets: [],
+      matchedSkills,
+      promptSha256: createHash("sha256").update(stripped, "utf-8").digest("hex"),
+      responseChars: content.length,
+      provider: providerName,
+      model: modelName,
+    });
 
     return {
       content,
@@ -184,6 +211,16 @@ export class OpenRedTeam {
 
   reset(): void {
     this.history = [];
+  }
+}
+
+async function cliAudit(entry: Omit<AuditRecord, "ts">): Promise<void> {
+  const path = process.env.ORT_AUDIT_LOG;
+  if (!path) return;
+  try {
+    await appendAudit(path, { ts: new Date().toISOString(), ...entry } as AuditRecord);
+  } catch {
+    /* CLI auditing is best-effort */
   }
 }
 
