@@ -50,7 +50,7 @@
 - [x] ストリーミングフォールバック + reasoning_content 捕捉、LangFuse・Prometheus・JSONL監査（SHA-256）
 - [x] デプロイ・運用: base/infra compose分離、ollama-pull・vllm-preflightゲート、シークレット必須化、
       Keycloak realm、Grafanaダッシュボード、オフライン搬入（skopeo/crane）、Trivy SBOM + Cosign
-- [x] テスト73件 + 検索品質基準線 + CI（typecheck/build/test/docker build/スキャン）
+- [x] テスト80件 + 検索品質基準線 + CI（typecheck/build/test/docker build/スキャン）
 - [x] 多言語ドキュメント（EN基準 / KO / JA / ZH）+ コンプライアンス統制表
 - [ ] Ollama `num_ctx` 自動拡張
 - [ ] 埋め込みベースの意味マッチング（RAG）— キーワードマッチングの代替オプション

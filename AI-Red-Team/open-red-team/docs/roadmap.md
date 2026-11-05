@@ -53,7 +53,7 @@ followed by the remaining claude-red categories. All 79 skills across 23 categor
 - [x] Deployment & operations: base/infra compose split, ollama-pull & vllm-preflight gating,
       required secrets, Keycloak realm, Grafana dashboards, offline transfer scripts (skopeo/
       crane), Trivy SBOM + Cosign signing
-- [x] Test suite (73 tests) + retrieval quality baseline + CI (typecheck/build/test/docker build/scan)
+- [x] Test suite (80 tests) + retrieval quality baseline + CI (typecheck/build/test/docker build/scan)
 - [x] Multilingual documentation (EN base / KO / JA / ZH) + compliance controls table
 - [ ] Ollama `num_ctx` auto-expansion
 - [ ] Embedding-based semantic matching (RAG) — optional replacement for keyword matching

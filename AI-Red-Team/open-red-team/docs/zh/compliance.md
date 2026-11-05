@@ -16,9 +16,13 @@ PCI-DSS 或 NIST 的合规认证。
 | AUTH-1 | 面板 API 默认上锁：静态令牌或 OIDC 必填 | 无认证则 exit 1（`ORT_ALLOW_ANONYMOUS=1` 例外） |
 | AUTH-2 | OIDC（Keycloak）RS256/JWKS 校验，会话绑定令牌 `sub` | `src/dashboard/oidc.ts`、`X-Ort-Session` |
 | AUTH-3 | `/metrics` 需要认证（`ORT_METRICS_TOKEN` 或面板认证） | `src/dashboard/server.ts` |
+| AUTH-4 | 登录暴力破解锁定（按用户名+IP，HTTP 429）+ 登录成功/失败审计 | `src/dashboard/ratelimit.ts`、`event: "auth"` 审计 |
+| AUTH-5 | 账户生命周期管理（创建/重置密码/删除，admin 角色，首次登录强制改密） | `/api/users`、Settings 页 |
 | SESS-1 | 按操作员隔离对话（内存会话、LRU 上限、空闲淘汰） | `src/sessions.ts` |
 | AUDIT-1 | JSONL 审计：ts、sessionId、operator、decision、flaggedTargets、matchedSkills、提示词 SHA-256（不存原文） | `ORT_AUDIT_LOG` |
 | AUDIT-2 | `ORT_AUDIT_REQUIRED=1` 时审计写入失败即请求失败 | `src/dashboard/server.ts` |
+| AUDIT-3 | 审计日志达到 `ORT_AUDIT_MAX_BYTES` 时轮转（单次） | `src/auditlog.ts` |
+| AUDIT-4 | 设置 `ORT_AUDIT_LOG` 后 CLI 对话也会被审计 | `src/index.ts` |
 | BUDGET-1 | 上下文预算：技能正文截断、历史裁剪、超大技能 `index_only` | `src/skills/inject.ts`、`src/index.ts` |
 | OBS-1 | Prometheus 指标（请求、延迟、token、RSS） | `/metrics` |
 | OBS-2 | LangFuse 追踪 — **默认关闭**；启用后提示词与响应全文将发送至 LangFuse | `LANGFUSE_*` |

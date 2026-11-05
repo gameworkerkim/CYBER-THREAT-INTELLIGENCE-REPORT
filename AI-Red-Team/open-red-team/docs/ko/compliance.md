@@ -16,9 +16,13 @@ PCI-DSS·NIST를 충족시키는 인증이 아닙니다.
 | AUTH-1 | 대시보드 API 기본 잠금: 정적 토큰 또는 OIDC 필수 | 인증 없으면 exit 1 (`ORT_ALLOW_ANONYMOUS=1` 예외) |
 | AUTH-2 | OIDC(Keycloak) RS256/JWKS 검증, 세션은 토큰 `sub`에 귀속 | `src/dashboard/oidc.ts`, `X-Ort-Session` |
 | AUTH-3 | `/metrics` 인증 (`ORT_METRICS_TOKEN` 또는 대시보드 인증) | `src/dashboard/server.ts` |
+| AUTH-4 | 로그인 무차별 대입 잠금(사용자명+IP별, HTTP 429) + 로그인 성공/실패 감사 | `src/dashboard/ratelimit.ts`, `event: "auth"` 감사 |
+| AUTH-5 | 계정 수명주기 관리(생성/비밀번호 초기화/삭제, admin 역할, 최초 로그인 변경 강제) | `/api/users`, Settings 탭 |
 | SESS-1 | 운영자별 대화 격리 (인메모리 세션, LRU 상한, 유휴 축출) | `src/sessions.ts` |
 | AUDIT-1 | JSONL 감사: ts, sessionId, operator, decision, flaggedTargets, matchedSkills, 프롬프트 SHA-256 (원문 미기록) | `ORT_AUDIT_LOG` |
 | AUDIT-2 | `ORT_AUDIT_REQUIRED=1`이면 감사 기록 실패 시 요청 실패 | `src/dashboard/server.ts` |
+| AUDIT-3 | `ORT_AUDIT_MAX_BYTES` 도달 시 감사 로그 로테이션(단일) | `src/auditlog.ts` |
+| AUDIT-4 | `ORT_AUDIT_LOG` 설정 시 CLI 채팅도 감사 | `src/index.ts` |
 | BUDGET-1 | 컨텍스트 예산: 스킬 본문 절단, 히스토리 트리밍, 대형 스킬 `index_only` | `src/skills/inject.ts`, `src/index.ts` |
 | OBS-1 | Prometheus 메트릭 (요청, 지연, 토큰, RSS) | `/metrics` |
 | OBS-2 | LangFuse 트레이싱 — **기본 꺼짐**; 켜면 프롬프트·응답 전문이 LangFuse로 전송됨 | `LANGFUSE_*` |

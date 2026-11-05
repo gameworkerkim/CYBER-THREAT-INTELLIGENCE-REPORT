@@ -287,7 +287,7 @@ docker compose up -d ort    # http://localhost:8081
 | # | 지적사항 | 상태 |
 |---|----------|------|
 | 1 | 스킬 본문 전량 주입 → 컨텍스트 오버플로 (단일 스킬 ~138K 토큰) | 토큰 예산제 + 대형 스킬 6종 `index_only`, 실행 시 프롬프트 ~6-8K 토큰 실측 |
-| 2 | 테스트 전무 | vitest 63건/12파일 |
+| 2 | 테스트 전무 | vitest 80건/15파일 (영문·한글 검색 기준선, HTTP/인증/세션/안전장치) |
 | 3 | CLI뿐인 앱 → `docker compose up -d` 미동작 | Express 대시보드 + compose `command: ["dashboard"]` |
 | 4 | 범위 강제 없음 → 전부 모델에 전달 | `decision: deny` 시 프로바이더 호출 전 반환 — 호출 카운터로 0회 확증 |
 | 5 | fail-open 기동 (무인증/무스코프) | 둘 다 exit 1 거부 |
@@ -306,6 +306,10 @@ docker compose up -d ort    # http://localhost:8081
 | 13 | 운영자 간 히스토리 공유 | `SessionStore`(LRU·유휴 축출) + OIDC `sub` 귀속 |
 | 14 | 히스토리 무한 누적 | 턴 예산 + `[earlier turns omitted]` 표식 |
 | 15 | 검색 품질 기준선 없음 | 30개 fixture + 임계값(top-1 ≥ 0.85, top-3 ≥ 0.95) |
+| 16 | 로그인 무차별 대입 보호 없음 | 사용자명+IP별 잠금(`ORT_LOGIN_MAX_ATTEMPTS`, HTTP 429) + 인증 이벤트 감사 |
+| 17 | 계정 관리 없음 | 관리자 API + Settings 탭 UI: 생성/비밀번호 초기화/삭제 (신규 계정 변경 강제) |
+| 18 | 감사 로그 무한 증가·CLI 미감사 | `ORT_AUDIT_MAX_BYTES` 로테이션, `ort chat`/`ask` JSONL 기록 |
+| 19 | 한국어 검색 기준선 없음 | 한글 fixture 30건: 실측 top-1 0.93 / top-3 1.00, 임계값 0.85/0.95 커밋 |
 
 ### P2 — 마감·경계, 해결
 

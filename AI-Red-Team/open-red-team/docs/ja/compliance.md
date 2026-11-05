@@ -16,9 +16,13 @@ Open AI Red Team は許可された任務のための方法論注入ミドルウ
 | AUTH-1 | ダッシュボードAPIは既定で施錠: 静的トークンまたはOIDC必須 | 認証なしはexit 1（`ORT_ALLOW_ANONYMOUS=1` 例外） |
 | AUTH-2 | OIDC（Keycloak）RS256/JWKS検証、セッションはトークン `sub` に帰属 | `src/dashboard/oidc.ts`、`X-Ort-Session` |
 | AUTH-3 | `/metrics` は認証必須（`ORT_METRICS_TOKEN` またはダッシュボード認証） | `src/dashboard/server.ts` |
+| AUTH-4 | ログイン総当たりロック（ユーザー名+IPごと、HTTP 429）+ ログイン成功/失敗の監査 | `src/dashboard/ratelimit.ts`、`event: "auth"` 監査 |
+| AUTH-5 | アカウントライフサイクル管理（作成/パスワード初期化/削除、adminロール、初回ログイン変更強制） | `/api/users`、Settingsタブ |
 | SESS-1 | 運用者別の会話分離（インメモリセッション、LRU上限、アイドル追い出し） | `src/sessions.ts` |
 | AUDIT-1 | JSONL監査: ts, sessionId, operator, decision, flaggedTargets, matchedSkills, プロンプトSHA-256（原文なし） | `ORT_AUDIT_LOG` |
 | AUDIT-2 | `ORT_AUDIT_REQUIRED=1` なら監査書込失敗時にリクエスト失敗 | `src/dashboard/server.ts` |
+| AUDIT-3 | `ORT_AUDIT_MAX_BYTES` 到達時の監査ログローテーション（単一） | `src/auditlog.ts` |
+| AUDIT-4 | `ORT_AUDIT_LOG` 設定時はCLIチャットも監査 | `src/index.ts` |
 | BUDGET-1 | コンテキスト予算: スキル本文切詰め、履歴トリミング、巨大スキル `index_only` | `src/skills/inject.ts`、`src/index.ts` |
 | OBS-1 | Prometheusメトリクス（リクエスト、遅延、トークン、RSS） | `/metrics` |
 | OBS-2 | LangFuseトレーシング — **既定オフ**; 有効化するとプロンプト・応答全文がLangFuseへ送信 | `LANGFUSE_*` |

@@ -17,9 +17,13 @@ regulations, PCI-DSS, or NIST.
 | AUTH-1 | Dashboard API closed by default: bearer token or OIDC mandatory | startup exits 1 without auth unless `ORT_ALLOW_ANONYMOUS=1` |
 | AUTH-2 | OIDC (Keycloak) RS256/JWKS verification; sessions are bound to the token `sub` | `src/dashboard/oidc.ts`, `X-Ort-Session` |
 | AUTH-3 | `/metrics` is authenticated (`ORT_METRICS_TOKEN` or the dashboard auth) | `src/dashboard/server.ts` |
+| AUTH-4 | Login brute-force lockout (per username+IP, HTTP 429) with audit of login success/failure | `src/dashboard/ratelimit.ts`, `event: "auth"` audit records |
+| AUTH-5 | User lifecycle management (create / reset-password / delete, admin role, forced first-login change) | `/api/users`, Settings tab |
 | SESS-1 | Per-operator conversation isolation (in-memory sessions, LRU cap, idle eviction) | `src/sessions.ts` |
 | AUDIT-1 | JSONL audit entries: ts, sessionId, operator, decision, flaggedTargets, matchedSkills, prompt SHA-256 (no prompt plaintext) | `ORT_AUDIT_LOG` |
 | AUDIT-2 | `ORT_AUDIT_REQUIRED=1` fails the request when the audit write fails | `src/dashboard/server.ts` |
+| AUDIT-3 | Audit log rotation at `ORT_AUDIT_MAX_BYTES` (single rotation) | `src/auditlog.ts` |
+| AUDIT-4 | CLI chats are audited too when `ORT_AUDIT_LOG` is set | `src/index.ts` |
 | BUDGET-1 | Context budget: skill bodies truncated, history trimmed, oversized skills `index_only` | `src/skills/inject.ts`, `src/index.ts` |
 | OBS-1 | Prometheus metrics (requests, latency, tokens, RSS) | `/metrics` |
 | OBS-2 | LangFuse tracing — **off by default**; enabling exports full prompt/response text to LangFuse | `LANGFUSE_*` |

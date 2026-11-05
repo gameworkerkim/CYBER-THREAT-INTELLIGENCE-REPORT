@@ -50,7 +50,7 @@
 - [x] 流式回退 + reasoning_content 捕获，LangFuse·Prometheus·JSONL 审计（SHA-256）
 - [x] 部署与运营：base/infra compose 拆分、ollama-pull·vllm-preflight 门禁、必需密钥、
       Keycloak realm、Grafana 仪表盘、离线转入（skopeo/crane）、Trivy SBOM + Cosign
-- [x] 测试 73 项 + 检索质量基准 + CI（typecheck/build/test/docker build/扫描）
+- [x] 测试 80 项 + 检索质量基准 + CI（typecheck/build/test/docker build/扫描）
 - [x] 多语言文档（EN 基准 / KO / JA / ZH）+ 合规控制表
 - [ ] Ollama `num_ctx` 自动扩展
 - [ ] 基于嵌入的语义匹配（RAG）— 关键词匹配的替代选项

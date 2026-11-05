@@ -20,6 +20,9 @@ All notable changes to Open AI Red Team are recorded here.
   updated in 4 languages
 
 ### Changed
+- Docs refreshed with the new functional test results: test suite now **80 tests / 15 files**
+  (manual review-findings tables, roadmaps), compliance control tables extended (AUTH-4/5,
+  AUDIT-3/4), README feature bullets updated
 - Roadmap: evaluated extension proposals added as a prioritized table (approval-based
   propose-execute bridge, skill-to-tool mapping registry, methodology quality benchmark,
   CI/CD suggestion gate, community skill marketplace) plus a pending live-verification

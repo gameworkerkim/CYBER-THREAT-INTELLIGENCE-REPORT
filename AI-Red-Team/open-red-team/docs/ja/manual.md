@@ -288,7 +288,7 @@ docker compose up -d ort    # http://localhost:8081
 | # | 指摘 | 状態 |
 |---|------|------|
 | 1 | スキル本文の全量注入 → コンテキストオーバーフロー（単一スキル ~138Kトークン） | トークン予算エンジン + 巨大スキル6種 `index_only`、実行時プロンプト ~6-8Kトークン実測 |
-| 2 | テスト皆無 | vitest 63件/12ファイル |
+| 2 | テスト皆無 | vitest 80件/15ファイル（英・韓の検索基準線、HTTP/認証/セッション/安全装置） |
 | 3 | CLIのみ → `docker compose up -d` が動作せず | Expressダッシュボード + compose `command: ["dashboard"]` |
 | 4 | 範囲強制なし → 全入力をモデルへ送信 | `decision: deny` でプロバイダ呼び出し前に返却 — 呼び出しカウンタで0回を確認 |
 | 5 | fail-open起動（無認証/無スコープ） | どちらも exit 1 で拒否 |
@@ -307,6 +307,10 @@ docker compose up -d ort    # http://localhost:8081
 | 13 | 運用者間の履歴共有 | `SessionStore`（LRU・アイドル追い出し）+ OIDC `sub` 帰属 |
 | 14 | 履歴の無限増加 | ターン予算 + `[earlier turns omitted]` マーカー |
 | 15 | 検索品質の基準線なし | 30クエリfixture + 閾値（top-1 ≥ 0.85、top-3 ≥ 0.95） |
+| 16 | ログイン総当たり保護なし | ユーザー名+IPごとのロック（`ORT_LOGIN_MAX_ATTEMPTS`、HTTP 429）+ 認証イベント監査 |
+| 17 | アカウント管理なし | 管理者API + SettingsタブUI: 作成/パスワード初期化/削除（新規アカウントは変更強制） |
+| 18 | 監査ログ無限増加・CLI未監査 | `ORT_AUDIT_MAX_BYTES` ローテーション、`ort chat`/`ask` がJSONL記録 |
+| 19 | 韓国語の検索基準線なし | 韓国語fixture 30件: 実測 top-1 0.93 / top-3 1.00、閾値 0.85/0.95 をコミット |
 
 ### P2 — 仕上げ・境界、解決
 

@@ -287,7 +287,7 @@ docker compose up -d ort    # http://localhost:8081
 | # | 问题 | 状态 |
 |---|------|------|
 | 1 | 技能正文全量注入 → 上下文溢出（单技能约 138K token） | 令牌预算引擎 + 6 个超大技能 `index_only`，运行时提示词实测约 6-8K token |
-| 2 | 完全没有测试 | vitest 63 项/12 个文件 |
+| 2 | 完全没有测试 | vitest 80 项/15 个文件（英/韩检索基准、HTTP/认证/会话/安全装置） |
 | 3 | 只有 CLI → `docker compose up -d` 无法运行 | Express 面板 + compose `command: ["dashboard"]` |
 | 4 | 无范围强制 → 全部送往模型 | `decision: deny` 在提供商调用前返回 — 以调用计数器确认 0 次 |
 | 5 | fail-open 启动（无认证/无范围） | 两者均以 exit 1 拒绝 |
@@ -306,6 +306,10 @@ docker compose up -d ort    # http://localhost:8081
 | 13 | 操作员之间共享历史 | `SessionStore`（LRU·空闲淘汰）+ OIDC `sub` 归属 |
 | 14 | 历史无限增长 | 轮次预算 + `[earlier turns omitted]` 标记 |
 | 15 | 无检索质量基准 | 30 条 fixture + 阈值（top-1 ≥ 0.85、top-3 ≥ 0.95） |
+| 16 | 无登录暴力破解防护 | 按用户名+IP 锁定（`ORT_LOGIN_MAX_ATTEMPTS`、HTTP 429）+ 认证事件审计 |
+| 17 | 无账户管理 | 管理员 API + Settings 页 UI：创建/重置密码/删除（新账户强制改密） |
+| 18 | 审计日志无限增长·CLI 未审计 | `ORT_AUDIT_MAX_BYTES` 轮转，`ort chat`/`ask` 写入 JSONL |
+| 19 | 无韩文检索基准 | 韩文 fixture 30 条：实测 top-1 0.93 / top-3 1.00，阈值 0.85/0.95 已提交 |
 
 ### P2 — 收尾与边界，已解决
 

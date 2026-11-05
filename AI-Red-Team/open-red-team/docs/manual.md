@@ -310,7 +310,7 @@ Accumulated review findings (4 rounds) and their current status.
 | # | Finding | Status |
 |---|---------|--------|
 | 1 | Full skill-body injection caused context overflow (single skill ~138K tokens) | Token budget engine + 6 oversized skills marked `index_only`; runtime prompt measured in the ~6-8K token range |
-| 2 | No tests at all | vitest suite: 63 tests across 12 files |
+| 2 | No tests at all | vitest suite: 80 tests across 15 files (English + Korean retrieval baselines, HTTP/auth/session/safety) |
 | 3 | App was CLI-only; `docker compose up -d` did not work | Express dashboard + `command: ["dashboard"]` in compose |
 | 4 | No scope enforcement; everything reached the model | `decision: deny` returns before the provider call — verified with a call counter (0 calls) |
 | 5 | Fail-open startup (no auth / no scope) | Both refuse to start with exit code 1 |
@@ -329,6 +329,10 @@ Accumulated review findings (4 rounds) and their current status.
 | 13 | Shared conversation history across operators | `SessionStore` (LRU + idle eviction) + OIDC `sub` ownership |
 | 14 | Unbounded history growth | Per-turn token budget + `[earlier turns omitted]` marker |
 | 15 | No retrieval-quality baseline | 30-query fixture suite with committed thresholds (top-1 ≥ 0.85, top-3 ≥ 0.95) |
+| 16 | No login brute-force protection | Per username+IP lockout (`ORT_LOGIN_MAX_ATTEMPTS`, HTTP 429) + auth events audited |
+| 17 | No user management | Admin API + Settings-tab UI: create / reset-password / delete (new users forced to change password) |
+| 18 | Audit log grows unbounded; CLI un-audited | Rotation at `ORT_AUDIT_MAX_BYTES`; `ort chat`/`ask` write JSONL entries |
+| 19 | No Korean retrieval baseline | 30 Korean fixtures: measured top-1 0.93 / top-3 1.00, thresholds 0.85/0.95 committed |
 
 ### P2 — polish & boundaries, resolved
 

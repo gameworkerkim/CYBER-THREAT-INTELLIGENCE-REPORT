@@ -50,7 +50,7 @@
 - [x] 스트리밍 폴백 + reasoning_content 포착, LangFuse·Prometheus·JSONL 감사(SHA-256)
 - [x] 배포·운영: base/infra compose 분리, ollama-pull·vllm-preflight 게이트, 시크릿 필수화,
       Keycloak realm, Grafana 대시보드, 오프라인 반입(skopeo/crane), Trivy SBOM + Cosign
-- [x] 테스트 73개 + 검색 품질 기준선 + CI (typecheck/build/test/docker build/스캔)
+- [x] 테스트 80개 + 검색 품질 기준선 + CI (typecheck/build/test/docker build/스캔)
 - [x] 다국어 문서 (EN 기준 / KO / JA / ZH) + 컴플라이언스 통제표
 - [ ] Ollama num_ctx 자동 확장
 - [ ] 임베딩 기반 의미 매칭 (RAG) — 키워드 매칭 대체 옵션

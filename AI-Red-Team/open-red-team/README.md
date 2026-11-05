@@ -24,9 +24,10 @@ environment.
 - **Extensive, proven skill library**: Ports **79 skills across 23 categories** from Claude Red,
   including 16 web application skills, 7 infrastructure/red-team skills, and 6 exploit
   development skills.
-- **Built-in enterprise operations features**: Web dashboard, JSONL audit trails, Prometheus
-  metrics, OIDC authentication (Keycloak), and LangFuse tracing. Includes safety guardrails such
-  as `ORT_SCOPE` scoping and operator-attributed audit records.
+- **Built-in enterprise operations features**: Web dashboard, JSONL audit trails (with rotation),
+  Prometheus metrics, OIDC authentication (Keycloak), and LangFuse tracing. Local accounts
+  (SQLite) with rate-limited login, user management, and forced password change. Includes
+  safety guardrails such as `ORT_SCOPE` scoping and operator-attributed audit records.
 - **Context management and multilingual support**: A context budget engine and large-skill
   truncation help avoid context overflow. Documentation is available in English, Korean,
   Japanese, and Chinese.
