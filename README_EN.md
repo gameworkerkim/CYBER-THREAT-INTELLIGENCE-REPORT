@@ -9,7 +9,7 @@ SEO Keywords: cyber threat intelligence, CTI, OSINT, APT, DPRK hacking, Lazarus,
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--11--01-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--11--20-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **Languages:** [한국어](README.md) · **English (this document)** · [日本語](README_JP.md) · [中文](README_CN.md)
@@ -33,6 +33,54 @@ LLM/agent index: [`llms.txt`](llms.txt)
 ---
 
 ## Latest — Featured
+
+> **Published 2026-11-20**
+
+### North Korea's AI Tsunami — Latest DPRK Hacking Traits and a Proposal for a New Paradigm
+
+**CTI-2026-1120-DPRK-AI-TSUNAMI** · HIGH · TLP:CLEAR
+
+Analyzes the Lazarus-ecosystem PHP2Shell targeting (216 targets in 10 countries, including 30 Korean servers/domains) and a suspected Kimsuky operation against a National Assembly seminar attendee using the new NodeLinkRAT. Proposes a new defense paradigm — exposure-time management, dependency/write-permission control, machine-led first response — plus 16 policy recommendations for an era where AI cuts vulnerability weaponization time to under 72 hours.
+
+**Report:** [KR](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.md) · [EN](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.md) · [JP](CTI-2026-1120-DPRK-AI-TSUNAMI_JP.md) · [ZH](CTI-2026-1120-DPRK-AI-TSUNAMI_ZH.md) · **PDF:** [KR](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.pdf) · [EN](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.pdf)
+
+---
+
+> **Published 2026-11-20**
+
+### Mid-November 2026 Threat Brief — Supply Chain and Targeting, the Two Roads In
+
+**CTI-2026-1120-WEEKLY** · HIGH · TLP:CLEAR
+
+Five incidents disclosed Nov 12–16: the Optimizely Web Experimentation supply-chain compromise (OPTIMJACK), the Lazarus-ecosystem PHP2Shell targeting list, suspected Kimsuky NodeLinkRAT phishing of a National Assembly seminar attendee, and the NHN Dooray and Coinone vendor breaches — with attribution discipline and organizational/personal response procedures.
+
+**Report:** [KR](CTI-2026-1120-WEEKLY-KR.md)
+
+---
+
+> **Published 2026-11-19**
+
+### nginx2root — Five nginx Vulnerabilities Plus a Kernel SCTP Flaw, Up to Host Root
+
+**CTI-2026-1119-Nginx2root** · CRITICAL · TLP:CLEAR
+
+Five nginx vulnerabilities disclosed by Xint (all CVSS 4.0 9.2, including CVE-2026-123007 in the HTTP/2 path) plus a Linux kernel SCTP use-after-free. Covers the chain from unauthenticated nginx worker RCE to host root / container escape, and the response: upgrade (1.31.9/1.30.7), disable HTTP/2, and block SCTP until patched.
+
+**Report:** [KR](CTI-2026-1119-Nginx2root%20analysis_KR.md)
+
+---
+
+> **Published 2026-11-18**
+
+### Java4Shell (CVE-2026-114938) — OpenJDK Base64 Intrinsic Heap Overflow
+
+**CTI-2026-1118-JAVA4SHELL** · CRITICAL · TLP:CLEAR
+
+A heap buffer overflow in the OpenJDK HotSpot x86-64 Base64 decode intrinsic (AVX-512 path) writes 62–63 bytes past the heap array end and, under the right conditions, leads to pre-auth RCE. Covers affected 17/21/25/27 builds, Oracle fixed builds, and the `-XX:-UseBASE64Intrinsics` mitigation.
+
+**Report:** [KR](CTI-2026-1118-JAVA4SHELL_KR.md)
+
+---
 
 > **Published 2026-11-01**
 
@@ -161,6 +209,10 @@ Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposur
 
 | Date | ID / Title | Severity | Languages |
 | --- | --- | --- | --- |
+| 2026-11-20 | [`CTI-2026-1120-DPRK-AI-TSUNAMI`](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.md) — North Korea's AI Tsunami — latest DPRK hacking traits and a new paradigm proposal | HIGH | [KR](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.md) · [EN](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.md) · [JP](CTI-2026-1120-DPRK-AI-TSUNAMI_JP.md) · [ZH](CTI-2026-1120-DPRK-AI-TSUNAMI_ZH.md) · [PDF](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.pdf) |
+| 2026-11-20 | [`CTI-2026-1120-WEEKLY`](CTI-2026-1120-WEEKLY-KR.md) — Mid-November 2026 threat brief — supply chain and targeting, the two roads in | HIGH | [KR](CTI-2026-1120-WEEKLY-KR.md) |
+| 2026-11-19 | [`CTI-2026-1119-Nginx2root`](CTI-2026-1119-Nginx2root%20analysis_KR.md) — nginx2root — five nginx vulnerabilities + Linux kernel SCTP chain | CRITICAL | [KR](CTI-2026-1119-Nginx2root%20analysis_KR.md) |
+| 2026-11-18 | [`CTI-2026-1118-JAVA4SHELL`](CTI-2026-1118-JAVA4SHELL_KR.md) — Java4Shell (CVE-2026-114938) — OpenJDK Base64 intrinsic heap overflow | CRITICAL | [KR](CTI-2026-1118-JAVA4SHELL_KR.md) |
 | 2026-11-01 | [`CTI-2026-1101-NORTHKOREA-BINANCE`](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) — The US$6.3 billion Binance hack — largest crypto theft on record and response playbook | CRITICAL | [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · [PDF](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) |
 | 2026-07-20 | [`CTI-2026-0720-MOFA-KNDA`](CTI-2026-0720-MOFA-KNDA_EN.md) — Long-term intrusion of KNDA online training system (diplomat PII exposure) | CRITICAL | [KR](CTI-2026-0720-MOFA-KNDA_KR.md) · [EN](CTI-2026-0720-MOFA-KNDA_EN.md) · [JP](CTI-2026-0720-MOFA-KNDA_JP.md) |
 | 2026-07-20 | [`CTI-2026-0720-IITP`](CTI-2026-0720-IITP_KR.md) — IITP personal-data access-log system breach (re-compromise in 7 months) | HIGH | [KR](CTI-2026-0720-IITP_KR.md) |
@@ -248,22 +300,22 @@ Multi-LLM cross-validation secret scanner (inspired by the Tving AWS key exposur
 ## By Category
 
 ### Supply Chain
-`MIASMA_SPRINGBLIGHT` · `IRONWORM` · `CLAUDECODE` · `GLASSWORM` · `WEBSPHERE` · `GITEA` · `GOGS` · `DUALTHREAT` · `GITHUB` · `VERCEL` · `AISUPPLY` · `SWIFTVIBE`
+`MIASMA_SPRINGBLIGHT` · `IRONWORM` · `CLAUDECODE` · `GLASSWORM` · `WEBSPHERE` · `GITEA` · `GOGS` · `DUALTHREAT` · `GITHUB` · `VERCEL` · `AISUPPLY` · `SWIFTVIBE` · `WEEKLY`
 
 ### Zero-Day & Vulnerabilities
-`MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP`
+`MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP` · `JAVA4SHELL` · `Nginx2root`
 
 ### DPRK & State-Sponsored
-`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER`
+`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER` · `DPRK-AI-TSUNAMI` · `WEEKLY`
 
 ### AI / LLM Threats
-`SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY`
+`SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY` · `DPRK-AI-TSUNAMI`
 
 ### Web3 & Crypto
 `NORTHKOREA-BINANCE` · `KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO`
 
 ### Korea Cybersecurity & Breaches
-`TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY`
+`TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY` · `WEEKLY`
 
 
 ---
@@ -308,7 +360,7 @@ Examples:
 
 ## Keywords
 
-`Cyber Threat Intelligence` `CTI` `OSINT` `APT` `DPRK Hacking` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `Supply Chain Attack` `Zero-Day` `CVE` `Vulnerability` `AI Security` `LLM` `Artificial Intelligence Hacking` `Web3` `Blockchain` `Cryptocurrency` `DeFi` `Data Breach` `PII Leak` `Korea Cybersecurity` `Threat Analysis` `Security Research` `Incident Response` `MITRE ATT&CK` `IOC` `Binance` `TraderTraitor` `Bybit` `Dennis Kim` `Betalabs`
+`Cyber Threat Intelligence` `CTI` `OSINT` `APT` `DPRK Hacking` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `Supply Chain Attack` `Zero-Day` `CVE` `Vulnerability` `AI Security` `LLM` `Artificial Intelligence Hacking` `Web3` `Blockchain` `Cryptocurrency` `DeFi` `Data Breach` `PII Leak` `Korea Cybersecurity` `Threat Analysis` `Security Research` `Incident Response` `MITRE ATT&CK` `IOC` `Binance` `TraderTraitor` `Bybit` `Java4Shell` `nginx2root` `NodeLinkRAT` `OPTIMJACK` `Dennis Kim` `Betalabs`
 
 ---
 
@@ -338,7 +390,7 @@ Examples:
 | **Report series** | 100+ |
 | **Languages** | Korean · English · Japanese · Chinese |
 | **Key threat actors** | Lazarus · Kimsuky (APT43) · ScarCruft (APT37) · TraderTraitor · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE · and others |
-| **Last update** | 2026-11-01 |
+| **Last update** | 2026-11-20 |
 
 ---
 

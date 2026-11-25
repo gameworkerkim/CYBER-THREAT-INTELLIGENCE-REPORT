@@ -9,7 +9,7 @@ SEO Keywords: サイバー脅威インテリジェンス, CTI, OSINT, APT, 北�
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--11--01-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--11--20-informational?style=flat-square)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **言語:** [한국어](README.md) · [English](README_EN.md) · **日本語（この文書）** · [中文](README_CN.md)
@@ -30,6 +30,54 @@ SEO Keywords: サイバー脅威インテリジェンス, CTI, OSINT, APT, 北�
 ---
 
 ## 最新レポート（Featured）
+
+> **2026-11-20 公開**
+
+### 北朝鮮のAI津波 — 北朝鮮ハッキングの最新の特徴と新たなパラダイムの提案
+
+**CTI-2026-1120-DPRK-AI-TSUNAMI** · HIGH · TLP:CLEAR
+
+Lazarus エコシステムによる PHP2Shell 標的化（10カ国216件の標的リストに韓国のサーバー・ドメイン30件を含む）と、Kimsuky と推定される勢力による国会セミナー出席者への標的攻撃（NodeLinkRAT）を分析します。AI が脆弱性の武器化を72時間以内に短縮した時代に向け、露出時間管理・依存関係統制・機械による初動を軸とした新たな対応パラダイムと政策16項目を提案します。
+
+**レポート:** [KR](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.md) · [EN](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.md) · [JP](CTI-2026-1120-DPRK-AI-TSUNAMI_JP.md) · [ZH](CTI-2026-1120-DPRK-AI-TSUNAMI_ZH.md) · **PDF:** [KR](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.pdf) · [EN](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.pdf)
+
+---
+
+> **2026-11-20 公開**
+
+### 2026年11月中旬脅威ブリーフ — サプライチェーンと標的、二つの侵入路
+
+**CTI-2026-1120-WEEKLY** · HIGH · TLP:CLEAR
+
+11月12〜16日に公開された5件 — Optimizely サプライチェーン攻撃（OPTIMJACK）、Lazarus の PHP2Shell 標的リスト、Kimsuky 推定の NodeLinkRAT、NHN Dooray・コインワン受託会社からの流出 — をまとめ、北朝鮮型サプライチェーン・標的攻撃の特徴と組織・個人向け対応手順を整理します。
+
+**レポート:** [KR](CTI-2026-1120-WEEKLY-KR.md)
+
+---
+
+> **2026-11-19 公開**
+
+### nginx2root — nginx の脆弱性5件＋カーネルSCTP連鎖でホストrootまで
+
+**CTI-2026-1119-Nginx2root** · CRITICAL · TLP:CLEAR
+
+Xint が公開した nginx の脆弱性5件（すべて CVSS 4.0 9.2、HTTP/2 経路の CVE-2026-123007 を含む）と Linux カーネル SCTP の脆弱性1件を分析します。認証不要の worker 権限 RCE からカーネル欠陥連鎖でホストroot・コンテナ脱出に至る攻撃チェーンと、パッチ（1.31.9/1.30.7）・HTTP/2 無効化・SCTP 遮断の対応を整理します。
+
+**レポート:** [KR](CTI-2026-1119-Nginx2root%20analysis_KR.md)
+
+---
+
+> **2026-11-18 公開**
+
+### Java4Shell (CVE-2026-114938) — OpenJDK Base64 イントリンシックのヒープオーバーフロー
+
+**CTI-2026-1118-JAVA4SHELL** · CRITICAL · TLP:CLEAR
+
+OpenJDK HotSpot の x86-64 Base64 デコードイントリンシック（AVX-512 経路）におけるヒープバッファオーバーフロー。細工した Base64 入力がヒープ配列の末尾を62〜63バイト超えて書き込み、条件が揃えば認証前のリモートコード実行につながります。影響バージョン（17/21/25/27）、Oracle 修正ビルド、`-XX:-UseBASE64Intrinsics` による暫定緩和策を整理します。
+
+**レポート:** [KR](CTI-2026-1118-JAVA4SHELL_KR.md)
+
+---
 
 > **2026-11-01 公開**
 
@@ -153,6 +201,10 @@ TVING、CU、FastCampus の侵害事例が示すように、一つの設定ミ�
 
 | 日付 | ID / タイトル | 深刻度 | 言語 |
 | --- | --- | --- | --- |
+| 2026-11-20 | [`CTI-2026-1120-DPRK-AI-TSUNAMI`](CTI-2026-1120-DPRK-AI-TSUNAMI_JP.md) — 北朝鮮のAI津波 — 北朝鮮ハッキングの最新の特徴と新たなパラダイムの提案 | HIGH | [KR](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.md) · [EN](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.md) · [JP](CTI-2026-1120-DPRK-AI-TSUNAMI_JP.md) · [ZH](CTI-2026-1120-DPRK-AI-TSUNAMI_ZH.md) · [PDF](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.pdf) |
+| 2026-11-20 | [`CTI-2026-1120-WEEKLY`](CTI-2026-1120-WEEKLY-KR.md) — 2026年11月中旬脅威ブリーフ — サプライチェーンと標的、二つの侵入路 | HIGH | [KR](CTI-2026-1120-WEEKLY-KR.md) |
+| 2026-11-19 | [`CTI-2026-1119-Nginx2root`](CTI-2026-1119-Nginx2root%20analysis_KR.md) — nginx2root — nginx の脆弱性5件＋LinuxカーネルSCTP連鎖 | CRITICAL | [KR](CTI-2026-1119-Nginx2root%20analysis_KR.md) |
+| 2026-11-18 | [`CTI-2026-1118-JAVA4SHELL`](CTI-2026-1118-JAVA4SHELL_KR.md) — Java4Shell (CVE-2026-114938) — OpenJDK Base64 イントリンシックのヒープオーバーフロー | CRITICAL | [KR](CTI-2026-1118-JAVA4SHELL_KR.md) |
 | 2026-11-01 | [`CTI-2026-1101-NORTHKOREA-BINANCE`](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) — バイナンス63億ドルハッキング — 史上最大の窃取と対応プレイブック | CRITICAL | [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · [PDF](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) |
 | 2026-07-20 | [`CTI-2026-0720-MOFA-KNDA`](CTI-2026-0720-MOFA-KNDA_JP.md) — 国立外交院オンライン教育システムの長期侵害（外交官個人情報流出の疑い） | CRITICAL | [KR](CTI-2026-0720-MOFA-KNDA_KR.md) · [EN](CTI-2026-0720-MOFA-KNDA_EN.md) · [JP](CTI-2026-0720-MOFA-KNDA_JP.md) |
 | 2026-07-20 | [`CTI-2026-0720-IITP`](CTI-2026-0720-IITP_KR.md) — IITP 個人情報アクセス記録管理システムの侵害（7か月ぶりの再侵害） | HIGH | [KR](CTI-2026-0720-IITP_KR.md) |
@@ -239,29 +291,29 @@ TVING、CU、FastCampus の侵害事例が示すように、一つの設定ミ�
 ## By Category
 
 ### Supply Chain
-`MIASMA_SPRINGBLIGHT` · `IRONWORM` · `CLAUDECODE` · `GLASSWORM` · `WEBSPHERE` · `GITEA` · `GOGS` · `DUALTHREAT` · `GITHUB` · `VERCEL` · `AISUPPLY` · `SWIFTVIBE`
+`MIASMA_SPRINGBLIGHT` · `IRONWORM` · `CLAUDECODE` · `GLASSWORM` · `WEBSPHERE` · `GITEA` · `GOGS` · `DUALTHREAT` · `GITHUB` · `VERCEL` · `AISUPPLY` · `SWIFTVIBE` · `WEEKLY`
 
 ### Zero-Day & Vulnerabilities
-`MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP`
+`MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP` · `JAVA4SHELL` · `Nginx2root`
 
 ### DPRK & State-Sponsored
-`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER`
+`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER` · `DPRK-AI-TSUNAMI` · `WEEKLY`
 
 ### AI / LLM Threats
-`SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY`
+`SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY` · `DPRK-AI-TSUNAMI`
 
 ### Web3 & Crypto
 `NORTHKOREA-BINANCE` · `KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO`
 
 ### Korea Cybersecurity & Breaches
-`TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY`
+`TVING` · `CU_BREACH` · `FASTCAMPUS_DAYONECOMPANY` · `KAKAO` · `MODOO` · `QSHING` · `GITHUB-KEY-LEAK` · `KRWEEKLY` · `WEEKLY`
 
 
 ---
 
 ## キーワード (Keywords)
 
-`サイバー脅威インテリジェンス` `CTI` `OSINT` `APT` `北朝鮮ハッキング` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `サプライチェーン攻撃` `ゼロデイ` `CVE` `脆弱性` `AIセキュリティ` `LLM` `AIハッキング` `Web3` `ブロックチェーン` `暗号通貨` `DeFi` `データ侵害` `個人情報漏洩` `韓国サイバーセキュリティ` `脅威分析` `セキュリティ研究` `インシデント対応` `MITRE ATT&CK` `IOC` `バイナンス` `Binance` `TraderTraitor` `Bybit` `Dennis Kim` `Betalabs`
+`サイバー脅威インテリジェンス` `CTI` `OSINT` `APT` `北朝鮮ハッキング` `Lazarus` `Kimsuky` `APT43` `ScarCruft` `APT37` `サプライチェーン攻撃` `ゼロデイ` `CVE` `脆弱性` `AIセキュリティ` `LLM` `AIハッキング` `Web3` `ブロックチェーン` `暗号通貨` `DeFi` `データ侵害` `個人情報漏洩` `韓国サイバーセキュリティ` `脅威分析` `セキュリティ研究` `インシデント対応` `MITRE ATT&CK` `IOC` `バイナンス` `Binance` `TraderTraitor` `Bybit` `Java4Shell` `nginx2root` `NodeLinkRAT` `OPTIMJACK` `Dennis Kim` `Betalabs`
 
 ---
 
@@ -328,7 +380,7 @@ Examples:
 | --- | --- |
 | **レポートシリーズ** | 100+ |
 | **言語** | 한국어 · English · 日本語 · 中文 |
-| **最終更新** | 2026-11-01 |
+| **最終更新** | 2026-11-20 |
 
 ---
 

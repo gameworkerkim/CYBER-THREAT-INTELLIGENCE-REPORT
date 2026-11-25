@@ -9,7 +9,7 @@ SEO Keywords: 사이버 위협 인텔리전스, CTI, OSINT, APT, 북한 해킹, 
 ![TLP](https://img.shields.io/badge/TLP-GREEN-2ECC71?style=flat-square)
 ![Purpose](https://img.shields.io/badge/Purpose-Education%20%26%20Defense-blue?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-KR%20%7C%20EN%20%7C%20JP%20%7C%20ZH-lightgrey?style=flat-square)
-![Updated](https://img.shields.io/badge/Last%20Update-2026--11--01-informational?style=flat-square)
+![Updated](https://img.shields.io/badge/Last%20Update-2026--11--20-informational?style=flat-square)
 [![Ask DeepWiki](https://img.shields.io/badge/Ask-DeepWiki-1F6FEB?style=flat-square)](https://deepwiki.com/gameworkerkim/CYBER-THREAT-INTELLIGENCE-REPORT)
 
 **언어 / Languages:** **한국어 (이 문서)** · [English](README_EN.md) · [日本語](README_JP.md) · [中文](README_CN.md)
@@ -35,6 +35,54 @@ LLM/에이전트용 인덱스: [`llms.txt`](llms.txt)
 ## 최신 리포트 (Latest — Featured)
 
 > ⭐ 새 리포트를 놓치지 않으려면 저장소 우측 상단의 **Star**와 **Watch**를 눌러 주세요. 전체 목록은 아래 [전체 리포트 목록](#전체-리포트-목록-report-index)에 있습니다.
+
+> **2026-11-20 발행**
+
+### 북한의 AI 쓰나미 — 북한 해킹의 최신 특징과 새로운 패러다임 제안
+
+**CTI-2026-1120-DPRK-AI-TSUNAMI** · HIGH · TLP:CLEAR
+
+라자루스 생태계의 PHP2Shell 표적화(10개국 216개 목록 중 한국 서버·도메인 30곳 포함)와 김수키 추정 세력의 국회 세미나 참석자 표적 공격(NodeLinkRAT)을 분석합니다. AI가 취약점 무기화를 72시간 이내로 끌어내린 시대에 노출 시간 관리·의존성 통제·기계 초동 중심의 새 대응 패러다임과 정책 16개를 제안합니다.
+
+**리포트:** [KR](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.md) · [EN](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.md) · [JP](CTI-2026-1120-DPRK-AI-TSUNAMI_JP.md) · [ZH](CTI-2026-1120-DPRK-AI-TSUNAMI_ZH.md) · **PDF:** [KR](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.pdf) · [EN](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.pdf)
+
+---
+
+> **2026-11-20 발행**
+
+### 2026년 11월 중순 위협 브리프 — 공급망과 표적, 두 갈래로 들어오는 공격
+
+**CTI-2026-1120-WEEKLY** · HIGH · TLP:CLEAR
+
+11월 12~16일 공개된 다섯 사건 — 옵티마이즐리 공급망 공격(OPTIMJACK), 라자루스 PHP2Shell 표적 목록, 김수키 추정 NodeLinkRAT, NHN두레이·코인원 수탁사 유출 — 을 묶어 북한형 공급망·표적 공격의 특징과 조직·개인 대응 절차를 정리합니다.
+
+**리포트:** [KR](CTI-2026-1120-WEEKLY-KR.md)
+
+---
+
+> **2026-11-19 발행**
+
+### nginx2root — nginx 취약점 5종 + 커널 SCTP 연계, 호스트 root까지
+
+**CTI-2026-1119-Nginx2root** · CRITICAL · TLP:CLEAR
+
+Xint가 공개한 nginx 취약점 5건(모두 CVSS 4.0 9.2, HTTP/2 경로의 CVE-2026-123007 포함)과 Linux 커널 SCTP 취약점 1건을 분석합니다. 인증 없는 worker 권한 RCE에서 커널 결함 연계 시 호스트 root·컨테이너 탈출까지 이어지는 공격 체인과 패치(1.31.9/1.30.7)·HTTP/2 비활성화·SCTP 차단 대응을 정리합니다.
+
+**리포트:** [KR](CTI-2026-1119-Nginx2root%20analysis_KR.md)
+
+---
+
+> **2026-11-18 발행**
+
+### Java4Shell (CVE-2026-114938) — OpenJDK Base64 인트린식 힙 오버플로
+
+**CTI-2026-1118-JAVA4SHELL** · CRITICAL · TLP:CLEAR
+
+OpenJDK HotSpot x86-64 Base64 디코딩 인트린식(AVX-512 경로)의 힙 버퍼 오버플로. 조작된 Base64 입력이 힙 배열 끝을 62~63바이트 넘겨 쓰고, 조건이 맞으면 인증 전 원격 코드 실행까지 이어집니다. 영향 버전(17/21/25/27), Oracle 수정 빌드, `-XX:-UseBASE64Intrinsics` 임시 완화를 정리합니다.
+
+**리포트:** [KR](CTI-2026-1118-JAVA4SHELL_KR.md)
+
+---
 
 > **2026-11-01 발행**
 
@@ -177,6 +225,10 @@ FBI·비밀경호국이 경고한 86,644개 유출 자격 증명의 현행 악�
 
 | 발행일 | ID / 제목 | 심각도 | 언어 |
 | --- | --- | --- | --- |
+| 2026-11-20 | [`CTI-2026-1120-DPRK-AI-TSUNAMI`](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.md) — 북한의 AI 쓰나미 — 북한 해킹의 최신 특징과 새로운 패러다임 제안 | HIGH | [KR](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.md) · [EN](CTI-2026-1120-DPRK-AI-TSUNAMI_EN.md) · [JP](CTI-2026-1120-DPRK-AI-TSUNAMI_JP.md) · [ZH](CTI-2026-1120-DPRK-AI-TSUNAMI_ZH.md) · [PDF](CTI-2026-1120-DPRK-AI-TSUNAMI_KR.pdf) |
+| 2026-11-20 | [`CTI-2026-1120-WEEKLY`](CTI-2026-1120-WEEKLY-KR.md) — 2026년 11월 중순 위협 브리프 — 공급망과 표적, 두 갈래로 들어오는 공격 | HIGH | [KR](CTI-2026-1120-WEEKLY-KR.md) |
+| 2026-11-19 | [`CTI-2026-1119-Nginx2root`](CTI-2026-1119-Nginx2root%20analysis_KR.md) — nginx2root — nginx 취약점 5종 + Linux 커널 SCTP 연계 공격 체인 | CRITICAL | [KR](CTI-2026-1119-Nginx2root%20analysis_KR.md) |
+| 2026-11-18 | [`CTI-2026-1118-JAVA4SHELL`](CTI-2026-1118-JAVA4SHELL_KR.md) — Java4Shell (CVE-2026-114938) — OpenJDK Base64 인트린식 힙 오버플로 | CRITICAL | [KR](CTI-2026-1118-JAVA4SHELL_KR.md) |
 | 2026-11-01 | [`CTI-2026-1101-NORTHKOREA-BINANCE`](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) — 바이낸스 63억 달러 해킹 — 역대 최대 규모 탈취와 대응 플레이북 | CRITICAL | [KR](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_KR.md) · [EN](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_EN.md) · [JP](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_JP.md) · [ZH](CTI-2026-1101-NORTHKOREA-BINANCE-REPORT_ZH.md) · [PDF](Binance-6.3B-Hack-Incident-Analysis-Playbook.pdf) |
 | 2026-10-30 | [`CTI-2026-1030-TCP`](CTI-2026-1030-TCP_KR.md) — 리눅스 커널 TCP Use-After-Free (CVE-2026-98432) | HIGH | [KR](CTI-2026-1030-TCP_KR.md) · [Tools](Linux_TCP/README.md) |
 | 2026-10-22 | [`CTI-2026-10-22-PHP`](CTI-2026-10-22-PHP_KR.md) — PHP2Shell — PHP 코어 비인증 RCE 2종 (CVE-2026-109618/109619) | CRITICAL | [KR](CTI-2026-10-22-PHP_KR.md) |
@@ -283,16 +335,16 @@ FBI·비밀경호국이 경고한 86,644개 유출 자격 증명의 현행 악�
 ## 주제별 분류 (By Category)
 
 ### 공급망 공격
-`MIASMA_SPRINGBLIGHT` · `IRONWORM` · `CLAUDECODE` · `GLASSWORM` · `WEBSPHERE` · `GITEA` · `GOGS` · `DUALTHREAT` · `GITHUB` · `VERCEL` · `AISUPPLY` · `SWIFTVIBE` · `HANWHA` · `OPENJDK`
+`MIASMA_SPRINGBLIGHT` · `IRONWORM` · `CLAUDECODE` · `GLASSWORM` · `WEBSPHERE` · `GITEA` · `GOGS` · `DUALTHREAT` · `GITHUB` · `VERCEL` · `AISUPPLY` · `SWIFTVIBE` · `HANWHA` · `OPENJDK` · `WEEKLY`
 
 ### 제로데이·취약점
-`MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP` · `TCP` · `PHP2Shell` · `OPENJDK` · `FortiBleed` · `COLDCARD-RNG`
+`MSFT_PATCHTUESDAY_206CVE` · `AI-ZERODAY` · `NETSCALER` · `MIRAI-ZERODAY` · `YELLOWKEY` · `DRUPAL` · `EXCHANGE` · `COPYFAIL` · `CORUNA` · `ANDROID-EOP` · `TCP` · `PHP2Shell` · `OPENJDK` · `FortiBleed` · `COLDCARD-RNG` · `JAVA4SHELL` · `Nginx2root`
 
 ### 북한·국가배후 위협
-`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER` · `DPRK-LAPTOP-FARM` · `HWP` · `KIMSUKY` · `DPRK-BANK-HACKERS` · `CHINA-HACKING` · `Qilin-Japan-Arrest`
+`NORTHKOREA-BINANCE` · `DPRK-AI` · `KIMSUKY-PEBBLEDASH` · `KIMSUKY-LNK-DROPBOX` · `LAZARUS-GITHOOKS` · `LAZARUS-CLICKFIX` · `SCARCRUFT` · `DPRK-TRENDS` · `AICYBER` · `IRANGENAI` · `UNC6508-REDCAP` · `SCATTEREDSPIDER` · `DPRK-LAPTOP-FARM` · `HWP` · `KIMSUKY` · `DPRK-BANK-HACKERS` · `CHINA-HACKING` · `Qilin-Japan-Arrest` · `DPRK-AI-TSUNAMI` · `WEEKLY`
 
 ### AI·LLM 위협
-`SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY` · `AI-BANK-HACKING` · `AI-HACKING-TREND` · `KIMSUKY` · `CODEX-OPEN-SECURITY`
+`SWIFTVIBE` · `AI-ZERODAY` · `CLAUDECODE` · `DPRK-AI` · `GREYVIBE` · `CHATGPHISH` · `AICRYPTOJACK` · `EVILTOKENS` · `AICYBER` · `VIBE` · `MCP` · `AISUPPLY` · `AI-BANK-HACKING` · `AI-HACKING-TREND` · `KIMSUKY` · `CODEX-OPEN-SECURITY` · `DPRK-AI-TSUNAMI`
 
 ### Web3·암호화폐
 `NORTHKOREA-BINANCE` · `KELPDAO` · `AICRYPTOJACK` · `UK_RUSSIA_CRYPTO_SANCTIONS` · `LITECOIN` · `KAKAO` · `WEMIX` · `COLDCARD-RNG`
@@ -350,7 +402,7 @@ Examples:
 
 ## 키워드 (Keywords)
 
-`사이버 위협 인텔리전스` `CTI` `OSINT` `APT` `북한 해킹` `라자루스` `Lazarus` `김수키` `Kimsuky` `APT43` `스카크러프트` `ScarCruft` `APT37` `공급망 공격` `Supply Chain` `제로데이` `Zero-Day` `취약점` `CVE` `AI 보안` `LLM` `인공지능 해킹` `Web3` `블록체인` `암호화폐` `DeFi` `개인정보 유출` `데이터 유출` `한국 사이버 보안` `Korea Cybersecurity` `위협 분석` `Threat Intelligence` `보안 연구` `사고 대응` `MITRE ATT&CK` `IOC` `침해 지표` `PHP2Shell` `리눅스 커널` `Linux Kernel` `FortiBleed` `Qilin` `랜섬웨어` `노트북 팜` `아래아 한글` `HWP` `바이낸스` `Binance` `TraderTraitor` `바이비트` `Bybit` `Dennis Kim` `Betalabs`
+`사이버 위협 인텔리전스` `CTI` `OSINT` `APT` `북한 해킹` `라자루스` `Lazarus` `김수키` `Kimsuky` `APT43` `스카크러프트` `ScarCruft` `APT37` `공급망 공격` `Supply Chain` `제로데이` `Zero-Day` `취약점` `CVE` `AI 보안` `LLM` `인공지능 해킹` `Web3` `블록체인` `암호화폐` `DeFi` `개인정보 유출` `데이터 유출` `한국 사이버 보안` `Korea Cybersecurity` `위협 분석` `Threat Intelligence` `보안 연구` `사고 대응` `MITRE ATT&CK` `IOC` `침해 지표` `PHP2Shell` `리눅스 커널` `Linux Kernel` `FortiBleed` `Qilin` `랜섬웨어` `노트북 팜` `아래아 한글` `HWP` `바이낸스` `Binance` `TraderTraitor` `바이비트` `Bybit` `Java4Shell` `nginx2root` `NodeLinkRAT` `OPTIMJACK` `북한 AI 쓰나미` `Dennis Kim` `Betalabs`
 
 ---
 
@@ -381,7 +433,7 @@ Examples:
 | **총 리포트 시리즈** | 100+ |
 | **커버 언어** | 한국어 · English · 日本語 · 中文 |
 | **주요 위협 행위자** | Lazarus · Kimsuky(APT43) · ScarCruft(APT37) · TraderTraitor · Scattered Spider · UNC6508 · SWIFTVIBE · Miasma · IronWorm · GlassWorm · ShinyHunters · GREYVIBE · Qilin · FortiBleed 캠페인 외 |
-| **최근 업데이트** | 2026-11-01 |
+| **최근 업데이트** | 2026-11-20 |
 
 ---
 
